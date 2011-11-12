@@ -1,0 +1,2315 @@
+<!DOCTYPE html>
+<!--
+  Copyright 2010 Google Inc.
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+
+  Original slides: Marcin Wichary (mwichary@google.com)
+  Modifications: Ernest Delgado (ernestd@google.com)
+                 Alex Russell (slightlyoff@chromium.org)
+
+  landslide modifications: Adam Zapletal (adamzap@gmail.com)
+                           Nicolas Perriault (nperriault@gmail.com)
+-->
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Triggered!</title>
+    <!-- Styles -->
+    
+    <link rel="stylesheet" media="print" href="/usr/local/lib/python2.7/dist-packages/landslide/themes/default/css/print.css">
+    <link rel="stylesheet" media="screen, projection" href="theme/css/screen.css">
+    
+    
+    <!-- /Styles -->
+    <!-- Javascripts -->
+    
+    <script type="text/javascript" src="theme/js/slides.js"></script>
+    
+    
+    <!-- /Javascripts -->
+</head>
+<body>
+  <div id="blank"></div>
+  <div class="presentation">
+    <div id="current_presenter_notes">
+      <div id="presenter_note"></div>
+    </div>
+    <div class="slides">
+      
+      <!-- slide source: Triggered.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Triggered!</h1></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Triggered.md">Triggered.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              1/54
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Triggered.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Terminology</h2></header>
+            
+            
+            <section><ul>
+<li>An <em>Event</em> is an <em>action</em></li>
+<li>A <em>Listener</em> is a callback that responds to an <em>event</em></li>
+<li>An <em>EventManager</em> is a collection of <em>listeners</em> and <em>triggers</em> events</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Triggered.md">Triggered.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              2/54
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Triggered.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code">
+          <div class="inner">
+            
+            <header><h2>In a Nutshell</h2></header>
+            
+            
+            <section><div class="highlight"><pre><span class="lineno"> 1</span> <span class="cp">&lt;?php</span>
+<span class="lineno"> 2</span> <span class="k">use</span> <span class="nx">Zend\EventManager\EventManager</span><span class="p">;</span>
+<span class="lineno"> 3</span> 
+<span class="lineno"> 4</span> <span class="nv">$events</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">EventManager</span><span class="p">();</span>
+<span class="lineno"> 5</span> 
+<span class="lineno"> 6</span> <span class="nv">$events</span><span class="o">-&gt;</span><span class="na">attach</span><span class="p">(</span><span class="s1">&#39;do&#39;</span><span class="p">,</span> <span class="k">function</span><span class="p">(</span><span class="nv">$e</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno"> 7</span>     <span class="nv">$event</span>  <span class="o">=</span> <span class="nv">$e</span><span class="o">-&gt;</span><span class="na">getName</span><span class="p">();</span>
+<span class="lineno"> 8</span>     <span class="nv">$params</span> <span class="o">=</span> <span class="nv">$e</span><span class="o">-&gt;</span><span class="na">getParams</span><span class="p">();</span>
+<span class="lineno"> 9</span>     <span class="nb">printf</span><span class="p">(</span>
+<span class="lineno">10</span>         <span class="s1">&#39;Handled event &quot;%s&quot;, with parameters %s&#39;</span><span class="p">,</span>
+<span class="lineno">11</span>         <span class="nv">$event</span><span class="p">,</span>
+<span class="lineno">12</span>         <span class="nx">json_encode</span><span class="p">(</span><span class="nv">$params</span><span class="p">)</span>
+<span class="lineno">13</span>     <span class="p">);</span>
+<span class="lineno">14</span> <span class="p">});</span>
+<span class="lineno">15</span> 
+<span class="lineno">16</span> <span class="nv">$params</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;foo&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;bar&#39;</span><span class="p">,</span> <span class="s1">&#39;baz&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;bat&#39;</span><span class="p">);</span>
+<span class="lineno">17</span> <span class="nv">$events</span><span class="o">-&gt;</span><span class="na">trigger</span><span class="p">(</span><span class="s1">&#39;do&#39;</span><span class="p">,</span> <span class="k">null</span><span class="p">,</span> <span class="nv">$params</span><span class="p">);</span>
+</pre></div>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Triggered.md">Triggered.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              3/54
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Triggered.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_notes">
+          <div class="inner">
+            
+            <header><h2>Attach</h2></header>
+            
+            
+            <section><p class="notes">Priority allows doing pre/post style hooks</p>
+<ul>
+<li>An event <em>name</em> </li>
+<li>The callback that will respond</li>
+<li>Optionally, the priority at which to listen</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Triggered.md">Triggered.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              4/54
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Triggered.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code">
+          <div class="inner">
+            
+            
+            <section><div class="highlight"><pre><span class="lineno">1</span> <span class="cp">&lt;?php</span>
+<span class="lineno">2</span> <span class="nv">$events</span><span class="o">-&gt;</span><span class="na">attach</span><span class="p">(</span><span class="s1">&#39;do&#39;</span><span class="p">,</span> <span class="nv">$callback</span><span class="p">);</span>       <span class="c1">// base priority</span>
+<span class="lineno">3</span> <span class="nv">$events</span><span class="o">-&gt;</span><span class="na">attach</span><span class="p">(</span><span class="s1">&#39;do&#39;</span><span class="p">,</span> <span class="nv">$callback</span><span class="p">,</span> <span class="mi">100</span><span class="p">);</span>  <span class="c1">// high priority</span>
+<span class="lineno">4</span> <span class="nv">$events</span><span class="o">-&gt;</span><span class="na">attach</span><span class="p">(</span><span class="s1">&#39;do&#39;</span><span class="p">,</span> <span class="nv">$callback</span><span class="p">,</span> <span class="o">-</span><span class="mi">100</span><span class="p">);</span> <span class="c1">// low priority</span>
+</pre></div>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Triggered.md">Triggered.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              5/54
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Triggered.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Trigger</h2></header>
+            
+            
+            <section><p>Typically:</p>
+<ul>
+<li>Event <em>name</em></li>
+<li>Target (object or function triggering the event)</li>
+<li>Arguments</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Triggered.md">Triggered.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              6/54
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Triggered.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code">
+          <div class="inner">
+            
+            
+            <section><div class="highlight"><pre><span class="lineno">1</span> <span class="cp">&lt;?php</span>
+<span class="lineno">2</span> <span class="c1">// instance method</span>
+<span class="lineno">3</span> <span class="k">public</span> <span class="k">function</span> <span class="nf">foo</span><span class="p">(</span><span class="nv">$bar</span><span class="p">,</span> <span class="nv">$baz</span><span class="p">)</span>
+<span class="lineno">4</span> <span class="p">{</span>
+<span class="lineno">5</span>     <span class="nv">$params</span> <span class="o">=</span> <span class="nb">compact</span><span class="p">(</span><span class="s1">&#39;bar&#39;</span><span class="p">,</span> <span class="s1">&#39;baz&#39;</span><span class="p">);</span>
+<span class="lineno">6</span>     <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">events</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">trigger</span><span class="p">(</span><span class="s1">&#39;do&#39;</span><span class="p">,</span> <span class="nv">$this</span><span class="p">,</span> <span class="nv">$params</span><span class="p">);</span>
+<span class="lineno">7</span> <span class="p">}</span>
+</pre></div>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Triggered.md">Triggered.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              7/54
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Triggered.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code">
+          <div class="inner">
+            
+            <header><h2>Event</h2></header>
+            
+            
+            <section><div class="highlight"><pre><span class="lineno"> 1</span> <span class="cp">&lt;?php</span>
+<span class="lineno"> 2</span> <span class="k">interface</span> <span class="nx">EventDescription</span>
+<span class="lineno"> 3</span> <span class="p">{</span>
+<span class="lineno"> 4</span>     <span class="k">public</span> <span class="k">function</span> <span class="nf">setName</span><span class="p">(</span><span class="nv">$name</span><span class="p">);</span>
+<span class="lineno"> 5</span>     <span class="k">public</span> <span class="k">function</span> <span class="nf">setTarget</span><span class="p">(</span><span class="nv">$target</span><span class="p">);</span>
+<span class="lineno"> 6</span>     <span class="k">public</span> <span class="k">function</span> <span class="nf">setParams</span><span class="p">(</span><span class="nv">$params</span><span class="p">);</span>
+<span class="lineno"> 7</span>     <span class="k">public</span> <span class="k">function</span> <span class="nf">getName</span><span class="p">();</span>
+<span class="lineno"> 8</span>     <span class="k">public</span> <span class="k">function</span> <span class="nf">getTarget</span><span class="p">();</span>
+<span class="lineno"> 9</span>     <span class="k">public</span> <span class="k">function</span> <span class="nf">getParam</span><span class="p">(</span><span class="nv">$name</span><span class="p">,</span> <span class="nv">$default</span> <span class="o">=</span> <span class="k">null</span><span class="p">);</span>
+<span class="lineno">10</span>     <span class="k">public</span> <span class="k">function</span> <span class="nf">getParams</span><span class="p">();</span>
+<span class="lineno">11</span> <span class="p">}</span>
+</pre></div>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Triggered.md">Triggered.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              8/54
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Triggered.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Listeners</h2></header>
+            
+            
+            <section><p>Listeners receive an <em>Event</em> as their sole argument.</p>
+<p>Listeners can be <em>any</em> valid PHP callback.</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Triggered.md">Triggered.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              9/54
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Triggered.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code">
+          <div class="inner">
+            
+            
+            <section><div class="highlight"><pre><span class="lineno"> 1</span> <span class="cp">&lt;?php</span>
+<span class="lineno"> 2</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$e</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno"> 3</span>     <span class="nv">$event</span>  <span class="o">=</span> <span class="nv">$e</span><span class="o">-&gt;</span><span class="na">getName</span><span class="p">();</span>
+<span class="lineno"> 4</span>     <span class="nv">$target</span> <span class="o">=</span> <span class="nv">$e</span><span class="o">-&gt;</span><span class="na">getTarget</span><span class="p">();</span>
+<span class="lineno"> 5</span>     <span class="nv">$target</span> <span class="o">=</span> <span class="p">(</span><span class="nb">is_object</span><span class="p">(</span><span class="nv">$target</span><span class="p">)</span> 
+<span class="lineno"> 6</span>             <span class="o">?</span> <span class="nb">get_class</span><span class="p">(</span><span class="nv">$target</span><span class="p">)</span> 
+<span class="lineno"> 7</span>             <span class="o">:</span> <span class="nb">gettype</span><span class="p">(</span><span class="nv">$target</span><span class="p">))</span>
+<span class="lineno"> 8</span>     <span class="nv">$params</span> <span class="o">=</span> <span class="nv">$e</span><span class="o">-&gt;</span><span class="na">getParams</span><span class="p">();</span>
+<span class="lineno"> 9</span>     <span class="nb">printf</span><span class="p">(</span>
+<span class="lineno">10</span>         <span class="s1">&#39;Event &quot;%s&quot;, params %s, target &quot;%s&quot;&#39;</span><span class="p">,</span>
+<span class="lineno">11</span>         <span class="nv">$event</span><span class="p">,</span>
+<span class="lineno">12</span>         <span class="nx">json_encode</span><span class="p">(</span><span class="nv">$params</span><span class="p">),</span>
+<span class="lineno">13</span>         <span class="nv">$target</span>
+<span class="lineno">14</span>     <span class="p">);</span>
+<span class="lineno">15</span> <span class="p">}</span>
+</pre></div>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Triggered.md">Triggered.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              10/54
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Triggered.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Digression: Custom Events</h1></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Triggered.md">Triggered.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              11/54
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Triggered.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Semantics matter.</h1></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Triggered.md">Triggered.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              12/54
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Triggered.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code">
+          <div class="inner">
+            
+            <header><h2>An Example of Bad Semantics</h2></header>
+            
+            
+            <section><div class="highlight"><pre><span class="lineno">1</span> <span class="cp">&lt;?php</span>
+<span class="lineno">2</span> <span class="nv">$callback</span> <span class="o">=</span> <span class="k">function</span><span class="p">(</span><span class="nv">$e</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno">3</span>     <span class="nv">$result</span>  <span class="o">=</span> <span class="nv">$e</span><span class="o">-&gt;</span><span class="na">getParam</span><span class="p">(</span><span class="s1">&#39;__RESULT__&#39;</span><span class="p">);</span>
+<span class="lineno">4</span>     <span class="nv">$matches</span> <span class="o">=</span> <span class="nv">$e</span><span class="o">-&gt;</span><span class="na">getParam</span><span class="p">(</span><span class="s1">&#39;route-match&#39;</span><span class="p">);</span>
+<span class="lineno">5</span>     <span class="c1">// ...</span>
+<span class="lineno">6</span> <span class="p">};</span>
+</pre></div>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Triggered.md">Triggered.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              13/54
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Triggered.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code">
+          <div class="inner">
+            
+            <header><h2>Better Semantics</h2></header>
+            
+            
+            <section><div class="highlight"><pre><span class="lineno">1</span> <span class="cp">&lt;?php</span>
+<span class="lineno">2</span> <span class="nv">$callback</span> <span class="o">=</span> <span class="k">function</span><span class="p">(</span><span class="nv">$e</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno">3</span>     <span class="nv">$result</span>  <span class="o">=</span> <span class="nv">$e</span><span class="o">-&gt;</span><span class="na">getResult</span><span class="p">();</span>
+<span class="lineno">4</span>     <span class="nv">$matches</span> <span class="o">=</span> <span class="nv">$e</span><span class="o">-&gt;</span><span class="na">getRouteMatch</span><span class="p">();</span>
+<span class="lineno">5</span>     <span class="c1">// ...</span>
+<span class="lineno">6</span> <span class="p">};</span>
+</pre></div>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Triggered.md">Triggered.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              14/54
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Triggered.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code has_notes">
+          <div class="inner">
+            
+            <header><h2>Creating Custom Events</h2></header>
+            
+            
+            <section><p class="notes">Using built-in parameters makes martialling easier.</p>
+<p>Easiest is to simply extend Zend&#92;EventManager&#92;Event:</p>
+<div class="highlight"><pre><span class="lineno"> 1</span> <span class="cp">&lt;?php</span>
+<span class="lineno"> 2</span> <span class="k">use</span> <span class="nx">Zend\EventManager\Event</span><span class="p">;</span>
+<span class="lineno"> 3</span> 
+<span class="lineno"> 4</span> <span class="k">class</span> <span class="nc">MyEvent</span> <span class="k">extends</span> <span class="nx">Event</span>
+<span class="lineno"> 5</span> <span class="p">{</span>
+<span class="lineno"> 6</span>     <span class="k">protected</span> <span class="nv">$result</span><span class="p">;</span>
+<span class="lineno"> 7</span> 
+<span class="lineno"> 8</span>     <span class="k">public</span> <span class="k">function</span> <span class="nf">setResult</span><span class="p">(</span><span class="nv">$result</span><span class="p">)</span>
+<span class="lineno"> 9</span>     <span class="p">{</span>
+<span class="lineno">10</span>         <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">setParam</span><span class="p">(</span><span class="s1">&#39;result&#39;</span><span class="p">,</span> <span class="nv">$result</span><span class="p">);</span>
+<span class="lineno">11</span>     <span class="p">}</span>
+<span class="lineno">12</span> 
+<span class="lineno">13</span>     <span class="k">public</span> <span class="k">function</span> <span class="nf">getResult</span><span class="p">()</span>
+<span class="lineno">14</span>     <span class="p">{</span>
+<span class="lineno">15</span>         <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getParam</span><span class="p">(</span><span class="s1">&#39;result&#39;</span><span class="p">);</span>
+<span class="lineno">16</span>     <span class="p">}</span>
+<span class="lineno">17</span> <span class="p">}</span>
+</pre></div>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Triggered.md">Triggered.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              15/54
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Triggered.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code">
+          <div class="inner">
+            
+            <header><h2>Using Custom Events: part 1</h2></header>
+            
+            
+            <section><p>Pass as sole parameter:</p>
+<div class="highlight"><pre><span class="lineno">1</span> <span class="cp">&lt;?php</span>
+<span class="lineno">2</span> <span class="nv">$event</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyEvent</span><span class="p">();</span>
+<span class="lineno">3</span> <span class="nv">$event</span><span class="o">-&gt;</span><span class="na">setName</span><span class="p">(</span><span class="s1">&#39;foo&#39;</span><span class="p">);</span>
+<span class="lineno">4</span> <span class="nv">$event</span><span class="o">-&gt;</span><span class="na">setTarget</span><span class="p">(</span><span class="nv">$this</span><span class="p">);</span>
+<span class="lineno">5</span> 
+<span class="lineno">6</span> <span class="nv">$events</span><span class="o">-&gt;</span><span class="na">trigger</span><span class="p">(</span><span class="nv">$event</span><span class="p">);</span>
+</pre></div>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Triggered.md">Triggered.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              16/54
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Triggered.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code">
+          <div class="inner">
+            
+            <header><h2>Using Custom Events: part 2</h2></header>
+            
+            
+            <section><p>Pass as second parameter:</p>
+<div class="highlight"><pre><span class="lineno">1</span> <span class="cp">&lt;?php</span>
+<span class="lineno">2</span> <span class="nv">$event</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyEvent</span><span class="p">();</span>
+<span class="lineno">3</span> <span class="nv">$event</span><span class="o">-&gt;</span><span class="na">setTarget</span><span class="p">(</span><span class="nv">$this</span><span class="p">);</span>
+<span class="lineno">4</span> 
+<span class="lineno">5</span> <span class="nv">$events</span><span class="o">-&gt;</span><span class="na">trigger</span><span class="p">(</span><span class="s1">&#39;foo&#39;</span><span class="p">,</span> <span class="nv">$event</span><span class="p">);</span>
+</pre></div>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Triggered.md">Triggered.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              17/54
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Triggered.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code">
+          <div class="inner">
+            
+            <header><h2>Using Custom Events: part 3</h2></header>
+            
+            
+            <section><p>Pass as third parameter:</p>
+<div class="highlight"><pre><span class="lineno">1</span> <span class="cp">&lt;?php</span>
+<span class="lineno">2</span> <span class="nv">$event</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyEvent</span><span class="p">();</span>
+<span class="lineno">3</span> 
+<span class="lineno">4</span> <span class="nv">$events</span><span class="o">-&gt;</span><span class="na">trigger</span><span class="p">(</span><span class="s1">&#39;foo&#39;</span><span class="p">,</span> <span class="nv">$this</span><span class="p">,</span> <span class="nv">$event</span><span class="p">);</span>
+</pre></div>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Triggered.md">Triggered.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              18/54
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Triggered.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Recommended Usage</h1></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Triggered.md">Triggered.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              19/54
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Triggered.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code has_notes">
+          <div class="inner">
+            
+            <header><h2>Compose an EventManager</h2></header>
+            
+            
+            <section><p class="notes">This would make a great Trait</p>
+<div class="highlight"><pre><span class="lineno"> 1</span> <span class="cp">&lt;?php</span>
+<span class="lineno"> 2</span> <span class="k">use</span> <span class="nx">Zend\EventManager\EventCollection</span><span class="p">,</span>
+<span class="lineno"> 3</span>     <span class="nx">Zend\EventManager\EventManager</span><span class="p">;</span>
+<span class="lineno"> 4</span> <span class="k">class</span> <span class="nc">Foo</span>
+<span class="lineno"> 5</span> <span class="p">{</span>
+<span class="lineno"> 6</span>     <span class="k">protected</span> <span class="nv">$events</span><span class="p">;</span>
+<span class="lineno"> 7</span>     <span class="k">public</span> <span class="k">function</span> <span class="nf">setEventManager</span><span class="p">(</span><span class="nx">EventCollection</span> <span class="nv">$events</span><span class="p">)</span>
+<span class="lineno"> 8</span>     <span class="p">{</span>
+<span class="lineno"> 9</span>         <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">events</span> <span class="o">=</span> <span class="nv">$events</span><span class="p">;</span>
+<span class="lineno">10</span>     <span class="p">}</span>
+<span class="lineno">11</span>     <span class="k">public</span> <span class="k">function</span> <span class="nf">events</span><span class="p">()</span>
+<span class="lineno">12</span>     <span class="p">{</span>
+<span class="lineno">13</span>         <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">events</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno">14</span>             <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">setEventManager</span><span class="p">(</span><span class="k">new</span> <span class="nx">EventManager</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+<span class="lineno">15</span>                 <span class="nx">__CLASS__</span><span class="p">,</span> <span class="nx">get_called_class</span><span class="p">(),</span>
+<span class="lineno">16</span>             <span class="p">));</span>
+<span class="lineno">17</span>         <span class="p">}</span>
+<span class="lineno">18</span>         <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">events</span><span class="p">;</span>
+<span class="lineno">19</span>     <span class="p">}</span>
+<span class="lineno">20</span> <span class="p">}</span>
+</pre></div>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Triggered.md">Triggered.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              20/54
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Triggered.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code">
+          <div class="inner">
+            
+            <header><h2>Trigger Events</h2></header>
+            
+            
+            <section><div class="highlight"><pre><span class="lineno"> 1</span> <span class="cp">&lt;?php</span>
+<span class="lineno"> 2</span> <span class="k">class</span> <span class="nc">Foo</span>
+<span class="lineno"> 3</span> <span class="p">{</span>
+<span class="lineno"> 4</span>     <span class="c1">// ...</span>
+<span class="lineno"> 5</span> 
+<span class="lineno"> 6</span>     <span class="k">public</span> <span class="k">function</span> <span class="nf">bar</span><span class="p">(</span><span class="nv">$baz</span><span class="p">,</span> <span class="nv">$bat</span> <span class="o">=</span> <span class="k">null</span><span class="p">)</span>
+<span class="lineno"> 7</span>     <span class="p">{</span>
+<span class="lineno"> 8</span>         <span class="nv">$params</span> <span class="o">=</span> <span class="nb">compact</span><span class="p">(</span><span class="nv">$baz</span><span class="p">,</span> <span class="nv">$bat</span><span class="p">);</span>
+<span class="lineno"> 9</span>         <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">events</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">trigger</span><span class="p">(</span><span class="nx">__FUNCTION__</span><span class="p">,</span> <span class="nv">$this</span><span class="p">,</span> <span class="nv">$params</span><span class="p">);</span>
+<span class="lineno">10</span>     <span class="p">}</span>
+<span class="lineno">11</span> <span class="p">}</span>
+</pre></div>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Triggered.md">Triggered.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              21/54
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Triggered.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Notes on Triggering</h2></header>
+            
+            
+            <section><ul>
+<li>Use the method name as the event.<ul>
+<li>If triggering more than one event, use dot-notation (e.g., "dispatch.pre",
+  "dispatch.post").</li>
+</ul>
+</li>
+<li>Pass all input to the method as parameters.</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Triggered.md">Triggered.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              22/54
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Triggered.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Aggregate Listeners</h1></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Triggered.md">Triggered.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              23/54
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Triggered.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_notes">
+          <div class="inner">
+            
+            
+            <section><p class="notes">Examples might be composing object collaborators</p>
+<p>Sometimes you'll want stateful listeners.</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Triggered.md">Triggered.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              24/54
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Triggered.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_notes">
+          <div class="inner">
+            
+            
+            <section><p class="notes">Example includes view listener in ZF2 - views, layouts, error pages</p>
+<p>Sometimes several listeners fall under the same area of responsibility.</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Triggered.md">Triggered.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              25/54
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Triggered.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Aggregate Listeners</h2></header>
+            
+            
+            <section><ul>
+<li>Allow attaching and detaching many listeners at once</li>
+<li>Pass an aggregate to the event manager, or vice versa</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Triggered.md">Triggered.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              26/54
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Triggered.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code">
+          <div class="inner">
+            
+            <header><h2>Example</h2></header>
+            
+            
+            <section><div class="highlight"><pre><span class="lineno"> 1</span> <span class="cp">&lt;?php</span>
+<span class="lineno"> 2</span> <span class="k">class</span> <span class="nc">LogEvents</span> <span class="k">implements</span> <span class="nx">ListenerAggregate</span>
+<span class="lineno"> 3</span> <span class="p">{</span>
+<span class="lineno"> 4</span>     <span class="k">protected</span> <span class="nv">$handlers</span> <span class="o">=</span> <span class="k">array</span><span class="p">();</span>
+<span class="lineno"> 5</span>     <span class="k">protected</span> <span class="nv">$log</span><span class="p">;</span>
+<span class="lineno"> 6</span> 
+<span class="lineno"> 7</span>     <span class="k">public</span> <span class="k">function</span> <span class="nf">__construct</span><span class="p">(</span><span class="nx">Logger</span> <span class="nv">$log</span><span class="p">)</span>
+<span class="lineno"> 8</span>     <span class="p">{</span>
+<span class="lineno"> 9</span>         <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">log</span> <span class="o">=</span> <span class="nv">$log</span><span class="p">;</span>
+<span class="lineno">10</span>     <span class="p">}</span>
+<span class="lineno">11</span> 
+<span class="lineno">12</span>     <span class="k">public</span> <span class="k">function</span> <span class="nf">log</span><span class="p">(</span><span class="nx">Event</span> <span class="nv">$e</span><span class="p">)</span>
+<span class="lineno">13</span>     <span class="p">{</span>
+<span class="lineno">14</span>         <span class="nv">$event</span>  <span class="o">=</span> <span class="nv">$e</span><span class="o">-&gt;</span><span class="na">getName</span><span class="p">();</span>
+<span class="lineno">15</span>         <span class="nv">$params</span> <span class="o">=</span> <span class="nv">$e</span><span class="o">-&gt;</span><span class="na">getParams</span><span class="p">();</span>
+<span class="lineno">16</span>         <span class="nv">$log</span><span class="o">-&gt;</span><span class="na">info</span><span class="p">(</span><span class="nb">sprintf</span><span class="p">(</span><span class="s1">&#39;%s: %s&#39;</span><span class="p">,</span> <span class="nv">$event</span><span class="p">,</span> <span class="nx">json_encode</span><span class="p">(</span><span class="nv">$params</span><span class="p">)));</span>
+<span class="lineno">17</span>     <span class="p">}</span>
+<span class="lineno">18</span> 
+<span class="lineno">19</span>     <span class="c1">// ...</span>
+<span class="lineno">20</span> <span class="p">}</span>
+</pre></div>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Triggered.md">Triggered.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              27/54
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Triggered.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code">
+          <div class="inner">
+            
+            <header><h2>Aggregate Functionality</h2></header>
+            
+            
+            <section><div class="highlight"><pre><span class="lineno"> 1</span> <span class="cp">&lt;?php</span>
+<span class="lineno"> 2</span> <span class="k">public</span> <span class="k">function</span> <span class="nf">attach</span><span class="p">(</span><span class="nx">EventCollection</span> <span class="nv">$events</span><span class="p">)</span>
+<span class="lineno"> 3</span> <span class="p">{</span>
+<span class="lineno"> 4</span>     <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">handlers</span><span class="p">[]</span> <span class="o">=</span> <span class="nv">$events</span><span class="o">-&gt;</span><span class="na">attach</span><span class="p">(</span><span class="s1">&#39;do&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="nv">$this</span><span class="p">,</span> <span class="s1">&#39;log&#39;</span><span class="p">));</span>
+<span class="lineno"> 5</span>     <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">handlers</span><span class="p">[]</span> <span class="o">=</span> <span class="nv">$events</span><span class="o">-&gt;</span><span class="na">attach</span><span class="p">(</span><span class="s1">&#39;doSomethingElse&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="nv">$this</span><span class="p">,</span> <span class="s1">&#39;log&#39;</span><span class="p">));</span>
+<span class="lineno"> 6</span> <span class="p">}</span>
+<span class="lineno"> 7</span> 
+<span class="lineno"> 8</span> <span class="k">public</span> <span class="k">function</span> <span class="nf">detach</span><span class="p">(</span><span class="nx">EventCollection</span> <span class="nv">$events</span><span class="p">)</span>
+<span class="lineno"> 9</span> <span class="p">{</span>
+<span class="lineno">10</span>     <span class="k">foreach</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">handlers</span> <span class="k">as</span> <span class="nv">$key</span> <span class="o">=&gt;</span> <span class="nv">$handler</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno">11</span>         <span class="nv">$events</span><span class="o">-&gt;</span><span class="na">detach</span><span class="p">(</span><span class="nv">$handler</span><span class="p">);</span>
+<span class="lineno">12</span>         <span class="nb">unset</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">handlers</span><span class="p">[</span><span class="nv">$key</span><span class="p">];</span>
+<span class="lineno">13</span>     <span class="p">}</span>
+<span class="lineno">14</span>     <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">handlers</span> <span class="o">=</span> <span class="k">array</span><span class="p">();</span>
+<span class="lineno">15</span> <span class="p">}</span>
+</pre></div>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Triggered.md">Triggered.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              28/54
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Triggered.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code">
+          <div class="inner">
+            
+            <header><h2>Using Aggregates</h2></header>
+            
+            
+            <section><div class="highlight"><pre><span class="lineno">1</span> <span class="cp">&lt;?php</span>
+<span class="lineno">2</span> <span class="nv">$logEvents</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">LogEvents</span><span class="p">(</span><span class="nv">$logger</span><span class="p">);</span>
+<span class="lineno">3</span> <span class="nv">$events</span><span class="o">-&gt;</span><span class="na">attach</span><span class="p">(</span><span class="nv">$logEvents</span><span class="p">);</span>
+<span class="lineno">4</span> 
+<span class="lineno">5</span> <span class="c1">// or</span>
+<span class="lineno">6</span> <span class="nv">$logEvents</span><span class="o">-&gt;</span><span class="na">attach</span><span class="p">(</span><span class="nv">$events</span><span class="p">);</span>
+</pre></div>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Triggered.md">Triggered.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              29/54
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Triggered.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Attaching Listeners Globally</h1></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Triggered.md">Triggered.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              30/54
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Triggered.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Why?</h2></header>
+            
+            
+            <section><ul>
+<li>Listeners are often used for <em>cross-cutting concerns</em>.</li>
+<li>Often, you'll want to setup listeners early, before you have access to
+  specific event manager instances.</li>
+<li>E.g., logging, debugging, caching.</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Triggered.md">Triggered.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              31/54
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Triggered.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code">
+          <div class="inner">
+            
+            <header><h2>How?</h2></header>
+            
+            
+            <section><p>Use the StaticEventManager.</p>
+<div class="highlight"><pre><span class="lineno">1</span> <span class="cp">&lt;?php</span>
+<span class="lineno">2</span> <span class="k">use</span> <span class="nx">Zend\EventManager\StaticEventManager</span><span class="p">;</span>
+<span class="lineno">3</span> <span class="nv">$events</span> <span class="o">=</span> <span class="nx">StaticEventManager</span><span class="o">::</span><span class="na">getInstance</span><span class="p">();</span>
+<span class="lineno">4</span> <span class="nv">$events</span><span class="o">-&gt;</span><span class="na">attach</span><span class="p">(</span><span class="nv">$context</span><span class="p">,</span> <span class="nv">$event</span><span class="p">,</span> <span class="nv">$callback</span><span class="p">);</span>
+</pre></div>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Triggered.md">Triggered.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              32/54
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Triggered.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>What is the "context"?</h2></header>
+            
+            
+            <section><ul>
+<li>Each EventManager instance can listen on one or more contexts<ul>
+<li>Provided to the constructor</li>
+<li>Alternately added using <code>setIdentifier()</code></li>
+</ul>
+</li>
+<li>When triggering events, checks to see if any listeners were registered for its
+  contexts with the StaticEventManager</li>
+<li>You can disable this at any time!</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Triggered.md">Triggered.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              33/54
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Triggered.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code">
+          <div class="inner">
+            
+            <header><h2>Example</h2></header>
+            
+            
+            <section><div class="highlight"><pre><span class="lineno">1</span> <span class="cp">&lt;?php</span>
+<span class="lineno">2</span> <span class="k">use</span> <span class="nx">Zend\EventManager\StaticEventManager</span><span class="p">;</span>
+<span class="lineno">3</span> <span class="nv">$events</span> <span class="o">=</span> <span class="nx">StaticEventManager</span><span class="o">::</span><span class="na">getInstance</span><span class="p">();</span>
+<span class="lineno">4</span> <span class="nv">$events</span><span class="o">-&gt;</span><span class="na">attach</span><span class="p">(</span><span class="s1">&#39;Foo&#39;</span><span class="p">,</span> <span class="s1">&#39;bar&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$e</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno">5</span>     <span class="nv">$event</span>  <span class="o">=</span> <span class="nv">$e</span><span class="o">-&gt;</span><span class="na">getName</span><span class="p">();</span>
+<span class="lineno">6</span>     <span class="nv">$target</span> <span class="o">=</span> <span class="nv">$e</span><span class="o">-&gt;</span><span class="na">getTarget</span><span class="p">();</span>
+<span class="lineno">7</span>     <span class="nv">$params</span> <span class="o">=</span> <span class="nx">json_encode</span><span class="p">(</span><span class="nv">$e</span><span class="o">-&gt;</span><span class="na">getParams</span><span class="p">());</span>
+<span class="lineno">8</span>     <span class="nb">sprintf</span><span class="p">(</span><span class="s1">&#39;%s::%s: %s&#39;</span><span class="p">,</span> <span class="nv">$event</span><span class="p">,</span> <span class="nv">$target</span><span class="p">,</span> <span class="nv">$params</span><span class="p">);</span>
+<span class="lineno">9</span> <span class="p">});</span>
+</pre></div>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Triggered.md">Triggered.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              34/54
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Triggered.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Advanced Topics</h1></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Triggered.md">Triggered.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              35/54
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Triggered.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Short Circuting</h1></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Triggered.md">Triggered.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              36/54
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Triggered.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>What?</h2></header>
+            
+            
+            <section><ul>
+<li>Sometimes you may want to return early based on what a listener does</li>
+<li>Sometimes a listener may want to prevent other listeners from processing</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Triggered.md">Triggered.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              37/54
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Triggered.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code">
+          <div class="inner">
+            
+            <header><h2>How?</h2></header>
+            
+            
+            <section><p><em>Method 1:</em> Attach a callback when triggering</p>
+<div class="highlight"><pre><span class="lineno">1</span> <span class="cp">&lt;?php</span>
+<span class="lineno">2</span> <span class="nv">$results</span> <span class="o">=</span> <span class="nv">$events</span><span class="o">-&gt;</span><span class="na">trigger</span><span class="p">(</span><span class="nv">$event</span><span class="p">,</span> <span class="k">function</span><span class="p">(</span><span class="nv">$r</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno">3</span>     <span class="k">return</span> <span class="p">(</span><span class="nv">$r</span> <span class="nx">instanceof</span> <span class="nx">Response</span><span class="p">);</span>
+<span class="lineno">4</span> <span class="p">});</span>
+</pre></div>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Triggered.md">Triggered.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              38/54
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Triggered.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code has_notes">
+          <div class="inner">
+            
+            <header><h2>How?</h2></header>
+            
+            
+            <section><p class="notes">This is like JavaScript</p>
+<p><em>Method 2:</em> Signal from a listener</p>
+<div class="highlight"><pre><span class="lineno">1</span> <span class="cp">&lt;?php</span>
+<span class="lineno">2</span> <span class="nv">$listener</span> <span class="o">=</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$e</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno">3</span>     <span class="nv">$e</span><span class="o">-&gt;</span><span class="na">stopPropagation</span><span class="p">(</span><span class="k">true</span><span class="p">);</span>
+<span class="lineno">4</span> <span class="p">};</span>
+</pre></div>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Triggered.md">Triggered.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              39/54
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Triggered.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code">
+          <div class="inner">
+            
+            <header><h2>Testing for stopped propagation</h2></header>
+            
+            
+            <section><div class="highlight"><pre><span class="lineno">1</span> <span class="cp">&lt;?php</span>
+<span class="lineno">2</span> <span class="nv">$results</span> <span class="o">=</span> <span class="nv">$events</span><span class="o">-&gt;</span><span class="na">trigger</span><span class="p">(</span><span class="cm">/* ... */</span><span class="p">);</span>
+<span class="lineno">3</span> <span class="k">if</span> <span class="p">(</span><span class="nv">$results</span><span class="o">-&gt;</span><span class="na">stopped</span><span class="p">())</span> <span class="p">{</span>
+<span class="lineno">4</span>     <span class="k">return</span> <span class="nv">$results</span><span class="o">-&gt;</span><span class="na">last</span><span class="p">();</span>
+<span class="lineno">5</span> <span class="p">}</span>
+</pre></div>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Triggered.md">Triggered.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              40/54
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Triggered.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Introspecting results</h1></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Triggered.md">Triggered.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              41/54
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Triggered.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code">
+          <div class="inner">
+            
+            <header><h2>Iterate:</h2></header>
+            
+            
+            <section><div class="highlight"><pre><span class="lineno">1</span> <span class="cp">&lt;?php</span>
+<span class="lineno">2</span> <span class="k">foreach</span> <span class="p">(</span><span class="nv">$results</span> <span class="k">as</span> <span class="nv">$result</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno">3</span>     <span class="c1">// ...</span>
+<span class="lineno">4</span> <span class="p">}</span>
+</pre></div>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Triggered.md">Triggered.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              42/54
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Triggered.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code">
+          <div class="inner">
+            
+            <header><h2>First result:</h2></header>
+            
+            
+            <section><div class="highlight"><pre><span class="lineno">1</span> <span class="cp">&lt;?php</span>
+<span class="lineno">2</span> <span class="nv">$first</span> <span class="o">=</span> <span class="nv">$results</span><span class="o">-&gt;</span><span class="na">first</span><span class="p">();</span>
+</pre></div>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Triggered.md">Triggered.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              43/54
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Triggered.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code">
+          <div class="inner">
+            
+            <header><h2>Last result:</h2></header>
+            
+            
+            <section><div class="highlight"><pre><span class="lineno">1</span> <span class="cp">&lt;?php</span>
+<span class="lineno">2</span> <span class="nv">$first</span> <span class="o">=</span> <span class="nv">$results</span><span class="o">-&gt;</span><span class="na">last</span><span class="p">();</span>
+</pre></div>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Triggered.md">Triggered.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              44/54
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Triggered.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code">
+          <div class="inner">
+            
+            <header><h2>Test for specific value:</h2></header>
+            
+            
+            <section><div class="highlight"><pre><span class="lineno">1</span> <span class="cp">&lt;?php</span>
+<span class="lineno">2</span> <span class="k">if</span> <span class="p">(</span><span class="nv">$results</span><span class="o">-&gt;</span><span class="na">contains</span><span class="p">(</span><span class="s1">&#39;foo&#39;</span><span class="p">))</span> <span class="p">{</span>
+<span class="lineno">3</span>     <span class="c1">// found!</span>
+<span class="lineno">4</span> <span class="p">}</span>
+</pre></div>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Triggered.md">Triggered.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              45/54
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Triggered.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Prioritized Events</h1></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Triggered.md">Triggered.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              46/54
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Triggered.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_notes">
+          <div class="inner">
+            
+            <header><h2>Why?</h2></header>
+            
+            
+            <section><p class="notes">Examples: ACLs, caching</p>
+<p>Sometimes events need to execute in a given order.</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Triggered.md">Triggered.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              47/54
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Triggered.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>How?</h2></header>
+            
+            
+            <section><ul>
+<li>Optional final argument to attach() (even statically)</li>
+<li>Default priority is 1</li>
+<li>Higher values == higher priority</li>
+<li>Negative values == lower priority</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Triggered.md">Triggered.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              48/54
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Triggered.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code">
+          <div class="inner">
+            
+            <header><h2>Examples</h2></header>
+            
+            
+            <section><div class="highlight"><pre><span class="lineno">1</span> <span class="cp">&lt;?php</span>
+<span class="lineno">2</span> <span class="c1">// High priority:</span>
+<span class="lineno">3</span> <span class="nv">$events</span><span class="o">-&gt;</span><span class="na">attach</span><span class="p">(</span><span class="s1">&#39;foo&#39;</span><span class="p">,</span> <span class="nv">$listener</span><span class="p">,</span> <span class="mi">100</span><span class="p">);</span>
+<span class="lineno">4</span> 
+<span class="lineno">5</span> <span class="c1">// Low priority:</span>
+<span class="lineno">6</span> <span class="nv">$events</span><span class="o">-&gt;</span><span class="na">attach</span><span class="p">(</span><span class="s1">&#39;foo&#39;</span><span class="p">,</span> <span class="nv">$listener</span><span class="p">,</span> <span class="o">-</span><span class="mi">100</span><span class="p">);</span>
+</pre></div>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Triggered.md">Triggered.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              49/54
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Triggered.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Putting it Together</h1></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Triggered.md">Triggered.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              50/54
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Triggered.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code">
+          <div class="inner">
+            
+            <header><h2>Our target</h2></header>
+            
+            
+            <section><div class="highlight"><pre><span class="lineno"> 1</span> <span class="cp">&lt;?php</span>
+<span class="lineno"> 2</span> <span class="k">public</span> <span class="k">function</span> <span class="nf">someExpensiveCall</span><span class="p">(</span><span class="nv">$criteria1</span><span class="p">,</span> <span class="nv">$criteria2</span><span class="p">)</span>
+<span class="lineno"> 3</span> <span class="p">{</span>
+<span class="lineno"> 4</span>     <span class="nv">$params</span>  <span class="o">=</span> <span class="nb">compact</span><span class="p">(</span><span class="s1">&#39;criteria1&#39;</span><span class="p">,</span> <span class="s1">&#39;criteria2&#39;</span><span class="p">);</span>
+<span class="lineno"> 5</span>     <span class="nv">$results</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">events</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">trigger</span><span class="p">(</span>
+<span class="lineno"> 6</span>         <span class="nx">__FUNCTION__</span> <span class="o">.</span> <span class="s1">&#39;.pre&#39;</span><span class="p">,</span> <span class="nv">$this</span><span class="p">,</span> <span class="nv">$params</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$r</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno"> 7</span>         <span class="k">return</span> <span class="p">(</span><span class="nv">$r</span> <span class="nx">instanceof</span> <span class="nx">SomeResultClass</span><span class="p">);</span>
+<span class="lineno"> 8</span>     <span class="p">});</span>
+<span class="lineno"> 9</span>     <span class="k">if</span> <span class="p">(</span><span class="nv">$results</span><span class="o">-&gt;</span><span class="na">stopped</span><span class="p">())</span> <span class="p">{</span>
+<span class="lineno">10</span>         <span class="k">return</span> <span class="nv">$results</span><span class="o">-&gt;</span><span class="na">last</span><span class="p">();</span>
+<span class="lineno">11</span>     <span class="p">}</span>
+<span class="lineno">12</span> 
+<span class="lineno">13</span>     <span class="c1">// ... do some work ...</span>
+<span class="lineno">14</span> 
+<span class="lineno">15</span>     <span class="nv">$params</span><span class="p">[</span><span class="s1">&#39;__RESULT__&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$calculatedResult</span><span class="p">;</span>
+<span class="lineno">16</span>     <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">events</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">trigger</span><span class="p">(</span>
+<span class="lineno">17</span>         <span class="nx">__FUNCTION__</span> <span class="o">.</span> <span class="s1">&#39;.post&#39;</span><span class="p">,</span> <span class="nv">$this</span><span class="p">,</span> <span class="nv">$params</span><span class="p">);</span>
+<span class="lineno">18</span>     <span class="k">return</span> <span class="nv">$calculatedResult</span><span class="p">;</span>
+<span class="lineno">19</span> <span class="p">}</span>
+</pre></div>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Triggered.md">Triggered.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              51/54
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Triggered.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code">
+          <div class="inner">
+            
+            <header><h2>Caching: check for match</h2></header>
+            
+            
+            <section><div class="highlight"><pre><span class="lineno">1</span> <span class="cp">&lt;?php</span>
+<span class="lineno">2</span> <span class="nv">$events</span><span class="o">-&gt;</span><span class="na">attach</span><span class="p">(</span><span class="s1">&#39;someExpensiveCall.pre&#39;</span><span class="p">,</span> <span class="k">function</span><span class="p">(</span><span class="nv">$e</span><span class="p">)</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$cache</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno">3</span>     <span class="nv">$params</span> <span class="o">=</span> <span class="nv">$e</span><span class="o">-&gt;</span><span class="na">getParams</span><span class="p">();</span>
+<span class="lineno">4</span>     <span class="nv">$key</span>    <span class="o">=</span> <span class="nb">md5</span><span class="p">(</span><span class="nx">json_encode</span><span class="p">(</span><span class="nv">$params</span><span class="p">));</span>
+<span class="lineno">5</span>     <span class="k">if</span> <span class="p">(</span><span class="k">false</span> <span class="o">!==</span> <span class="p">(</span><span class="nv">$hit</span> <span class="o">=</span> <span class="nv">$cache</span><span class="o">-&gt;</span><span class="na">load</span><span class="p">(</span><span class="nv">$key</span><span class="p">))</span> <span class="p">{</span>
+<span class="lineno">6</span>         <span class="k">return</span> <span class="nv">$hit</span><span class="p">;</span>
+<span class="lineno">7</span>     <span class="p">}</span>
+<span class="lineno">8</span> <span class="p">},</span> <span class="mi">100</span><span class="p">);</span>
+</pre></div>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Triggered.md">Triggered.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              52/54
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Triggered.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code">
+          <div class="inner">
+            
+            <header><h2>Caching: cache a value</h2></header>
+            
+            
+            <section><div class="highlight"><pre><span class="lineno">1</span> <span class="cp">&lt;?php</span>
+<span class="lineno">2</span> <span class="nv">$events</span><span class="o">-&gt;</span><span class="na">attach</span><span class="p">(</span><span class="s1">&#39;someExpensiveCall.post&#39;</span><span class="p">,</span> <span class="k">function</span><span class="p">(</span><span class="nv">$e</span><span class="p">)</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$cache</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno">3</span>     <span class="nv">$params</span> <span class="o">=</span> <span class="nv">$e</span><span class="o">-&gt;</span><span class="na">getParams</span><span class="p">();</span>
+<span class="lineno">4</span>     <span class="nv">$result</span> <span class="o">=</span> <span class="nv">$params</span><span class="p">[</span><span class="s1">&#39;__RESULT__&#39;</span><span class="p">];</span>
+<span class="lineno">5</span>     <span class="nb">unset</span><span class="p">(</span><span class="nv">$params</span><span class="p">[</span><span class="s1">&#39;__RESULT__&#39;</span><span class="p">]);</span>
+<span class="lineno">6</span>     <span class="nv">$key</span>    <span class="o">=</span> <span class="nb">md5</span><span class="p">(</span><span class="nx">json_encode</span><span class="p">(</span><span class="nv">$params</span><span class="p">));</span>
+<span class="lineno">7</span>     <span class="nv">$cache</span><span class="o">-&gt;</span><span class="na">save</span><span class="p">(</span><span class="nv">$result</span><span class="p">,</span> <span class="nv">$key</span><span class="p">);</span>
+<span class="lineno">8</span> <span class="p">},</span> <span class="o">-</span><span class="mi">100</span><span class="p">);</span>
+</pre></div>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Triggered.md">Triggered.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              53/54
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Triggered.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Thank you!</h1></header>
+            
+            
+            <section><ul>
+<li>http://joind.in/3788</li>
+<li>http://twitter.com/weierophinney</li>
+<li>http://framework.zend.com/zf2</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Triggered.md">Triggered.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              54/54
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div id="toc" class="sidebar hidden">
+    <h2>Table of Contents</h2>
+    <table>
+      <caption>Table of Contents</caption>
+      
+      <tr id="toc-row-1">
+        <th><a href="#slide1">Triggered!</a></th>
+        <td><a href="#slide1">1</a></td>
+      </tr>
+      
+        
+        <tr id="toc-row-2" class="sub">
+          <th><a href="#slide2">Terminology</a></th>
+          <td><a href="#slide2">2</a></td>
+        </tr>
+        
+        <tr id="toc-row-3" class="sub">
+          <th><a href="#slide3">In a Nutshell</a></th>
+          <td><a href="#slide3">3</a></td>
+        </tr>
+        
+        <tr id="toc-row-4" class="sub">
+          <th><a href="#slide4">Attach</a></th>
+          <td><a href="#slide4">4</a></td>
+        </tr>
+        
+        <tr id="toc-row-6" class="sub">
+          <th><a href="#slide6">Trigger</a></th>
+          <td><a href="#slide6">6</a></td>
+        </tr>
+        
+        <tr id="toc-row-8" class="sub">
+          <th><a href="#slide8">Event</a></th>
+          <td><a href="#slide8">8</a></td>
+        </tr>
+        
+        <tr id="toc-row-9" class="sub">
+          <th><a href="#slide9">Listeners</a></th>
+          <td><a href="#slide9">9</a></td>
+        </tr>
+        
+      
+      
+      <tr id="toc-row-11">
+        <th><a href="#slide11">Digression: Custom Events</a></th>
+        <td><a href="#slide11">11</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-12">
+        <th><a href="#slide12">Semantics matter.</a></th>
+        <td><a href="#slide12">12</a></td>
+      </tr>
+      
+        
+        <tr id="toc-row-13" class="sub">
+          <th><a href="#slide13">An Example of Bad Semantics</a></th>
+          <td><a href="#slide13">13</a></td>
+        </tr>
+        
+        <tr id="toc-row-14" class="sub">
+          <th><a href="#slide14">Better Semantics</a></th>
+          <td><a href="#slide14">14</a></td>
+        </tr>
+        
+        <tr id="toc-row-15" class="sub">
+          <th><a href="#slide15">Creating Custom Events</a></th>
+          <td><a href="#slide15">15</a></td>
+        </tr>
+        
+        <tr id="toc-row-16" class="sub">
+          <th><a href="#slide16">Using Custom Events: part 1</a></th>
+          <td><a href="#slide16">16</a></td>
+        </tr>
+        
+        <tr id="toc-row-17" class="sub">
+          <th><a href="#slide17">Using Custom Events: part 2</a></th>
+          <td><a href="#slide17">17</a></td>
+        </tr>
+        
+        <tr id="toc-row-18" class="sub">
+          <th><a href="#slide18">Using Custom Events: part 3</a></th>
+          <td><a href="#slide18">18</a></td>
+        </tr>
+        
+      
+      
+      <tr id="toc-row-19">
+        <th><a href="#slide19">Recommended Usage</a></th>
+        <td><a href="#slide19">19</a></td>
+      </tr>
+      
+        
+        <tr id="toc-row-20" class="sub">
+          <th><a href="#slide20">Compose an EventManager</a></th>
+          <td><a href="#slide20">20</a></td>
+        </tr>
+        
+        <tr id="toc-row-21" class="sub">
+          <th><a href="#slide21">Trigger Events</a></th>
+          <td><a href="#slide21">21</a></td>
+        </tr>
+        
+        <tr id="toc-row-22" class="sub">
+          <th><a href="#slide22">Notes on Triggering</a></th>
+          <td><a href="#slide22">22</a></td>
+        </tr>
+        
+      
+      
+      <tr id="toc-row-23">
+        <th><a href="#slide23">Aggregate Listeners</a></th>
+        <td><a href="#slide23">23</a></td>
+      </tr>
+      
+        
+        <tr id="toc-row-26" class="sub">
+          <th><a href="#slide26">Aggregate Listeners</a></th>
+          <td><a href="#slide26">26</a></td>
+        </tr>
+        
+        <tr id="toc-row-27" class="sub">
+          <th><a href="#slide27">Example</a></th>
+          <td><a href="#slide27">27</a></td>
+        </tr>
+        
+        <tr id="toc-row-28" class="sub">
+          <th><a href="#slide28">Aggregate Functionality</a></th>
+          <td><a href="#slide28">28</a></td>
+        </tr>
+        
+        <tr id="toc-row-29" class="sub">
+          <th><a href="#slide29">Using Aggregates</a></th>
+          <td><a href="#slide29">29</a></td>
+        </tr>
+        
+      
+      
+      <tr id="toc-row-30">
+        <th><a href="#slide30">Attaching Listeners Globally</a></th>
+        <td><a href="#slide30">30</a></td>
+      </tr>
+      
+        
+        <tr id="toc-row-31" class="sub">
+          <th><a href="#slide31">Why?</a></th>
+          <td><a href="#slide31">31</a></td>
+        </tr>
+        
+        <tr id="toc-row-32" class="sub">
+          <th><a href="#slide32">How?</a></th>
+          <td><a href="#slide32">32</a></td>
+        </tr>
+        
+        <tr id="toc-row-33" class="sub">
+          <th><a href="#slide33">What is the "context"?</a></th>
+          <td><a href="#slide33">33</a></td>
+        </tr>
+        
+        <tr id="toc-row-34" class="sub">
+          <th><a href="#slide34">Example</a></th>
+          <td><a href="#slide34">34</a></td>
+        </tr>
+        
+      
+      
+      <tr id="toc-row-35">
+        <th><a href="#slide35">Advanced Topics</a></th>
+        <td><a href="#slide35">35</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-36">
+        <th><a href="#slide36">Short Circuting</a></th>
+        <td><a href="#slide36">36</a></td>
+      </tr>
+      
+        
+        <tr id="toc-row-37" class="sub">
+          <th><a href="#slide37">What?</a></th>
+          <td><a href="#slide37">37</a></td>
+        </tr>
+        
+        <tr id="toc-row-38" class="sub">
+          <th><a href="#slide38">How?</a></th>
+          <td><a href="#slide38">38</a></td>
+        </tr>
+        
+        <tr id="toc-row-39" class="sub">
+          <th><a href="#slide39">How?</a></th>
+          <td><a href="#slide39">39</a></td>
+        </tr>
+        
+        <tr id="toc-row-40" class="sub">
+          <th><a href="#slide40">Testing for stopped propagation</a></th>
+          <td><a href="#slide40">40</a></td>
+        </tr>
+        
+      
+      
+      <tr id="toc-row-41">
+        <th><a href="#slide41">Introspecting results</a></th>
+        <td><a href="#slide41">41</a></td>
+      </tr>
+      
+        
+        <tr id="toc-row-42" class="sub">
+          <th><a href="#slide42">Iterate:</a></th>
+          <td><a href="#slide42">42</a></td>
+        </tr>
+        
+        <tr id="toc-row-43" class="sub">
+          <th><a href="#slide43">First result:</a></th>
+          <td><a href="#slide43">43</a></td>
+        </tr>
+        
+        <tr id="toc-row-44" class="sub">
+          <th><a href="#slide44">Last result:</a></th>
+          <td><a href="#slide44">44</a></td>
+        </tr>
+        
+        <tr id="toc-row-45" class="sub">
+          <th><a href="#slide45">Test for specific value:</a></th>
+          <td><a href="#slide45">45</a></td>
+        </tr>
+        
+      
+      
+      <tr id="toc-row-46">
+        <th><a href="#slide46">Prioritized Events</a></th>
+        <td><a href="#slide46">46</a></td>
+      </tr>
+      
+        
+        <tr id="toc-row-47" class="sub">
+          <th><a href="#slide47">Why?</a></th>
+          <td><a href="#slide47">47</a></td>
+        </tr>
+        
+        <tr id="toc-row-48" class="sub">
+          <th><a href="#slide48">How?</a></th>
+          <td><a href="#slide48">48</a></td>
+        </tr>
+        
+        <tr id="toc-row-49" class="sub">
+          <th><a href="#slide49">Examples</a></th>
+          <td><a href="#slide49">49</a></td>
+        </tr>
+        
+      
+      
+      <tr id="toc-row-50">
+        <th><a href="#slide50">Putting it Together</a></th>
+        <td><a href="#slide50">50</a></td>
+      </tr>
+      
+        
+        <tr id="toc-row-51" class="sub">
+          <th><a href="#slide51">Our target</a></th>
+          <td><a href="#slide51">51</a></td>
+        </tr>
+        
+        <tr id="toc-row-52" class="sub">
+          <th><a href="#slide52">Caching: check for match</a></th>
+          <td><a href="#slide52">52</a></td>
+        </tr>
+        
+        <tr id="toc-row-53" class="sub">
+          <th><a href="#slide53">Caching: cache a value</a></th>
+          <td><a href="#slide53">53</a></td>
+        </tr>
+        
+      
+      
+      <tr id="toc-row-54">
+        <th><a href="#slide54">Thank you!</a></th>
+        <td><a href="#slide54">54</a></td>
+      </tr>
+      
+      
+    </table>
+  </div>
+  
+  <div id="help" class="sidebar hidden">
+    <h2>Help</h2>
+    <table>
+      <caption>Help</caption>
+      <tr>
+        <th>Table of Contents</th>
+        <td>t</td>
+      </tr>
+      <tr>
+        <th>Exposé</th>
+        <td>ESC</td>
+      </tr>
+      <tr>
+        <th>Full screen slides</th>
+        <td>e</td>
+      </tr>
+      <tr>
+        <th>Presenter View</th>
+        <td>p</td>
+      </tr>
+      <tr>
+        <th>Source Files</th>
+        <td>s</td>
+      </tr>
+      <tr>
+        <th>Slide Numbers</th>
+        <td>n</td>
+      </tr>
+      <tr>
+        <th>Toggle screen blanking</th>
+        <td>b</td>
+      </tr>
+      <tr>
+        <th>Show/hide slide context</th>
+        <td>c</td>
+      </tr>
+      <tr>
+        <th>Notes</th>
+        <td>2</td>
+      </tr>
+      <tr>
+        <th>Help</th>
+        <td>h</td>
+      </tr>
+    </table>
+  </div>
+  <script>main()</script>
+</body>
+</html>
