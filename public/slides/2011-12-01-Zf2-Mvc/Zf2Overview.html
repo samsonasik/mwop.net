@@ -1,0 +1,2459 @@
+<!DOCTYPE html>
+<!--
+  Copyright 2010 Google Inc.
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+
+  Original slides: Marcin Wichary (mwichary@google.com)
+  Modifications: Ernest Delgado (ernestd@google.com)
+                 Alex Russell (slightlyoff@chromium.org)
+
+  landslide modifications: Adam Zapletal (adamzap@gmail.com)
+                           Nicolas Perriault (nperriault@gmail.com)
+-->
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Dispatch This!</title>
+    <!-- Styles -->
+    
+    <link rel="stylesheet" media="print" href="/usr/local/lib/python2.7/dist-packages/landslide-1.0.0-py2.7.egg/landslide/themes/default/css/print.css">
+    <link rel="stylesheet" media="screen, projection" href="theme/css/screen.css">
+    
+    
+    <!-- /Styles -->
+    <!-- Javascripts -->
+    
+    <script type="text/javascript" src="theme/js/slides.js"></script>
+    
+    
+    <!-- /Javascripts -->
+</head>
+<body>
+  <div id="blank"></div>
+  <div class="presentation">
+    <div id="current_presenter_notes">
+      <div id="presenter_note"></div>
+    </div>
+    <div class="slides">
+      
+      <!-- slide source: Zf2Overview.md -->
+      <div class="slide-wrapper">
+        <div class="slide titleslide">
+          <div class="inner">
+            
+            <header><h1>Dispatch This!</h1></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Overview.md">Zf2Overview.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              1/51
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Overview.md -->
+      <div class="slide-wrapper">
+        <div class="slide centeredHeaders">
+          <div class="inner">
+            
+            <header><h2>Our goal</h2></header>
+            
+            
+            <section><h2>Better consistency and performance.</h2></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Overview.md">Zf2Overview.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              2/51
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Overview.md -->
+      <div class="slide-wrapper">
+        <div class="slide sectionslide">
+          <div class="inner">
+            
+            <header><h1>A New Core</h1></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Overview.md">Zf2Overview.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              3/51
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Overview.md -->
+      <div class="slide-wrapper">
+        <div class="slide centeredHeaders">
+          <div class="inner">
+            
+            <header><h2>The ZF1 Way</h2></header>
+            
+            
+            <section><p>Singletons, Registries, and Hard-Coded Dependencies</p>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <p>The main entry point to a ZF1 app was a singleton, Zend_Controller_Front.
+Registries have long been promoted as a way to access dependencies, and are the
+primary way i18n/l10n work. Controllers typically instantiated objects they
+needed directly. It's a mess.</p>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Overview.md">Zf2Overview.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              4/51
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Overview.md -->
+      <div class="slide-wrapper">
+        <div class="slide centeredHeaders">
+          <div class="inner">
+            
+            <header><h2>The ZF2 Way</h2></header>
+            
+            
+            <section><p>Aspect Oriented Design and Dependency Injection</p>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <p>The two biggest questions as we've worked on ZF2 have centered around how
+controllers could get their dependencies, and how to make systems flexible.
+Tasks like logging, caching, and authorization should be simple to initiate.</p>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Overview.md">Zf2Overview.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              5/51
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Overview.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Dependency Injection</h1></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Overview.md">Zf2Overview.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              6/51
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Overview.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code">
+          <div class="inner">
+            
+            <header><h2>Basic Dependency Injection</h2></header>
+            
+            
+            <section><p>Dependency Injection is not magic.</p>
+<div class="highlight"><pre><span class="lineno"> 1</span> <span class="cp">&lt;?php</span>
+<span class="lineno"> 2</span> <span class="k">class</span> <span class="nc">Bar</span> <span class="p">{}</span>
+<span class="lineno"> 3</span> 
+<span class="lineno"> 4</span> <span class="k">class</span> <span class="nc">Foo</span>
+<span class="lineno"> 5</span> <span class="p">{</span>
+<span class="lineno"> 6</span>     <span class="k">protected</span> <span class="nv">$bar</span><span class="p">;</span>
+<span class="lineno"> 7</span> 
+<span class="lineno"> 8</span>     <span class="k">public</span> <span class="k">function</span> <span class="nf">__construct</span><span class="p">(</span><span class="nx">Bar</span> <span class="nv">$bar</span><span class="p">)</span>
+<span class="lineno"> 9</span>     <span class="p">{</span>
+<span class="lineno">10</span>         <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">bar</span> <span class="o">=</span> <span class="nv">$bar</span><span class="p">;</span>
+<span class="lineno">11</span>     <span class="p">}</span>
+<span class="lineno">12</span> <span class="p">}</span>
+</pre></div>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Overview.md">Zf2Overview.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              7/51
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Overview.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code">
+          <div class="inner">
+            
+            <header><h2>Setter Injection</h2></header>
+            
+            
+            <section><p>Sometimes we use setters.</p>
+<div class="highlight"><pre><span class="lineno"> 1</span> <span class="cp">&lt;?php</span>
+<span class="lineno"> 2</span> <span class="k">class</span> <span class="nc">Foo</span>
+<span class="lineno"> 3</span> <span class="p">{</span>
+<span class="lineno"> 4</span>     <span class="k">protected</span> <span class="nv">$bar</span><span class="p">;</span>
+<span class="lineno"> 5</span> 
+<span class="lineno"> 6</span>     <span class="k">public</span> <span class="k">function</span> <span class="nf">setBar</span><span class="p">(</span><span class="nx">Bar</span> <span class="nv">$bar</span><span class="p">)</span>
+<span class="lineno"> 7</span>     <span class="p">{</span>
+<span class="lineno"> 8</span>         <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">bar</span> <span class="o">=</span> <span class="nv">$bar</span><span class="p">;</span>
+<span class="lineno"> 9</span>     <span class="p">}</span>
+<span class="lineno">10</span> <span class="p">}</span>
+</pre></div>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Overview.md">Zf2Overview.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              8/51
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Overview.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>It solves a problem</h2></header>
+            
+            
+            <section><ul>
+<li>How do we enforce a separation of concerns?</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Overview.md">Zf2Overview.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              9/51
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Overview.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>It creates a new problem</h2></header>
+            
+            
+            <section><ul>
+<li>How and when do we create and inject dependencies?</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Overview.md">Zf2Overview.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              10/51
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Overview.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>DI Containers</h2></header>
+            
+            
+            <section><ul>
+<li>Store object definitions, including dependency information</li>
+<li>Store environment-specific configuration of the dependencies</li>
+<li>Handle the creation of objects and their dependencies</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Overview.md">Zf2Overview.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              11/51
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Overview.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code">
+          <div class="inner">
+            
+            <header><h2>Sample Definition</h2></header>
+            
+            
+            <section><div class="highlight"><pre><span class="lineno"> 1</span> <span class="cp">&lt;?php</span>
+<span class="lineno"> 2</span> <span class="nv">$definition</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+<span class="lineno"> 3</span>     <span class="s1">&#39;Foo&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+<span class="lineno"> 4</span>         <span class="s1">&#39;setBar&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+<span class="lineno"> 5</span>             <span class="s1">&#39;bar&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+<span class="lineno"> 6</span>                 <span class="s1">&#39;type&#39;</span>     <span class="o">=&gt;</span> <span class="s1">&#39;Bar&#39;</span><span class="p">,</span>
+<span class="lineno"> 7</span>                 <span class="s1">&#39;required&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
+<span class="lineno"> 8</span>             <span class="p">),</span>
+<span class="lineno"> 9</span>         <span class="p">),</span>
+<span class="lineno">10</span>     <span class="p">),</span>
+<span class="lineno">11</span> <span class="p">);</span>
+</pre></div>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Overview.md">Zf2Overview.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              12/51
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Overview.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code">
+          <div class="inner">
+            
+            <header><h2>Using the DI Container</h2></header>
+            
+            
+            <section><div class="highlight"><pre><span class="lineno"> 1</span> <span class="cp">&lt;?php</span>
+<span class="lineno"> 2</span> <span class="k">use</span> <span class="nx">Zend\Di\Di</span><span class="p">,</span>
+<span class="lineno"> 3</span>     <span class="nx">Zend\Di\Configuration</span><span class="p">;</span>
+<span class="lineno"> 4</span> 
+<span class="lineno"> 5</span> <span class="nv">$di</span>     <span class="o">=</span> <span class="k">new</span> <span class="nx">Di</span><span class="p">;</span>
+<span class="lineno"> 6</span> <span class="nv">$config</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Configuration</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+<span class="lineno"> 7</span>     <span class="s1">&#39;definition&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;class&#39;</span> <span class="o">=&gt;</span> <span class="nv">$definition</span><span class="p">)</span>
+<span class="lineno"> 8</span> <span class="p">));</span>
+<span class="lineno"> 9</span> <span class="nv">$config</span><span class="o">-&gt;</span><span class="na">configure</span><span class="p">(</span><span class="nv">$di</span><span class="p">);</span>
+<span class="lineno">10</span> 
+<span class="lineno">11</span> <span class="nv">$foo</span> <span class="o">=</span> <span class="nv">$di</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;Foo&#39;</span><span class="p">);</span> <span class="c1">// contains Bar!</span>
+</pre></div>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Overview.md">Zf2Overview.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              13/51
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Overview.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Zend\Di Features</h2></header>
+            
+            
+            <section><ul>
+<li>Intelligent mix of definition strategies: Runtime, Compiled, Builder</li>
+<li>Annotation support to automate creation of definitions</li>
+<li>Flexible and simple configuration</li>
+</ul>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <p>Annotation support is primarily to make interface injection possible.</p>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Overview.md">Zf2Overview.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              14/51
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Overview.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Aspect Oriented Design</h1></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Overview.md">Zf2Overview.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              15/51
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Overview.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>What?</h2></header>
+            
+            
+            <section><ul>
+<li>How can we create extensible architectures that allow for a variety of
+  cross-cutting concerns?</li>
+<li>How can we create architectures that allow developers to shape workflows and
+  execution to suit differing needs?</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Overview.md">Zf2Overview.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              16/51
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Overview.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Zend\EventManager</h2></header>
+            
+            
+            <section><ul>
+<li>Trigger <em>Events</em> to be handled by <em>Listeners</em></li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Overview.md">Zf2Overview.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              17/51
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Overview.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code">
+          <div class="inner">
+            
+            <header><h2>It's simple, really</h2></header>
+            
+            
+            <section><div class="highlight"><pre><span class="lineno"> 1</span> <span class="cp">&lt;?php</span>
+<span class="lineno"> 2</span> <span class="k">use</span> <span class="nx">Zend\EventManager\EventManager</span><span class="p">;</span>
+<span class="lineno"> 3</span> 
+<span class="lineno"> 4</span> <span class="nv">$events</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">EventManager</span><span class="p">();</span>
+<span class="lineno"> 5</span> <span class="nv">$events</span><span class="o">-&gt;</span><span class="na">attach</span><span class="p">(</span><span class="s1">&#39;execute&#39;</span><span class="p">,</span> <span class="k">function</span><span class="p">(</span><span class="nv">$e</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno"> 6</span>     <span class="nv">$event</span>  <span class="o">=</span> <span class="nv">$e</span><span class="o">-&gt;</span><span class="na">getName</span><span class="p">();</span>
+<span class="lineno"> 7</span>     <span class="nv">$params</span> <span class="o">=</span> <span class="nx">json_encode</span><span class="p">(</span><span class="nv">$e</span><span class="o">-&gt;</span><span class="na">getParams</span><span class="p">());</span>
+<span class="lineno"> 8</span>     <span class="nb">sprintf</span><span class="p">(</span><span class="s1">&#39;%s: %s&#39;</span><span class="p">,</span> <span class="nv">$event</span><span class="p">,</span> <span class="nv">$params</span><span class="p">);</span>
+<span class="lineno"> 9</span> <span class="p">});</span>
+<span class="lineno">10</span> <span class="nv">$events</span><span class="o">-&gt;</span><span class="na">trigger</span><span class="p">(</span><span class="s1">&#39;execute&#39;</span><span class="p">,</span> <span class="k">null</span><span class="p">,</span> <span class="nv">$params</span><span class="p">);</span>
+</pre></div>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Overview.md">Zf2Overview.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              18/51
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Overview.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Features</h2></header>
+            
+            
+            <section><ul>
+<li>Listener prioritization</li>
+<li>Static attachment, by context</li>
+<li>Ability to short-circuit </li>
+<li>Result introspection</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Overview.md">Zf2Overview.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              19/51
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Overview.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Dispatch This!</h1></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <p>While the DI container and the EventManager provide important tools for the
+framework, another big change is a paradigm shift towards simpler processes. One
+realization is that a web application is basically about handling HTTP requests
+and returning HTTP responses. From this we derived a simple solution: the
+Dispatchable interface.</p>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Overview.md">Zf2Overview.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              20/51
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Overview.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code">
+          <div class="inner">
+            
+            <header><h2>Zend\Stdlib\Dispatchable</h2></header>
+            
+            
+            <section><div class="highlight"><pre><span class="lineno">1</span> <span class="cp">&lt;?php</span>
+<span class="lineno">2</span> <span class="k">namespace</span> <span class="nx">Zend\Stdlib</span><span class="p">;</span>
+<span class="lineno">3</span> 
+<span class="lineno">4</span> <span class="k">interface</span> <span class="nx">Dispatchable</span>
+<span class="lineno">5</span> <span class="p">{</span>
+<span class="lineno">6</span>     <span class="k">public</span> <span class="k">function</span> <span class="nf">dispatch</span><span class="p">(</span>
+<span class="lineno">7</span>         <span class="nx">RequestDescription</span> <span class="nv">$request</span><span class="p">,</span> 
+<span class="lineno">8</span>         <span class="nx">ResponseDescription</span> <span class="nv">$response</span> <span class="o">=</span> <span class="k">null</span><span class="p">);</span>
+<span class="lineno">9</span> <span class="p">}</span>
+</pre></div>
+
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <p>It's so simple and obvious. It can be used by servers to accept requests and
+return responses, or by clients, to send requests, and parse responses.</p>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Overview.md">Zf2Overview.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              21/51
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Overview.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Use Cases for Dispatchables</h2></header>
+            
+            
+            <section><ul>
+<li>Strategy/Command patterns</li>
+<li>Server classes</li>
+<li>HTTP clients</li>
+</ul>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <p>Dispatchable is really nothing more than a Strategy Pattern. The whole idea is a
+common signature that many objects implement.</p>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Overview.md">Zf2Overview.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              22/51
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Overview.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Use Cases for Dispatchables</h2></header>
+            
+            
+            <section><ul>
+<li>Strategy/Command patterns</li>
+<li>Server classes</li>
+<li>HTTP clients</li>
+<li><strong>MVC applications</strong></li>
+</ul>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <p>One thing interesting about the MVC is that because the same base is used for
+server classes and general Strategies or Commands, these, too, can be attached
+to the MVC directly, with little or no extra overhead.</p>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Overview.md">Zf2Overview.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              23/51
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Overview.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Modular MVC Applications</h1></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <p>We all know the real reason you're here today. You want to see what a ZF2
+application looks like.</p>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Overview.md">Zf2Overview.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              24/51
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Overview.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Basics</h2></header>
+            
+            
+            <section><ul>
+<li>An <code>Application</code> composes a router, a locator, and an event manager</li>
+<li>A matching route should return a controller name</li>
+<li>Controllers are pulled from the locator and dispatched</li>
+<li>Routing and dispatching are <em>events</em></li>
+</ul>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <p>The last point is incredibly important. It means that if you want to provide
+alternate strategies for routing or dispatch, all you need to do is replace
+the listeners on those events.</p>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Overview.md">Zf2Overview.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              25/51
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Overview.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Modules</h2></header>
+            
+            
+            <section><ul>
+<li>The basic unit in a ZF2 MVC application is a <em>Module</em></li>
+<li>Modules are simply:</li>
+<li>A <strong>namespace</strong>,</li>
+<li>containing a single classfile, a <strong>Module</strong></li>
+</ul>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>Structure is left to the developer, though we have a <em>recommended</em> structure</li>
+<li>We have a few interfaces you can implement that hint to the module manager how
+  a module can be <em>used</em></li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Overview.md">Zf2Overview.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              26/51
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Overview.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Example</h2></header>
+            
+            
+            <section><p>We start with the following directory structure:</p>
+<pre><code>module/
+    Foo/
+        Module.php
+</code></pre></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Overview.md">Zf2Overview.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              27/51
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Overview.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code">
+          <div class="inner">
+            
+            <header><h2>Example (part 2)</h2></header>
+            
+            
+            <section><p>Which contains:</p>
+<div class="highlight"><pre><span class="lineno">1</span> <span class="cp">&lt;?php</span>
+<span class="lineno">2</span> <span class="k">namespace</span> <span class="nx">Foo</span><span class="p">;</span>
+<span class="lineno">3</span> 
+<span class="lineno">4</span> <span class="k">class</span> <span class="nc">Module</span> <span class="p">{</span> <span class="p">}</span>
+</pre></div>
+
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>That's really it. It's a single entry point, and completely opt-in.</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Overview.md">Zf2Overview.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              28/51
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Overview.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Modules usually also provide...</h2></header>
+            
+            
+            <section><ul>
+<li>Autoloading artifacts</li>
+<li>Basic configuration</li>
+</ul>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <p>Commonly, we will provide DI and routing configuration.</p>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Overview.md">Zf2Overview.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              29/51
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Overview.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code">
+          <div class="inner">
+            
+            <header><h2>Providing autoloading hints</h2></header>
+            
+            
+            <section><div class="highlight"><pre><span class="lineno"> 1</span> <span class="cp">&lt;?php</span>
+<span class="lineno"> 2</span> <span class="k">namespace</span> <span class="nx">Foo</span><span class="p">;</span>
+<span class="lineno"> 3</span> <span class="k">use</span> <span class="nx">Zend\Module\Consumer\AutoloaderProvider</span><span class="p">;</span>
+<span class="lineno"> 4</span> <span class="k">class</span> <span class="nc">Module</span> <span class="k">implements</span> <span class="nx">AutoloaderProvider</span>
+<span class="lineno"> 5</span> <span class="p">{</span>
+<span class="lineno"> 6</span>     <span class="k">public</span> <span class="k">function</span> <span class="nf">getAutoloaderConfig</span><span class="p">()</span>
+<span class="lineno"> 7</span>     <span class="p">{</span>
+<span class="lineno"> 8</span>       <span class="k">return</span> <span class="k">array</span><span class="p">(</span>
+<span class="lineno"> 9</span>         <span class="s1">&#39;Zend\Loader\ClassMapAutoloader&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+<span class="lineno">10</span>           <span class="k">include</span> <span class="nx">__DIR__</span> <span class="o">.</span> <span class="s1">&#39;/autoload_classmap.php&#39;</span><span class="p">,</span>
+<span class="lineno">11</span>         <span class="p">),</span>
+<span class="lineno">12</span>         <span class="s1">&#39;Zend\Loader\StandardAutoloader&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+<span class="lineno">13</span>           <span class="s1">&#39;namespaces&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+<span class="lineno">14</span>             <span class="s1">&#39;Foo&#39;</span> <span class="o">=&gt;</span> <span class="nx">__DIR__</span> <span class="o">.</span> <span class="s1">&#39;/src/Foo&#39;</span><span class="p">,</span>
+<span class="lineno">15</span>           <span class="p">),</span>
+<span class="lineno">16</span>         <span class="p">),</span>
+<span class="lineno">17</span>       <span class="p">);</span>
+<span class="lineno">18</span>     <span class="p">}</span>
+<span class="lineno">19</span> <span class="p">}</span>
+</pre></div>
+
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>Basically, returning a configuration array to pass to the AutoloaderFactory.
+  This ensures re-use of the same autoloader objects, but also means that the
+  AutoloaderListener will be able to cache this configuration for later use.</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Overview.md">Zf2Overview.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              30/51
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Overview.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code">
+          <div class="inner">
+            
+            <header><h2>Providing configuration</h2></header>
+            
+            
+            <section><div class="highlight"><pre><span class="lineno"> 1</span> <span class="cp">&lt;?php</span>
+<span class="lineno"> 2</span> <span class="k">namespace</span> <span class="nx">Foo</span><span class="p">;</span>
+<span class="lineno"> 3</span> 
+<span class="lineno"> 4</span> <span class="k">class</span> <span class="nc">Module</span>
+<span class="lineno"> 5</span> <span class="p">{</span>
+<span class="lineno"> 6</span>     <span class="k">public</span> <span class="k">function</span> <span class="nf">getConfig</span><span class="p">(</span><span class="nv">$env</span> <span class="o">=</span> <span class="k">null</span><span class="p">)</span>
+<span class="lineno"> 7</span>     <span class="p">{</span>
+<span class="lineno"> 8</span>         <span class="nv">$config</span> <span class="o">=</span> <span class="k">include</span> <span class="nx">__DIR__</span> 
+<span class="lineno"> 9</span>                 <span class="o">.</span> <span class="s1">&#39;/config/module.config.php&#39;</span><span class="p">;</span>
+<span class="lineno">10</span>         <span class="k">if</span> <span class="p">(</span><span class="k">null</span> <span class="o">===</span> <span class="nv">$env</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno">11</span>             <span class="k">return</span> <span class="nv">$config</span><span class="p">;</span>
+<span class="lineno">12</span>         <span class="p">}</span>
+<span class="lineno">13</span> 
+<span class="lineno">14</span>         <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nb">isset</span><span class="p">(</span><span class="nv">$config</span><span class="p">[</span><span class="nv">$env</span><span class="p">]))</span> <span class="p">{</span>
+<span class="lineno">15</span>             <span class="k">return</span> <span class="nv">$config</span><span class="p">;</span> <span class="c1">// or throw exception</span>
+<span class="lineno">16</span>         <span class="p">}</span>
+<span class="lineno">17</span> 
+<span class="lineno">18</span>         <span class="k">return</span> <span class="nv">$config</span><span class="p">[</span><span class="nv">$env</span><span class="p">];</span>
+<span class="lineno">19</span>     <span class="p">}</span>
+<span class="lineno">20</span> <span class="p">}</span>
+</pre></div>
+
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>The config listener merges this configuration with the config it stores
+  internally.</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Overview.md">Zf2Overview.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              31/51
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Overview.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code">
+          <div class="inner">
+            
+            <header><h2>Example module configuration</h2></header>
+            
+            
+            <section><div class="highlight"><pre><span class="lineno">1</span> <span class="cp">&lt;?php</span>
+<span class="lineno">2</span> <span class="k">return</span> <span class="k">array</span><span class="p">(</span> <span class="c1">// likely want to create sections/envs</span>
+<span class="lineno">3</span>     <span class="s1">&#39;routes&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span> <span class="cm">/* ... */</span> <span class="p">),</span>
+<span class="lineno">4</span>     <span class="s1">&#39;di&#39;</span>     <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span> <span class="cm">/* ... */</span> <span class="p">),</span>
+<span class="lineno">5</span> <span class="p">);</span>
+</pre></div>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Overview.md">Zf2Overview.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              32/51
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Overview.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code">
+          <div class="inner">
+            
+            <header><h2>Post-load initialization</h2></header>
+            
+            
+            <section><div class="highlight"><pre><span class="lineno"> 1</span> <span class="cp">&lt;?php</span>
+<span class="lineno"> 2</span> <span class="k">namespace</span> <span class="nx">Foo</span><span class="p">;</span>
+<span class="lineno"> 3</span> <span class="k">use</span> <span class="nx">Zend\EventManager\StaticEventManager</span><span class="p">,</span>
+<span class="lineno"> 4</span>     <span class="nx">Zend\Module\Manager</span> <span class="k">as</span> <span class="nx">ModuleManager</span><span class="p">;</span>
+<span class="lineno"> 5</span> <span class="k">class</span> <span class="nc">Module</span>
+<span class="lineno"> 6</span> <span class="p">{</span>
+<span class="lineno"> 7</span>     <span class="k">public</span> <span class="k">function</span> <span class="nf">init</span><span class="p">(</span><span class="nx">ModuleManager</span> <span class="nv">$manager</span><span class="p">)</span>
+<span class="lineno"> 8</span>     <span class="p">{</span>
+<span class="lineno"> 9</span>         <span class="nv">$events</span> <span class="o">=</span> <span class="nx">StaticEventManager</span><span class="o">::</span><span class="na">getInstance</span><span class="p">();</span>
+<span class="lineno">10</span>         <span class="nv">$events</span><span class="o">-&gt;</span><span class="na">attach</span><span class="p">(</span>
+<span class="lineno">11</span>             <span class="s1">&#39;bootstrap&#39;</span><span class="p">,</span> <span class="s1">&#39;bootstrap&#39;</span><span class="p">,</span> 
+<span class="lineno">12</span>             <span class="k">array</span><span class="p">(</span><span class="nv">$this</span><span class="p">,</span> <span class="s1">&#39;bootstrap&#39;</span><span class="p">)</span>
+<span class="lineno">13</span>         <span class="p">);</span>
+<span class="lineno">14</span>     <span class="p">}</span>
+<span class="lineno">15</span> 
+<span class="lineno">16</span>     <span class="k">public</span> <span class="k">function</span> <span class="nf">bootstrap</span><span class="p">(</span><span class="nv">$e</span><span class="p">)</span>
+<span class="lineno">17</span>     <span class="p">{</span>
+<span class="lineno">18</span>         <span class="nv">$app</span>    <span class="o">=</span> <span class="nv">$e</span><span class="o">-&gt;</span><span class="na">getParam</span><span class="p">(</span><span class="s1">&#39;application&#39;</span><span class="p">);</span>
+<span class="lineno">19</span>         <span class="c1">// do some stuff...</span>
+<span class="lineno">20</span>     <span class="p">}</span>
+<span class="lineno">21</span> <span class="p">}</span>
+</pre></div>
+
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>a special "InitTrigger" listener will call init() if it exists</li>
+<li>this is a good place to register events</li>
+<li>shows execution order: module manager aggregates items and triggers events; we
+  then execute the bootstrap, which triggers other events; and then we run the
+  application</li>
+<li>Event at bootstrap knows about the application, config, and module manager</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Overview.md">Zf2Overview.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              33/51
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Overview.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Modules can contain...</h2></header>
+            
+            
+            <section><ul>
+<li>PHP code, <em>including MVC code</em></li>
+<li>Assets, such as CSS, JS, and images</li>
+<li>Unit tests</li>
+<li>Documentation</li>
+<li><em>Anything</em></li>
+</ul>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <p>I've created a module that simply provided SkeletonCSS in a way that I could
+easily drop it into a project. I have modules that are basically libraries, and
+contain source code, unit tests, and documentation. The point is, they can
+provide just about anything, because the only requirement is the Module class as
+an entry point.</p>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Overview.md">Zf2Overview.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              34/51
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Overview.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code smaller-code">
+          <div class="inner">
+            
+            <header><h2>Putting it together: index.php</h2></header>
+            
+            
+            <section><div class="highlight"><pre><span class="lineno"> 1</span> <span class="cp">&lt;?php</span>
+<span class="lineno"> 2</span> <span class="nv">$appConfig</span> <span class="o">=</span> <span class="k">include</span> <span class="nx">__DIR__</span> <span class="o">.</span> <span class="s1">&#39;/../config/application.config.php&#39;</span><span class="p">;</span>
+<span class="lineno"> 3</span> 
+<span class="lineno"> 4</span> <span class="nv">$moduleLoader</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ModuleAutoloader</span><span class="p">(</span><span class="nv">$appConfig</span><span class="p">[</span><span class="s1">&#39;module_paths&#39;</span><span class="p">]);</span>
+<span class="lineno"> 5</span> <span class="nv">$moduleLoader</span><span class="o">-&gt;</span><span class="na">register</span><span class="p">();</span>
+<span class="lineno"> 6</span> 
+<span class="lineno"> 7</span> <span class="nv">$moduleManager</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Manager</span><span class="p">(</span><span class="nv">$appConfig</span><span class="p">[</span><span class="s1">&#39;modules&#39;</span><span class="p">]);</span>
+<span class="lineno"> 8</span> <span class="nv">$moduleManager</span>
+<span class="lineno"> 9</span>     <span class="o">-&gt;</span><span class="na">getConfigListener</span><span class="p">()</span>
+<span class="lineno">10</span>     <span class="o">-&gt;</span><span class="na">addConfigGlobPath</span><span class="p">(</span><span class="nx">__DIR__</span> <span class="o">.</span> <span class="s1">&#39;/config/autoload/*.config.php&#39;</span><span class="p">);</span>
+<span class="lineno">11</span> <span class="nv">$moduleManager</span><span class="o">-&gt;</span><span class="na">loadModules</span><span class="p">();</span>
+<span class="lineno">12</span> <span class="nv">$config</span> <span class="o">=</span> <span class="nv">$moduleManager</span><span class="o">-&gt;</span><span class="na">getMergedConfig</span><span class="p">();</span>
+<span class="lineno">13</span> 
+<span class="lineno">14</span> <span class="c1">// Create application, bootstrap, and run</span>
+<span class="lineno">15</span> <span class="nv">$bootstrap</span>   <span class="o">=</span> <span class="k">new</span> <span class="nx">Bootstrap</span><span class="p">(</span><span class="nv">$config</span><span class="p">);</span>
+<span class="lineno">16</span> <span class="nv">$application</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Application</span><span class="p">;</span>
+<span class="lineno">17</span> <span class="nv">$bootstrap</span><span class="o">-&gt;</span><span class="na">bootstrap</span><span class="p">(</span><span class="nv">$application</span><span class="p">);</span>
+<span class="lineno">18</span> <span class="nv">$application</span><span class="o">-&gt;</span><span class="na">run</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">send</span><span class="p">();</span>
+</pre></div>
+
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>Loops through modules, grabbing configuration</li>
+<li>Merges in local configuration (addConfigGlobPath())</li>
+<li>Bootstraps from configuration</li>
+<li>Executes application</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Overview.md">Zf2Overview.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              35/51
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Overview.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Under the hood:</h2></header>
+            
+            
+            <section><ul>
+<li>Bootstrap<ul>
+<li>Instantiates and configures DI container</li>
+<li>Instantiates and configures router</li>
+<li>Triggers "bootstrap" event</li>
+</ul>
+</li>
+<li>Application<ul>
+<li>Triggers "route" event</li>
+<li>Triggers "dispatch" event</li>
+<li>As soon as a response is returned by a listener, sends it</li>
+</ul>
+</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Overview.md">Zf2Overview.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              36/51
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Overview.md -->
+      <div class="slide-wrapper">
+        <div class="slide centeredHeaders">
+          <div class="inner">
+            
+            <header><h2>Routing</h2></header>
+            
+            
+            <section><p>The act of matching a Request </p>
+<p>to a Controller.</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Overview.md">Zf2Overview.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              37/51
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Overview.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Types of routes</h2></header>
+            
+            
+            <section><ul>
+<li><strong>Literal:</strong> <code>"/contact"</code></li>
+<li><strong>Segment:</strong> <code>"/article/:id"</code></li>
+<li><strong>Regex:</strong> <code>"/tag/(?&lt;tag&gt;[^/]+)"</code></li>
+<li><strong>Part/TreeRouteStack:</strong> tree of routes</li>
+<li><strong>Wildcard:</strong> <code>"/*"</code></li>
+<li><strong>Hostname</strong> </li>
+<li><strong>Scheme</strong> </li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Overview.md">Zf2Overview.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              38/51
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Overview.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>TreeRouteStack Example</h2></header>
+            
+            
+            <section><pre><code>/blog -- Literal 
+    .xml -- Literal ("/blog.xml")
+    /(?&lt;id&gt;[^/]+) -- Regex ("/blog/foo")
+    /tag/(?&lt;tag&gt;[^/.]+) -- Regex ("/blog/tag/foo")
+        .xml -- Literal ("/blog/tag/foo.xml")
+    /year/:year -- Segment ("/blog/year/2011")
+    /month/:year/:month -- Segment ("/blog/month/2011/12")
+</code></pre>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>Any given route can indicate if it can terminate, or if additional segments
+  are required</li>
+<li>Any given route may have child routes</li>
+<li>Each route gets full configuration for its type</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Overview.md">Zf2Overview.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              39/51
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Overview.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code">
+          <div class="inner">
+            
+            <header><h2>Routing</h2></header>
+            
+            
+            <section><p>A matched route <strong>MUST</strong> return a controller</p>
+<div class="highlight"><pre><span class="lineno">1</span> <span class="cp">&lt;?php</span>
+<span class="lineno">2</span> <span class="k">use</span> <span class="nx">Zend\Mvc\Router\Http\Regex</span> <span class="k">as</span> <span class="nx">RegexRoute</span><span class="p">;</span>
+<span class="lineno">3</span> <span class="nv">$route</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">RegexRoute</span><span class="p">(</span>
+<span class="lineno">4</span>     <span class="s1">&#39;/blog/(?&lt;id&gt;[/.]+)&#39;</span><span class="p">,</span> 
+<span class="lineno">5</span>     <span class="s1">&#39;/blog/%id%&#39;</span><span class="p">,</span> 
+<span class="lineno">6</span>     <span class="k">array</span><span class="p">(</span>
+<span class="lineno">7</span>         <span class="s1">&#39;controller&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Blog\Controller\EntryController&#39;</span>
+<span class="lineno">8</span>     <span class="p">)</span>
+<span class="lineno">9</span> <span class="p">);</span>
+</pre></div>
+
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>Controller is what the Application is trying to <em>dispatch</em></li>
+<li>Can be the class name (recommended) or an alias</li>
+<li>Anything else returned is up to the developer -- "action" is not necessary, as
+  your controller defines what to do based on the Request and RouteMatch</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Overview.md">Zf2Overview.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              40/51
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Overview.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code">
+          <div class="inner">
+            
+            <header><h2>A note on RouteMatch-es</h2></header>
+            
+            
+            <section><p>Routes return a <code>RouteMatch</code> object on success</p>
+<div class="highlight"><pre><span class="lineno">1</span> <span class="cp">&lt;?php</span>
+<span class="lineno">2</span> <span class="k">namespace</span> <span class="nx">Zend\Mvc\Router</span><span class="p">;</span>
+<span class="lineno">3</span> 
+<span class="lineno">4</span> <span class="k">class</span> <span class="nc">RouteMatch</span>
+<span class="lineno">5</span> <span class="p">{</span>
+<span class="lineno">6</span>     <span class="k">public</span> <span class="k">function</span> <span class="nf">getMatchedRouteName</span><span class="p">();</span>
+<span class="lineno">7</span>     <span class="k">public</span> <span class="k">function</span> <span class="nf">getParams</span><span class="p">();</span>
+<span class="lineno">8</span>     <span class="k">public</span> <span class="k">function</span> <span class="nf">getParam</span><span class="p">(</span><span class="nv">$name</span><span class="p">,</span> <span class="nv">$default</span> <span class="o">=</span> <span class="k">null</span><span class="p">);</span>
+<span class="lineno">9</span> <span class="p">}</span>
+</pre></div>
+
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>This allows you to pull out anything matched by the route.</li>
+<li>Routes part of a TreeRoute will contain all matched parameters.</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Overview.md">Zf2Overview.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              41/51
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Overview.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code">
+          <div class="inner">
+            
+            <header><h2>Controllers</h2></header>
+            
+            
+            <section><div class="highlight"><pre><span class="lineno"> 1</span> <span class="cp">&lt;?php</span>
+<span class="lineno"> 2</span> <span class="k">namespace</span> <span class="nx">Foo\Controller</span><span class="p">;</span>
+<span class="lineno"> 3</span> 
+<span class="lineno"> 4</span> <span class="k">use</span> <span class="nx">Zend\Mvc\Controller\ActionController</span><span class="p">;</span>
+<span class="lineno"> 5</span> 
+<span class="lineno"> 6</span> <span class="k">class</span> <span class="nc">HelloController</span> <span class="k">extends</span> <span class="nx">ActionController</span>
+<span class="lineno"> 7</span> <span class="p">{</span>
+<span class="lineno"> 8</span>     <span class="k">public</span> <span class="k">function</span> <span class="nf">worldAction</span><span class="p">()</span>
+<span class="lineno"> 9</span>     <span class="p">{</span>
+<span class="lineno">10</span>         <span class="nv">$routeMatch</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getEvent</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">getRouteMatch</span><span class="p">()</span>
+<span class="lineno">11</span>         <span class="nv">$target</span>     <span class="o">=</span> <span class="nv">$routeMatch</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">getParam</span><span class="p">(</span><span class="s1">&#39;target&#39;</span><span class="p">);</span>
+<span class="lineno">12</span>         <span class="nv">$post</span>       <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">post</span><span class="p">();</span>
+<span class="lineno">13</span>         <span class="nv">$message</span>    <span class="o">=</span> <span class="nv">$post</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;message&#39;</span><span class="p">,</span> <span class="s1">&#39;Nobody&#39;</span><span class="p">);</span>
+<span class="lineno">14</span>         <span class="k">return</span> <span class="k">array</span><span class="p">(</span>
+<span class="lineno">15</span>             <span class="s1">&#39;target&#39;</span> <span class="o">=&gt;</span> <span class="nv">$target</span><span class="p">,</span>
+<span class="lineno">16</span>             <span class="s1">&#39;message&#39;</span> <span class="o">=&gt;</span> <span class="nv">$message</span><span class="p">,</span>
+<span class="lineno">17</span>         <span class="p">);</span>
+<span class="lineno">18</span>     <span class="p">}</span>
+<span class="lineno">19</span> <span class="p">}</span>
+</pre></div>
+
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>Looks a lot like ZF1</li>
+<li>Returning an array... completely divorced from View</li>
+<li>Inject dependencies via setters or constructor params</li>
+<li><strong><em>You can simply implement Dispatchable if you want!</em></strong></li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Overview.md">Zf2Overview.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              42/51
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Overview.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code">
+          <div class="inner">
+            
+            <header><h2>This is also a controller</h2></header>
+            
+            
+            <section><div class="highlight"><pre><span class="lineno"> 1</span> <span class="cp">&lt;?php</span>
+<span class="lineno"> 2</span> <span class="k">namespace</span> <span class="nx">Foo\Controller</span><span class="p">;</span>
+<span class="lineno"> 3</span> 
+<span class="lineno"> 4</span> <span class="k">use</span> <span class="nx">Zend\Stdlib\Dispatchable</span><span class="p">,</span>
+<span class="lineno"> 5</span>     <span class="nx">Zend\Stdlib\RequestDescription</span> <span class="k">as</span> <span class="nx">Request</span><span class="p">,</span>
+<span class="lineno"> 6</span>     <span class="nx">Zend\Stdlib\ResponseDescription</span> <span class="k">as</span> <span class="nx">Response</span><span class="p">;</span>
+<span class="lineno"> 7</span> 
+<span class="lineno"> 8</span> <span class="k">class</span> <span class="nc">MyController</span> <span class="k">implements</span> <span class="nx">Dispatchable</span>
+<span class="lineno"> 9</span> <span class="p">{</span>
+<span class="lineno">10</span>     <span class="k">public</span> <span class="k">function</span> <span class="nf">dispatch</span><span class="p">(</span>
+<span class="lineno">11</span>         <span class="nx">Request</span> <span class="nv">$request</span><span class="p">,</span> <span class="nx">Response</span> <span class="nv">$response</span> <span class="o">=</span> <span class="k">null</span>
+<span class="lineno">12</span>     <span class="p">)</span> <span class="p">{</span>
+<span class="lineno">13</span>         <span class="c1">// do something and return a Response object</span>
+<span class="lineno">14</span>     <span class="p">}</span>
+<span class="lineno">15</span> <span class="p">}</span>
+</pre></div>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Overview.md">Zf2Overview.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              43/51
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Overview.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code">
+          <div class="inner">
+            
+            <header><h2>What about the V, View?</h2></header>
+            
+            
+            <section><p>When is view rendering happening? Via an Event Listener:</p>
+<div class="highlight"><pre><span class="lineno"> 1</span> <span class="cp">&lt;?php</span>
+<span class="lineno"> 2</span> <span class="k">use</span> <span class="nx">Zend\EventManager\EventCollection</span> <span class="k">as</span> <span class="nx">Events</span><span class="p">,</span>
+<span class="lineno"> 3</span>     <span class="nx">Zend\EventManager\ListenerAggregate</span><span class="p">;</span>
+<span class="lineno"> 4</span> 
+<span class="lineno"> 5</span> <span class="k">class</span> <span class="nc">ViewListener</span> <span class="k">implements</span> <span class="nx">ListenerAggregate</span>
+<span class="lineno"> 6</span> <span class="p">{</span>
+<span class="lineno"> 7</span>     <span class="cm">/* ... */</span>
+<span class="lineno"> 8</span> 
+<span class="lineno"> 9</span>     <span class="k">public</span> <span class="k">function</span> <span class="nf">attach</span><span class="p">(</span><span class="nx">Events</span> <span class="nv">$events</span><span class="p">)</span>
+<span class="lineno">10</span>     <span class="p">{</span>
+<span class="lineno">11</span>         <span class="nv">$events</span><span class="o">-&gt;</span><span class="na">attach</span><span class="p">(</span><span class="s1">&#39;dispatch&#39;</span><span class="p">,</span> 
+<span class="lineno">12</span>             <span class="k">array</span><span class="p">(</span><span class="nv">$this</span><span class="p">,</span> <span class="s1">&#39;renderView&#39;</span><span class="p">,</span> <span class="o">-</span><span class="mi">100</span><span class="p">);</span>
+<span class="lineno">13</span>         <span class="nv">$events</span><span class="o">-&gt;</span><span class="na">attach</span><span class="p">(</span><span class="s1">&#39;dispatch&#39;</span><span class="p">,</span> 
+<span class="lineno">14</span>             <span class="k">array</span><span class="p">(</span><span class="nv">$this</span><span class="p">,</span> <span class="s1">&#39;renderLayout&#39;</span><span class="p">,</span> <span class="o">-</span><span class="mi">1000</span><span class="p">);</span>
+<span class="lineno">15</span>     <span class="p">}</span>
+<span class="lineno">16</span> 
+<span class="lineno">17</span>     <span class="cm">/* ... */</span>
+<span class="lineno">18</span> <span class="p">}</span>
+</pre></div>
+
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>Low priority listeners, layout happening magnitudes later than view</li>
+<li>We'll be formalizing this later</li>
+<li>Discuss the concept of a "ViewResult" type of object</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Overview.md">Zf2Overview.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              44/51
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Overview.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code">
+          <div class="inner">
+            
+            <header><h2>Getting Dependencies</h2></header>
+            
+            
+            <section><div class="highlight"><pre><span class="lineno"> 1</span> <span class="cp">&lt;?php</span>
+<span class="lineno"> 2</span> <span class="k">namespace</span> <span class="nx">Contact\Controller</span><span class="p">;</span>
+<span class="lineno"> 3</span> 
+<span class="lineno"> 4</span> <span class="k">use</span> <span class="nx">Zend\Mail\Transport</span><span class="p">,</span>
+<span class="lineno"> 5</span>     <span class="nx">Zend\Mvc\Controller\ActionController</span><span class="p">;</span>
+<span class="lineno"> 6</span> 
+<span class="lineno"> 7</span> <span class="k">class</span> <span class="nc">ContactController</span> <span class="k">extends</span> <span class="nx">ActionController</span>
+<span class="lineno"> 8</span> <span class="p">{</span>
+<span class="lineno"> 9</span>     <span class="k">public</span> <span class="k">function</span> <span class="nf">setMailer</span><span class="p">(</span><span class="nx">Transport</span> <span class="nv">$transport</span><span class="p">)</span>
+<span class="lineno">10</span>     <span class="p">{</span>
+<span class="lineno">11</span>         <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">transport</span> <span class="o">=</span> <span class="nv">$transport</span><span class="p">;</span>
+<span class="lineno">12</span>     <span class="p">}</span>
+<span class="lineno">13</span> <span class="p">}</span>
+</pre></div>
+
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>Dependencies are now typically injected, not pulled</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Overview.md">Zf2Overview.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              45/51
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Overview.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code smaller-code">
+          <div class="inner">
+            
+            <header><h2>DI Configuration</h2></header>
+            
+            
+            <section><div class="highlight"><pre><span class="lineno"> 1</span> <span class="cp">&lt;?php</span>
+<span class="lineno"> 2</span> <span class="k">return</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;di&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+<span class="lineno"> 3</span>   <span class="s1">&#39;definition&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;class&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+<span class="lineno"> 4</span>     <span class="s1">&#39;Zend\Mail\Transport\Smtp&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+<span class="lineno"> 5</span>       <span class="s1">&#39;__construct&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+<span class="lineno"> 6</span>         <span class="s1">&#39;host&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;required&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">),</span>
+<span class="lineno"> 7</span>         <span class="s1">&#39;user&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;required&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">),</span>
+<span class="lineno"> 8</span>         <span class="s1">&#39;pass&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;required&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">),</span>
+<span class="lineno"> 9</span>       <span class="p">),</span>
+<span class="lineno">10</span>     <span class="p">),</span>
+<span class="lineno">11</span>   <span class="p">)),</span>
+<span class="lineno">12</span>   <span class="s1">&#39;instance&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+<span class="lineno">13</span>     <span class="s1">&#39;Zend\Mail\Transport&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;parameters&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+<span class="lineno">14</span>       <span class="s1">&#39;host&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;some.host.tld&#39;</span><span class="p">,</span> <span class="s1">&#39;user&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;user&#39;</span><span class="p">,</span> <span class="s1">&#39;pass&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;pass&#39;</span>
+<span class="lineno">15</span>     <span class="p">)),</span>
+<span class="lineno">16</span>   <span class="p">),</span>
+<span class="lineno">17</span> <span class="p">);</span>
+</pre></div>
+
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>Shows definitions, as well as basic configuration</li>
+<li>Definitions can be compiled!</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Overview.md">Zf2Overview.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              46/51
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Overview.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Wrapping Up</h1></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Overview.md">Zf2Overview.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              47/51
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Overview.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>When?</h2></header>
+            
+            
+            <section><ul>
+<li>Beta 1: <ul>
+<li>http://packages.zendframework.com/</li>
+</ul>
+</li>
+<li>Beta 2:<ul>
+<li>Next week</li>
+</ul>
+</li>
+<li>New Betas at least every six weeks, until we're done.</li>
+<li>Stable:<ul>
+<li>? <em>(hopefully April-ish)</em></li>
+</ul>
+</li>
+</ul>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>We're doing gmail style betas. We <em>want</em> you to play with the code. We think
+  it's compelling, and going to change the way you develop applications.</li>
+<li>This also means that our betas are going to introduce changes. We'll work hard
+  to minimize them, but be prepared. But build with it!</li>
+<li>Beta2 is focussing on low-level components such as caching, logging,
+  mail, debug, etc.</li>
+<li>Third beta will focus on things like CLI tooling, i18n/l10n, etc.</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Overview.md">Zf2Overview.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              48/51
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Overview.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Resources</h2></header>
+            
+            
+            <section><ul>
+<li>Bundle o' links! <ul>
+<li>http://bit.ly/rzOOge</li>
+</ul>
+</li>
+<li>The ZF2 subsite<ul>
+<li>http://framework.zend.com/zf2</li>
+</ul>
+</li>
+<li>My "mwop.net" site repository<ul>
+<li>http://git.mwop.net/?a=summary&amp;p=zf2sandbox</li>
+</ul>
+</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Overview.md">Zf2Overview.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              49/51
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Overview.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Helping out</h2></header>
+            
+            
+            <section><ul>
+<li>http://framework.zend.com/zf2</li>
+<li>https://github.com/zendframework</li>
+<li>Bi-weekly IRC meetings (#zf2-meeting on Freenode IRC)</li>
+<li>#zftalk.2 on Freenode IRC</li>
+</ul>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>Read our Git guide, NO CLA REQUIRED, blah, blah, blah</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Overview.md">Zf2Overview.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              50/51
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Overview.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Thank You!</h1></header>
+            
+            
+            <section><ul>
+<li>Feedback?<ul>
+<li>http://framework.zend.com/</li>
+<li>http://twitter.com/weierophinney</li>
+</ul>
+</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Overview.md">Zf2Overview.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              51/51
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div id="toc" class="sidebar hidden">
+    <h2>Table of Contents</h2>
+    <table>
+      <caption>Table of Contents</caption>
+      
+      <tr id="toc-row-1">
+        <th><a href="#slide1">Dispatch This!</a></th>
+        <td><a href="#slide1">1</a></td>
+      </tr>
+      
+        
+        <tr id="toc-row-2" class="sub">
+          <th><a href="#slide2">Our goal</a></th>
+          <td><a href="#slide2">2</a></td>
+        </tr>
+        
+      
+      
+      <tr id="toc-row-3">
+        <th><a href="#slide3">A New Core</a></th>
+        <td><a href="#slide3">3</a></td>
+      </tr>
+      
+        
+        <tr id="toc-row-4" class="sub">
+          <th><a href="#slide4">The ZF1 Way</a></th>
+          <td><a href="#slide4">4</a></td>
+        </tr>
+        
+        <tr id="toc-row-5" class="sub">
+          <th><a href="#slide5">The ZF2 Way</a></th>
+          <td><a href="#slide5">5</a></td>
+        </tr>
+        
+      
+      
+      <tr id="toc-row-6">
+        <th><a href="#slide6">Dependency Injection</a></th>
+        <td><a href="#slide6">6</a></td>
+      </tr>
+      
+        
+        <tr id="toc-row-7" class="sub">
+          <th><a href="#slide7">Basic Dependency Injection</a></th>
+          <td><a href="#slide7">7</a></td>
+        </tr>
+        
+        <tr id="toc-row-8" class="sub">
+          <th><a href="#slide8">Setter Injection</a></th>
+          <td><a href="#slide8">8</a></td>
+        </tr>
+        
+        <tr id="toc-row-9" class="sub">
+          <th><a href="#slide9">It solves a problem</a></th>
+          <td><a href="#slide9">9</a></td>
+        </tr>
+        
+        <tr id="toc-row-10" class="sub">
+          <th><a href="#slide10">It creates a new problem</a></th>
+          <td><a href="#slide10">10</a></td>
+        </tr>
+        
+        <tr id="toc-row-11" class="sub">
+          <th><a href="#slide11">DI Containers</a></th>
+          <td><a href="#slide11">11</a></td>
+        </tr>
+        
+        <tr id="toc-row-12" class="sub">
+          <th><a href="#slide12">Sample Definition</a></th>
+          <td><a href="#slide12">12</a></td>
+        </tr>
+        
+        <tr id="toc-row-13" class="sub">
+          <th><a href="#slide13">Using the DI Container</a></th>
+          <td><a href="#slide13">13</a></td>
+        </tr>
+        
+        <tr id="toc-row-14" class="sub">
+          <th><a href="#slide14">Zend\Di Features</a></th>
+          <td><a href="#slide14">14</a></td>
+        </tr>
+        
+      
+      
+      <tr id="toc-row-15">
+        <th><a href="#slide15">Aspect Oriented Design</a></th>
+        <td><a href="#slide15">15</a></td>
+      </tr>
+      
+        
+        <tr id="toc-row-16" class="sub">
+          <th><a href="#slide16">What?</a></th>
+          <td><a href="#slide16">16</a></td>
+        </tr>
+        
+        <tr id="toc-row-17" class="sub">
+          <th><a href="#slide17">Zend\EventManager</a></th>
+          <td><a href="#slide17">17</a></td>
+        </tr>
+        
+        <tr id="toc-row-18" class="sub">
+          <th><a href="#slide18">It's simple, really</a></th>
+          <td><a href="#slide18">18</a></td>
+        </tr>
+        
+        <tr id="toc-row-19" class="sub">
+          <th><a href="#slide19">Features</a></th>
+          <td><a href="#slide19">19</a></td>
+        </tr>
+        
+      
+      
+      <tr id="toc-row-20">
+        <th><a href="#slide20">Dispatch This!</a></th>
+        <td><a href="#slide20">20</a></td>
+      </tr>
+      
+        
+        <tr id="toc-row-21" class="sub">
+          <th><a href="#slide21">Zend\Stdlib\Dispatchable</a></th>
+          <td><a href="#slide21">21</a></td>
+        </tr>
+        
+        <tr id="toc-row-22" class="sub">
+          <th><a href="#slide22">Use Cases for Dispatchables</a></th>
+          <td><a href="#slide22">22</a></td>
+        </tr>
+        
+        <tr id="toc-row-23" class="sub">
+          <th><a href="#slide23">Use Cases for Dispatchables</a></th>
+          <td><a href="#slide23">23</a></td>
+        </tr>
+        
+      
+      
+      <tr id="toc-row-24">
+        <th><a href="#slide24">Modular MVC Applications</a></th>
+        <td><a href="#slide24">24</a></td>
+      </tr>
+      
+        
+        <tr id="toc-row-25" class="sub">
+          <th><a href="#slide25">Basics</a></th>
+          <td><a href="#slide25">25</a></td>
+        </tr>
+        
+        <tr id="toc-row-26" class="sub">
+          <th><a href="#slide26">Modules</a></th>
+          <td><a href="#slide26">26</a></td>
+        </tr>
+        
+        <tr id="toc-row-27" class="sub">
+          <th><a href="#slide27">Example</a></th>
+          <td><a href="#slide27">27</a></td>
+        </tr>
+        
+        <tr id="toc-row-28" class="sub">
+          <th><a href="#slide28">Example (part 2)</a></th>
+          <td><a href="#slide28">28</a></td>
+        </tr>
+        
+        <tr id="toc-row-29" class="sub">
+          <th><a href="#slide29">Modules usually also provide...</a></th>
+          <td><a href="#slide29">29</a></td>
+        </tr>
+        
+        <tr id="toc-row-30" class="sub">
+          <th><a href="#slide30">Providing autoloading hints</a></th>
+          <td><a href="#slide30">30</a></td>
+        </tr>
+        
+        <tr id="toc-row-31" class="sub">
+          <th><a href="#slide31">Providing configuration</a></th>
+          <td><a href="#slide31">31</a></td>
+        </tr>
+        
+        <tr id="toc-row-32" class="sub">
+          <th><a href="#slide32">Example module configuration</a></th>
+          <td><a href="#slide32">32</a></td>
+        </tr>
+        
+        <tr id="toc-row-33" class="sub">
+          <th><a href="#slide33">Post-load initialization</a></th>
+          <td><a href="#slide33">33</a></td>
+        </tr>
+        
+        <tr id="toc-row-34" class="sub">
+          <th><a href="#slide34">Modules can contain...</a></th>
+          <td><a href="#slide34">34</a></td>
+        </tr>
+        
+        <tr id="toc-row-35" class="sub">
+          <th><a href="#slide35">Putting it together: index.php</a></th>
+          <td><a href="#slide35">35</a></td>
+        </tr>
+        
+        <tr id="toc-row-36" class="sub">
+          <th><a href="#slide36">Under the hood:</a></th>
+          <td><a href="#slide36">36</a></td>
+        </tr>
+        
+        <tr id="toc-row-37" class="sub">
+          <th><a href="#slide37">Routing</a></th>
+          <td><a href="#slide37">37</a></td>
+        </tr>
+        
+        <tr id="toc-row-38" class="sub">
+          <th><a href="#slide38">Types of routes</a></th>
+          <td><a href="#slide38">38</a></td>
+        </tr>
+        
+        <tr id="toc-row-39" class="sub">
+          <th><a href="#slide39">TreeRouteStack Example</a></th>
+          <td><a href="#slide39">39</a></td>
+        </tr>
+        
+        <tr id="toc-row-40" class="sub">
+          <th><a href="#slide40">Routing</a></th>
+          <td><a href="#slide40">40</a></td>
+        </tr>
+        
+        <tr id="toc-row-41" class="sub">
+          <th><a href="#slide41">A note on RouteMatch-es</a></th>
+          <td><a href="#slide41">41</a></td>
+        </tr>
+        
+        <tr id="toc-row-42" class="sub">
+          <th><a href="#slide42">Controllers</a></th>
+          <td><a href="#slide42">42</a></td>
+        </tr>
+        
+        <tr id="toc-row-43" class="sub">
+          <th><a href="#slide43">This is also a controller</a></th>
+          <td><a href="#slide43">43</a></td>
+        </tr>
+        
+        <tr id="toc-row-44" class="sub">
+          <th><a href="#slide44">What about the V, View?</a></th>
+          <td><a href="#slide44">44</a></td>
+        </tr>
+        
+        <tr id="toc-row-45" class="sub">
+          <th><a href="#slide45">Getting Dependencies</a></th>
+          <td><a href="#slide45">45</a></td>
+        </tr>
+        
+        <tr id="toc-row-46" class="sub">
+          <th><a href="#slide46">DI Configuration</a></th>
+          <td><a href="#slide46">46</a></td>
+        </tr>
+        
+      
+      
+      <tr id="toc-row-47">
+        <th><a href="#slide47">Wrapping Up</a></th>
+        <td><a href="#slide47">47</a></td>
+      </tr>
+      
+        
+        <tr id="toc-row-48" class="sub">
+          <th><a href="#slide48">When?</a></th>
+          <td><a href="#slide48">48</a></td>
+        </tr>
+        
+        <tr id="toc-row-49" class="sub">
+          <th><a href="#slide49">Resources</a></th>
+          <td><a href="#slide49">49</a></td>
+        </tr>
+        
+        <tr id="toc-row-50" class="sub">
+          <th><a href="#slide50">Helping out</a></th>
+          <td><a href="#slide50">50</a></td>
+        </tr>
+        
+      
+      
+      <tr id="toc-row-51">
+        <th><a href="#slide51">Thank You!</a></th>
+        <td><a href="#slide51">51</a></td>
+      </tr>
+      
+      
+    </table>
+  </div>
+  
+  <div id="help" class="sidebar hidden">
+    <h2>Help</h2>
+    <table>
+      <caption>Help</caption>
+      <tr>
+        <th>Table of Contents</th>
+        <td>t</td>
+      </tr>
+      <tr>
+        <th>Exposé</th>
+        <td>ESC</td>
+      </tr>
+      <tr>
+        <th>Full screen slides</th>
+        <td>e</td>
+      </tr>
+      <tr>
+        <th>Presenter View</th>
+        <td>p</td>
+      </tr>
+      <tr>
+        <th>Source Files</th>
+        <td>s</td>
+      </tr>
+      <tr>
+        <th>Slide Numbers</th>
+        <td>n</td>
+      </tr>
+      <tr>
+        <th>Toggle screen blanking</th>
+        <td>b</td>
+      </tr>
+      <tr>
+        <th>Show/hide slide context</th>
+        <td>c</td>
+      </tr>
+      <tr>
+        <th>Notes</th>
+        <td>2</td>
+      </tr>
+      <tr>
+        <th>Help</th>
+        <td>h</td>
+      </tr>
+    </table>
+  </div>
+  <script>main()</script>
+</body>
+</html>
