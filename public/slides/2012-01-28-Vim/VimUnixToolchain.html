@@ -1,0 +1,2638 @@
+<!DOCTYPE html>
+<!--
+  Copyright 2010 Google Inc.
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+
+  Original slides: Marcin Wichary (mwichary@google.com)
+  Modifications: Ernest Delgado (ernestd@google.com)
+                 Alex Russell (slightlyoff@chromium.org)
+
+  landslide modifications: Adam Zapletal (adamzap@gmail.com)
+                           Nicolas Perriault (nperriault@gmail.com)
+-->
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Vim + Unix == IDE</title>
+    <!-- Styles -->
+    
+    <link rel="stylesheet" media="print" href="/usr/local/lib/python2.7/dist-packages/landslide-1.0.0-py2.7.egg/landslide/themes/default/css/print.css">
+    <link rel="stylesheet" media="screen, projection" href="theme/css/screen.css">
+    
+    
+    <!-- /Styles -->
+    <!-- Javascripts -->
+    
+    <script type="text/javascript" src="theme/js/slides.js"></script>
+    
+    
+    <!-- /Javascripts -->
+</head>
+<body>
+  <div id="blank"></div>
+  <div class="presentation">
+    <div id="current_presenter_notes">
+      <div id="presenter_note"></div>
+    </div>
+    <div class="slides">
+      
+      <!-- slide source: VimUnixToolchain.md -->
+      <div class="slide-wrapper">
+        <div class="slide titleslide">
+          <div class="inner">
+            
+            <header><h1>Vim + Unix == IDE</h1></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="VimUnixToolchain.md">VimUnixToolchain.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              1/58
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: VimUnixToolchain.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Yes, I work for Zend</h1></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="VimUnixToolchain.md">VimUnixToolchain.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              2/58
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: VimUnixToolchain.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Yes, I use Vim</h1></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="VimUnixToolchain.md">VimUnixToolchain.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              3/58
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: VimUnixToolchain.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Why?</h2></header>
+            
+            
+            <section><ul>
+<li><strong>It's fast</strong></li>
+</ul>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>Starting speed</li>
+<li>Speed of editing</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="VimUnixToolchain.md">VimUnixToolchain.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              4/58
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: VimUnixToolchain.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Why?</h2></header>
+            
+            
+            <section><ul>
+<li>It's fast</li>
+<li><strong>It's ubiquitous</strong></li>
+</ul>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>Installed and aliased as "vi" by default on most linux distributions</li>
+<li>Most mainframes will have it</li>
+<li>Cross platform -- available on Windows and Mac OSX, as well as others.</li>
+<li>In fact, it was originally written for Amiga OS, for which I have a certain
+    fondness as that was my first PC.</li>
+<li>I can use the same editing environment on my desktop, my laptop, my virtual
+    machines, and my servers.</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="VimUnixToolchain.md">VimUnixToolchain.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              5/58
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: VimUnixToolchain.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Why?</h2></header>
+            
+            
+            <section><ul>
+<li>It's fast</li>
+<li>It's ubiquitous</li>
+<li><strong>Engineered for efficient text manipulation</strong></li>
+</ul>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>As a developer, this is key</li>
+<li>As a writer, even simply of email, this is key</li>
+<li>I use it for <em>all</em> text -- email, news posts, blog posts, coding, articles,
+  books...</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="VimUnixToolchain.md">VimUnixToolchain.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              6/58
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: VimUnixToolchain.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>It follows the Unix Philosophy</h2></header>
+            
+            
+            <section><blockquote>
+<p>Write programs that do one thing and do it well. </p>
+<p>Write programs to work together. </p>
+<p>Write programs to handle text streams, because that is the universal interface.</p>
+<p><em>-- Doug McIlroy, inventor of Unix pipes</em></p>
+</blockquote>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>Works with streams</li>
+<li>Does text manipulation only</li>
+<li>Offers a language for writing extensions, which typically do <em>one thing well</em>.</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="VimUnixToolchain.md">VimUnixToolchain.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              7/58
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: VimUnixToolchain.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Vim Bootcamp</h1></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="VimUnixToolchain.md">VimUnixToolchain.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              8/58
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: VimUnixToolchain.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>If you haven't already, use <code>vimtutor</code></h1></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="VimUnixToolchain.md">VimUnixToolchain.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              9/58
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: VimUnixToolchain.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>First things first: Modal editors</h2></header>
+            
+            
+            <section><ul>
+<li>Different execution modes, based on what you're trying to accomplish.</li>
+<li>In vim, typically: </li>
+<li><strong>Insert</strong> mode (actual text entry), </li>
+<li><strong>Visual</strong> mode (visual text selection), </li>
+<li><strong>Normal</strong> mode (movement, commands)</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="VimUnixToolchain.md">VimUnixToolchain.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              10/58
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: VimUnixToolchain.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Choosing modes: Insert mode</h2></header>
+            
+            
+            <section><p>From Normal mode...</p>
+<ul>
+<li><code>i</code> enters "Insert" mode, at the current position</li>
+<li><code>I</code> enters "Insert" mode, at the first position of the line</li>
+<li><code>a</code> enters "Insert" mode, <em>appending</em> the current position</li>
+<li><code>A</code> enters "Insert" mode, <em>appending</em> the line</li>
+<li><code>o</code> enters "Insert" mode, <em>opening</em> a new line beneath the current</li>
+<li><code>O</code> enters "Insert" mode, <em>opening</em> a new line above the current</li>
+<li><code>C</code> enters "Insert" mode, <em>changing</em> from current position to EOL</li>
+<li><code>R</code> enters "Insert" mode, <em>replacing</em> text as you type</li>
+</ul>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>"a", for "append"</li>
+<li>There are other ways as well; "r" for "replace" and "s" for "substitute"</li>
+<li>Demonstrate each</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="VimUnixToolchain.md">VimUnixToolchain.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              11/58
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: VimUnixToolchain.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Choosing modes: Visual mode</h2></header>
+            
+            
+            <section><p>From Normal mode...</p>
+<ul>
+<li><code>v</code> enters "Visual" mode to highlight contiguous text ranges</li>
+<li><code>V</code> enters "Visual" mode to highlight lines of text</li>
+<li><code>Ctrl-v</code> enters "Visual" mode to highlight blocks of text</li>
+</ul>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>Demonstrate each</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="VimUnixToolchain.md">VimUnixToolchain.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              12/58
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: VimUnixToolchain.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Choosing modes: Normal mode</h2></header>
+            
+            
+            <section><ul>
+<li>From Insert or Visual mode, hitting <code>Escape</code> will return you to Normal mode</li>
+</ul>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>When all else fails, hit Escape</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="VimUnixToolchain.md">VimUnixToolchain.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              13/58
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: VimUnixToolchain.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Insert Mode</h1></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="VimUnixToolchain.md">VimUnixToolchain.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              14/58
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: VimUnixToolchain.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Basics</h2></header>
+            
+            
+            <section><ul>
+<li>Start typing</li>
+<li>If you need to move around, go back to Normal mode</li>
+</ul>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>Normal mode offers the most efficient movement</li>
+<li>Demonstrate insert mode and returning to Normal mode</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="VimUnixToolchain.md">VimUnixToolchain.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              15/58
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: VimUnixToolchain.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Normal Mode</h1></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="VimUnixToolchain.md">VimUnixToolchain.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              16/58
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: VimUnixToolchain.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>A Note on Visual Mode</h1></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>Visual mode is for selecting text</li>
+<li>All movement keys shown and demonstrated for Normal mode are valid for Visual
+  mode as well</li>
+<li>I'll be demonstrating this throughout</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="VimUnixToolchain.md">VimUnixToolchain.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              17/58
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: VimUnixToolchain.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Basics: Movement</h2></header>
+            
+            
+            <section><ul>
+<li>Home row:</li>
+<li><code>h</code> - left</li>
+<li><code>j</code> - down</li>
+<li><code>k</code> - up</li>
+<li><code>l</code> - right</li>
+<li><code>Ctrl-F</code> - page forward</li>
+<li><code>Ctrl-B</code> - page backward</li>
+<li><code>:he movement</code> for more information</li>
+</ul>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>Highly efficient - you don't need to move your fingers from standard typing
+  position in order to move around.</li>
+<li><em>All movement keys work in Visual mode as well</em></li>
+<li>Pro tip: map your caps lock key to Ctrl to make it easier to reach</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="VimUnixToolchain.md">VimUnixToolchain.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              18/58
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: VimUnixToolchain.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Basics: Getting help</h2></header>
+            
+            
+            <section><ul>
+<li><code>:he</code> invokes the help system</li>
+<li><code>:he &lt;topic&gt;</code> invokes the help system with that topic</li>
+<li><code>Ctrl-]</code> jumps to a tag</li>
+<li><code>Ctrl-t</code> goes back to the screen from which you jumped</li>
+</ul>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>Demonstrate this: ":he", ":he movement", jumping</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="VimUnixToolchain.md">VimUnixToolchain.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              19/58
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: VimUnixToolchain.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Faster movement</h2></header>
+            
+            
+            <section><ul>
+<li>By word: <code>w</code>, <code>W</code>, <code>e</code>, <code>E</code></li>
+<li>Start of line/End of line: <code>0</code>, <code>$</code></li>
+<li>Start of document/End of document: <code>gg</code>, <code>G</code></li>
+<li>To line number {N}: <code>{N}G</code></li>
+</ul>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li><code>:se number</code> turns on line numbers, which is useful for jumping around</li>
+<li>Demonstrate each of these</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="VimUnixToolchain.md">VimUnixToolchain.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              20/58
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: VimUnixToolchain.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Faster movement: searching</h2></header>
+            
+            
+            <section><ul>
+<li>Search for next line with {searchpattern}: <code>/{searchpattern}</code></li>
+<li>Search for previous line with {searchpattern}: <code>?{searchpattern}</code></li>
+<li>Go to first occurence of {character} in this line: <code>f{character}</code></li>
+<li>Go to previous occurence of {character} in this line: <code>F{character}</code></li>
+<li><code>t</code> and <code>T</code> are like <code>f</code> and <code>F</code>, but go to character preceding</li>
+</ul>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>Demonstrate each of these</li>
+<li>Talk about the <code>\v</code> switch with searches, and how it enables PCRE regex</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="VimUnixToolchain.md">VimUnixToolchain.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              21/58
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: VimUnixToolchain.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Faster movement: matching pairs</h2></header>
+            
+            
+            <section><ul>
+<li>Go to matching (brace, bracket, paren, quote): <code>%</code></li>
+</ul>
+<blockquote>
+<p>When in doubt, parenthesize. At the very least it will let some poor schmuck
+bounce on the % key in <em>vi</em>.</p>
+<p><em>-- Larry Wall</em></p>
+</blockquote>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>Demonstrate this in a code sample</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="VimUnixToolchain.md">VimUnixToolchain.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              22/58
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: VimUnixToolchain.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Faster movement: marks</h2></header>
+            
+            
+            <section><ul>
+<li>Bookmark a location: <code>m{character}</code></li>
+<li>Go to a bookmark: <code>'{character}</code></li>
+</ul>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>Demonstrate this</li>
+<li>Discuss some patterns of marks you've used/seen</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="VimUnixToolchain.md">VimUnixToolchain.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              23/58
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: VimUnixToolchain.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Common commands</h2></header>
+            
+            
+            <section><ul>
+<li>Write/save a file: <code>:w&lt;CR&gt;</code></li>
+<li>Quit: <code>:q</code></li>
+<li>Write and quit: <code>:wq</code> or <code>ZZ</code></li>
+</ul>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>Demonstrate the above</li>
+<li>Also demonstrate what happens if you try to quit and the file is not saved</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="VimUnixToolchain.md">VimUnixToolchain.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              24/58
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: VimUnixToolchain.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Cutting and pasting</h2></header>
+            
+            
+            <section><ul>
+<li>Copy/"Yank": <code>y</code> (<code>yy</code> to yank current line)</li>
+<li>Cut/"Delete": <code>d</code> (<code>dd</code> to delete current line)</li>
+<li>Cut/delete characters: <code>x</code> (current), <code>X</code> (previous)</li>
+<li>Paste: <code>p</code> (after current position), <code>P</code> (before)</li>
+<li>Undo: <code>u</code></li>
+</ul>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>Demonstrate each of the above</li>
+<li>Demonstrate <code>xp</code> (twiddling characters)</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="VimUnixToolchain.md">VimUnixToolchain.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              25/58
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: VimUnixToolchain.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Replacing text</h2></header>
+            
+            
+            <section><ul>
+<li>Flip the case of the current character: <code>~</code></li>
+<li>Replace the current selection: <code>r</code></li>
+<li>Substitute matched text: <code>:s /{pattern}/{substitution}/{g}</code></li>
+</ul>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li><code>r</code> actually needs an explanation of visual mode</li>
+<li><code>s</code> is like perl's <code>s//</code> operator</li>
+<li>As shown, only operates on current line</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="VimUnixToolchain.md">VimUnixToolchain.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              26/58
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: VimUnixToolchain.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Faster operations: use quantifiers</h2></header>
+            
+            
+            <section><ul>
+<li>Move to the 4th word: <code>4w</code></li>
+<li>Move to the 5th occurence of "x": <code>4fx</code></li>
+<li>Yank the next six lines: <code>6yy</code></li>
+<li>Delete to the end of the 3rd word: <code>d3e</code></li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="VimUnixToolchain.md">VimUnixToolchain.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              27/58
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: VimUnixToolchain.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Specifying ranges</h2></header>
+            
+            
+            <section><ul>
+<li>Most commands allow <em>ranges</em> over which they should operate</li>
+<li>Typically, it will be what you highlight in Visual mode</li>
+<li>You can specify it manually</li>
+<li><code>:{start},{end} {command}</code></li>
+<li><code>:%</code> -- all lines in file</li>
+<li><code>:'&lt;,'&gt;</code> -- between start and end of visual selection</li>
+<li><code>:3,15</code> -- from lines 3 to 15</li>
+</ul>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>demonstrate substitution over whole, partial documents, and selection</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="VimUnixToolchain.md">VimUnixToolchain.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              28/58
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: VimUnixToolchain.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Power search: perform commands</h2></header>
+            
+            
+            <section><ul>
+<li>Execute a command on lines matching a pattern: <code>:{range} g/{pattern}/{command}</code></li>
+<li>Execute a command on lines NOT matching a pattern: <code>:{range} v/{pattern}/{command}</code></li>
+</ul>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>"v" == "inVerse"</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="VimUnixToolchain.md">VimUnixToolchain.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              29/58
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: VimUnixToolchain.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Formatting text/code</h2></header>
+            
+            
+            <section><ul>
+<li>Format/wrap the current paragraph: <code>gqip</code></li>
+<li>Format the current selection: <code>gq</code></li>
+<li>More: <code>:he gq</code></li>
+</ul>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>Demonstrate with an email or blog post; show with selection as well.</li>
+<li>Mention that the rules are configurable, and particularly on a per-syntax
+  basis</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="VimUnixToolchain.md">VimUnixToolchain.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              30/58
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: VimUnixToolchain.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Piping</h2></header>
+            
+            
+            <section><ul>
+<li>"Read" a file into the current: <code>:r {filename}</code></li>
+<li>Execute an external program: <code>:!{command}</code></li>
+<li>Execute an external program, redirecting output to this buffer: <code>:r!{command}</code></li>
+</ul>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>This is where vim shines. It allows you to interact with other processes
+  simply and easily, giving you ultimate flexibility.</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="VimUnixToolchain.md">VimUnixToolchain.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              31/58
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: VimUnixToolchain.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Some Personal Favorite Pipes</h1></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>Things we didn't talk about, but which you'll see:</li>
+<li>windows, tabs and buffers</li>
+<li>folding</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="VimUnixToolchain.md">VimUnixToolchain.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              32/58
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: VimUnixToolchain.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2><code>sort</code></h2></header>
+            
+            
+            <section><ul>
+<li><code>:{range}!sort</code></li>
+</ul>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>Demonstrate sorting an assoc array</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="VimUnixToolchain.md">VimUnixToolchain.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              33/58
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: VimUnixToolchain.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2><code>ls</code></h2></header>
+            
+            
+            <section><ul>
+<li><code>:!ls</code></li>
+</ul>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>Demonstrate listing a directory, as well as capturing it into the file</li>
+<li>We'll see another tool for this later</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="VimUnixToolchain.md">VimUnixToolchain.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              34/58
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: VimUnixToolchain.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2><code>tree</code></h2></header>
+            
+            
+            <section><ul>
+<li><code>:!tree {directory}</code></li>
+</ul>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>Demonstrate</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="VimUnixToolchain.md">VimUnixToolchain.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              35/58
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: VimUnixToolchain.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Execute with PHP</h2></header>
+            
+            
+            <section><ul>
+<li><code>:!php %</code></li>
+</ul>
+<p>Or, add this to your vimrc:</p>
+<ul>
+<li><code>:autocmd FileType php noremap &lt;C-M&gt; :w!&lt;CR&gt;:!$HOME/bin/php %&lt;CR&gt;</code></li>
+</ul>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>Talk about <code>:make</code></li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="VimUnixToolchain.md">VimUnixToolchain.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              36/58
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: VimUnixToolchain.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Lint your PHP source</h2></header>
+            
+            
+            <section><ul>
+<li><code>:!php -l %</code></li>
+</ul>
+<p>Or, add this to your vimrc:</p>
+<ul>
+<li><code>:autocmd FileType php noremap &lt;C-L&gt; :w!&lt;CR&gt;:!$HOME/bin/php -l %&lt;CR&gt;</code></li>
+</ul>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>Mention you do this for JavaScript as well, using jslint</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="VimUnixToolchain.md">VimUnixToolchain.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              37/58
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: VimUnixToolchain.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Execute PHPUnit</h2></header>
+            
+            
+            <section><ul>
+<li><code>:!phpunit %</code></li>
+</ul>
+<p>Or, add this to your vimrc:</p>
+<ul>
+<li><code>:autocmd FileType php noremap &lt;Leader&gt;u :w!&lt;CR&gt;:!$HOME/bin/phpunit %&lt;CR&gt;</code></li>
+</ul>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>Mention what <code>&lt;Leader&gt;</code> is</li>
+<li>Mention you need to be in the tests directory</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="VimUnixToolchain.md">VimUnixToolchain.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              38/58
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: VimUnixToolchain.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>PHP Manual</h2></header>
+            
+            
+            <section><ul>
+<li>Get pman: <code>pear install doc.php.net/pman</code></li>
+<li>Use as <code>keywordprg</code> in PHP files; add this to your vimrc: <code>:autocmd FileType
+  php set keywordprg=/path/to/bin/pman</code></li>
+<li>Type <code>Ctrl-k</code> on a PHP function to get its man page!</li>
+</ul>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>Demonstrate looking up a keyword</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="VimUnixToolchain.md">VimUnixToolchain.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              39/58
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: VimUnixToolchain.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Plugins</h1></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>There are thousands of plugins, from syntax to themes to plugins altering
+  behavior</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="VimUnixToolchain.md">VimUnixToolchain.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              40/58
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: VimUnixToolchain.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Favorites: syntax highlighting</h2></header>
+            
+            
+            <section><ul>
+<li>Most languages/formats already are supported</li>
+<li>Add <code>:syntax on</code> to your vimrc</li>
+<li>And filetype detection: <code>:filetype plugin on</code></li>
+<li>And auto indentation: <code>:filetype plugin indent on</code></li>
+<li>And support for any custom filetypes you install: <code>:runtime! $HOME/.vim/ftdetect/*.vim</code></li>
+</ul>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>Demonstrate</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="VimUnixToolchain.md">VimUnixToolchain.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              41/58
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: VimUnixToolchain.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Favorites: surround</h2></header>
+            
+            
+            <section><ul>
+<li>https://github.com/tpope/vim-surround</li>
+<li>Highlight some text, and press <code>s{character}</code></li>
+<li>Favorites: quotes, parens, braces, backticks...</li>
+</ul>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>Demonstrate</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="VimUnixToolchain.md">VimUnixToolchain.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              42/58
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: VimUnixToolchain.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Favorites: Tabularize</h2></header>
+            
+            
+            <section><ul>
+<li>https://github.com/godlygeek/tabular</li>
+<li>Align text on patterns</li>
+</ul>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>Demonstrate aligning elements of an assoc array</li>
+<li>Demonstrate aligning variable assignments</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="VimUnixToolchain.md">VimUnixToolchain.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              43/58
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: VimUnixToolchain.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Favorites: snipMate</h2></header>
+            
+            
+            <section><ul>
+<li>http://www.vim.org/scripts/script.php?script_id=2540</li>
+<li>Create "snippets" of text, optionally with placeholders</li>
+<li>Invoke the snippets to reduce typing</li>
+</ul>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>Demonstrate "accessors" snippet</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="VimUnixToolchain.md">VimUnixToolchain.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              44/58
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: VimUnixToolchain.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Favorites: taglist</h2></header>
+            
+            
+            <section><ul>
+<li>http://vim-taglist.sourceforge.net/</li>
+<li>Show an outline of code elements, and allow jumping to their definitions</li>
+</ul>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>Demonstrate this with a class file</li>
+<li>Note that I use <code>F8</code> to open the tag list</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="VimUnixToolchain.md">VimUnixToolchain.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              45/58
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: VimUnixToolchain.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Favorites: ctags</h2></header>
+            
+            
+            <section><ul>
+<li>Built-in support for tag files created with exuberant ctags
+  (http://ctags.sourceforge.net/)</li>
+<li>Use <code>ctags-exuberant</code> to create tag files for PHP (http://bit.ly/vim-mktags)</li>
+<li>Tell vim about your tags (<code>:let tagspath = {tag path}</code>)</li>
+<li><code>:tag {tagname}</code> to jump to a tag</li>
+<li><code>:stag {tagname}</code> to open a new window with the given tag</li>
+<li><code>Ctrl-w Ctrl-]</code> to open a new window with the tag under the cursor</li>
+</ul>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li><code>:tag</code> has tab-completion</li>
+<li>Demonstrate with EventManager</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="VimUnixToolchain.md">VimUnixToolchain.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              46/58
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: VimUnixToolchain.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Favorites: NERDTree</h2></header>
+            
+            
+            <section><ul>
+<li>http://www.vim.org/scripts/script.php?script_id=1658</li>
+<li>http://github.com/scrooloose/nerdtree</li>
+<li>Opens a buffer showing a tree from the current working dir</li>
+<li>Explore the tree, open files, create bookmarks, etc.</li>
+</ul>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>Demonstrate</li>
+<li>Note that I bind <code>&lt;Leader&gt;n</code> to open this</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="VimUnixToolchain.md">VimUnixToolchain.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              47/58
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: VimUnixToolchain.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>PHP Plugins: syntax/php.vim</h2></header>
+            
+            
+            <section><ul>
+<li>https://github.com/tobyS/vip/blob/master/.vim/ftplugin/php.vim
+  (Tobias Schlitt)</li>
+<li>Most up-to-date PHP syntax, usually.</li>
+<li>Follows PEAR standards for formatting</li>
+<li>Has good folding rules by default</li>
+</ul>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>Open a PHP file</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="VimUnixToolchain.md">VimUnixToolchain.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              48/58
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: VimUnixToolchain.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>PHP Plugins: PDV</h2></header>
+            
+            
+            <section><ul>
+<li>PhpDocumentor for Vim: http://www.vim.org/scripts/script.php?script_id=1355</li>
+<li>Can automatically create docblocks for you, or on demand</li>
+</ul>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>I've created a key binding for this, <code>Ctrl-p</code></li>
+<li>Demonstrate</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="VimUnixToolchain.md">VimUnixToolchain.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              49/58
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: VimUnixToolchain.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>PHP Plugins: phpcomplete.vim</h2></header>
+            
+            
+            <section><ul>
+<li>http://www.vim.org/scripts/script.php?script_id=3171
+  https://github.com/EvanDotPro/phpcomplete.vim</li>
+<li>Context-sensitive code-completion for PHP</li>
+</ul>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>You won't get things like arguments or type-hinting usually</li>
+<li>But it's generally good enough</li>
+<li>Demonstrate with EventManager</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="VimUnixToolchain.md">VimUnixToolchain.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              50/58
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: VimUnixToolchain.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Collaboration Plugins: paster.vim</h2></header>
+            
+            
+            <section><ul>
+<li>https://github.com/weierophinney/paster.vim</li>
+<li>Paste file or selection to paste service of your choice</li>
+<li>Returns URL of new paste, and optionally opens browser window with it</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="VimUnixToolchain.md">VimUnixToolchain.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              51/58
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: VimUnixToolchain.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Collaboration Plugins: Gist</h2></header>
+            
+            
+            <section><ul>
+<li>http://www.vim.org/scripts/script.php?script_id=2423</li>
+<li>https://github.com/mattn/gist-vim</li>
+<li>Paste file or selection as GitHub gist; returns URL of new gist</li>
+<li>Can also do a ton of manipulation of gists</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="VimUnixToolchain.md">VimUnixToolchain.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              52/58
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: VimUnixToolchain.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Collaboration Plugins: fugitive</h2></header>
+            
+            
+            <section><ul>
+<li>http://www.vim.org/scripts/script.php?script_id=2975</li>
+<li>https://github.com/tpope/vim-fugitive</li>
+<li>Work with and manipulate git repositories</li>
+<li>"I'm not going to lie to you; fugitive.vim may very well be the best Git
+  wrapper of all time.'" <em>-- Tim Pope, author of fugitive</em></li>
+</ul>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>This one has to be presented. There's too much info.</li>
+<li>Mention vcscommand, which is for CVS and SVN, but not nearly as good</li>
+<li>Get the link to the fugitive series on vimcasts.org</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="VimUnixToolchain.md">VimUnixToolchain.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              53/58
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: VimUnixToolchain.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Productivity Plugins: Project</h2></header>
+            
+            
+            <section><ul>
+<li>http://www.vim.org/scripts/script.php?script_id=69</li>
+<li>Create a customized "workspace" of files in a project</li>
+<li>Apply commands to trees in the project</li>
+<li>Much more</li>
+</ul>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>Demonstrate with mwop.net</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="VimUnixToolchain.md">VimUnixToolchain.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              54/58
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: VimUnixToolchain.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Productivity Plugins: vimwiki + vimtask</h2></header>
+            
+            
+            <section><ul>
+<li><strong>vimwiki:</strong> http://code.google.com/p/vimwiki/</li>
+<li><strong>vimtask:</strong> https://github.com/samsonw/vim-task</li>
+<li><strong>vimwiki+vimtask:</strong>
+  https://github.com/weierophinney/vimwiki/tree/feature/vim-task</li>
+<li><strong>Vimwiki:</strong> personal, file-system-based wiki, diary/journal, etc.</li>
+<li><strong>Vimtask:</strong> dead-simple todo lists</li>
+<li><strong>Vimiwiki+Vimtask:</strong> nirvana</li>
+</ul>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>Open up the wiki</li>
+<li>Open up the diary</li>
+<li>Demonstrate task lists</li>
+<li>Mention using this with fugitive for a versioned wiki...</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="VimUnixToolchain.md">VimUnixToolchain.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              55/58
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: VimUnixToolchain.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Parting shots</h1></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>I've only scratched the surface.</li>
+<li>Spellchecking, Integration with make, grepping files, diff resolution, etc.</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="VimUnixToolchain.md">VimUnixToolchain.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              56/58
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: VimUnixToolchain.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Resources</h2></header>
+            
+            
+            <section><ul>
+<li>http://www.vim.org/</li>
+<li>My vim settings: <code>git clone git://mwop.net/vimrc.git</code></li>
+<li>Stuff mentioned today (and more): http://bitly.com/w5tKYU</li>
+<li>This talk: http://mwop.net/slides/2012-01-28-Vim/VimUnixToolchain.html</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="VimUnixToolchain.md">VimUnixToolchain.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              57/58
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: VimUnixToolchain.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Thank You!</h1></header>
+            
+            
+            <section><ul>
+<li>http://joind.in/4769</li>
+<li>http://twitter.com/weierophinney</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="VimUnixToolchain.md">VimUnixToolchain.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              58/58
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div id="toc" class="sidebar hidden">
+    <h2>Table of Contents</h2>
+    <table>
+      <caption>Table of Contents</caption>
+      
+      <tr id="toc-row-1">
+        <th><a href="#slide1">Vim + Unix == IDE</a></th>
+        <td><a href="#slide1">1</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-2">
+        <th><a href="#slide2">Yes, I work for Zend</a></th>
+        <td><a href="#slide2">2</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-3">
+        <th><a href="#slide3">Yes, I use Vim</a></th>
+        <td><a href="#slide3">3</a></td>
+      </tr>
+      
+        
+        <tr id="toc-row-4" class="sub">
+          <th><a href="#slide4">Why?</a></th>
+          <td><a href="#slide4">4</a></td>
+        </tr>
+        
+        <tr id="toc-row-5" class="sub">
+          <th><a href="#slide5">Why?</a></th>
+          <td><a href="#slide5">5</a></td>
+        </tr>
+        
+        <tr id="toc-row-6" class="sub">
+          <th><a href="#slide6">Why?</a></th>
+          <td><a href="#slide6">6</a></td>
+        </tr>
+        
+        <tr id="toc-row-7" class="sub">
+          <th><a href="#slide7">It follows the Unix Philosophy</a></th>
+          <td><a href="#slide7">7</a></td>
+        </tr>
+        
+      
+      
+      <tr id="toc-row-8">
+        <th><a href="#slide8">Vim Bootcamp</a></th>
+        <td><a href="#slide8">8</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-9">
+        <th><a href="#slide9">If you haven't already, use <code>vimtutor</code></a></th>
+        <td><a href="#slide9">9</a></td>
+      </tr>
+      
+        
+        <tr id="toc-row-10" class="sub">
+          <th><a href="#slide10">First things first: Modal editors</a></th>
+          <td><a href="#slide10">10</a></td>
+        </tr>
+        
+        <tr id="toc-row-11" class="sub">
+          <th><a href="#slide11">Choosing modes: Insert mode</a></th>
+          <td><a href="#slide11">11</a></td>
+        </tr>
+        
+        <tr id="toc-row-12" class="sub">
+          <th><a href="#slide12">Choosing modes: Visual mode</a></th>
+          <td><a href="#slide12">12</a></td>
+        </tr>
+        
+        <tr id="toc-row-13" class="sub">
+          <th><a href="#slide13">Choosing modes: Normal mode</a></th>
+          <td><a href="#slide13">13</a></td>
+        </tr>
+        
+      
+      
+      <tr id="toc-row-14">
+        <th><a href="#slide14">Insert Mode</a></th>
+        <td><a href="#slide14">14</a></td>
+      </tr>
+      
+        
+        <tr id="toc-row-15" class="sub">
+          <th><a href="#slide15">Basics</a></th>
+          <td><a href="#slide15">15</a></td>
+        </tr>
+        
+      
+      
+      <tr id="toc-row-16">
+        <th><a href="#slide16">Normal Mode</a></th>
+        <td><a href="#slide16">16</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-17">
+        <th><a href="#slide17">A Note on Visual Mode</a></th>
+        <td><a href="#slide17">17</a></td>
+      </tr>
+      
+        
+        <tr id="toc-row-18" class="sub">
+          <th><a href="#slide18">Basics: Movement</a></th>
+          <td><a href="#slide18">18</a></td>
+        </tr>
+        
+        <tr id="toc-row-19" class="sub">
+          <th><a href="#slide19">Basics: Getting help</a></th>
+          <td><a href="#slide19">19</a></td>
+        </tr>
+        
+        <tr id="toc-row-20" class="sub">
+          <th><a href="#slide20">Faster movement</a></th>
+          <td><a href="#slide20">20</a></td>
+        </tr>
+        
+        <tr id="toc-row-21" class="sub">
+          <th><a href="#slide21">Faster movement: searching</a></th>
+          <td><a href="#slide21">21</a></td>
+        </tr>
+        
+        <tr id="toc-row-22" class="sub">
+          <th><a href="#slide22">Faster movement: matching pairs</a></th>
+          <td><a href="#slide22">22</a></td>
+        </tr>
+        
+        <tr id="toc-row-23" class="sub">
+          <th><a href="#slide23">Faster movement: marks</a></th>
+          <td><a href="#slide23">23</a></td>
+        </tr>
+        
+        <tr id="toc-row-24" class="sub">
+          <th><a href="#slide24">Common commands</a></th>
+          <td><a href="#slide24">24</a></td>
+        </tr>
+        
+        <tr id="toc-row-25" class="sub">
+          <th><a href="#slide25">Cutting and pasting</a></th>
+          <td><a href="#slide25">25</a></td>
+        </tr>
+        
+        <tr id="toc-row-26" class="sub">
+          <th><a href="#slide26">Replacing text</a></th>
+          <td><a href="#slide26">26</a></td>
+        </tr>
+        
+        <tr id="toc-row-27" class="sub">
+          <th><a href="#slide27">Faster operations: use quantifiers</a></th>
+          <td><a href="#slide27">27</a></td>
+        </tr>
+        
+        <tr id="toc-row-28" class="sub">
+          <th><a href="#slide28">Specifying ranges</a></th>
+          <td><a href="#slide28">28</a></td>
+        </tr>
+        
+        <tr id="toc-row-29" class="sub">
+          <th><a href="#slide29">Power search: perform commands</a></th>
+          <td><a href="#slide29">29</a></td>
+        </tr>
+        
+        <tr id="toc-row-30" class="sub">
+          <th><a href="#slide30">Formatting text/code</a></th>
+          <td><a href="#slide30">30</a></td>
+        </tr>
+        
+        <tr id="toc-row-31" class="sub">
+          <th><a href="#slide31">Piping</a></th>
+          <td><a href="#slide31">31</a></td>
+        </tr>
+        
+      
+      
+      <tr id="toc-row-32">
+        <th><a href="#slide32">Some Personal Favorite Pipes</a></th>
+        <td><a href="#slide32">32</a></td>
+      </tr>
+      
+        
+        <tr id="toc-row-33" class="sub">
+          <th><a href="#slide33"><code>sort</code></a></th>
+          <td><a href="#slide33">33</a></td>
+        </tr>
+        
+        <tr id="toc-row-34" class="sub">
+          <th><a href="#slide34"><code>ls</code></a></th>
+          <td><a href="#slide34">34</a></td>
+        </tr>
+        
+        <tr id="toc-row-35" class="sub">
+          <th><a href="#slide35"><code>tree</code></a></th>
+          <td><a href="#slide35">35</a></td>
+        </tr>
+        
+        <tr id="toc-row-36" class="sub">
+          <th><a href="#slide36">Execute with PHP</a></th>
+          <td><a href="#slide36">36</a></td>
+        </tr>
+        
+        <tr id="toc-row-37" class="sub">
+          <th><a href="#slide37">Lint your PHP source</a></th>
+          <td><a href="#slide37">37</a></td>
+        </tr>
+        
+        <tr id="toc-row-38" class="sub">
+          <th><a href="#slide38">Execute PHPUnit</a></th>
+          <td><a href="#slide38">38</a></td>
+        </tr>
+        
+        <tr id="toc-row-39" class="sub">
+          <th><a href="#slide39">PHP Manual</a></th>
+          <td><a href="#slide39">39</a></td>
+        </tr>
+        
+      
+      
+      <tr id="toc-row-40">
+        <th><a href="#slide40">Plugins</a></th>
+        <td><a href="#slide40">40</a></td>
+      </tr>
+      
+        
+        <tr id="toc-row-41" class="sub">
+          <th><a href="#slide41">Favorites: syntax highlighting</a></th>
+          <td><a href="#slide41">41</a></td>
+        </tr>
+        
+        <tr id="toc-row-42" class="sub">
+          <th><a href="#slide42">Favorites: surround</a></th>
+          <td><a href="#slide42">42</a></td>
+        </tr>
+        
+        <tr id="toc-row-43" class="sub">
+          <th><a href="#slide43">Favorites: Tabularize</a></th>
+          <td><a href="#slide43">43</a></td>
+        </tr>
+        
+        <tr id="toc-row-44" class="sub">
+          <th><a href="#slide44">Favorites: snipMate</a></th>
+          <td><a href="#slide44">44</a></td>
+        </tr>
+        
+        <tr id="toc-row-45" class="sub">
+          <th><a href="#slide45">Favorites: taglist</a></th>
+          <td><a href="#slide45">45</a></td>
+        </tr>
+        
+        <tr id="toc-row-46" class="sub">
+          <th><a href="#slide46">Favorites: ctags</a></th>
+          <td><a href="#slide46">46</a></td>
+        </tr>
+        
+        <tr id="toc-row-47" class="sub">
+          <th><a href="#slide47">Favorites: NERDTree</a></th>
+          <td><a href="#slide47">47</a></td>
+        </tr>
+        
+        <tr id="toc-row-48" class="sub">
+          <th><a href="#slide48">PHP Plugins: syntax/php.vim</a></th>
+          <td><a href="#slide48">48</a></td>
+        </tr>
+        
+        <tr id="toc-row-49" class="sub">
+          <th><a href="#slide49">PHP Plugins: PDV</a></th>
+          <td><a href="#slide49">49</a></td>
+        </tr>
+        
+        <tr id="toc-row-50" class="sub">
+          <th><a href="#slide50">PHP Plugins: phpcomplete.vim</a></th>
+          <td><a href="#slide50">50</a></td>
+        </tr>
+        
+        <tr id="toc-row-51" class="sub">
+          <th><a href="#slide51">Collaboration Plugins: paster.vim</a></th>
+          <td><a href="#slide51">51</a></td>
+        </tr>
+        
+        <tr id="toc-row-52" class="sub">
+          <th><a href="#slide52">Collaboration Plugins: Gist</a></th>
+          <td><a href="#slide52">52</a></td>
+        </tr>
+        
+        <tr id="toc-row-53" class="sub">
+          <th><a href="#slide53">Collaboration Plugins: fugitive</a></th>
+          <td><a href="#slide53">53</a></td>
+        </tr>
+        
+        <tr id="toc-row-54" class="sub">
+          <th><a href="#slide54">Productivity Plugins: Project</a></th>
+          <td><a href="#slide54">54</a></td>
+        </tr>
+        
+        <tr id="toc-row-55" class="sub">
+          <th><a href="#slide55">Productivity Plugins: vimwiki + vimtask</a></th>
+          <td><a href="#slide55">55</a></td>
+        </tr>
+        
+      
+      
+      <tr id="toc-row-56">
+        <th><a href="#slide56">Parting shots</a></th>
+        <td><a href="#slide56">56</a></td>
+      </tr>
+      
+        
+        <tr id="toc-row-57" class="sub">
+          <th><a href="#slide57">Resources</a></th>
+          <td><a href="#slide57">57</a></td>
+        </tr>
+        
+      
+      
+      <tr id="toc-row-58">
+        <th><a href="#slide58">Thank You!</a></th>
+        <td><a href="#slide58">58</a></td>
+      </tr>
+      
+      
+    </table>
+  </div>
+  
+  <div id="help" class="sidebar hidden">
+    <h2>Help</h2>
+    <table>
+      <caption>Help</caption>
+      <tr>
+        <th>Table of Contents</th>
+        <td>t</td>
+      </tr>
+      <tr>
+        <th>Exposé</th>
+        <td>ESC</td>
+      </tr>
+      <tr>
+        <th>Full screen slides</th>
+        <td>e</td>
+      </tr>
+      <tr>
+        <th>Presenter View</th>
+        <td>p</td>
+      </tr>
+      <tr>
+        <th>Source Files</th>
+        <td>s</td>
+      </tr>
+      <tr>
+        <th>Slide Numbers</th>
+        <td>n</td>
+      </tr>
+      <tr>
+        <th>Toggle screen blanking</th>
+        <td>b</td>
+      </tr>
+      <tr>
+        <th>Show/hide slide context</th>
+        <td>c</td>
+      </tr>
+      <tr>
+        <th>Notes</th>
+        <td>2</td>
+      </tr>
+      <tr>
+        <th>Help</th>
+        <td>h</td>
+      </tr>
+    </table>
+  </div>
+  <script>main()</script>
+</body>
+</html>
