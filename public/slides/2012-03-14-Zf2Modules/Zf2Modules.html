@@ -1,0 +1,2549 @@
+<!DOCTYPE html>
+<!--
+  Copyright 2010 Google Inc.
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+
+  Original slides: Marcin Wichary (mwichary@google.com)
+  Modifications: Ernest Delgado (ernestd@google.com)
+                 Alex Russell (slightlyoff@chromium.org)
+
+  landslide modifications: Adam Zapletal (adamzap@gmail.com)
+                           Nicolas Perriault (nperriault@gmail.com)
+-->
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Writing Reusable ZF2 Modules</title>
+    <!-- Styles -->
+    
+    <link rel="stylesheet" media="print" href="/usr/local/lib/python2.7/dist-packages/landslide/themes/default/css/print.css">
+    <link rel="stylesheet" media="screen, projection" href="theme/css/screen.css">
+    
+    
+    <!-- /Styles -->
+    <!-- Javascripts -->
+    
+    <script type="text/javascript" src="theme/js/slides.js"></script>
+    
+    
+    <!-- /Javascripts -->
+</head>
+<body>
+  <div id="blank"></div>
+  <div class="presentation">
+    <div id="current_presenter_notes">
+      <div id="presenter_note"></div>
+    </div>
+    <div class="slides">
+      
+      <!-- slide source: Zf2Modules.md -->
+      <div class="slide-wrapper">
+        <div class="slide titleslide">
+          <div class="inner">
+            
+            <header><h1>Writing Reusable ZF2 Modules</h1></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <p>What provides us with controllers and routes?</p>
+<p>The answer is: modules</p>
+<ul>
+<li>what is a module, and why?</li>
+<li>basic structure</li>
+<li>the module class</li>
+<li>hooking into bootstrapping</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Modules.md">Zf2Modules.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              1/49
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Modules.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>What is a module?</h1></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>Problem with ZF1: no reuse and sharing, due to architecture</li>
+<li>ZF2's goal: share and collaborate</li>
+<li>A module is a complete solution to a discrete problem or set of related
+  problems</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Modules.md">Zf2Modules.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              2/49
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Modules.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Modules in ZF2</h2></header>
+            
+            
+            <section><ul>
+<li>A <strong>namespace</strong>,</li>
+<li>containing a single classfile, a <strong>Module</strong></li>
+</ul>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>Structure is left to the developer, though we have a <em>recommended</em> structure</li>
+<li>We have a few interfaces you can implement that hint to the module manager how
+  a module can be <em>used</em></li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Modules.md">Zf2Modules.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              3/49
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Modules.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Modules can contain...</h2></header>
+            
+            
+            <section><ul>
+<li>PHP code, <em>including MVC code</em></li>
+<li>Assets, such as CSS, JS, and images</li>
+<li>Unit tests</li>
+<li>Documentation</li>
+<li><em>Anything</em></li>
+</ul>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <p>I've created a module that simply provided SkeletonCSS in a way that I could
+easily drop it into a project. I have modules that are basically libraries, and
+contain source code, unit tests, and documentation. The point is, they can
+provide just about anything, because the only requirement is the Module class as
+an entry point.</p>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Modules.md">Zf2Modules.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              4/49
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Modules.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>At the most basic...</h2></header>
+            
+            
+            <section><pre><code>module/
+    Foo/
+        Module.php
+</code></pre></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Modules.md">Zf2Modules.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              5/49
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Modules.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code">
+          <div class="inner">
+            
+            <header><h2>The module class...</h2></header>
+            
+            
+            <section><p>Which contains:</p>
+<div class="highlight"><pre><span class="lineno">1</span> <span class="cp">&lt;?php</span>
+<span class="lineno">2</span> <span class="k">namespace</span> <span class="nx">Foo</span><span class="p">;</span>
+<span class="lineno">3</span> 
+<span class="lineno">4</span> <span class="k">class</span> <span class="nc">Module</span> <span class="p">{</span> <span class="p">}</span>
+</pre></div>
+
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>That's really it. It's a single entry point, and completely opt-in.</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Modules.md">Zf2Modules.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              6/49
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Modules.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Recommended module structure</h2></header>
+            
+            
+            <section><pre><code>ModuleName/
+    Module.php
+    config/
+        module.config.php
+    public/
+        css/
+        images/
+        js/
+    src/
+        ModuleName/
+            ... code ...
+    test/
+        ModuleName/
+            ... code ...
+    view/
+        ... templates, etc. ...
+</code></pre>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>I mentioned before they can contain anything. We have a recommended structure
+  to answer the question of "where do I put X, Y, or Z?"</li>
+<li>Discuss some of the reasons behind the decisions</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Modules.md">Zf2Modules.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              7/49
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Modules.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Modules typically provide...</h2></header>
+            
+            
+            <section><ul>
+<li>Autoloading artifacts</li>
+<li>Basic configuration, including routes</li>
+<li>Event listener registration</li>
+</ul>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <p>Commonly, we will provide DI and routing configuration.</p>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Modules.md">Zf2Modules.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              8/49
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Modules.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code">
+          <div class="inner">
+            
+            <header><h2>Providing autoloading hints</h2></header>
+            
+            
+            <section><div class="highlight"><pre><span class="lineno"> 1</span> <span class="cp">&lt;?php</span>
+<span class="lineno"> 2</span> <span class="k">namespace</span> <span class="nx">Foo</span><span class="p">;</span>
+<span class="lineno"> 3</span> <span class="k">use</span> <span class="nx">Zend\Module\Consumer\AutoloaderProvider</span><span class="p">;</span>
+<span class="lineno"> 4</span> <span class="k">class</span> <span class="nc">Module</span> <span class="k">implements</span> <span class="nx">AutoloaderProvider</span>
+<span class="lineno"> 5</span> <span class="p">{</span>
+<span class="lineno"> 6</span>     <span class="k">public</span> <span class="k">function</span> <span class="nf">getAutoloaderConfig</span><span class="p">()</span>
+<span class="lineno"> 7</span>     <span class="p">{</span>
+<span class="lineno"> 8</span>       <span class="k">return</span> <span class="k">array</span><span class="p">(</span>
+<span class="lineno"> 9</span>         <span class="s1">&#39;Zend\Loader\ClassMapAutoloader&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+<span class="lineno">10</span>           <span class="k">include</span> <span class="nx">__DIR__</span> <span class="o">.</span> <span class="s1">&#39;/autoload_classmap.php&#39;</span><span class="p">,</span>
+<span class="lineno">11</span>         <span class="p">),</span>
+<span class="lineno">12</span>         <span class="s1">&#39;Zend\Loader\StandardAutoloader&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+<span class="lineno">13</span>           <span class="s1">&#39;namespaces&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+<span class="lineno">14</span>             <span class="s1">&#39;Foo&#39;</span> <span class="o">=&gt;</span> <span class="nx">__DIR__</span> <span class="o">.</span> <span class="s1">&#39;/src/Foo&#39;</span><span class="p">,</span>
+<span class="lineno">15</span>           <span class="p">),</span>
+<span class="lineno">16</span>         <span class="p">),</span>
+<span class="lineno">17</span>       <span class="p">);</span>
+<span class="lineno">18</span>     <span class="p">}</span>
+<span class="lineno">19</span> <span class="p">}</span>
+</pre></div>
+
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>Basically, returning a configuration array to pass to the AutoloaderFactory.
+  This ensures reuse of the same autoloader objects, but also means that the
+  AutoloaderListener will be able to cache this configuration for later use.</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Modules.md">Zf2Modules.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              9/49
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Modules.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code">
+          <div class="inner">
+            
+            <header><h2>Providing configuration</h2></header>
+            
+            
+            <section><div class="highlight"><pre><span class="lineno"> 1</span> <span class="cp">&lt;?php</span>
+<span class="lineno"> 2</span> <span class="k">namespace</span> <span class="nx">Foo</span><span class="p">;</span>
+<span class="lineno"> 3</span> 
+<span class="lineno"> 4</span> <span class="k">class</span> <span class="nc">Module</span>
+<span class="lineno"> 5</span> <span class="p">{</span>
+<span class="lineno"> 6</span>     <span class="k">public</span> <span class="k">function</span> <span class="nf">getConfig</span><span class="p">()</span>
+<span class="lineno"> 7</span>     <span class="p">{</span>
+<span class="lineno"> 8</span>         <span class="k">return</span> <span class="k">include</span> <span class="nx">__DIR__</span> 
+<span class="lineno"> 9</span>                 <span class="o">.</span> <span class="s1">&#39;/config/module.config.php&#39;</span><span class="p">;</span>
+<span class="lineno">10</span>     <span class="p">}</span>
+<span class="lineno">11</span> <span class="p">}</span>
+</pre></div>
+
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>The config listener merges this configuration with the config it stores
+  internally.</li>
+<li>You can also use other config formats. Just return an array or Traversable
+  object</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Modules.md">Zf2Modules.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              10/49
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Modules.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code">
+          <div class="inner">
+            
+            <header><h2>Typical module configuration</h2></header>
+            
+            
+            <section><div class="highlight"><pre><span class="lineno"> 1</span> <span class="cp">&lt;?php</span>
+<span class="lineno"> 2</span> <span class="k">return</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;di&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+<span class="lineno"> 3</span>   <span class="s1">&#39;instance&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+<span class="lineno"> 4</span>     <span class="s1">&#39;Zend\Mvc\Router\RouteStack&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;parameters&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+<span class="lineno"> 5</span>       <span class="s1">&#39;routes&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+<span class="lineno"> 6</span>         <span class="s1">&#39;foo&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+<span class="lineno"> 7</span>           <span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Literal&#39;</span><span class="p">,</span>
+<span class="lineno"> 8</span>           <span class="s1">&#39;options&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+<span class="lineno"> 9</span>             <span class="s1">&#39;route&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;/foo&#39;</span><span class="p">,</span>
+<span class="lineno">10</span>             <span class="s1">&#39;defaults&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+<span class="lineno">11</span>               <span class="s1">&#39;controller&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Foo\Controller\IndexController&#39;</span><span class="p">,</span>
+<span class="lineno">12</span>             <span class="p">),</span>
+<span class="lineno">13</span>           <span class="p">),</span>
+<span class="lineno">14</span>           <span class="s1">&#39;may_terminate&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
+<span class="lineno">15</span>           <span class="s1">&#39;child_routes&#39;</span> <span class="o">=&gt;</span> <span class="nx">aray</span><span class="p">(</span> <span class="cm">/* ... */</span> <span class="p">),</span>
+<span class="lineno">16</span> <span class="p">)))))));</span>
+</pre></div>
+
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>Note lack of environments; we do envs via glob merging</li>
+<li>base root! This allows us to override the base route in order to provide an
+  alternate starting segment to our module's routes</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Modules.md">Zf2Modules.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              11/49
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Modules.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code">
+          <div class="inner">
+            
+            <header><h2>Event registration (post-init tasks)</h2></header>
+            
+            
+            <section><div class="highlight"><pre><span class="lineno"> 1</span> <span class="cp">&lt;?php</span>
+<span class="lineno"> 2</span> <span class="k">namespace</span> <span class="nx">Foo</span><span class="p">;</span>
+<span class="lineno"> 3</span> <span class="k">use</span> <span class="nx">Zend\EventManager\StaticEventManager</span><span class="p">,</span>
+<span class="lineno"> 4</span>     <span class="nx">Zend\Module\Manager</span> <span class="k">as</span> <span class="nx">ModuleManager</span><span class="p">;</span>
+<span class="lineno"> 5</span> <span class="k">class</span> <span class="nc">Module</span>
+<span class="lineno"> 6</span> <span class="p">{</span>
+<span class="lineno"> 7</span>     <span class="k">public</span> <span class="k">function</span> <span class="nf">init</span><span class="p">(</span><span class="nx">ModuleManager</span> <span class="nv">$manager</span><span class="p">)</span>
+<span class="lineno"> 8</span>     <span class="p">{</span>
+<span class="lineno"> 9</span>         <span class="nv">$events</span> <span class="o">=</span> <span class="nx">StaticEventManager</span><span class="o">::</span><span class="na">getInstance</span><span class="p">();</span>
+<span class="lineno">10</span>         <span class="nv">$events</span><span class="o">-&gt;</span><span class="na">attach</span><span class="p">(</span>
+<span class="lineno">11</span>             <span class="s1">&#39;bootstrap&#39;</span><span class="p">,</span> <span class="s1">&#39;bootstrap&#39;</span><span class="p">,</span> 
+<span class="lineno">12</span>             <span class="k">array</span><span class="p">(</span><span class="nv">$this</span><span class="p">,</span> <span class="s1">&#39;bootstrap&#39;</span><span class="p">)</span>
+<span class="lineno">13</span>         <span class="p">);</span>
+<span class="lineno">14</span>     <span class="p">}</span>
+<span class="lineno">15</span> 
+<span class="lineno">16</span>     <span class="k">public</span> <span class="k">function</span> <span class="nf">bootstrap</span><span class="p">(</span><span class="nv">$e</span><span class="p">)</span>
+<span class="lineno">17</span>     <span class="p">{</span>
+<span class="lineno">18</span>         <span class="nv">$app</span>    <span class="o">=</span> <span class="nv">$e</span><span class="o">-&gt;</span><span class="na">getParam</span><span class="p">(</span><span class="s1">&#39;application&#39;</span><span class="p">);</span>
+<span class="lineno">19</span>         <span class="c1">// do some stuff...</span>
+<span class="lineno">20</span>         <span class="c1">// Often, registering other listeners</span>
+<span class="lineno">21</span>     <span class="p">}</span>
+<span class="lineno">22</span> <span class="p">}</span>
+</pre></div>
+
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>a special "InitTrigger" listener will call init() if it exists</li>
+<li>this is a good place to register events</li>
+<li>shows execution order: module manager aggregates items and triggers events; we
+  then execute the bootstrap, which triggers other events; and then we run the
+  application</li>
+<li>Event at bootstrap knows about the application, config, and module manager</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Modules.md">Zf2Modules.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              12/49
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Modules.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code smaller-code">
+          <div class="inner">
+            
+            <header><h2>Module-specific Event Listeners</h2></header>
+            
+            
+            <section><div class="highlight"><pre><span class="lineno"> 1</span> <span class="cp">&lt;?php</span>
+<span class="lineno"> 2</span> <span class="k">namespace</span> <span class="nx">Foo</span><span class="p">;</span>
+<span class="lineno"> 3</span> <span class="cm">/* ... */</span>
+<span class="lineno"> 4</span> <span class="k">class</span> <span class="nc">Module</span>
+<span class="lineno"> 5</span> <span class="p">{</span>
+<span class="lineno"> 6</span>     <span class="cm">/* ... */</span>
+<span class="lineno"> 7</span>     <span class="k">public</span> <span class="k">function</span> <span class="nf">bootstrap</span><span class="p">(</span><span class="nv">$e</span><span class="p">)</span>
+<span class="lineno"> 8</span>     <span class="p">{</span>
+<span class="lineno"> 9</span>         <span class="nv">$app</span>    <span class="o">=</span> <span class="nv">$e</span><span class="o">-&gt;</span><span class="na">getParam</span><span class="p">(</span><span class="s1">&#39;application&#39;</span><span class="p">);</span>
+<span class="lineno">10</span>         <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">events</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">attach</span><span class="p">(</span><span class="s1">&#39;route&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="nv">$this</span><span class="p">,</span> <span class="s1">&#39;moduleCheck&#39;</span><span class="p">),</span> <span class="o">-</span><span class="mi">100</span><span class="p">);</span>
+<span class="lineno">11</span>     <span class="p">}</span>
+<span class="lineno">12</span> 
+<span class="lineno">13</span>     <span class="k">public</span> <span class="k">function</span> <span class="nf">moduleCheck</span><span class="p">(</span><span class="nv">$e</span><span class="p">)</span>
+<span class="lineno">14</span>     <span class="p">{</span>
+<span class="lineno">15</span>         <span class="nv">$matches</span> <span class="o">=</span> <span class="nv">$e</span><span class="o">-&gt;</span><span class="na">getRouteMatch</span><span class="p">();</span>
+<span class="lineno">16</span>         <span class="nv">$controller</span> <span class="o">=</span> <span class="nv">$matches</span><span class="o">-&gt;</span><span class="na">getParam</span><span class="p">(</span><span class="s1">&#39;controller&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">);</span>
+<span class="lineno">17</span>         <span class="k">if</span> <span class="p">(</span><span class="mi">0</span> <span class="o">!==</span> <span class="nb">strpos</span><span class="p">(</span><span class="nv">$controller</span><span class="p">,</span> <span class="nx">__NAMESPACE__</span><span class="p">))</span> <span class="p">{</span>
+<span class="lineno">18</span>             <span class="c1">// Not our module</span>
+<span class="lineno">19</span>             <span class="k">return</span><span class="p">;</span>
+<span class="lineno">20</span>         <span class="p">}</span>
+<span class="lineno">21</span> 
+<span class="lineno">22</span>         <span class="c1">// Do cool stuff!</span>
+<span class="lineno">23</span>     <span class="p">}</span>
+<span class="lineno">24</span> <span class="p">}</span>
+</pre></div>
+
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>This allows attaching module-specific listeners, or doing module-specific
+  initialization. Since $e is the MvcEvent, and triggered by the Application,
+  this gives us access to the application, configuration, and the Locator
+  instance.</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Modules.md">Zf2Modules.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              13/49
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Modules.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code">
+          <div class="inner">
+            
+            <header><h2>Registering Modules with the Application</h2></header>
+            
+            
+            <section><p>Don't forget to register your module!</p>
+<div class="highlight"><pre><span class="lineno"> 1</span> <span class="cp">&lt;?php</span>
+<span class="lineno"> 2</span> <span class="c1">// config/application.config.php</span>
+<span class="lineno"> 3</span> <span class="k">return</span> <span class="k">array</span><span class="p">(</span>
+<span class="lineno"> 4</span>   <span class="s1">&#39;modules&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+<span class="lineno"> 5</span>     <span class="s1">&#39;Application&#39;</span><span class="p">,</span>
+<span class="lineno"> 6</span>     <span class="cm">/* add your module to the list */</span>
+<span class="lineno"> 7</span>   <span class="p">),</span>
+<span class="lineno"> 8</span>   <span class="s1">&#39;module_listener_options&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span> 
+<span class="lineno"> 9</span>     <span class="cm">/* ... */</span>
+<span class="lineno">10</span>   <span class="p">),</span>
+<span class="lineno">11</span> <span class="p">);</span>
+</pre></div>
+
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>The Module.php and Module class needs to be discoverable</li>
+<li>The app needs to know to look for it in the first place</li>
+<li>Explicit is always best</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Modules.md">Zf2Modules.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              14/49
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Modules.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Getting Your Hands Dirty: Contact!</h1></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <p>The idea now is to take the information we've got, and build a new module for
+the skeleton app I've handed around. We'll configure a mail transport and mail
+message, pass them into a controller, and do something with it all.</p>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Modules.md">Zf2Modules.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              15/49
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Modules.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>The goal:</h2></header>
+            
+            
+            <section><ul>
+<li>Display a contact form</li>
+<li>Validate the contact form, and re-display if necessary</li>
+<li>Send an email via a configured mail transport, and display a "thank you" page</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Modules.md">Zf2Modules.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              16/49
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Modules.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code">
+          <div class="inner">
+            
+            <header><h2>To begin:</h2></header>
+            
+            
+            <section><div class="highlight"><pre><span class="lineno">1</span> <span class="nb">cd </span>ZendSkeletonApplication
+<span class="lineno">2</span> mkdir module/PhlyContact
+<span class="lineno">3</span> <span class="nb">cd </span>module/PhlyContact
+<span class="lineno">4</span> mkdir -p config src/PhlyContact view/contact
+</pre></div>
+
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <p>This sets up the basic structure we need for the files we'll be creating.</p>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Modules.md">Zf2Modules.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              17/49
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Modules.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code smaller-code">
+          <div class="inner">
+            
+            <header><h2>Routes: Base route</h2></header>
+            
+            
+            <section><div class="highlight"><pre><span class="lineno"> 1</span> <span class="cp">&lt;?php</span>
+<span class="lineno"> 2</span> <span class="c1">// module/PhlyContact/config/module.config.php</span>
+<span class="lineno"> 3</span> <span class="k">return</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;di&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;instance&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+<span class="lineno"> 4</span> <span class="s1">&#39;Zend\Mvc\Router\RouteStack&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;parameters&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+<span class="lineno"> 5</span>   <span class="s1">&#39;routes&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+<span class="lineno"> 6</span>     <span class="s1">&#39;contact&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+<span class="lineno"> 7</span>       <span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Literal&#39;</span><span class="p">,</span>
+<span class="lineno"> 8</span>       <span class="s1">&#39;options&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+<span class="lineno"> 9</span>         <span class="s1">&#39;route&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;/contact&#39;</span><span class="p">,</span>
+<span class="lineno">10</span>         <span class="s1">&#39;defaults&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+<span class="lineno">11</span>           <span class="s1">&#39;controller&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;PhlyContact\Controller\ContactController&#39;</span><span class="p">,</span>
+<span class="lineno">12</span>           <span class="s1">&#39;action&#39;</span>     <span class="o">=&gt;</span> <span class="s1">&#39;index&#39;</span><span class="p">,</span>
+<span class="lineno">13</span>         <span class="p">),</span>
+<span class="lineno">14</span>       <span class="p">),</span>
+<span class="lineno">15</span>       <span class="s1">&#39;may_terminate&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
+<span class="lineno">16</span>       <span class="s1">&#39;child_routes&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="cm">/* ... */</span><span class="p">),</span>
+<span class="lineno">17</span>     <span class="p">),</span>
+<span class="lineno">18</span>   <span class="p">),</span>
+<span class="lineno">19</span> <span class="p">)),</span>
+<span class="lineno">20</span> <span class="p">)));</span>
+</pre></div>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Modules.md">Zf2Modules.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              18/49
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Modules.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code smaller-code">
+          <div class="inner">
+            
+            <header><h2>Routes: Process form</h2></header>
+            
+            
+            <section><div class="highlight"><pre><span class="lineno"> 1</span> <span class="cp">&lt;?php</span>
+<span class="lineno"> 2</span> <span class="cm">/* this is a child route */</span>
+<span class="lineno"> 3</span> <span class="s1">&#39;process&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+<span class="lineno"> 4</span>   <span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Literal&#39;</span><span class="p">,</span>
+<span class="lineno"> 5</span>   <span class="s1">&#39;options&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+<span class="lineno"> 6</span>     <span class="s1">&#39;route&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;/process&#39;</span><span class="p">,</span>
+<span class="lineno"> 7</span>     <span class="s1">&#39;defaults&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+<span class="lineno"> 8</span>       <span class="s1">&#39;action&#39;</span>     <span class="o">=&gt;</span> <span class="s1">&#39;process&#39;</span><span class="p">,</span>
+<span class="lineno"> 9</span>     <span class="p">),</span>
+<span class="lineno">10</span>   <span class="p">),</span>
+<span class="lineno">11</span> <span class="p">),</span>
+</pre></div>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Modules.md">Zf2Modules.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              19/49
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Modules.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code smaller-code">
+          <div class="inner">
+            
+            <header><h2>Routes: Thank you page</h2></header>
+            
+            
+            <section><div class="highlight"><pre><span class="lineno"> 1</span> <span class="cp">&lt;?php</span>
+<span class="lineno"> 2</span> <span class="cm">/* this is a child route */</span>
+<span class="lineno"> 3</span> <span class="s1">&#39;thank-you&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+<span class="lineno"> 4</span>   <span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Literal&#39;</span><span class="p">,</span>
+<span class="lineno"> 5</span>   <span class="s1">&#39;options&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+<span class="lineno"> 6</span>     <span class="s1">&#39;route&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;/thank-you&#39;</span><span class="p">,</span>
+<span class="lineno"> 7</span>     <span class="s1">&#39;defaults&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+<span class="lineno"> 8</span>       <span class="s1">&#39;action&#39;</span>     <span class="o">=&gt;</span> <span class="s1">&#39;thank-you&#39;</span><span class="p">,</span>
+<span class="lineno"> 9</span>     <span class="p">),</span>
+<span class="lineno">10</span>   <span class="p">),</span>
+<span class="lineno">11</span> <span class="p">),</span>
+</pre></div>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Modules.md">Zf2Modules.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              20/49
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Modules.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Defining the form</h2></header>
+            
+            
+            <section><ul>
+<li>Email</li>
+<li>Subject</li>
+<li>Body</li>
+<li>Captcha</li>
+<li>CSRF-protection</li>
+<li>Submit button</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Modules.md">Zf2Modules.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              21/49
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Modules.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code smaller-code">
+          <div class="inner">
+            
+            <header><h2>Contact Form</h2></header>
+            
+            
+            <section><div class="highlight"><pre><span class="lineno"> 1</span> <span class="cp">&lt;?php</span>
+<span class="lineno"> 2</span> <span class="c1">// module/PhlyContact/src/PhlyContact/ContactForm.php</span>
+<span class="lineno"> 3</span> <span class="k">namespace</span> <span class="nx">PhlyContact</span><span class="p">;</span>
+<span class="lineno"> 4</span> 
+<span class="lineno"> 5</span> <span class="k">use</span> <span class="nx">Zend\Captcha\Adapter</span> <span class="k">as</span> <span class="nx">CaptchaAdapter</span><span class="p">,</span>
+<span class="lineno"> 6</span>     <span class="nx">Zend\Form\Form</span><span class="p">,</span>
+<span class="lineno"> 7</span>     <span class="nx">Zend\Validator\Hostname</span> <span class="k">as</span> <span class="nx">HostnameValidator</span><span class="p">;</span>
+<span class="lineno"> 8</span> 
+<span class="lineno"> 9</span> <span class="k">class</span> <span class="nc">ContactForm</span> <span class="k">extends</span> <span class="nx">Form</span>
+<span class="lineno">10</span> <span class="p">{</span>
+<span class="lineno">11</span>     <span class="k">protected</span> <span class="nv">$captchaAdapter</span><span class="p">;</span>
+<span class="lineno">12</span> 
+<span class="lineno">13</span>     <span class="k">public</span> <span class="k">function</span> <span class="nf">__construct</span><span class="p">(</span><span class="nv">$captchaAdapter</span> <span class="o">=</span> <span class="k">null</span><span class="p">)</span>
+<span class="lineno">14</span>     <span class="p">{</span>
+<span class="lineno">15</span>         <span class="k">if</span> <span class="p">(</span><span class="nv">$options</span> <span class="nx">instanceof</span> <span class="nx">CaptchaAdapter</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno">16</span>             <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">setCaptchaAdapter</span><span class="p">(</span><span class="nv">$captchaAdapter</span><span class="p">);</span>
+<span class="lineno">17</span>             <span class="k">parent</span><span class="o">::</span><span class="na">__construct</span><span class="p">(</span><span class="k">null</span><span class="p">);</span>
+<span class="lineno">18</span>             <span class="k">return</span><span class="p">;</span>
+<span class="lineno">19</span>         <span class="p">};</span>
+<span class="lineno">20</span> 
+<span class="lineno">21</span>         <span class="k">parent</span><span class="o">::</span><span class="na">__construct</span><span class="p">(</span><span class="nv">$captchaAdapterj</span><span class="p">);</span>
+<span class="lineno">22</span>     <span class="p">}</span>
+<span class="lineno">23</span>     <span class="o">/</span><span class="nx">\</span><span class="o">*</span> <span class="o">...</span> <span class="nx">\</span><span class="o">*/</span>
+</pre></div>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Modules.md">Zf2Modules.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              22/49
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Modules.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code smaller-code">
+          <div class="inner">
+            
+            <header><h2>Contact Form</h2></header>
+            
+            
+            <section><div class="highlight"><pre><span class="lineno"> 1</span> <span class="cp">&lt;?php</span>
+<span class="lineno"> 2</span> <span class="k">namespace</span> <span class="nx">PhlyContact</span><span class="p">;</span>
+<span class="lineno"> 3</span> 
+<span class="lineno"> 4</span> <span class="k">use</span> <span class="nx">Zend\Captcha\Adapter</span> <span class="k">as</span> <span class="nx">CaptchaAdapter</span><span class="p">,</span>
+<span class="lineno"> 5</span>     <span class="nx">Zend\Form\Form</span><span class="p">,</span>
+<span class="lineno"> 6</span>     <span class="nx">Zend\Validator\Hostname</span> <span class="k">as</span> <span class="nx">HostnameValidator</span><span class="p">;</span>
+<span class="lineno"> 7</span> 
+<span class="lineno"> 8</span> <span class="k">class</span> <span class="nc">ContactForm</span> <span class="k">extends</span> <span class="nx">Form</span>
+<span class="lineno"> 9</span> <span class="p">{</span>
+<span class="lineno">10</span>     <span class="o">/</span><span class="nx">\</span><span class="o">*</span> <span class="o">...</span> <span class="nx">\</span><span class="o">*/</span>
+<span class="lineno">11</span>     <span class="k">protected</span> <span class="k">function</span> <span class="nf">setCaptchaAdapter</span><span class="p">(</span><span class="nx">CaptchaAdapter</span> <span class="nv">$captcha</span><span class="p">)</span>
+<span class="lineno">12</span>     <span class="p">{</span>
+<span class="lineno">13</span>         <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">captchaAdapter</span> <span class="o">=</span> <span class="nv">$captcha</span><span class="p">;</span>
+<span class="lineno">14</span>     <span class="p">}</span>
+<span class="lineno">15</span>     <span class="o">/</span><span class="nx">\</span><span class="o">*</span> <span class="o">...</span> <span class="nx">\</span><span class="o">*/</span>
+</pre></div>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Modules.md">Zf2Modules.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              23/49
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Modules.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code smaller-code">
+          <div class="inner">
+            
+            <header><h2>Contact Form</h2></header>
+            
+            
+            <section><div class="highlight"><pre><span class="lineno"> 1</span> <span class="cp">&lt;?php</span>
+<span class="lineno"> 2</span> <span class="k">namespace</span> <span class="nx">PhlyContact</span><span class="p">;</span>
+<span class="lineno"> 3</span> 
+<span class="lineno"> 4</span> <span class="k">use</span> <span class="nx">Zend\Captcha\ReCaptcha</span><span class="p">,</span>
+<span class="lineno"> 5</span>     <span class="nx">Zend\Form\Form</span><span class="p">,</span>
+<span class="lineno"> 6</span>     <span class="nx">Zend\Validator\Hostname</span> <span class="k">as</span> <span class="nx">HostnameValidator</span><span class="p">;</span>
+<span class="lineno"> 7</span> 
+<span class="lineno"> 8</span> <span class="k">class</span> <span class="nc">ContactForm</span> <span class="k">extends</span> <span class="nx">Form</span>
+<span class="lineno"> 9</span> <span class="p">{</span>
+<span class="lineno">10</span>     <span class="k">public</span> <span class="k">function</span> <span class="nf">init</span><span class="p">()</span>
+<span class="lineno">11</span>     <span class="p">{</span>
+<span class="lineno">12</span>         <span class="o">/</span><span class="nx">\</span><span class="o">*</span> <span class="nx">setup</span> <span class="nx">all</span> <span class="nx">elements</span> <span class="nx">\</span><span class="o">*/</span>
+<span class="lineno">13</span>         <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">addElement</span><span class="p">(</span><span class="s1">&#39;captcha&#39;</span><span class="p">,</span> <span class="s1">&#39;captcha&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+<span class="lineno">14</span>             <span class="s1">&#39;required&#39;</span>       <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
+<span class="lineno">15</span>             <span class="s1">&#39;captcha&#39;</span>        <span class="o">=&gt;</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">captchaAdapter</span><span class="p">,</span>
+<span class="lineno">16</span>         <span class="p">));</span>
+<span class="lineno">17</span>         <span class="o">/</span><span class="nx">\</span><span class="o">*</span> <span class="nx">finish</span> <span class="nx">setting</span> <span class="nx">up</span> <span class="nx">\</span><span class="o">*/</span>
+<span class="lineno">18</span>     <span class="p">}</span>
+</pre></div>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Modules.md">Zf2Modules.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              24/49
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Modules.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code smaller-code">
+          <div class="inner">
+            
+            <header><h2>Controller: Dependencies</h2></header>
+            
+            
+            <section><div class="highlight"><pre><span class="lineno"> 1</span> <span class="cp">&lt;?php</span>
+<span class="lineno"> 2</span> <span class="k">namespace</span> <span class="nx">PhlyContact\Controller</span><span class="p">;</span>
+<span class="lineno"> 3</span> 
+<span class="lineno"> 4</span> <span class="k">use</span> <span class="nx">PhlyContact\ContactForm</span><span class="p">,</span>
+<span class="lineno"> 5</span>     <span class="nx">Zend\Mail\Transport</span><span class="p">,</span>
+<span class="lineno"> 6</span>     <span class="nx">Zend\Mail\Message</span> <span class="k">as</span> <span class="nx">Message</span><span class="p">,</span>
+<span class="lineno"> 7</span>     <span class="nx">Zend\Mvc\Controller\ActionController</span><span class="p">,</span>
+<span class="lineno"> 8</span>     <span class="nx">Zend\View\Model\ViewModel</span><span class="p">;</span>
+<span class="lineno"> 9</span> 
+<span class="lineno">10</span> <span class="k">class</span> <span class="nc">ContactController</span> <span class="k">extends</span> <span class="nx">ActionController</span>
+<span class="lineno">11</span> <span class="p">{</span>
+<span class="lineno">12</span>     <span class="k">protected</span> <span class="nv">$form</span><span class="p">;</span>
+<span class="lineno">13</span>     <span class="k">protected</span> <span class="nv">$message</span><span class="p">;</span>
+<span class="lineno">14</span>     <span class="k">protected</span> <span class="nv">$transport</span><span class="p">;</span>
+<span class="lineno">15</span> 
+<span class="lineno">16</span>     <span class="k">public</span> <span class="k">function</span> <span class="nf">setMessage</span><span class="p">(</span><span class="nx">Message</span> <span class="nv">$message</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno">17</span>         <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">message</span> <span class="o">=</span> <span class="nv">$message</span><span class="p">;</span>
+<span class="lineno">18</span>     <span class="p">}</span>
+<span class="lineno">19</span> 
+<span class="lineno">20</span>     <span class="k">public</span> <span class="k">function</span> <span class="nf">setMailTransport</span><span class="p">(</span><span class="nx">Transport</span> <span class="nv">$transport</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno">21</span>         <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">transport</span> <span class="o">=</span> <span class="nv">$transport</span><span class="p">;</span>
+<span class="lineno">22</span>     <span class="p">}</span>
+<span class="lineno">23</span> 
+<span class="lineno">24</span>     <span class="k">public</span> <span class="k">function</span> <span class="nf">setContactForm</span><span class="p">(</span><span class="nx">ContactForm</span> <span class="nv">$form</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno">25</span>         <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">form</span> <span class="o">=</span> <span class="nv">$form</span><span class="p">;</span>
+<span class="lineno">26</span>     <span class="p">}</span>
+</pre></div>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Modules.md">Zf2Modules.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              25/49
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Modules.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code">
+          <div class="inner">
+            
+            <header><h2>Controller: Display form</h2></header>
+            
+            
+            <section><div class="highlight"><pre><span class="lineno">1</span> <span class="cp">&lt;?php</span>
+<span class="lineno">2</span> <span class="k">public</span> <span class="k">function</span> <span class="nf">indexAction</span><span class="p">()</span>
+<span class="lineno">3</span> <span class="p">{</span>
+<span class="lineno">4</span>     <span class="k">return</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;form&#39;</span> <span class="o">=&gt;</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">form</span><span class="p">);</span>
+<span class="lineno">5</span> <span class="p">}</span>
+</pre></div>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Modules.md">Zf2Modules.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              26/49
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Modules.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code smaller-code">
+          <div class="inner">
+            
+            <header><h2>Controller: Process form</h2></header>
+            
+            
+            <section><div class="highlight"><pre><span class="lineno"> 1</span> <span class="cp">&lt;?php</span>
+<span class="lineno"> 2</span> <span class="k">public</span> <span class="k">function</span> <span class="nf">processAction</span><span class="p">()</span>
+<span class="lineno"> 3</span> <span class="p">{</span>
+<span class="lineno"> 4</span>     <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">isPost</span><span class="p">())</span> <span class="p">{</span>
+<span class="lineno"> 5</span>         <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">response</span><span class="o">-&gt;</span><span class="na">setStatusCode</span><span class="p">(</span><span class="mi">302</span><span class="p">);</span>
+<span class="lineno"> 6</span>         <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">response</span><span class="o">-&gt;</span><span class="na">headers</span><span class="p">()</span>
+<span class="lineno"> 7</span>              <span class="o">-&gt;</span><span class="na">addHeaderLine</span><span class="p">(</span><span class="s1">&#39;Location&#39;</span><span class="p">,</span> <span class="s1">&#39;/contact&#39;</span><span class="p">);</span>
+<span class="lineno"> 8</span>     <span class="p">}</span>
+<span class="lineno"> 9</span>     <span class="nv">$post</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">post</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">toArray</span><span class="p">();</span>
+<span class="lineno">10</span>     <span class="nv">$form</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">form</span><span class="p">;</span>
+<span class="lineno">11</span>     <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$form</span><span class="o">-&gt;</span><span class="na">isValid</span><span class="p">(</span><span class="nv">$post</span><span class="p">))</span> <span class="p">{</span>
+<span class="lineno">12</span>         <span class="nv">$model</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ViewModel</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+<span class="lineno">13</span>             <span class="s1">&#39;error&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
+<span class="lineno">14</span>             <span class="s1">&#39;form&#39;</span>  <span class="o">=&gt;</span> <span class="nv">$form</span>
+<span class="lineno">15</span>         <span class="p">));</span>
+<span class="lineno">16</span>         <span class="nv">$model</span><span class="o">-&gt;</span><span class="na">setTemplate</span><span class="p">(</span><span class="s1">&#39;contact/index&#39;</span><span class="p">);</span>
+<span class="lineno">17</span>         <span class="k">return</span> <span class="nv">$model</span><span class="p">;</span>
+<span class="lineno">18</span>     <span class="p">}</span>
+<span class="lineno">19</span> 
+<span class="lineno">20</span>     <span class="c1">// send email...</span>
+<span class="lineno">21</span>     <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">sendEmail</span><span class="p">(</span><span class="nv">$form</span><span class="o">-&gt;</span><span class="na">getValues</span><span class="p">());</span>
+<span class="lineno">22</span> 
+<span class="lineno">23</span>     <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">redirect</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">toRoute</span><span class="p">(</span><span class="s1">&#39;contact/thank-you&#39;</span><span class="p">);</span>
+<span class="lineno">24</span> <span class="p">}</span>
+</pre></div>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Modules.md">Zf2Modules.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              27/49
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Modules.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code smaller-code">
+          <div class="inner">
+            
+            <header><h2>Controller: Send email</h2></header>
+            
+            
+            <section><div class="highlight"><pre><span class="lineno"> 1</span> <span class="cp">&lt;?php</span>
+<span class="lineno"> 2</span> <span class="k">protected</span> <span class="k">function</span> <span class="nf">sendEmail</span><span class="p">(</span><span class="k">array</span> <span class="nv">$data</span><span class="p">)</span>
+<span class="lineno"> 3</span> <span class="p">{</span>
+<span class="lineno"> 4</span>     <span class="nv">$from</span>    <span class="o">=</span> <span class="nv">$data</span><span class="p">[</span><span class="s1">&#39;from&#39;</span><span class="p">];</span>
+<span class="lineno"> 5</span>     <span class="nv">$subject</span> <span class="o">=</span> <span class="s1">&#39;[Contact Form] &#39;</span> <span class="o">.</span> <span class="nv">$data</span><span class="p">[</span><span class="s1">&#39;subject&#39;</span><span class="p">];</span>
+<span class="lineno"> 6</span>     <span class="nv">$body</span>    <span class="o">=</span> <span class="nv">$data</span><span class="p">[</span><span class="s1">&#39;body&#39;</span><span class="p">];</span>
+<span class="lineno"> 7</span> 
+<span class="lineno"> 8</span>     <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">message</span><span class="o">-&gt;</span><span class="na">addFrom</span><span class="p">(</span><span class="nv">$from</span><span class="p">)</span>
+<span class="lineno"> 9</span>                   <span class="o">-&gt;</span><span class="na">addReplyTo</span><span class="p">(</span><span class="nv">$from</span><span class="p">)</span>
+<span class="lineno">10</span>                   <span class="o">-&gt;</span><span class="na">setSubject</span><span class="p">(</span><span class="nv">$subject</span><span class="p">)</span>
+<span class="lineno">11</span>                   <span class="o">-&gt;</span><span class="na">setBody</span><span class="p">(</span><span class="nv">$body</span><span class="p">);</span>
+<span class="lineno">12</span>     <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">transport</span><span class="o">-&gt;</span><span class="na">send</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">message</span><span class="p">);</span>
+<span class="lineno">13</span> <span class="p">}</span>
+</pre></div>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Modules.md">Zf2Modules.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              28/49
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Modules.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code smaller-code">
+          <div class="inner">
+            
+            <header><h2>Controller: Thank you page</h2></header>
+            
+            
+            <section><div class="highlight"><pre><span class="lineno"> 1</span> <span class="cp">&lt;?php</span>
+<span class="lineno"> 2</span> <span class="k">public</span> <span class="k">function</span> <span class="nf">thankYouAction</span><span class="p">()</span>
+<span class="lineno"> 3</span> <span class="p">{</span>
+<span class="lineno"> 4</span>     <span class="nv">$headers</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">headers</span><span class="p">();</span>
+<span class="lineno"> 5</span>     <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$headers</span><span class="o">-&gt;</span><span class="na">has</span><span class="p">(</span><span class="s1">&#39;Referer&#39;</span><span class="p">)</span>
+<span class="lineno"> 6</span>         <span class="o">||</span> <span class="o">!</span><span class="nb">preg_match</span><span class="p">(</span><span class="s1">&#39;#/contact$#&#39;</span><span class="p">,</span>
+<span class="lineno"> 7</span>               <span class="nv">$headers</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;Referer&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">getFieldValue</span><span class="p">())</span>
+<span class="lineno"> 8</span>     <span class="p">)</span> <span class="p">{</span>
+<span class="lineno"> 9</span>         <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">response</span><span class="o">-&gt;</span><span class="na">setStatusCode</span><span class="p">(</span><span class="mi">302</span><span class="p">);</span>
+<span class="lineno">10</span>         <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">response</span><span class="o">-&gt;</span><span class="na">headers</span><span class="p">()</span>
+<span class="lineno">11</span>              <span class="o">-&gt;</span><span class="na">addHeaderLine</span><span class="p">(</span><span class="s1">&#39;Location&#39;</span><span class="p">,</span> <span class="s1">&#39;/contact&#39;</span><span class="p">);</span>
+<span class="lineno">12</span>         <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">response</span><span class="p">;</span>
+<span class="lineno">13</span>     <span class="p">}</span>
+<span class="lineno">14</span> 
+<span class="lineno">15</span>     <span class="c1">// do nothing...</span>
+<span class="lineno">16</span>     <span class="k">return</span> <span class="k">array</span><span class="p">();</span>
+<span class="lineno">17</span> <span class="p">}</span>
+</pre></div>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Modules.md">Zf2Modules.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              29/49
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Modules.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code smaller-code">
+          <div class="inner">
+            
+            <header><h2>Add view scripts: Form</h2></header>
+            
+            
+            <section><div class="highlight"><pre><span class="lineno"> 1</span> <span class="cp">&lt;?php</span>
+<span class="lineno"> 2</span> <span class="c1">// module/PhlyContact/view/contact/index.phtml</span>
+<span class="lineno"> 3</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">headTitle</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">prepend</span><span class="p">(</span><span class="s1">&#39;Contact&#39;</span><span class="p">);</span> <span class="cp">?&gt;</span><span class="x"></span>
+<span class="lineno"> 4</span> <span class="x">&lt;section class=&quot;contact&quot;&gt;</span>
+<span class="lineno"> 5</span> <span class="x">&lt;h2&gt;Contact Me&lt;/h2&gt;</span>
+<span class="lineno"> 6</span> 
+<span class="lineno"> 7</span> <span class="cp">&lt;?php</span> <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">error</span><span class="p">)</span><span class="o">:</span> <span class="cp">?&gt;</span><span class="x"></span>
+<span class="lineno"> 8</span> <span class="x">&lt;p class=&quot;error&quot;&gt;</span>
+<span class="lineno"> 9</span> <span class="x">    There were one or more isues with your submission. Please correct them</span>
+<span class="lineno">10</span> <span class="x">    as indicated below.</span>
+<span class="lineno">11</span> <span class="x">&lt;/p&gt;</span>
+<span class="lineno">12</span> <span class="cp">&lt;?php</span> <span class="k">endif</span> <span class="cp">?&gt;</span><span class="x"></span>
+<span class="lineno">13</span> 
+<span class="lineno">14</span> <span class="cp">&lt;?php</span> 
+<span class="lineno">15</span> <span class="nv">$form</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">form</span><span class="p">;</span>
+<span class="lineno">16</span> <span class="nv">$form</span><span class="o">-&gt;</span><span class="na">setAction</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">url</span><span class="p">(</span><span class="s1">&#39;contact/process&#39;</span><span class="p">));</span>
+<span class="lineno">17</span> <span class="nv">$form</span><span class="o">-&gt;</span><span class="na">setMethod</span><span class="p">(</span><span class="s1">&#39;post&#39;</span><span class="p">);</span>
+<span class="lineno">18</span> <span class="k">echo</span> <span class="nv">$form</span><span class="o">-&gt;</span><span class="na">render</span><span class="p">(</span><span class="nv">$this</span><span class="p">);</span>
+</pre></div>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Modules.md">Zf2Modules.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              30/49
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Modules.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code smaller-code">
+          <div class="inner">
+            
+            <header><h2>Add view scripts: Thank You</h2></header>
+            
+            
+            <section><div class="highlight"><pre><span class="lineno"> 1</span> <span class="cp">&lt;?php</span>
+<span class="lineno"> 2</span> <span class="c1">// module/PhlyContact/view/contact/thank-you.phtml</span>
+<span class="lineno"> 3</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">headTitle</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">prepend</span><span class="p">(</span><span class="s1">&#39;Contact&#39;</span><span class="p">);</span>
+<span class="lineno"> 4</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">headTitle</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">prepend</span><span class="p">(</span><span class="s1">&#39;Thank You!&#39;</span><span class="p">);</span>
+<span class="lineno"> 5</span> <span class="cp">?&gt;</span><span class="x"></span>
+<span class="lineno"> 6</span> <span class="x">&lt;section class=&quot;contact&quot;&gt;</span>
+<span class="lineno"> 7</span> <span class="x">&lt;h2&gt;Thank you!&lt;/h2&gt;</span>
+<span class="lineno"> 8</span> 
+<span class="lineno"> 9</span> <span class="x">&lt;p&gt;</span>
+<span class="lineno">10</span> <span class="x">    Your message has been sent!</span>
+<span class="lineno">11</span> <span class="x">&lt;/p&gt;</span>
+<span class="lineno">12</span> <span class="x">&lt;/section&gt;</span>
+</pre></div>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Modules.md">Zf2Modules.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              31/49
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Modules.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code smaller-code">
+          <div class="inner">
+            
+            <header><h2>DI Definitions: Controller/Form</h2></header>
+            
+            
+            <section><div class="highlight"><pre><span class="lineno"> 1</span> <span class="cp">&lt;?php</span>
+<span class="lineno"> 2</span> <span class="cm">/* inside module/PhlyContact/config/module.config.php */</span>
+<span class="lineno"> 3</span> <span class="s1">&#39;di&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+<span class="lineno"> 4</span>   <span class="s1">&#39;definition&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;class&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+<span class="lineno"> 5</span>     <span class="s1">&#39;PhlyContact\ContactForm&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+<span class="lineno"> 6</span>       <span class="s1">&#39;__construct&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+<span class="lineno"> 7</span>         <span class="s1">&#39;required&#39;</span>  <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
+<span class="lineno"> 8</span>         <span class="s1">&#39;captchaAdapter&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+<span class="lineno"> 9</span>           <span class="s1">&#39;required&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
+<span class="lineno">10</span>           <span class="s1">&#39;type&#39;</span>     <span class="o">=&gt;</span> <span class="s1">&#39;Zend\Captcha\Adapter&#39;</span><span class="p">,</span>
+<span class="lineno">11</span>         <span class="p">),</span>
+<span class="lineno">12</span>       <span class="p">),</span>
+<span class="lineno">13</span>     <span class="p">),</span>
+<span class="lineno">14</span>   <span class="p">)),</span>
+<span class="lineno">15</span> <span class="p">),</span>
+</pre></div>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Modules.md">Zf2Modules.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              32/49
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Modules.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code smaller-code">
+          <div class="inner">
+            
+            <header><h2>DI Definitions: Message</h2></header>
+            
+            
+            <section><div class="highlight"><pre><span class="lineno"> 1</span> <span class="cp">&lt;?php</span>
+<span class="lineno"> 2</span> <span class="cm">/* inside module/PhlyContact/config/module.config.php,</span>
+<span class="lineno"> 3</span> <span class="cm">   in the di -&gt; definition array */</span>
+<span class="lineno"> 4</span> <span class="s1">&#39;Zend\Mail\Message&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+<span class="lineno"> 5</span>   <span class="s1">&#39;addTo&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+<span class="lineno"> 6</span>     <span class="s1">&#39;emailOrAddressList&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+<span class="lineno"> 7</span>       <span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">,</span> <span class="s1">&#39;required&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">),</span>
+<span class="lineno"> 8</span>     <span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">,</span> <span class="s1">&#39;required&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">),</span>
+<span class="lineno"> 9</span>   <span class="p">),</span>
+<span class="lineno">10</span>   <span class="s1">&#39;addFrom&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+<span class="lineno">11</span>     <span class="s1">&#39;emailOrAddressList&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+<span class="lineno">12</span>       <span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">,</span> <span class="s1">&#39;required&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">),</span>
+<span class="lineno">13</span>     <span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">,</span> <span class="s1">&#39;required&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">),</span>
+<span class="lineno">14</span>   <span class="p">),</span>
+<span class="lineno">15</span>   <span class="s1">&#39;setSender&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+<span class="lineno">16</span>     <span class="s1">&#39;emailOrAddressList&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+<span class="lineno">17</span>       <span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">,</span> <span class="s1">&#39;required&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">),</span>
+<span class="lineno">18</span>     <span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">,</span> <span class="s1">&#39;required&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">),</span>
+<span class="lineno">19</span>   <span class="p">),</span>
+<span class="lineno">20</span> <span class="p">),</span>
+</pre></div>
+
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <p>Why? so we can specify the sender and recipient for messages!</p>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Modules.md">Zf2Modules.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              33/49
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Modules.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code smaller-code">
+          <div class="inner">
+            
+            <header><h2>DI Preferences and aliases</h2></header>
+            
+            
+            <section><div class="highlight"><pre><span class="lineno">1</span> <span class="cp">&lt;?php</span>
+<span class="lineno">2</span> <span class="cm">/* inside module/PhlyContact/config/module.config.php,</span>
+<span class="lineno">3</span> <span class="cm">   in the &quot;di&quot; array */</span>
+<span class="lineno">4</span>   <span class="s1">&#39;preferences&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+<span class="lineno">5</span>     <span class="s1">&#39;Zend\Mail\Transport&#39;</span>  <span class="o">=&gt;</span> <span class="s1">&#39;Zend\Mail\Transport\Smtp&#39;</span><span class="p">,</span>
+<span class="lineno">6</span>   <span class="p">),</span>
+<span class="lineno">7</span> <span class="p">);</span>
+</pre></div>
+
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>We're telling DI that when a Transport is requested, use an SMTP transport</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Modules.md">Zf2Modules.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              34/49
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Modules.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code smaller-code">
+          <div class="inner">
+            
+            <header><h2>DI Configuration: Controller/Form</h2></header>
+            
+            
+            <section><div class="highlight"><pre><span class="lineno"> 1</span> <span class="cp">&lt;?php</span>
+<span class="lineno"> 2</span> <span class="cm">/* inside module/PhlyContact/config/module.config.php,</span>
+<span class="lineno"> 3</span> <span class="cm">   in the &quot;di -&gt; instance&quot; array */</span>
+<span class="lineno"> 4</span> <span class="s1">&#39;PhlyContact\ContactForm&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;parameters&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+<span class="lineno"> 5</span>     <span class="s1">&#39;captchaAdapter&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Zend\Captcha\Dumb&#39;</span><span class="p">,</span>
+<span class="lineno"> 6</span> <span class="p">)),</span>
+<span class="lineno"> 7</span> <span class="s1">&#39;PhlyContact\Controller\ContactController&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+<span class="lineno"> 8</span>   <span class="s1">&#39;parameters&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+<span class="lineno"> 9</span>     <span class="s1">&#39;form&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;PhlyContact\ContactForm&#39;</span><span class="p">,</span>
+<span class="lineno">10</span>   <span class="p">)</span>
+<span class="lineno">11</span> <span class="p">),</span>
+</pre></div>
+
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>If the controller is pulled, so are its dependencies.</li>
+<li>We tell it the preferred Transport</li>
+<li>and how to configure it</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Modules.md">Zf2Modules.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              35/49
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Modules.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code smaller-code">
+          <div class="inner">
+            
+            <header><h2>DI Configuration: View scripts</h2></header>
+            
+            
+            <section><div class="highlight"><pre><span class="lineno"> 1</span> <span class="cp">&lt;?php</span>
+<span class="lineno"> 2</span> <span class="k">return</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;di&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+<span class="lineno"> 3</span> <span class="cm">/* inside module/PhlyContact/config/module.config.php,</span>
+<span class="lineno"> 4</span> <span class="cm">   in the &quot;di -&gt; instance&quot; array */</span>
+<span class="lineno"> 5</span> <span class="s1">&#39;Zend\View\Resolver\TemplateMapResolver&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;parameters&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+<span class="lineno"> 6</span>     <span class="s1">&#39;map&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+<span class="lineno"> 7</span>       <span class="s1">&#39;contact/index&#39;</span>     <span class="o">=&gt;</span> <span class="nx">__DIR__</span> <span class="o">.</span> <span class="s1">&#39;/../view/contact/index.phtml&#39;</span><span class="p">,</span>
+<span class="lineno"> 8</span>       <span class="s1">&#39;contact/thank-you&#39;</span> <span class="o">=&gt;</span> <span class="nx">__DIR__</span> <span class="o">.</span> <span class="s1">&#39;/../view/contact/thank-you.phtml&#39;</span><span class="p">,</span>
+<span class="lineno"> 9</span>     <span class="p">),</span>
+<span class="lineno">10</span> <span class="p">)),</span>
+<span class="lineno">11</span> <span class="s1">&#39;Zend\View\Resolver\TemplatePathStack&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;parameters&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+<span class="lineno">12</span>     <span class="s1">&#39;paths&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;contact&#39;</span> <span class="o">=&gt;</span> <span class="nx">__DIR__</span> <span class="o">.</span> <span class="s1">&#39;/../view&#39;</span><span class="p">),</span>
+<span class="lineno">13</span> <span class="p">)),</span>
+</pre></div>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Modules.md">Zf2Modules.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              36/49
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Modules.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code">
+          <div class="inner">
+            
+            <header><h2>Create an autoloader map</h2></header>
+            
+            
+            <section><div class="highlight"><pre><span class="lineno">1</span> <span class="nb">cd </span>module/PhlyContact
+<span class="lineno">2</span> php ../../vendor/ZendFramework/bin/classmap_generator.php <span class="se">\</span>
+<span class="lineno">3</span> -l ./src <span class="se">\</span>
+<span class="lineno">4</span> -o ./autoload_classmap.php
+</pre></div>
+
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <p>Creates "autoload_classmap.php" file in module root</p>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Modules.md">Zf2Modules.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              37/49
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Modules.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code smaller-code">
+          <div class="inner">
+            
+            <header><h2>Module class: autoloading</h2></header>
+            
+            
+            <section><div class="highlight"><pre><span class="lineno"> 1</span> <span class="cp">&lt;?php</span>
+<span class="lineno"> 2</span> <span class="c1">// module/PhlyContact/Module.php</span>
+<span class="lineno"> 3</span> <span class="k">namespace</span> <span class="nx">PhlyContact</span><span class="p">;</span>
+<span class="lineno"> 4</span> 
+<span class="lineno"> 5</span> <span class="k">use</span> <span class="nx">Zend\Module\Consumer\AutoloaderProvider</span><span class="p">;</span>
+<span class="lineno"> 6</span> 
+<span class="lineno"> 7</span> <span class="k">class</span> <span class="nc">Module</span> <span class="k">implements</span> <span class="nx">AutoloaderProvider</span>
+<span class="lineno"> 8</span> <span class="p">{</span>
+<span class="lineno"> 9</span>   <span class="k">public</span> <span class="k">function</span> <span class="nf">getAutoloaderConfig</span><span class="p">()</span>
+<span class="lineno">10</span>   <span class="p">{</span>
+<span class="lineno">11</span>     <span class="k">return</span> <span class="k">array</span><span class="p">(</span>
+<span class="lineno">12</span>       <span class="s1">&#39;Zend\Loader\ClassMapAutoloader&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+<span class="lineno">13</span>         <span class="nx">__DIR__</span> <span class="o">.</span> <span class="s1">&#39;/autoload_classmap.php&#39;</span>
+<span class="lineno">14</span>       <span class="p">),</span>
+<span class="lineno">15</span>       <span class="s1">&#39;Zend\Loader\StandardAutoloader&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+<span class="lineno">16</span>         <span class="s1">&#39;namespaces&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+<span class="lineno">17</span>           <span class="s1">&#39;PhlyContact&#39;</span> <span class="o">=&gt;</span> <span class="nx">__DIR__</span> <span class="o">.</span> <span class="s1">&#39;/src/PhlyContact&#39;</span><span class="p">,</span>
+<span class="lineno">18</span>         <span class="p">),</span>
+<span class="lineno">19</span>       <span class="p">),</span>
+<span class="lineno">20</span>     <span class="p">);</span>
+<span class="lineno">21</span>   <span class="p">}</span>
+<span class="lineno">22</span>   <span class="cm">/* ... */</span>
+</pre></div>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Modules.md">Zf2Modules.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              38/49
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Modules.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code smaller-code">
+          <div class="inner">
+            
+            <header><h2>Module class: configuration</h2></header>
+            
+            
+            <section><div class="highlight"><pre><span class="lineno"> 1</span> <span class="cp">&lt;?php</span>
+<span class="lineno"> 2</span> <span class="k">namespace</span> <span class="nx">PhlyContact</span><span class="p">;</span>
+<span class="lineno"> 3</span> 
+<span class="lineno"> 4</span> <span class="k">use</span> <span class="nx">Zend\Module\Consumer\AutoloaderProvider</span><span class="p">;</span>
+<span class="lineno"> 5</span> 
+<span class="lineno"> 6</span> <span class="k">class</span> <span class="nc">Module</span> <span class="k">implements</span> <span class="nx">AutoloaderProvider</span>
+<span class="lineno"> 7</span> <span class="p">{</span>
+<span class="lineno"> 8</span>   <span class="cm">/* ... */</span>
+<span class="lineno"> 9</span> 
+<span class="lineno">10</span>   <span class="k">public</span> <span class="k">function</span> <span class="nf">getConfig</span><span class="p">()</span>
+<span class="lineno">11</span>   <span class="p">{</span>
+<span class="lineno">12</span>     <span class="k">return</span> <span class="k">include</span> <span class="nx">__DIR__</span> <span class="o">.</span> <span class="s1">&#39;/config/module.config.php&#39;</span><span class="p">;</span>
+<span class="lineno">13</span>   <span class="p">}</span>
+<span class="lineno">14</span> <span class="p">}</span>
+</pre></div>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Modules.md">Zf2Modules.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              39/49
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Modules.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code smaller-code">
+          <div class="inner">
+            
+            <header><h2>Add application configuration</h2></header>
+            
+            
+            <section><div class="highlight"><pre><span class="lineno"> 1</span> <span class="cp">&lt;?php</span>
+<span class="lineno"> 2</span> <span class="c1">// config/autoload/module.phly-contact.config.php</span>
+<span class="lineno"> 3</span> <span class="k">return</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;di&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+<span class="lineno"> 4</span>   <span class="s1">&#39;preferences&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+<span class="lineno"> 5</span>     <span class="s1">&#39;Zend\Mail\Transport&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Zend\Mail\Transport\File&#39;</span><span class="p">,</span>
+<span class="lineno"> 6</span>   <span class="p">)</span>
+<span class="lineno"> 7</span>   <span class="s1">&#39;instance&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+<span class="lineno"> 8</span>     <span class="s1">&#39;contact&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;parameters&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+<span class="lineno"> 9</span>       <span class="s1">&#39;transport&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Zend\Mail\Transport\File&#39;</span><span class="p">,</span>
+<span class="lineno">10</span>     <span class="p">))</span>
+<span class="lineno">11</span>     <span class="s1">&#39;PhlyContact\ContactForm&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;parameters&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+<span class="lineno">12</span>       <span class="s1">&#39;captchaAdapter&#39;</span>  <span class="o">=&gt;</span> <span class="s1">&#39;Zend\Captcha\Dumb&#39;</span><span class="p">,</span>
+<span class="lineno">13</span>     <span class="p">),</span>
+<span class="lineno">14</span>     <span class="s1">&#39;Zend\Mail\Transport\FileOptions&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;parameters&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+<span class="lineno">15</span>       <span class="s1">&#39;path&#39;</span> <span class="o">=&gt;</span> <span class="nx">sys_get_temp_dir</span><span class="p">(),</span>
+<span class="lineno">16</span>     <span class="p">)),</span>
+<span class="lineno">17</span>     <span class="s1">&#39;Zend\Mail\Message&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;parameters&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+<span class="lineno">18</span>       <span class="s1">&#39;Zend\Mail\Message::addTo:emailOrAddressList&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;me@mwop.net&#39;</span><span class="p">,</span>
+<span class="lineno">19</span>       <span class="s1">&#39;Zend\Mail\Message::setSender:emailOrAddressList&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;me@mwop.net&#39;</span><span class="p">,</span>
+<span class="lineno">20</span>     <span class="p">)),</span>
+<span class="lineno">21</span>   <span class="p">)),</span>
+<span class="lineno">22</span> <span class="p">);</span>
+</pre></div>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Modules.md">Zf2Modules.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              40/49
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Modules.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code">
+          <div class="inner">
+            
+            <header><h2>Add the module to the app</h2></header>
+            
+            
+            <section><div class="highlight"><pre><span class="lineno">1</span> <span class="cp">&lt;?php</span>
+<span class="lineno">2</span> <span class="c1">// config/application.config.php</span>
+<span class="lineno">3</span> <span class="cm">/* ... */</span>
+<span class="lineno">4</span> <span class="s1">&#39;modules&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+<span class="lineno">5</span>     <span class="s1">&#39;Application&#39;</span><span class="p">,</span>
+<span class="lineno">6</span>     <span class="s1">&#39;PhlyContact&#39;</span><span class="p">,</span> <span class="c1">// &lt;- add this</span>
+<span class="lineno">7</span> <span class="p">),</span>
+<span class="lineno">8</span> <span class="s1">&#39;module_listener_options&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span> <span class="cm">/* ... */</span><span class="p">)</span>
+<span class="lineno">9</span> <span class="cm">/* ... */</span>
+</pre></div>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Modules.md">Zf2Modules.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              41/49
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Modules.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Visit the page</h2></header>
+            
+            
+            <section><p>http://phly-contact.dev/contact</p>
+<p><img alt="Contact Form" src="images/PhlyContact.png" title="Contact Form" /></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Modules.md">Zf2Modules.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              42/49
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Modules.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code smaller-code">
+          <div class="inner">
+            
+            <header><h2>Why is it reusable?</h2></header>
+            
+            
+            <section><p>We can change the base root.</p>
+<div class="highlight"><pre><span class="lineno">1</span> <span class="cp">&lt;?php</span>
+<span class="lineno">2</span> <span class="c1">// config/autoload/module.phly-contact.config.php</span>
+<span class="lineno">3</span> <span class="s1">&#39;Zend\Mvc\Router\RouteStack&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;parameters&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+<span class="lineno">4</span>   <span class="s1">&#39;routes&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+<span class="lineno">5</span>     <span class="s1">&#39;contact&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+<span class="lineno">6</span>       <span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Literal&#39;</span><span class="p">,</span>
+<span class="lineno">7</span>       <span class="s1">&#39;options&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+<span class="lineno">8</span>         <span class="s1">&#39;route&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;/contact-us&#39;</span><span class="p">,</span>
+</pre></div>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Modules.md">Zf2Modules.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              43/49
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Modules.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code smaller-code">
+          <div class="inner">
+            
+            <header><h2>Why is it reusable?</h2></header>
+            
+            
+            <section><p>We can change the mail transport and message defaults.</p>
+<div class="highlight"><pre><span class="lineno"> 1</span> <span class="cp">&lt;?php</span>
+<span class="lineno"> 2</span> <span class="c1">// config/autoload/module.phly-contact.config.php</span>
+<span class="lineno"> 3</span> <span class="s1">&#39;preferences&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+<span class="lineno"> 4</span>   <span class="s1">&#39;Zend\Mail\Transport&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Zend\Mail\Transport\Smtp&#39;</span><span class="p">,</span>
+<span class="lineno"> 5</span> <span class="p">)</span>
+<span class="lineno"> 6</span> <span class="s1">&#39;instance&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+<span class="lineno"> 7</span>   <span class="s1">&#39;Zend\Mail\Message&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;parameters&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+<span class="lineno"> 8</span>     <span class="s1">&#39;Zend\Mail\Message::addTo:emailOrAddressList&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;you@your.tld&#39;</span><span class="p">,</span>
+<span class="lineno"> 9</span>     <span class="s1">&#39;Zend\Mail\Message::setSender:emailOrAddressList&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;you@your.tld&#39;</span><span class="p">,</span>
+<span class="lineno">10</span>   <span class="p">)),</span>
+<span class="lineno">11</span> <span class="p">)),</span>
+</pre></div>
+
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <p>We would need to specify options for the transport, obviously.</p>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Modules.md">Zf2Modules.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              44/49
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Modules.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code smaller-code">
+          <div class="inner">
+            
+            <header><h2>Why is it reusable?</h2></header>
+            
+            
+            <section><p>We can change which CAPTCHA type we want to use.</p>
+<div class="highlight"><pre><span class="lineno">1</span> <span class="cp">&lt;?php</span>
+<span class="lineno">2</span> <span class="c1">// config/autoload/module.phly-contact.config.php</span>
+<span class="lineno">3</span> <span class="s1">&#39;PhlyContact\ContactForm&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;parameters&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+<span class="lineno">4</span>     <span class="s1">&#39;captchaAdapter&#39;</span>  <span class="o">=&gt;</span> <span class="s1">&#39;Zend\Captcha\ReCaptcha&#39;</span><span class="p">,</span>
+<span class="lineno">5</span> <span class="p">),</span>
+</pre></div>
+
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <p>We would need to specify options for the adapter, obviously.</p>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Modules.md">Zf2Modules.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              45/49
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Modules.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Review</h2></header>
+            
+            
+            <section><ul>
+<li>We created routes</li>
+<li>We created a form (kind of!)</li>
+<li>We created a controller, with end points for landing, processing, and
+  displaying a thank you page</li>
+<li>We created the necessary views</li>
+<li>We setup DI configuration for our form</li>
+<li>We setup DI configuration for the mail transport and message</li>
+<li>We created an autoloader classmap</li>
+<li>We created a Module class for our module</li>
+<li>We added the module to the application</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Modules.md">Zf2Modules.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              46/49
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Modules.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Wrapping Up</h1></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Modules.md">Zf2Modules.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              47/49
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Modules.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Resources</h2></header>
+            
+            
+            <section><ul>
+<li>The code we saw today:<ul>
+<li>http://github.com/weierophinney/phly_contact</li>
+</ul>
+</li>
+<li>This presentation:<ul>
+<li>http://mwop.net/slides/2011-03-14-Zf2Modules/Zf2Modules.html</li>
+</ul>
+</li>
+<li>The ZF2 subsite<ul>
+<li>http://framework.zend.com/zf2</li>
+</ul>
+</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Modules.md">Zf2Modules.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              48/49
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Modules.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Thank You!</h1></header>
+            
+            
+            <section><ul>
+<li>Feedback?<ul>
+<li>http://framework.zend.com/</li>
+<li>http://twitter.com/weierophinney</li>
+</ul>
+</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Modules.md">Zf2Modules.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              49/49
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div id="toc" class="sidebar hidden">
+    <h2>Table of Contents</h2>
+    <table>
+      <caption>Table of Contents</caption>
+      
+      <tr id="toc-row-1">
+        <th><a href="#slide1">Writing Reusable ZF2 Modules</a></th>
+        <td><a href="#slide1">1</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-2">
+        <th><a href="#slide2">What is a module?</a></th>
+        <td><a href="#slide2">2</a></td>
+      </tr>
+      
+        
+        <tr id="toc-row-3" class="sub">
+          <th><a href="#slide3">Modules in ZF2</a></th>
+          <td><a href="#slide3">3</a></td>
+        </tr>
+        
+        <tr id="toc-row-4" class="sub">
+          <th><a href="#slide4">Modules can contain...</a></th>
+          <td><a href="#slide4">4</a></td>
+        </tr>
+        
+        <tr id="toc-row-5" class="sub">
+          <th><a href="#slide5">At the most basic...</a></th>
+          <td><a href="#slide5">5</a></td>
+        </tr>
+        
+        <tr id="toc-row-6" class="sub">
+          <th><a href="#slide6">The module class...</a></th>
+          <td><a href="#slide6">6</a></td>
+        </tr>
+        
+        <tr id="toc-row-7" class="sub">
+          <th><a href="#slide7">Recommended module structure</a></th>
+          <td><a href="#slide7">7</a></td>
+        </tr>
+        
+        <tr id="toc-row-8" class="sub">
+          <th><a href="#slide8">Modules typically provide...</a></th>
+          <td><a href="#slide8">8</a></td>
+        </tr>
+        
+        <tr id="toc-row-9" class="sub">
+          <th><a href="#slide9">Providing autoloading hints</a></th>
+          <td><a href="#slide9">9</a></td>
+        </tr>
+        
+        <tr id="toc-row-10" class="sub">
+          <th><a href="#slide10">Providing configuration</a></th>
+          <td><a href="#slide10">10</a></td>
+        </tr>
+        
+        <tr id="toc-row-11" class="sub">
+          <th><a href="#slide11">Typical module configuration</a></th>
+          <td><a href="#slide11">11</a></td>
+        </tr>
+        
+        <tr id="toc-row-12" class="sub">
+          <th><a href="#slide12">Event registration (post-init tasks)</a></th>
+          <td><a href="#slide12">12</a></td>
+        </tr>
+        
+        <tr id="toc-row-13" class="sub">
+          <th><a href="#slide13">Module-specific Event Listeners</a></th>
+          <td><a href="#slide13">13</a></td>
+        </tr>
+        
+        <tr id="toc-row-14" class="sub">
+          <th><a href="#slide14">Registering Modules with the Application</a></th>
+          <td><a href="#slide14">14</a></td>
+        </tr>
+        
+      
+      
+      <tr id="toc-row-15">
+        <th><a href="#slide15">Getting Your Hands Dirty: Contact!</a></th>
+        <td><a href="#slide15">15</a></td>
+      </tr>
+      
+        
+        <tr id="toc-row-16" class="sub">
+          <th><a href="#slide16">The goal:</a></th>
+          <td><a href="#slide16">16</a></td>
+        </tr>
+        
+        <tr id="toc-row-17" class="sub">
+          <th><a href="#slide17">To begin:</a></th>
+          <td><a href="#slide17">17</a></td>
+        </tr>
+        
+        <tr id="toc-row-18" class="sub">
+          <th><a href="#slide18">Routes: Base route</a></th>
+          <td><a href="#slide18">18</a></td>
+        </tr>
+        
+        <tr id="toc-row-19" class="sub">
+          <th><a href="#slide19">Routes: Process form</a></th>
+          <td><a href="#slide19">19</a></td>
+        </tr>
+        
+        <tr id="toc-row-20" class="sub">
+          <th><a href="#slide20">Routes: Thank you page</a></th>
+          <td><a href="#slide20">20</a></td>
+        </tr>
+        
+        <tr id="toc-row-21" class="sub">
+          <th><a href="#slide21">Defining the form</a></th>
+          <td><a href="#slide21">21</a></td>
+        </tr>
+        
+        <tr id="toc-row-22" class="sub">
+          <th><a href="#slide22">Contact Form</a></th>
+          <td><a href="#slide22">22</a></td>
+        </tr>
+        
+        <tr id="toc-row-23" class="sub">
+          <th><a href="#slide23">Contact Form</a></th>
+          <td><a href="#slide23">23</a></td>
+        </tr>
+        
+        <tr id="toc-row-24" class="sub">
+          <th><a href="#slide24">Contact Form</a></th>
+          <td><a href="#slide24">24</a></td>
+        </tr>
+        
+        <tr id="toc-row-25" class="sub">
+          <th><a href="#slide25">Controller: Dependencies</a></th>
+          <td><a href="#slide25">25</a></td>
+        </tr>
+        
+        <tr id="toc-row-26" class="sub">
+          <th><a href="#slide26">Controller: Display form</a></th>
+          <td><a href="#slide26">26</a></td>
+        </tr>
+        
+        <tr id="toc-row-27" class="sub">
+          <th><a href="#slide27">Controller: Process form</a></th>
+          <td><a href="#slide27">27</a></td>
+        </tr>
+        
+        <tr id="toc-row-28" class="sub">
+          <th><a href="#slide28">Controller: Send email</a></th>
+          <td><a href="#slide28">28</a></td>
+        </tr>
+        
+        <tr id="toc-row-29" class="sub">
+          <th><a href="#slide29">Controller: Thank you page</a></th>
+          <td><a href="#slide29">29</a></td>
+        </tr>
+        
+        <tr id="toc-row-30" class="sub">
+          <th><a href="#slide30">Add view scripts: Form</a></th>
+          <td><a href="#slide30">30</a></td>
+        </tr>
+        
+        <tr id="toc-row-31" class="sub">
+          <th><a href="#slide31">Add view scripts: Thank You</a></th>
+          <td><a href="#slide31">31</a></td>
+        </tr>
+        
+        <tr id="toc-row-32" class="sub">
+          <th><a href="#slide32">DI Definitions: Controller/Form</a></th>
+          <td><a href="#slide32">32</a></td>
+        </tr>
+        
+        <tr id="toc-row-33" class="sub">
+          <th><a href="#slide33">DI Definitions: Message</a></th>
+          <td><a href="#slide33">33</a></td>
+        </tr>
+        
+        <tr id="toc-row-34" class="sub">
+          <th><a href="#slide34">DI Preferences and aliases</a></th>
+          <td><a href="#slide34">34</a></td>
+        </tr>
+        
+        <tr id="toc-row-35" class="sub">
+          <th><a href="#slide35">DI Configuration: Controller/Form</a></th>
+          <td><a href="#slide35">35</a></td>
+        </tr>
+        
+        <tr id="toc-row-36" class="sub">
+          <th><a href="#slide36">DI Configuration: View scripts</a></th>
+          <td><a href="#slide36">36</a></td>
+        </tr>
+        
+        <tr id="toc-row-37" class="sub">
+          <th><a href="#slide37">Create an autoloader map</a></th>
+          <td><a href="#slide37">37</a></td>
+        </tr>
+        
+        <tr id="toc-row-38" class="sub">
+          <th><a href="#slide38">Module class: autoloading</a></th>
+          <td><a href="#slide38">38</a></td>
+        </tr>
+        
+        <tr id="toc-row-39" class="sub">
+          <th><a href="#slide39">Module class: configuration</a></th>
+          <td><a href="#slide39">39</a></td>
+        </tr>
+        
+        <tr id="toc-row-40" class="sub">
+          <th><a href="#slide40">Add application configuration</a></th>
+          <td><a href="#slide40">40</a></td>
+        </tr>
+        
+        <tr id="toc-row-41" class="sub">
+          <th><a href="#slide41">Add the module to the app</a></th>
+          <td><a href="#slide41">41</a></td>
+        </tr>
+        
+        <tr id="toc-row-42" class="sub">
+          <th><a href="#slide42">Visit the page</a></th>
+          <td><a href="#slide42">42</a></td>
+        </tr>
+        
+        <tr id="toc-row-43" class="sub">
+          <th><a href="#slide43">Why is it reusable?</a></th>
+          <td><a href="#slide43">43</a></td>
+        </tr>
+        
+        <tr id="toc-row-44" class="sub">
+          <th><a href="#slide44">Why is it reusable?</a></th>
+          <td><a href="#slide44">44</a></td>
+        </tr>
+        
+        <tr id="toc-row-45" class="sub">
+          <th><a href="#slide45">Why is it reusable?</a></th>
+          <td><a href="#slide45">45</a></td>
+        </tr>
+        
+        <tr id="toc-row-46" class="sub">
+          <th><a href="#slide46">Review</a></th>
+          <td><a href="#slide46">46</a></td>
+        </tr>
+        
+      
+      
+      <tr id="toc-row-47">
+        <th><a href="#slide47">Wrapping Up</a></th>
+        <td><a href="#slide47">47</a></td>
+      </tr>
+      
+        
+        <tr id="toc-row-48" class="sub">
+          <th><a href="#slide48">Resources</a></th>
+          <td><a href="#slide48">48</a></td>
+        </tr>
+        
+      
+      
+      <tr id="toc-row-49">
+        <th><a href="#slide49">Thank You!</a></th>
+        <td><a href="#slide49">49</a></td>
+      </tr>
+      
+      
+    </table>
+  </div>
+  
+  <div id="help" class="sidebar hidden">
+    <h2>Help</h2>
+    <table>
+      <caption>Help</caption>
+      <tr>
+        <th>Table of Contents</th>
+        <td>t</td>
+      </tr>
+      <tr>
+        <th>Exposé</th>
+        <td>ESC</td>
+      </tr>
+      <tr>
+        <th>Full screen slides</th>
+        <td>e</td>
+      </tr>
+      <tr>
+        <th>Presenter View</th>
+        <td>p</td>
+      </tr>
+      <tr>
+        <th>Source Files</th>
+        <td>s</td>
+      </tr>
+      <tr>
+        <th>Slide Numbers</th>
+        <td>n</td>
+      </tr>
+      <tr>
+        <th>Toggle screen blanking</th>
+        <td>b</td>
+      </tr>
+      <tr>
+        <th>Show/hide slide context</th>
+        <td>c</td>
+      </tr>
+      <tr>
+        <th>Notes</th>
+        <td>2</td>
+      </tr>
+      <tr>
+        <th>Help</th>
+        <td>h</td>
+      </tr>
+    </table>
+  </div>
+  <script>main()</script>
+</body>
+</html>
