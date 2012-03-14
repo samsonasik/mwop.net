@@ -584,17 +584,22 @@ div.fullslide  section {
 }
 
 div.titleslide .inner {
+  /*
   background: url('../../images/zf-logo-mark.png') center no-repeat;
   background-size: 100%;
+  overflow: hidden;
+  */
   margin-left: 30px;
   margin-right: 30px;
   margin-top: 0;
   display: block;
-  overflow: hidden;
 }
 
 div.titleslide .inner header h1 {
-    color: #FCFCFC !important;
+    color: #3f3f3f;
+    font-size: 96px;
+    font-weight: bolder;
+    text-shadow: rgba(0, 0, 0, 0.2) 0 2px 5px;
     z-index: -10;
 }
 
