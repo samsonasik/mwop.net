@@ -1002,7 +1002,7 @@ message, pass them into a controller, and do something with it all.</p>
 <span class="lineno">12</span> 
 <span class="lineno">13</span>     <span class="k">public</span> <span class="k">function</span> <span class="nf">__construct</span><span class="p">(</span><span class="nv">$captchaAdapter</span> <span class="o">=</span> <span class="k">null</span><span class="p">)</span>
 <span class="lineno">14</span>     <span class="p">{</span>
-<span class="lineno">15</span>         <span class="k">if</span> <span class="p">(</span><span class="nv">$options</span> <span class="nx">instanceof</span> <span class="nx">CaptchaAdapter</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno">15</span>         <span class="k">if</span> <span class="p">(</span><span class="nv">$captchaAdapter</span> <span class="nx">instanceof</span> <span class="nx">CaptchaAdapter</span><span class="p">)</span> <span class="p">{</span>
 <span class="lineno">16</span>             <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">setCaptchaAdapter</span><span class="p">(</span><span class="nv">$captchaAdapter</span><span class="p">);</span>
 <span class="lineno">17</span>             <span class="k">parent</span><span class="o">::</span><span class="na">__construct</span><span class="p">(</span><span class="k">null</span><span class="p">);</span>
 <span class="lineno">18</span>             <span class="k">return</span><span class="p">;</span>
@@ -1234,26 +1234,24 @@ message, pass them into a controller, and do something with it all.</p>
 <span class="lineno"> 2</span> <span class="k">public</span> <span class="k">function</span> <span class="nf">processAction</span><span class="p">()</span>
 <span class="lineno"> 3</span> <span class="p">{</span>
 <span class="lineno"> 4</span>     <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">isPost</span><span class="p">())</span> <span class="p">{</span>
-<span class="lineno"> 5</span>         <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">response</span><span class="o">-&gt;</span><span class="na">setStatusCode</span><span class="p">(</span><span class="mi">302</span><span class="p">);</span>
-<span class="lineno"> 6</span>         <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">response</span><span class="o">-&gt;</span><span class="na">headers</span><span class="p">()</span>
-<span class="lineno"> 7</span>              <span class="o">-&gt;</span><span class="na">addHeaderLine</span><span class="p">(</span><span class="s1">&#39;Location&#39;</span><span class="p">,</span> <span class="s1">&#39;/contact&#39;</span><span class="p">);</span>
-<span class="lineno"> 8</span>     <span class="p">}</span>
-<span class="lineno"> 9</span>     <span class="nv">$post</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">post</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">toArray</span><span class="p">();</span>
-<span class="lineno">10</span>     <span class="nv">$form</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">form</span><span class="p">;</span>
-<span class="lineno">11</span>     <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$form</span><span class="o">-&gt;</span><span class="na">isValid</span><span class="p">(</span><span class="nv">$post</span><span class="p">))</span> <span class="p">{</span>
-<span class="lineno">12</span>         <span class="nv">$model</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ViewModel</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
-<span class="lineno">13</span>             <span class="s1">&#39;error&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
-<span class="lineno">14</span>             <span class="s1">&#39;form&#39;</span>  <span class="o">=&gt;</span> <span class="nv">$form</span>
-<span class="lineno">15</span>         <span class="p">));</span>
-<span class="lineno">16</span>         <span class="nv">$model</span><span class="o">-&gt;</span><span class="na">setTemplate</span><span class="p">(</span><span class="s1">&#39;contact/index&#39;</span><span class="p">);</span>
-<span class="lineno">17</span>         <span class="k">return</span> <span class="nv">$model</span><span class="p">;</span>
-<span class="lineno">18</span>     <span class="p">}</span>
-<span class="lineno">19</span> 
-<span class="lineno">20</span>     <span class="c1">// send email...</span>
-<span class="lineno">21</span>     <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">sendEmail</span><span class="p">(</span><span class="nv">$form</span><span class="o">-&gt;</span><span class="na">getValues</span><span class="p">());</span>
-<span class="lineno">22</span> 
-<span class="lineno">23</span>     <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">redirect</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">toRoute</span><span class="p">(</span><span class="s1">&#39;contact/thank-you&#39;</span><span class="p">);</span>
-<span class="lineno">24</span> <span class="p">}</span>
+<span class="lineno"> 5</span>         <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">redirect</span><span class="o">-&gt;</span><span class="na">toRoute</span><span class="p">(</span><span class="s1">&#39;contact&#39;</span><span class="p">);</span>
+<span class="lineno"> 6</span>     <span class="p">}</span>
+<span class="lineno"> 7</span>     <span class="nv">$post</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">post</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">toArray</span><span class="p">();</span>
+<span class="lineno"> 8</span>     <span class="nv">$form</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">form</span><span class="p">;</span>
+<span class="lineno"> 9</span>     <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$form</span><span class="o">-&gt;</span><span class="na">isValid</span><span class="p">(</span><span class="nv">$post</span><span class="p">))</span> <span class="p">{</span>
+<span class="lineno">10</span>         <span class="nv">$model</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ViewModel</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+<span class="lineno">11</span>             <span class="s1">&#39;error&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
+<span class="lineno">12</span>             <span class="s1">&#39;form&#39;</span>  <span class="o">=&gt;</span> <span class="nv">$form</span>
+<span class="lineno">13</span>         <span class="p">));</span>
+<span class="lineno">14</span>         <span class="nv">$model</span><span class="o">-&gt;</span><span class="na">setTemplate</span><span class="p">(</span><span class="s1">&#39;contact/index&#39;</span><span class="p">);</span>
+<span class="lineno">15</span>         <span class="k">return</span> <span class="nv">$model</span><span class="p">;</span>
+<span class="lineno">16</span>     <span class="p">}</span>
+<span class="lineno">17</span> 
+<span class="lineno">18</span>     <span class="c1">// send email...</span>
+<span class="lineno">19</span>     <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">sendEmail</span><span class="p">(</span><span class="nv">$form</span><span class="o">-&gt;</span><span class="na">getValues</span><span class="p">());</span>
+<span class="lineno">20</span> 
+<span class="lineno">21</span>     <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">redirect</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">toRoute</span><span class="p">(</span><span class="s1">&#39;contact/thank-you&#39;</span><span class="p">);</span>
+<span class="lineno">22</span> <span class="p">}</span>
 </pre></div>
 </section>
             
@@ -1337,15 +1335,13 @@ message, pass them into a controller, and do something with it all.</p>
 <span class="lineno"> 6</span>         <span class="o">||</span> <span class="o">!</span><span class="nb">preg_match</span><span class="p">(</span><span class="s1">&#39;#/contact$#&#39;</span><span class="p">,</span>
 <span class="lineno"> 7</span>               <span class="nv">$headers</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;Referer&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">getFieldValue</span><span class="p">())</span>
 <span class="lineno"> 8</span>     <span class="p">)</span> <span class="p">{</span>
-<span class="lineno"> 9</span>         <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">response</span><span class="o">-&gt;</span><span class="na">setStatusCode</span><span class="p">(</span><span class="mi">302</span><span class="p">);</span>
-<span class="lineno">10</span>         <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">response</span><span class="o">-&gt;</span><span class="na">headers</span><span class="p">()</span>
-<span class="lineno">11</span>              <span class="o">-&gt;</span><span class="na">addHeaderLine</span><span class="p">(</span><span class="s1">&#39;Location&#39;</span><span class="p">,</span> <span class="s1">&#39;/contact&#39;</span><span class="p">);</span>
-<span class="lineno">12</span>         <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">response</span><span class="p">;</span>
-<span class="lineno">13</span>     <span class="p">}</span>
-<span class="lineno">14</span> 
-<span class="lineno">15</span>     <span class="c1">// do nothing...</span>
-<span class="lineno">16</span>     <span class="k">return</span> <span class="k">array</span><span class="p">();</span>
-<span class="lineno">17</span> <span class="p">}</span>
+<span class="lineno"> 9</span>         <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">redirect</span><span class="o">-&gt;</span><span class="na">toRoute</span><span class="p">(</span><span class="s1">&#39;contact&#39;</span><span class="p">);</span>
+<span class="lineno">10</span>         <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">response</span><span class="p">;</span>
+<span class="lineno">11</span>     <span class="p">}</span>
+<span class="lineno">12</span> 
+<span class="lineno">13</span>     <span class="c1">// do nothing...</span>
+<span class="lineno">14</span>     <span class="k">return</span> <span class="k">array</span><span class="p">();</span>
+<span class="lineno">15</span> <span class="p">}</span>
 </pre></div>
 </section>
             
@@ -1395,6 +1391,8 @@ message, pass them into a controller, and do something with it all.</p>
 <span class="lineno">16</span> <span class="nv">$form</span><span class="o">-&gt;</span><span class="na">setAction</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">url</span><span class="p">(</span><span class="s1">&#39;contact/process&#39;</span><span class="p">));</span>
 <span class="lineno">17</span> <span class="nv">$form</span><span class="o">-&gt;</span><span class="na">setMethod</span><span class="p">(</span><span class="s1">&#39;post&#39;</span><span class="p">);</span>
 <span class="lineno">18</span> <span class="k">echo</span> <span class="nv">$form</span><span class="o">-&gt;</span><span class="na">render</span><span class="p">(</span><span class="nv">$this</span><span class="p">);</span>
+<span class="lineno">19</span> <span class="cp">?&gt;</span><span class="x"></span>
+<span class="lineno">20</span> <span class="x">&lt;/section&gt;</span>
 </pre></div>
 </section>
             
@@ -1620,9 +1618,11 @@ message, pass them into a controller, and do something with it all.</p>
 <span class="lineno"> 6</span> <span class="p">)),</span>
 <span class="lineno"> 7</span> <span class="s1">&#39;PhlyContact\Controller\ContactController&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
 <span class="lineno"> 8</span>   <span class="s1">&#39;parameters&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
-<span class="lineno"> 9</span>     <span class="s1">&#39;form&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;PhlyContact\ContactForm&#39;</span><span class="p">,</span>
-<span class="lineno">10</span>   <span class="p">)</span>
-<span class="lineno">11</span> <span class="p">),</span>
+<span class="lineno"> 9</span>     <span class="s1">&#39;form&#39;</span>      <span class="o">=&gt;</span> <span class="s1">&#39;PhlyContact\ContactForm&#39;</span><span class="p">,</span>
+<span class="lineno">10</span>     <span class="s1">&#39;message&#39;</span>   <span class="o">=&gt;</span> <span class="s1">&#39;Zend\Mail\Message&#39;</span><span class="p">,</span>
+<span class="lineno">11</span>     <span class="s1">&#39;transport&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Zend\Mail\Transport&#39;</span><span class="p">,</span>
+<span class="lineno">12</span>   <span class="p">)</span>
+<span class="lineno">13</span> <span class="p">),</span>
 </pre></div>
 
 </section>
@@ -1759,7 +1759,7 @@ message, pass them into a controller, and do something with it all.</p>
 <span class="lineno">14</span>       <span class="p">),</span>
 <span class="lineno">15</span>       <span class="s1">&#39;Zend\Loader\StandardAutoloader&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
 <span class="lineno">16</span>         <span class="s1">&#39;namespaces&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
-<span class="lineno">17</span>           <span class="s1">&#39;PhlyContact&#39;</span> <span class="o">=&gt;</span> <span class="nx">__DIR__</span> <span class="o">.</span> <span class="s1">&#39;/src/PhlyContact&#39;</span><span class="p">,</span>
+<span class="lineno">17</span>           <span class="nx">__NAMESPACE__</span> <span class="o">=&gt;</span> <span class="nx">__DIR__</span> <span class="o">.</span> <span class="s1">&#39;/src/&#39;</span> <span class="o">.</span> <span class="nx">__NAMESPACE__</span><span class="p">,</span>
 <span class="lineno">18</span>         <span class="p">),</span>
 <span class="lineno">19</span>       <span class="p">),</span>
 <span class="lineno">20</span>     <span class="p">);</span>
@@ -1842,27 +1842,24 @@ message, pass them into a controller, and do something with it all.</p>
             
             
             <section><div class="highlight"><pre><span class="lineno"> 1</span> <span class="cp">&lt;?php</span>
-<span class="lineno"> 2</span> <span class="c1">// config/autoload/module.phly-contact.config.php</span>
+<span class="lineno"> 2</span> <span class="c1">// config/autoload/module.phly-contact.local.config.php</span>
 <span class="lineno"> 3</span> <span class="k">return</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;di&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
-<span class="lineno"> 4</span>   <span class="s1">&#39;preferences&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
-<span class="lineno"> 5</span>     <span class="s1">&#39;Zend\Mail\Transport&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Zend\Mail\Transport\File&#39;</span><span class="p">,</span>
-<span class="lineno"> 6</span>   <span class="p">)</span>
-<span class="lineno"> 7</span>   <span class="s1">&#39;instance&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
-<span class="lineno"> 8</span>     <span class="s1">&#39;contact&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;parameters&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
-<span class="lineno"> 9</span>       <span class="s1">&#39;transport&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Zend\Mail\Transport\File&#39;</span><span class="p">,</span>
-<span class="lineno">10</span>     <span class="p">))</span>
-<span class="lineno">11</span>     <span class="s1">&#39;PhlyContact\ContactForm&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;parameters&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
-<span class="lineno">12</span>       <span class="s1">&#39;captchaAdapter&#39;</span>  <span class="o">=&gt;</span> <span class="s1">&#39;Zend\Captcha\Dumb&#39;</span><span class="p">,</span>
-<span class="lineno">13</span>     <span class="p">),</span>
-<span class="lineno">14</span>     <span class="s1">&#39;Zend\Mail\Transport\FileOptions&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;parameters&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
-<span class="lineno">15</span>       <span class="s1">&#39;path&#39;</span> <span class="o">=&gt;</span> <span class="nx">sys_get_temp_dir</span><span class="p">(),</span>
-<span class="lineno">16</span>     <span class="p">)),</span>
-<span class="lineno">17</span>     <span class="s1">&#39;Zend\Mail\Message&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;parameters&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
-<span class="lineno">18</span>       <span class="s1">&#39;Zend\Mail\Message::addTo:emailOrAddressList&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;me@mwop.net&#39;</span><span class="p">,</span>
-<span class="lineno">19</span>       <span class="s1">&#39;Zend\Mail\Message::setSender:emailOrAddressList&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;me@mwop.net&#39;</span><span class="p">,</span>
-<span class="lineno">20</span>     <span class="p">)),</span>
-<span class="lineno">21</span>   <span class="p">)),</span>
-<span class="lineno">22</span> <span class="p">);</span>
+<span class="lineno"> 4</span>   <span class="s1">&#39;instance&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+<span class="lineno"> 5</span>     <span class="s1">&#39;PhlyContact\Controller\ContactController&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;parameters&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+<span class="lineno"> 6</span>       <span class="s1">&#39;transport&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Zend\Mail\Transport\File&#39;</span><span class="p">,</span>
+<span class="lineno"> 7</span>     <span class="p">))</span>
+<span class="lineno"> 8</span>     <span class="s1">&#39;PhlyContact\ContactForm&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;parameters&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+<span class="lineno"> 9</span>       <span class="s1">&#39;captchaAdapter&#39;</span>  <span class="o">=&gt;</span> <span class="s1">&#39;Zend\Captcha\Dumb&#39;</span><span class="p">,</span>
+<span class="lineno">10</span>     <span class="p">),</span>
+<span class="lineno">11</span>     <span class="s1">&#39;Zend\Mail\Transport\FileOptions&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;parameters&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+<span class="lineno">12</span>       <span class="s1">&#39;path&#39;</span> <span class="o">=&gt;</span> <span class="nx">sys_get_temp_dir</span><span class="p">(),</span>
+<span class="lineno">13</span>     <span class="p">)),</span>
+<span class="lineno">14</span>     <span class="s1">&#39;Zend\Mail\Message&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;parameters&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+<span class="lineno">15</span>       <span class="s1">&#39;Zend\Mail\Message::addTo:emailOrAddressList&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;me@mwop.net&#39;</span><span class="p">,</span>
+<span class="lineno">16</span>       <span class="s1">&#39;Zend\Mail\Message::setSender:emailOrAddressList&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;me@mwop.net&#39;</span><span class="p">,</span>
+<span class="lineno">17</span>     <span class="p">)),</span>
+<span class="lineno">18</span>   <span class="p">)),</span>
+<span class="lineno">19</span> <span class="p">);</span>
 </pre></div>
 </section>
             
@@ -1967,7 +1964,7 @@ message, pass them into a controller, and do something with it all.</p>
             
             <section><p>We can change the base root.</p>
 <div class="highlight"><pre><span class="lineno">1</span> <span class="cp">&lt;?php</span>
-<span class="lineno">2</span> <span class="c1">// config/autoload/module.phly-contact.config.php</span>
+<span class="lineno">2</span> <span class="c1">// config/autoload/module.phly-contact.local.config.php</span>
 <span class="lineno">3</span> <span class="s1">&#39;Zend\Mvc\Router\RouteStack&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;parameters&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
 <span class="lineno">4</span>   <span class="s1">&#39;routes&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
 <span class="lineno">5</span>     <span class="s1">&#39;contact&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
@@ -2007,7 +2004,7 @@ message, pass them into a controller, and do something with it all.</p>
             
             <section><p>We can change the mail transport and message defaults.</p>
 <div class="highlight"><pre><span class="lineno"> 1</span> <span class="cp">&lt;?php</span>
-<span class="lineno"> 2</span> <span class="c1">// config/autoload/module.phly-contact.config.php</span>
+<span class="lineno"> 2</span> <span class="c1">// config/autoload/module.phly-contact.local.config.php</span>
 <span class="lineno"> 3</span> <span class="s1">&#39;preferences&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
 <span class="lineno"> 4</span>   <span class="s1">&#39;Zend\Mail\Transport&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Zend\Mail\Transport\Smtp&#39;</span><span class="p">,</span>
 <span class="lineno"> 5</span> <span class="p">)</span>
@@ -2053,7 +2050,7 @@ message, pass them into a controller, and do something with it all.</p>
             
             <section><p>We can change which CAPTCHA type we want to use.</p>
 <div class="highlight"><pre><span class="lineno">1</span> <span class="cp">&lt;?php</span>
-<span class="lineno">2</span> <span class="c1">// config/autoload/module.phly-contact.config.php</span>
+<span class="lineno">2</span> <span class="c1">// config/autoload/module.phly-contact.local.config.php</span>
 <span class="lineno">3</span> <span class="s1">&#39;PhlyContact\ContactForm&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;parameters&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
 <span class="lineno">4</span>     <span class="s1">&#39;captchaAdapter&#39;</span>  <span class="o">=&gt;</span> <span class="s1">&#39;Zend\Captcha\ReCaptcha&#39;</span><span class="p">,</span>
 <span class="lineno">5</span> <span class="p">),</span>
@@ -2166,7 +2163,7 @@ message, pass them into a controller, and do something with it all.</p>
 </ul>
 </li>
 <li>This presentation:<ul>
-<li>http://mwop.net/slides/2011-03-14-Zf2Modules/Zf2Modules.html</li>
+<li>http://mwop.net/slides/2012-03-14-Zf2Modules/Zf2Modules.html</li>
 </ul>
 </li>
 <li>The ZF2 subsite<ul>

@@ -463,7 +463,7 @@ Contact Form
     
         public function __construct($captchaAdapter = null)
         {
-            if ($options instanceof CaptchaAdapter) {
+            if ($captchaAdapter instanceof CaptchaAdapter) {
                 $this->setCaptchaAdapter($captchaAdapter);
                 parent::__construct(null);
                 return;
@@ -583,9 +583,7 @@ Controller: Process form
     public function processAction()
     {
         if (!$this->request->isPost()) {
-            $this->response->setStatusCode(302);
-            $this->response->headers()
-                 ->addHeaderLine('Location', '/contact');
+            $this->redirect->toRoute('contact');
         }
         $post = $this->request->post()->toArray();
         $form = $this->form;
@@ -642,9 +640,7 @@ Controller: Thank you page
             || !preg_match('#/contact$#',
                   $headers->get('Referer')->getFieldValue())
         ) {
-            $this->response->setStatusCode(302);
-            $this->response->headers()
-                 ->addHeaderLine('Location', '/contact');
+            $this->redirect->toRoute('contact');
             return $this->response;
         }
 
@@ -678,6 +674,8 @@ Add view scripts: Form
     $form->setAction($this->url('contact/process'));
     $form->setMethod('post');
     echo $form->render($this);
+    ?>
+    </section>
 
 ----
 
@@ -796,7 +794,9 @@ DI Configuration: Controller/Form
     )),
     'PhlyContact\Controller\ContactController' => array(
       'parameters' => array(
-        'form' => 'PhlyContact\ContactForm',
+        'form'      => 'PhlyContact\ContactForm',
+        'message'   => 'Zend\Mail\Message',
+        'transport' => 'Zend\Mail\Transport',
       )
     ),
 
@@ -868,7 +868,7 @@ Module class: autoloading
           ),
           'Zend\Loader\StandardAutoloader' => array(
             'namespaces' => array(
-              'PhlyContact' => __DIR__ . '/src/PhlyContact',
+              __NAMESPACE__ => __DIR__ . '/src/' . __NAMESPACE__,
             ),
           ),
         );
@@ -907,13 +907,10 @@ Add application configuration
 
     !php
     <?php
-    // config/autoload/module.phly-contact.config.php
+    // config/autoload/module.phly-contact.local.config.php
     return array('di' => array(
-      'preferences' => array(
-        'Zend\Mail\Transport' => 'Zend\Mail\Transport\File',
-      )
       'instance' => array(
-        'contact' => array('parameters' => array(
+        'PhlyContact\Controller\ContactController' => array('parameters' => array(
           'transport' => 'Zend\Mail\Transport\File',
         ))
         'PhlyContact\ContactForm' => array('parameters' => array(
@@ -965,7 +962,7 @@ We can change the base root.
 
     !php
     <?php
-    // config/autoload/module.phly-contact.config.php
+    // config/autoload/module.phly-contact.local.config.php
     'Zend\Mvc\Router\RouteStack' => array('parameters' => array(
       'routes' => array(
         'contact' => array(
@@ -984,7 +981,7 @@ We can change the mail transport and message defaults.
 
     !php
     <?php
-    // config/autoload/module.phly-contact.config.php
+    // config/autoload/module.phly-contact.local.config.php
     'preferences' => array(
       'Zend\Mail\Transport' => 'Zend\Mail\Transport\Smtp',
     )
@@ -1011,7 +1008,7 @@ We can change which CAPTCHA type we want to use.
 
     !php
     <?php
-    // config/autoload/module.phly-contact.config.php
+    // config/autoload/module.phly-contact.local.config.php
     'PhlyContact\ContactForm' => array('parameters' => array(
         'captchaAdapter'  => 'Zend\Captcha\ReCaptcha',
     ),
@@ -1050,7 +1047,7 @@ Resources
 * The code we saw today:
     * http://github.com/weierophinney/phly_contact
 * This presentation:
-    * http://mwop.net/slides/2011-03-14-Zf2Modules/Zf2Modules.html
+    * http://mwop.net/slides/2012-03-14-Zf2Modules/Zf2Modules.html
 * The ZF2 subsite
     * http://framework.zend.com/zf2
 
