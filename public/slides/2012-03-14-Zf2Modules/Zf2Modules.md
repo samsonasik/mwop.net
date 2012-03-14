@@ -583,7 +583,7 @@ Controller: Process form
     public function processAction()
     {
         if (!$this->request->isPost()) {
-            $this->redirect->toRoute('contact');
+            return $this->redirect->toRoute('contact');
         }
         $post = $this->request->post()->toArray();
         $form = $this->form;
@@ -640,8 +640,7 @@ Controller: Thank you page
             || !preg_match('#/contact$#',
                   $headers->get('Referer')->getFieldValue())
         ) {
-            $this->redirect->toRoute('contact');
-            return $this->response;
+            return $this->redirect->toRoute('contact');
         }
 
         // do nothing...
