@@ -643,8 +643,7 @@
             
             
             <section><ul>
-<li><code>ZendMvcViewDefaultRenderingStrategy</code> registers
-  <code>ZendMvcStrategyPhpRendererStrategy</code>, which:<ul>
+<li><code>Zend\Mvc\View\DefaultRenderingStrategy</code> registers <code>Zend\View\Strategy\PhpRendererStrategy</code>, which:<ul>
 <li>Returns a <code>PhpRenderer</code> during the render phase</li>
 <li>Injects the <code>Response</code> with the results of rendering</li>
 </ul>
@@ -1489,7 +1488,7 @@
 <span class="lineno"> 8</span>     <span class="nv">$locator</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">getLocator</span><span class="p">();</span>
 <span class="lineno"> 9</span>     <span class="nv">$view</span>    <span class="o">=</span> <span class="nv">$locator</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;Zend\View\View&#39;</span><span class="p">);</span>
 <span class="lineno">10</span>     <span class="nv">$json</span>    <span class="o">=</span> <span class="nv">$locator</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;Zend\View\Strategy\JsonStrategy&#39;</span><span class="p">);</span>
-<span class="lineno">11</span>     <span class="nv">$view</span><span class="o">-&gt;</span><span class="na">attach</span><span class="p">(</span><span class="nv">$json</span><span class="p">,</span> <span class="mi">100</span><span class="p">);</span>
+<span class="lineno">11</span>     <span class="nv">$view</span><span class="o">-&gt;</span><span class="na">events</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">attach</span><span class="p">(</span><span class="nv">$json</span><span class="p">,</span> <span class="mi">100</span><span class="p">);</span>
 <span class="lineno">12</span> <span class="p">}</span>
 </pre></div>
 

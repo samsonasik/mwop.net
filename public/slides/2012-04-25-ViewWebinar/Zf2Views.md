@@ -196,8 +196,7 @@ Presenter Notes
 Rendering and Response Injection
 ----
 
-* `Zend\Mvc\View\DefaultRenderingStrategy` registers
-  `Zend\Mvc\Strategy\PhpRendererStrategy`, which:
+* `Zend\\Mvc\\View\\DefaultRenderingStrategy` registers `Zend\\View\\Strategy\\PhpRendererStrategy`, which:
     * Returns a `PhpRenderer` during the render phase
     * Injects the `Response` with the results of rendering
 * Acts as the "render" event listener for the Application
@@ -622,7 +621,7 @@ Serving JSON
         $locator = $app->getLocator();
         $view    = $locator->get('Zend\View\View');
         $json    = $locator->get('Zend\View\Strategy\JsonStrategy');
-        $view->attach($json, 100);
+        $view->events()->attach($json, 100);
     }
 
 Presenter Notes
