@@ -780,6 +780,14 @@ Resources
     * http://mwop.net/slides/2012-04-25-ViewWebinar/Zf2Views.html
 * Zend\\View quick start:
     * http://bit.ly/I4cfjs
+* Rob Allen's (Akrabat) ZF2TestApp repo:
+    * https://github.com/akrabat/ZF2TestApp
+
+Presenter Notes
+----
+
+* Rob's repo demonstrates a variety of things you can do with the view layer. If
+  you fire it up in a vhost, you can also see the effect of each of them.
 
 ---
 
