@@ -1,0 +1,2236 @@
+<!DOCTYPE html>
+<!--
+  Copyright 2010 Google Inc.
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+
+  Original slides: Marcin Wichary (mwichary@google.com)
+  Modifications: Ernest Delgado (ernestd@google.com)
+                 Alex Russell (slightlyoff@chromium.org)
+
+  landslide modifications: Adam Zapletal (adamzap@gmail.com)
+                           Nicolas Perriault (nperriault@gmail.com)
+-->
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Views, Renderers, Resolvers, Oh, My!</title>
+    <!-- Styles -->
+    
+    <link rel="stylesheet" media="print" href="/usr/local/lib/python2.7/dist-packages/landslide/themes/default/css/print.css">
+    <link rel="stylesheet" media="screen, projection" href="theme/css/screen.css">
+    
+    
+    <!-- /Styles -->
+    <!-- Javascripts -->
+    
+    <script type="text/javascript" src="theme/js/slides.js"></script>
+    
+    
+      
+      <script type="text/javascript" src="./theme/js/dojo.js"></script>
+      
+    
+      
+      <script type="text/javascript" src="./theme/js/custom.js"></script>
+      
+    
+    <!-- /Javascripts -->
+</head>
+<body>
+  <div id="blank"></div>
+  <div class="presentation">
+    <div id="current_presenter_notes">
+      <div id="presenter_note"></div>
+    </div>
+    <div class="slides">
+      
+      <!-- slide source: Zf2Views.md -->
+      <div class="slide-wrapper">
+        <div class="slide titleslide">
+          <div class="inner">
+            
+            <header><h1>Views, Renderers, Resolvers, Oh, My!</h1></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Views.md">Zf2Views.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              1/46
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Views.md -->
+      <div class="slide-wrapper">
+        <div class="slide image-right">
+          <div class="inner">
+            
+            <header><h1>Who am I?</h1></header>
+            
+            
+            <section><p>Matthew Weier O'Phinney</p>
+<p><img alt="Matthew Weier O'Phinney" src="images/mwop.png" title="Matthew Weier O'Phinney" /></p>
+<ul>
+<li>Project Lead, Zend Framework</li>
+<li>PHP Developer</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Views.md">Zf2Views.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              2/46
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Views.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Why a new View Layer?</h2></header>
+            
+            
+            <section><ul>
+<li>New MVC architecture == changes required</li>
+<li>Increase de-coupling</li>
+<li>Make serving alternate content types easier</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Views.md">Zf2Views.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              3/46
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Views.md -->
+      <div class="slide-wrapper">
+        <div class="slide image-right">
+          <div class="inner">
+            
+            <header><h2>Why a new View Layer?</h2></header>
+            
+            
+            <section><p><img alt="Do ALL the things!" src="images/ChefBot.jpg" title="Do ALL the things!" /></p>
+<ul>
+<li>Zend_View was doing too much</li>
+</ul>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>Resolved templates</li>
+<li>Managed helper and filter creation, registry, and invocation</li>
+<li>Variables container</li>
+<li>More!</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Views.md">Zf2Views.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              4/46
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Views.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>A New Architecture</h1></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Views.md">Zf2Views.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              5/46
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Views.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>View Models</h2></header>
+            
+            
+            <section><p><img alt="View Models" src="images/Ingredients.jpg" title="View Models" /></p>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>Container for variables, template name, renderer options</li>
+<li>Create trees of view models, captured to variables</li>
+<li>Indicate a new root for the tree</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Views.md">Zf2Views.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              6/46
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Views.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Resolvers</h2></header>
+            
+            
+            <section><p><img alt="Resolvers" src="images/RecipeBox.jpg" title="Resolvers" /></p>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>Resolve a template name to a resource the Renderer can consume</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Views.md">Zf2Views.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              7/46
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Views.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Renderers</h2></header>
+            
+            
+            <section><p><img alt="Renderers" src="images/Chef.jpg" title="Renderers" /></p>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>Accept a view model, and represent it</li>
+<li>Use the view model template, and Resolve it to a resource</li>
+<li>Optionally traverse trees of View Models</li>
+<li>Compose helpers as extension points</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Views.md">Zf2Views.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              8/46
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Views.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Helpers</h2></header>
+            
+            
+            <section><p><img alt="Helpers" src="images/PrepCook.jpg" title="Helpers" /></p>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>Extend the functionality of the renderer<ul>
+<li>Render URLs, snippets of markup, etc.</li>
+</ul>
+</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Views.md">Zf2Views.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              9/46
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Views.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>View</h2></header>
+            
+            
+            <section><p><img alt="View" src="images/Waiter.gif" title="Veiw" /></p>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>Use strategies to choose which renderer to use</li>
+<li>Use strategies to determine how to populate the response</li>
+<li>Strategies are simply event listeners</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Views.md">Zf2Views.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              10/46
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Views.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Default MVC Integration</h1></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Views.md">Zf2Views.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              11/46
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Views.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Goals</h2></header>
+            
+            
+            <section><ul>
+<li>Enable layouts by default</li>
+<li>Provide 404 pages by default</li>
+<li>Provide error pages by default</li>
+<li>Make providing action-specific views trivial<ul>
+<li>Provide sane defaults for view selection</li>
+</ul>
+</li>
+<li>Provide basic rendering capabilities and response injection</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Views.md">Zf2Views.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              12/46
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Views.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Layouts</h2></header>
+            
+            
+            <section><ul>
+<li><code>Zend\Mvc\Application</code> injects a <code>ViewModel</code> into the <code>MvcEvent</code></li>
+<li><code>Zend\Mvc\View\DefaultRenderingStrategy</code> has a configuration setting for the
+  <code>layoutTemplate</code> name</li>
+<li><code>Zend\Mvc\View\InjectViewModelListener</code> injects <code>ViewModel</code> results from
+  controllers into the Layout ViewModel</li>
+<li>Layout controller plugin and view helper are available for accessing the
+  layout <code>ViewModel</code></li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Views.md">Zf2Views.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              13/46
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Views.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>404 Pages</h2></header>
+            
+            
+            <section><ul>
+<li><code>Zend\Mvc\View\RouteNotFoundStrategy</code> handles 404s</li>
+<li>Invoked when routing fails</li>
+<li>Invoked when the matched controller does not exist</li>
+<li>Invoked when a controller sets a 404 response status</li>
+<li>Has a configuration setting for the <code>notFoundTemplate</code>, as well as whether or
+  not to display the reason and/or exception messages.</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Views.md">Zf2Views.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              14/46
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Views.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Application Error Pages</h2></header>
+            
+            
+            <section><ul>
+<li><code>Zend\Mvc\View\ExceptionStrategy</code> handles error pages</li>
+<li>Invoked when an exception is thrown by a controller</li>
+<li>Has a configuration setting for the <code>exceptionTemplate</code>, as well as whether or
+  not to display exception messages</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Views.md">Zf2Views.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              15/46
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Views.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Action Views</h2></header>
+            
+            
+            <section><ul>
+<li>Controllers can return an associative array or null value<ul>
+<li><code>Zend\Mvc\View\CreateViewModelStrategy</code></li>
+</ul>
+</li>
+<li>Controllers can return a <code>ViewModel</code> populated with variables only<ul>
+<li><code>Zend\Mvc\View\InjectTemplateListener</code></li>
+</ul>
+</li>
+<li>Controllers can return a fully populated <code>ViewModel</code></li>
+<li>Controllers can return a fully populated <code>Response</code>, which will bypass view
+  rendering</li>
+</ul>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li><code>CreateViewModelStrategy</code> creates <code>ViewModels</code> from empty arrays, null values,
+  or assoc arrays</li>
+<li><code>InjectTemplateListener</code> injects a template based on the active controller and
+  optionally an action route parameter. It will be invoked in addition to above.</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Views.md">Zf2Views.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              16/46
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Views.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Rendering and Response Injection</h2></header>
+            
+            
+            <section><ul>
+<li><code>ZendMvcViewDefaultRenderingStrategy</code> registers
+  <code>ZendMvcStrategyPhpRendererStrategy</code>, which:<ul>
+<li>Returns a <code>PhpRenderer</code> during the render phase</li>
+<li>Injects the <code>Response</code> with the results of rendering</li>
+</ul>
+</li>
+<li>Acts as the "render" event listener for the Application</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Views.md">Zf2Views.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              17/46
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Views.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Summary</h2></header>
+            
+            
+            <section><ul>
+<li>A lot of event listeners are setup to enable the most common use cases
+  surrounding views.</li>
+<li>You can override almost any portion of it via either DI or extending
+  <code>Zend\Mvc\Bootstrap</code> in order to override the <code>setupView()</code> method.</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Views.md">Zf2Views.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              18/46
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Views.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Common Tasks</h1></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>Now we get to the code</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Views.md">Zf2Views.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              19/46
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Views.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Configure Resolvers</h2></header>
+            
+            
+            <section><ul>
+<li>By default, an <code>AggregateResolver</code> is registered, with two child resolvers,<ul>
+<li><code>TemplateMapResolver</code> maps template names to specific files</li>
+<li><code>TemplatePathStack</code> provides a stack of paths to consult, and a default
+  file extension to use</li>
+</ul>
+</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Views.md">Zf2Views.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              20/46
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Views.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code smaller-code">
+          <div class="inner">
+            
+            <header><h2>Resolver Configuration</h2></header>
+            
+            
+            <section><div class="highlight"><pre><span class="lineno"> 1</span> <span class="cp">&lt;?php</span>
+<span class="lineno"> 2</span> <span class="k">return</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;di&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;instance&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+<span class="lineno"> 3</span>   <span class="s1">&#39;Zend\View\Resolver\AggregateResolver&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+<span class="lineno"> 4</span>     <span class="s1">&#39;injections&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+<span class="lineno"> 5</span>       <span class="s1">&#39;Zend\View\Resolver\TemplateMapResolver&#39;</span><span class="p">,</span>
+<span class="lineno"> 6</span>       <span class="s1">&#39;Zend\View\Resolver\TemplatePathStack&#39;</span><span class="p">,</span>
+<span class="lineno"> 7</span>     <span class="p">),</span>
+<span class="lineno"> 8</span>   <span class="p">),</span>
+<span class="lineno"> 9</span>   <span class="s1">&#39;Zend\View\Resolver\TemplateMapResolver&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+<span class="lineno">10</span>     <span class="s1">&#39;parameters&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+<span class="lineno">11</span>       <span class="s1">&#39;map&#39;</span>  <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+<span class="lineno">12</span>         <span class="s1">&#39;layout/layout&#39;</span> <span class="o">=&gt;</span> <span class="nx">__DIR__</span> <span class="o">.</span> <span class="s1">&#39;/../view/layout/layout.phtml&#39;</span><span class="p">,</span>
+<span class="lineno">13</span>       <span class="p">),</span>
+<span class="lineno">14</span>     <span class="p">),</span>
+<span class="lineno">15</span>   <span class="p">),</span>
+<span class="lineno">16</span>   <span class="s1">&#39;Zend\View\Resolver\TemplatePathStack&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+<span class="lineno">17</span>     <span class="s1">&#39;parameters&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+<span class="lineno">18</span>       <span class="s1">&#39;paths&#39;</span>  <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+<span class="lineno">19</span>         <span class="s1">&#39;application&#39;</span> <span class="o">=&gt;</span> <span class="nx">__DIR__</span> <span class="o">.</span> <span class="s1">&#39;/../view&#39;</span><span class="p">,</span>
+<span class="lineno">20</span>       <span class="p">),</span>
+<span class="lineno">21</span>     <span class="p">),</span>
+<span class="lineno">22</span>   <span class="p">),</span>
+<span class="lineno">23</span> <span class="p">)));</span>
+</pre></div>
+
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>Use the <code>TemplateMapResolver</code> for often-used view scripts, or ones you've got
+  set in stone</li>
+<li>Use the <code>TemplatePathStack</code> for RAD purposes</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Views.md">Zf2Views.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              21/46
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Views.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code smaller-code">
+          <div class="inner">
+            
+            <header><h2>Controllers: Provide data to the view</h2></header>
+            
+            
+            <section><p>Explicitly:</p>
+<div class="highlight"><pre><span class="lineno"> 1</span> <span class="cp">&lt;?php</span>
+<span class="lineno"> 2</span> <span class="k">use</span> <span class="nx">Zend\Mvc\Controller\ActionController</span><span class="p">;</span>
+<span class="lineno"> 3</span> <span class="k">use</span> <span class="nx">Zend\View\Model\ViewModel</span><span class="p">;</span>
+<span class="lineno"> 4</span> 
+<span class="lineno"> 5</span> <span class="k">class</span> <span class="nc">HelloController</span> <span class="k">extends</span> <span class="nx">ActionController</span>
+<span class="lineno"> 6</span> <span class="p">{</span>
+<span class="lineno"> 7</span>     <span class="k">public</span> <span class="k">function</span> <span class="nf">worldAction</span><span class="p">()</span>
+<span class="lineno"> 8</span>     <span class="p">{</span>
+<span class="lineno"> 9</span>         <span class="nv">$model</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ViewModel</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+<span class="lineno">10</span>             <span class="s1">&#39;message&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Hello, world!&#39;</span><span class="p">,</span>
+<span class="lineno">11</span>         <span class="p">));</span>
+<span class="lineno">12</span>         <span class="nv">$model</span><span class="o">-&gt;</span><span class="na">setTemplate</span><span class="p">(</span><span class="s1">&#39;hello/world&#39;</span><span class="p">);</span>
+<span class="lineno">13</span>         <span class="k">return</span> <span class="nv">$model</span><span class="p">;</span>
+<span class="lineno">14</span>     <span class="p">}</span>
+<span class="lineno">15</span> <span class="p">}</span>
+</pre></div>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Views.md">Zf2Views.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              22/46
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Views.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code smaller-code">
+          <div class="inner">
+            
+            <header><h2>Controllers: Provide data to the view</h2></header>
+            
+            
+            <section><p>Semi-Explicitly:</p>
+<div class="highlight"><pre><span class="lineno"> 1</span> <span class="cp">&lt;?php</span>
+<span class="lineno"> 2</span> <span class="k">use</span> <span class="nx">Zend\Mvc\Controller\ActionController</span><span class="p">;</span>
+<span class="lineno"> 3</span> <span class="k">use</span> <span class="nx">Zend\View\Model\ViewModel</span><span class="p">;</span>
+<span class="lineno"> 4</span> 
+<span class="lineno"> 5</span> <span class="k">class</span> <span class="nc">HelloController</span> <span class="k">extends</span> <span class="nx">ActionController</span>
+<span class="lineno"> 6</span> <span class="p">{</span>
+<span class="lineno"> 7</span>     <span class="k">public</span> <span class="k">function</span> <span class="nf">worldAction</span><span class="p">()</span>
+<span class="lineno"> 8</span>     <span class="p">{</span>
+<span class="lineno"> 9</span>         <span class="k">return</span> <span class="k">new</span> <span class="nx">ViewModel</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+<span class="lineno">10</span>             <span class="s1">&#39;message&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Hello, world!&#39;</span><span class="p">,</span>
+<span class="lineno">11</span>         <span class="p">));</span>
+<span class="lineno">12</span>     <span class="p">}</span>
+<span class="lineno">13</span> <span class="p">}</span>
+</pre></div>
+
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>InjectTemplateListener will inject the template "hello/world" automatically
+  based on the controller name and action.</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Views.md">Zf2Views.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              23/46
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Views.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code smaller-code">
+          <div class="inner">
+            
+            <header><h2>Controllers: Provide data to the view</h2></header>
+            
+            
+            <section><p>Implicitly:</p>
+<div class="highlight"><pre><span class="lineno"> 1</span> <span class="cp">&lt;?php</span>
+<span class="lineno"> 2</span> <span class="k">use</span> <span class="nx">Zend\Mvc\Controller\ActionController</span><span class="p">;</span>
+<span class="lineno"> 3</span> 
+<span class="lineno"> 4</span> <span class="k">class</span> <span class="nc">HelloController</span> <span class="k">extends</span> <span class="nx">ActionController</span>
+<span class="lineno"> 5</span> <span class="p">{</span>
+<span class="lineno"> 6</span>     <span class="k">public</span> <span class="k">function</span> <span class="nf">worldAction</span><span class="p">()</span>
+<span class="lineno"> 7</span>     <span class="p">{</span>
+<span class="lineno"> 8</span>         <span class="k">return</span> <span class="k">array</span><span class="p">(</span>
+<span class="lineno"> 9</span>             <span class="s1">&#39;message&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Hello, world!&#39;</span><span class="p">,</span>
+<span class="lineno">10</span>         <span class="p">);</span>
+<span class="lineno">11</span>     <span class="p">}</span>
+<span class="lineno">12</span> <span class="p">}</span>
+</pre></div>
+
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>CreateViewModelStrategy will create a view model with the returned array as
+  the variables</li>
+<li>InjectTemplateListener will inject the template "hello/world" automatically
+  based on the controller name and action.</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Views.md">Zf2Views.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              24/46
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Views.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code smaller-code">
+          <div class="inner">
+            
+            <header><h2>Choose an alternate layout</h2></header>
+            
+            
+            <section><p>Via configuration:</p>
+<div class="highlight"><pre><span class="lineno">1</span> <span class="cp">&lt;?php</span>
+<span class="lineno">2</span> <span class="c1">// in a config somewhere</span>
+<span class="lineno">3</span> <span class="k">return</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;di&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;instance&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+<span class="lineno">4</span>     <span class="s1">&#39;Zend\Mvc\View\DefaultRenderingStrategy&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+<span class="lineno">5</span>         <span class="s1">&#39;parameters&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+<span class="lineno">6</span>             <span class="s1">&#39;layoutTemplate&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;some/other/layout&#39;</span><span class="p">,</span>
+<span class="lineno">7</span>         <span class="p">),</span>
+<span class="lineno">8</span>     <span class="p">),</span>
+<span class="lineno">9</span> <span class="p">)));</span>
+</pre></div>
+
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>This could be in your module, or your overrides under config/autoload/</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Views.md">Zf2Views.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              25/46
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Views.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code smaller-code">
+          <div class="inner">
+            
+            <header><h2>Choose an alternate layout</h2></header>
+            
+            
+            <section><p>From a controller:</p>
+<div class="highlight"><pre><span class="lineno"> 1</span> <span class="cp">&lt;?php</span>
+<span class="lineno"> 2</span> <span class="k">use</span> <span class="nx">Zend\Mvc\Controller\ActionController</span><span class="p">;</span>
+<span class="lineno"> 3</span> 
+<span class="lineno"> 4</span> <span class="k">class</span> <span class="nc">HelloController</span> <span class="k">extends</span> <span class="nx">ActionController</span>
+<span class="lineno"> 5</span> <span class="p">{</span>
+<span class="lineno"> 6</span>     <span class="k">public</span> <span class="k">function</span> <span class="nf">worldAction</span><span class="p">()</span>
+<span class="lineno"> 7</span>     <span class="p">{</span>
+<span class="lineno"> 8</span>         <span class="c1">// ...</span>
+<span class="lineno"> 9</span> 
+<span class="lineno">10</span>         <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">layout</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">setTemplate</span><span class="p">(</span><span class="s1">&#39;some/other/template&#39;</span><span class="p">);</span>
+<span class="lineno">11</span> 
+<span class="lineno">12</span>         <span class="c1">// ...</span>
+<span class="lineno">13</span>     <span class="p">}</span>
+<span class="lineno">14</span> <span class="p">}</span>
+</pre></div>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Views.md">Zf2Views.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              26/46
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Views.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code smaller-code">
+          <div class="inner">
+            
+            <header><h2>Choose an alternate layout</h2></header>
+            
+            
+            <section><p>From a view script:</p>
+<div class="highlight"><pre><span class="lineno">1</span> <span class="cp">&lt;?php</span>
+<span class="lineno">2</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">layout</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">setTemplate</span><span class="p">(</span><span class="s1">&#39;some/other/template&#39;</span><span class="p">);</span>
+</pre></div>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Views.md">Zf2Views.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              27/46
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Views.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code smaller-code">
+          <div class="inner">
+            
+            <header><h2>Choose an alternate layout</h2></header>
+            
+            
+            <section><p>For an entire module:</p>
+<div class="highlight"><pre><span class="lineno"> 1</span> <span class="cp">&lt;?php</span>
+<span class="lineno"> 2</span> <span class="k">namespace</span> <span class="nx">Custom</span><span class="p">;</span>
+<span class="lineno"> 3</span> 
+<span class="lineno"> 4</span> <span class="k">class</span> <span class="nc">Module</span> <span class="p">{</span>
+<span class="lineno"> 5</span>     <span class="k">public</span> <span class="k">function</span> <span class="nf">onRouteFinish</span><span class="p">(</span><span class="nv">$e</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno"> 6</span>         <span class="nv">$match</span>      <span class="o">=</span> <span class="nv">$e</span><span class="o">-&gt;</span><span class="na">getRouteMatch</span><span class="p">();</span>
+<span class="lineno"> 7</span>         <span class="nv">$controller</span> <span class="o">=</span> <span class="nv">$match</span><span class="o">-&gt;</span><span class="na">getParam</span><span class="p">(</span><span class="s1">&#39;controller&#39;</span><span class="p">);</span>
+<span class="lineno"> 8</span>         <span class="nv">$segments</span>   <span class="o">=</span> <span class="nb">explode</span><span class="p">(</span><span class="s1">&#39;\\&#39;</span><span class="p">,</span> <span class="nv">$controller</span><span class="p">);</span>
+<span class="lineno"> 9</span>         <span class="nv">$namespace</span>  <span class="o">=</span> <span class="nb">array_shift</span><span class="p">(</span><span class="nv">$segments</span><span class="p">);</span>
+<span class="lineno">10</span>         <span class="k">if</span> <span class="p">(</span><span class="nv">$namespace</span> <span class="o">!=</span> <span class="nx">__NAMESPACE__</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno">11</span>             <span class="k">return</span><span class="p">;</span>
+<span class="lineno">12</span>         <span class="p">}</span>
+<span class="lineno">13</span>         <span class="nv">$e</span><span class="o">-&gt;</span><span class="na">getViewModel</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">setTemplate</span><span class="p">(</span><span class="s1">&#39;some/other/template&#39;</span><span class="p">);</span>
+<span class="lineno">14</span>     <span class="p">}</span>
+<span class="lineno">15</span> <span class="p">}</span>
+</pre></div>
+
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>Basically, if we have a controller from our namespace, use an alternate layout
+  template</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Views.md">Zf2Views.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              28/46
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Views.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code smaller-code">
+          <div class="inner">
+            
+            <header><h2>Use multiple view models</h2></header>
+            
+            
+            <section><p>Add a sidebar:</p>
+<div class="highlight"><pre><span class="lineno"> 1</span> <span class="cp">&lt;?php</span>
+<span class="lineno"> 2</span> <span class="k">use</span> <span class="nx">Zend\Mvc\Controller\ActionController</span><span class="p">;</span>
+<span class="lineno"> 3</span> <span class="k">use</span> <span class="nx">Zend\View\Model\ViewModel</span><span class="p">;</span>
+<span class="lineno"> 4</span> 
+<span class="lineno"> 5</span> <span class="k">class</span> <span class="nc">HelloController</span> <span class="k">extends</span> <span class="nx">ActionController</span>
+<span class="lineno"> 6</span> <span class="p">{</span>
+<span class="lineno"> 7</span>     <span class="k">public</span> <span class="k">function</span> <span class="nf">worldAction</span><span class="p">()</span>
+<span class="lineno"> 8</span>     <span class="p">{</span>
+<span class="lineno"> 9</span>         <span class="nv">$sidebar</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ViewModel</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getMenuData</span><span class="p">());</span>
+<span class="lineno">10</span>         <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">layout</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">addChild</span><span class="p">(</span><span class="nv">$sidebar</span><span class="p">,</span> <span class="s1">&#39;sidebar&#39;</span><span class="p">);</span>
+<span class="lineno">11</span> 
+<span class="lineno">12</span>         <span class="k">return</span> <span class="k">new</span> <span class="nx">ViewModel</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+<span class="lineno">13</span>             <span class="s1">&#39;message&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Hello, world!&#39;</span><span class="p">,</span>
+<span class="lineno">14</span>         <span class="p">));</span>
+<span class="lineno">15</span>     <span class="p">}</span>
+<span class="lineno">16</span> <span class="p">}</span>
+</pre></div>
+
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>When rendering, both the "content" view model and the "sidebar" view model will
+  be rendered and captured into the layout view model, prior to rendering the
+  layout view model.</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Views.md">Zf2Views.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              29/46
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Views.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code smaller-code">
+          <div class="inner">
+            
+            <header><h2>Use multiple view models</h2></header>
+            
+            
+            <section><p>Add several models:</p>
+<div class="highlight"><pre><span class="lineno"> 1</span> <span class="cp">&lt;?php</span>
+<span class="lineno"> 2</span> <span class="k">use</span> <span class="nx">Zend\Mvc\Controller\ActionController</span><span class="p">;</span>
+<span class="lineno"> 3</span> <span class="k">use</span> <span class="nx">Zend\View\Model\ViewModel</span><span class="p">;</span>
+<span class="lineno"> 4</span> 
+<span class="lineno"> 5</span> <span class="k">class</span> <span class="nc">HelloController</span> <span class="k">extends</span> <span class="nx">ActionController</span>
+<span class="lineno"> 6</span> <span class="p">{</span>
+<span class="lineno"> 7</span>     <span class="k">public</span> <span class="k">function</span> <span class="nf">worldAction</span><span class="p">()</span>
+<span class="lineno"> 8</span>     <span class="p">{</span>
+<span class="lineno"> 9</span>         <span class="nv">$nav</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ViewModel</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getNavData</span><span class="p">());</span>
+<span class="lineno">10</span>         <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">layout</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">addChild</span><span class="p">(</span><span class="nv">$nav</span><span class="p">,</span> <span class="s1">&#39;nav&#39;</span><span class="p">);</span>
+<span class="lineno">11</span> 
+<span class="lineno">12</span>         <span class="nv">$sidebar</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ViewModel</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getMenuData</span><span class="p">());</span>
+<span class="lineno">13</span>         <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">layout</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">addChild</span><span class="p">(</span><span class="nv">$sidebar</span><span class="p">,</span> <span class="s1">&#39;sidebar&#39;</span><span class="p">);</span>
+<span class="lineno">14</span> 
+<span class="lineno">15</span>         <span class="nv">$footer</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ViewModel</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getFooterData</span><span class="p">());</span>
+<span class="lineno">16</span>         <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">layout</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">addChild</span><span class="p">(</span><span class="nv">$footer</span><span class="p">,</span> <span class="s1">&#39;footer&#39;</span><span class="p">);</span>
+<span class="lineno">17</span> 
+<span class="lineno">18</span>         <span class="k">return</span> <span class="k">new</span> <span class="nx">ViewModel</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+<span class="lineno">19</span>             <span class="s1">&#39;message&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Hello, world!&#39;</span><span class="p">,</span>
+<span class="lineno">20</span>         <span class="p">));</span>
+<span class="lineno">21</span>     <span class="p">}</span>
+<span class="lineno">22</span> <span class="p">}</span>
+</pre></div>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Views.md">Zf2Views.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              30/46
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Views.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code smaller-code">
+          <div class="inner">
+            
+            <header><h2>Render without a layout</h2></header>
+            
+            
+            <section><p>Mark the ViewModel as "terminal":</p>
+<div class="highlight"><pre><span class="lineno"> 1</span> <span class="cp">&lt;?php</span>
+<span class="lineno"> 2</span> <span class="k">use</span> <span class="nx">Zend\Mvc\Controller\ActionController</span><span class="p">;</span>
+<span class="lineno"> 3</span> <span class="k">use</span> <span class="nx">Zend\View\Model\ViewModel</span><span class="p">;</span>
+<span class="lineno"> 4</span> 
+<span class="lineno"> 5</span> <span class="k">class</span> <span class="nc">HelloController</span> <span class="k">extends</span> <span class="nx">ActionController</span>
+<span class="lineno"> 6</span> <span class="p">{</span>
+<span class="lineno"> 7</span>     <span class="k">public</span> <span class="k">function</span> <span class="nf">worldAction</span><span class="p">()</span>
+<span class="lineno"> 8</span>     <span class="p">{</span>
+<span class="lineno"> 9</span>         <span class="nv">$model</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ViewModel</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+<span class="lineno">10</span>             <span class="s1">&#39;message&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Hello, world!&#39;</span><span class="p">,</span>
+<span class="lineno">11</span>         <span class="p">));</span>
+<span class="lineno">12</span>         <span class="nv">$model</span><span class="o">-&gt;</span><span class="na">setTerminal</span><span class="p">(</span><span class="k">true</span><span class="p">);</span>
+<span class="lineno">13</span>         <span class="k">return</span> <span class="nv">$model</span><span class="p">;</span>
+<span class="lineno">14</span>     <span class="p">}</span>
+<span class="lineno">15</span> <span class="p">}</span>
+</pre></div>
+
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>"terminal" model is now considered the new "root" from which to begin
+  rendering; the layout will be skipped.</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Views.md">Zf2Views.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              31/46
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Views.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code smaller-code">
+          <div class="inner">
+            
+            <header><h2>Don't render a view</h2></header>
+            
+            
+            <section><p>Simply return a Response at any time:</p>
+<div class="highlight"><pre><span class="lineno"> 1</span> <span class="cp">&lt;?php</span>
+<span class="lineno"> 2</span> <span class="k">use</span> <span class="nx">Zend\Mvc\Controller\ActionController</span><span class="p">;</span>
+<span class="lineno"> 3</span> 
+<span class="lineno"> 4</span> <span class="k">class</span> <span class="nc">HelloController</span> <span class="k">extends</span> <span class="nx">ActionController</span>
+<span class="lineno"> 5</span> <span class="p">{</span>
+<span class="lineno"> 6</span>     <span class="k">public</span> <span class="k">function</span> <span class="nf">worldAction</span><span class="p">()</span>
+<span class="lineno"> 7</span>     <span class="p">{</span>
+<span class="lineno"> 8</span>         <span class="c1">// Optionally, give a status code, or populate it</span>
+<span class="lineno"> 9</span>         <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getResponse</span><span class="p">();</span>
+<span class="lineno">10</span>     <span class="p">}</span>
+<span class="lineno">11</span> <span class="p">}</span>
+</pre></div>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Views.md">Zf2Views.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              32/46
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Views.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Handling Alternate Content Types</h1></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Views.md">Zf2Views.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              33/46
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Views.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>An egg is not always an egg</h2></header>
+            
+            
+            <section><p><img alt="Eggs" src="images/EggCooks.gif" title="Eggs" /></p>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>Some like scrambled, some like poached, etc.</li>
+<li>Same with requests -- sometimes we want HTML, sometimes JSON, sometimes feeds</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Views.md">Zf2Views.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              34/46
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Views.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Serving JSON</h2></header>
+            
+            
+            <section><p>Enter the <code>JsonStrategy</code></p>
+<ul>
+<li>If a <code>JsonModel</code> is returned, use the <code>JsonRenderer</code></li>
+<li>If the Accept header prefers <code>application/json</code>, use the <code>JsonRenderer</code></li>
+<li>Disables the layout, and renders a nested JSON object based on the model and
+  its children</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Views.md">Zf2Views.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              35/46
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Views.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code smaller-code">
+          <div class="inner">
+            
+            <header><h2>Serving JSON</h2></header>
+            
+            
+            <section><div class="highlight"><pre><span class="lineno"> 1</span> <span class="cp">&lt;?php</span>
+<span class="lineno"> 2</span> <span class="k">use</span> <span class="nx">Zend\View\Strategy\JsonStrategy</span><span class="p">;</span>
+<span class="lineno"> 3</span> 
+<span class="lineno"> 4</span> <span class="c1">// In a Module class...</span>
+<span class="lineno"> 5</span> <span class="k">public</span> <span class="k">function</span> <span class="nf">onRouteFinish</span><span class="p">(</span><span class="nv">$e</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno"> 6</span>     <span class="c1">// ... match namespace ...</span>
+<span class="lineno"> 7</span>     <span class="nv">$app</span>     <span class="o">=</span> <span class="nv">$e</span><span class="o">-&gt;</span><span class="na">getTarget</span><span class="p">();</span>
+<span class="lineno"> 8</span>     <span class="nv">$locator</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">getLocator</span><span class="p">();</span>
+<span class="lineno"> 9</span>     <span class="nv">$view</span>    <span class="o">=</span> <span class="nv">$locator</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;Zend\View\View&#39;</span><span class="p">);</span>
+<span class="lineno">10</span>     <span class="nv">$json</span>    <span class="o">=</span> <span class="nv">$locator</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;Zend\View\Strategy\JsonStrategy&#39;</span><span class="p">);</span>
+<span class="lineno">11</span>     <span class="nv">$view</span><span class="o">-&gt;</span><span class="na">attach</span><span class="p">(</span><span class="nv">$json</span><span class="p">,</span> <span class="mi">100</span><span class="p">);</span>
+<span class="lineno">12</span> <span class="p">}</span>
+</pre></div>
+
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>High priority means it will match before the PhpRenderer, but fall through to
+  the PhpRenderer if unable to match</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Views.md">Zf2Views.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              36/46
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Views.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Serving Feeds</h2></header>
+            
+            
+            <section><p>Enter the <code>FeedStrategy</code></p>
+<ul>
+<li>If a <code>FeedModel</code> is returned, use the <code>FeedRenderer</code></li>
+<li>If the Accept header prefers <code>application/atom+xml</code> or <code>application/rss+xml</code>,
+  use the <code>FeedRenderer</code></li>
+<li>Disables the layout, and renders a Feed, based on the contents of the
+  <code>ViewModel</code> or <code>FeedModel</code> provided</li>
+</ul>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>The FeedModel can either compose a <code>Zend\Feed\Writer\Feed</code> object, or build
+  one using <code>Zend\Feed\Writer\FeedFactory</code> based on the variables assigned.</li>
+<li>Enabling it is exactly the same as for the <code>JsonStrategy</code></li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Views.md">Zf2Views.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              37/46
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Views.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Combined Strategies</h2></header>
+            
+            
+            <section><ul>
+<li>You should be paying attention to Accept priority</li>
+<li>Having a single rendering strategy is faster and easier to test</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Views.md">Zf2Views.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              38/46
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Views.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code smaller-code">
+          <div class="inner">
+            
+            <header><h2>Combined Strategies Example</h2></header>
+            
+            
+            <section><div class="highlight"><pre><span class="lineno"> 1</span> <span class="cp">&lt;?php</span>
+<span class="lineno"> 2</span> <span class="k">class</span> <span class="nc">CustomStrategy</span> <span class="k">implements</span> <span class="nx">ListenerAggregate</span> <span class="p">{</span>
+<span class="lineno"> 3</span>     <span class="k">public</span> <span class="k">function</span> <span class="nf">onRender</span><span class="p">(</span><span class="nv">$e</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno"> 4</span>         <span class="nv">$request</span> <span class="o">=</span> <span class="nv">$e</span><span class="o">-&gt;</span><span class="na">getRequest</span><span class="p">();</span>
+<span class="lineno"> 5</span>         <span class="nv">$headers</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">headers</span><span class="p">();</span>
+<span class="lineno"> 6</span>         <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$headers</span><span class="o">-&gt;</span><span class="na">has</span><span class="p">(</span><span class="s1">&#39;accept&#39;</span><span class="p">))</span> <span class="p">{</span>
+<span class="lineno"> 7</span>             <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">phpRenderer</span><span class="p">;</span>
+<span class="lineno"> 8</span>         <span class="p">}</span>
+<span class="lineno"> 9</span>         <span class="nv">$accept</span> <span class="o">=</span> <span class="nv">$headers</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;accept&#39;</span><span class="p">);</span>
+<span class="lineno">10</span>         <span class="k">foreach</span> <span class="p">(</span><span class="nv">$accept</span><span class="o">-&gt;</span><span class="na">getPrioritized</span><span class="p">()</span> <span class="k">as</span> <span class="nv">$mediaType</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno">11</span>             <span class="k">if</span> <span class="p">(</span><span class="mi">0</span> <span class="o">===</span> <span class="nb">strpos</span><span class="p">(</span><span class="nv">$mediaType</span><span class="p">,</span> <span class="s1">&#39;application/json&#39;</span><span class="p">))</span> <span class="p">{</span>
+<span class="lineno">12</span>                 <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">jsonRenderer</span><span class="p">;</span>
+<span class="lineno">13</span>             <span class="p">}</span>
+<span class="lineno">14</span>             <span class="k">if</span> <span class="p">(</span><span class="mi">0</span> <span class="o">===</span> <span class="nb">strpos</span><span class="p">(</span><span class="nv">$mediaType</span><span class="p">,</span> <span class="s1">&#39;application/rss+xml&#39;</span><span class="p">))</span> <span class="p">{</span>
+<span class="lineno">15</span>                 <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">feedRenderer</span><span class="o">-&gt;</span><span class="na">setFeedType</span><span class="p">(</span><span class="s1">&#39;rss&#39;</span><span class="p">);</span>
+<span class="lineno">16</span>                 <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">feedRenderer</span><span class="p">;</span>
+<span class="lineno">17</span>             <span class="p">}</span>
+<span class="lineno">18</span>             <span class="k">if</span> <span class="p">(</span><span class="mi">0</span> <span class="o">===</span> <span class="nb">strpos</span><span class="p">(</span><span class="nv">$mediaType</span><span class="p">,</span> <span class="s1">&#39;application/atom+xml&#39;</span><span class="p">))</span> <span class="p">{</span>
+<span class="lineno">19</span>                 <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">feedRenderer</span><span class="o">-&gt;</span><span class="na">setFeedType</span><span class="p">(</span><span class="s1">&#39;atom&#39;</span><span class="p">);</span>
+<span class="lineno">20</span>                 <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">feedRenderer</span><span class="p">;</span>
+<span class="lineno">21</span>             <span class="p">}</span>
+<span class="lineno">22</span>         <span class="p">}</span>
+<span class="lineno">23</span>         <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">phpRenderer</span><span class="p">;</span>
+<span class="lineno">24</span>     <span class="p">}</span>
+<span class="lineno">25</span> <span class="p">}</span>
+</pre></div>
+
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>This just shows the renderer selection</li>
+<li>strpos is used to allow vendor extensions to content types</li>
+<li>Full example, including response selection, is in the manual</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Views.md">Zf2Views.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              39/46
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Views.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Things the View Layer Does Not Do (Yet)</h1></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Views.md">Zf2Views.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              40/46
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Views.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code smaller-code">
+          <div class="inner">
+            
+            <header><h2>Helper injection</h2></header>
+            
+            
+            <section><p>This sort of thing is still necessary:</p>
+<div class="highlight"><pre><span class="lineno"> 1</span> <span class="cp">&lt;?php</span>
+<span class="lineno"> 2</span> <span class="k">public</span> <span class="k">function</span> <span class="nf">onBootsrap</span><span class="p">(</span><span class="nv">$e</span><span class="p">)</span>
+<span class="lineno"> 3</span> <span class="p">{</span>
+<span class="lineno"> 4</span>      <span class="nv">$app</span>      <span class="o">=</span> <span class="nv">$e</span><span class="o">-&gt;</span><span class="na">getParam</span><span class="p">(</span><span class="s1">&#39;application&#39;</span><span class="p">);</span>
+<span class="lineno"> 5</span>      <span class="nv">$basePath</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">getRequest</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">getBasePath</span><span class="p">();</span>
+<span class="lineno"> 6</span>      <span class="nv">$locator</span>  <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">getLocator</span><span class="p">();</span>
+<span class="lineno"> 7</span>      <span class="nv">$renderer</span> <span class="o">=</span> <span class="nv">$locator</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;Zend\View\Renderer\PhpRenderer&#39;</span><span class="p">);</span>
+<span class="lineno"> 8</span>      <span class="nv">$router</span>   <span class="o">=</span> <span class="nv">$locator</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;Zend\Mvc\Router\RouteStack&#39;</span><span class="p">);</span>
+<span class="lineno"> 9</span>      <span class="nv">$renderer</span><span class="o">-&gt;</span><span class="na">plugin</span><span class="p">(</span><span class="s1">&#39;basePath&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">setBasePath</span><span class="p">(</span><span class="nv">$basePath</span><span class="p">);</span>
+<span class="lineno">10</span>      <span class="nv">$renderer</span><span class="o">-&gt;</span><span class="na">plugin</span><span class="p">(</span><span class="s1">&#39;doctype&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">setDoctype</span><span class="p">(</span><span class="s1">&#39;HTML5&#39;</span><span class="p">);</span>
+<span class="lineno">11</span>      <span class="nv">$renderer</span><span class="o">-&gt;</span><span class="na">plugin</span><span class="p">(</span><span class="s1">&#39;url&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">setRouter</span><span class="p">(</span><span class="nv">$router</span><span class="p">);</span>
+<span class="lineno">12</span> <span class="p">}</span>
+</pre></div>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Views.md">Zf2Views.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              41/46
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Views.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code smaller-code">
+          <div class="inner">
+            
+            <header><h2>Layout variable hinting</h2></header>
+            
+            
+            <section><p>Seed the layout with some configuration:</p>
+<div class="highlight"><pre><span class="lineno">1</span> <span class="cp">&lt;?php</span>
+<span class="lineno">2</span> <span class="k">public</span> <span class="k">function</span> <span class="nf">onBootsrap</span><span class="p">(</span><span class="nv">$e</span><span class="p">)</span>
+<span class="lineno">3</span> <span class="p">{</span>
+<span class="lineno">4</span>     <span class="nv">$app</span>      <span class="o">=</span> <span class="nv">$e</span><span class="o">-&gt;</span><span class="na">getParam</span><span class="p">(</span><span class="s1">&#39;application&#39;</span><span class="p">);</span>
+<span class="lineno">5</span>     <span class="c1">// ...</span>
+<span class="lineno">6</span>     <span class="nv">$config</span>    <span class="o">=</span> <span class="nv">$e</span><span class="o">-&gt;</span><span class="na">getParam</span><span class="p">(</span><span class="s1">&#39;config&#39;</span><span class="p">);</span>
+<span class="lineno">7</span>     <span class="nv">$viewModel</span> <span class="o">=</span> <span class="nv">$application</span><span class="o">-&gt;</span><span class="na">getMvcEvent</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">getViewModel</span><span class="p">();</span>
+<span class="lineno">8</span>     <span class="nv">$viewModel</span><span class="o">-&gt;</span><span class="na">config</span> <span class="o">=</span> <span class="nv">$config</span><span class="o">-&gt;</span><span class="na">layout</span><span class="p">;</span>
+<span class="lineno">9</span> <span class="p">}</span>
+</pre></div>
+
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>Allows creating a top-level assoc array under the "layout" key with
+  layout-specific variables, or variables you want to use everywhere</li>
+<li>Thanks to Rob Allen for the idea!</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Views.md">Zf2Views.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              42/46
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Views.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Wrapping Up</h1></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Views.md">Zf2Views.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              43/46
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Views.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>What we covered</h2></header>
+            
+            
+            <section><ul>
+<li>Assemble ingredients (view models)</li>
+<li>Provide recipes (resolvers)</li>
+<li>Prepare the recipe from the ingredients (renderers)<ul>
+<li>Have some prep cooks around to assist (helpers)</li>
+</ul>
+</li>
+<li>Have a top-notch waiter to take orders and provide a nice presentation (view)</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Views.md">Zf2Views.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              44/46
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Views.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Resources</h2></header>
+            
+            
+            <section><ul>
+<li>This presentation:<ul>
+<li>http://mwop.net/slides/2012-04-25-ViewWebinar/Zf2Views.html</li>
+</ul>
+</li>
+<li>Zend\View quick start:<ul>
+<li>http://bit.ly/I4cfjs</li>
+</ul>
+</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Views.md">Zf2Views.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              45/46
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2Views.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Thank You!</h1></header>
+            
+            
+            <section><ul>
+<li>Feedback?<ul>
+<li>http://framework.zend.com/zf2</li>
+<li>http://twitter.com/weierophinney</li>
+</ul>
+</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2Views.md">Zf2Views.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              46/46
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div id="toc" class="sidebar hidden">
+    <h2>Table of Contents</h2>
+    <table>
+      <caption>Table of Contents</caption>
+      
+      <tr id="toc-row-1">
+        <th><a href="#slide1">Views, Renderers, Resolvers, Oh, My!</a></th>
+        <td><a href="#slide1">1</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-2">
+        <th><a href="#slide2">Who am I?</a></th>
+        <td><a href="#slide2">2</a></td>
+      </tr>
+      
+        
+        <tr id="toc-row-3" class="sub">
+          <th><a href="#slide3">Why a new View Layer?</a></th>
+          <td><a href="#slide3">3</a></td>
+        </tr>
+        
+        <tr id="toc-row-4" class="sub">
+          <th><a href="#slide4">Why a new View Layer?</a></th>
+          <td><a href="#slide4">4</a></td>
+        </tr>
+        
+      
+      
+      <tr id="toc-row-5">
+        <th><a href="#slide5">A New Architecture</a></th>
+        <td><a href="#slide5">5</a></td>
+      </tr>
+      
+        
+        <tr id="toc-row-6" class="sub">
+          <th><a href="#slide6">View Models</a></th>
+          <td><a href="#slide6">6</a></td>
+        </tr>
+        
+        <tr id="toc-row-7" class="sub">
+          <th><a href="#slide7">Resolvers</a></th>
+          <td><a href="#slide7">7</a></td>
+        </tr>
+        
+        <tr id="toc-row-8" class="sub">
+          <th><a href="#slide8">Renderers</a></th>
+          <td><a href="#slide8">8</a></td>
+        </tr>
+        
+        <tr id="toc-row-9" class="sub">
+          <th><a href="#slide9">Helpers</a></th>
+          <td><a href="#slide9">9</a></td>
+        </tr>
+        
+        <tr id="toc-row-10" class="sub">
+          <th><a href="#slide10">View</a></th>
+          <td><a href="#slide10">10</a></td>
+        </tr>
+        
+      
+      
+      <tr id="toc-row-11">
+        <th><a href="#slide11">Default MVC Integration</a></th>
+        <td><a href="#slide11">11</a></td>
+      </tr>
+      
+        
+        <tr id="toc-row-12" class="sub">
+          <th><a href="#slide12">Goals</a></th>
+          <td><a href="#slide12">12</a></td>
+        </tr>
+        
+        <tr id="toc-row-13" class="sub">
+          <th><a href="#slide13">Layouts</a></th>
+          <td><a href="#slide13">13</a></td>
+        </tr>
+        
+        <tr id="toc-row-14" class="sub">
+          <th><a href="#slide14">404 Pages</a></th>
+          <td><a href="#slide14">14</a></td>
+        </tr>
+        
+        <tr id="toc-row-15" class="sub">
+          <th><a href="#slide15">Application Error Pages</a></th>
+          <td><a href="#slide15">15</a></td>
+        </tr>
+        
+        <tr id="toc-row-16" class="sub">
+          <th><a href="#slide16">Action Views</a></th>
+          <td><a href="#slide16">16</a></td>
+        </tr>
+        
+        <tr id="toc-row-17" class="sub">
+          <th><a href="#slide17">Rendering and Response Injection</a></th>
+          <td><a href="#slide17">17</a></td>
+        </tr>
+        
+        <tr id="toc-row-18" class="sub">
+          <th><a href="#slide18">Summary</a></th>
+          <td><a href="#slide18">18</a></td>
+        </tr>
+        
+      
+      
+      <tr id="toc-row-19">
+        <th><a href="#slide19">Common Tasks</a></th>
+        <td><a href="#slide19">19</a></td>
+      </tr>
+      
+        
+        <tr id="toc-row-20" class="sub">
+          <th><a href="#slide20">Configure Resolvers</a></th>
+          <td><a href="#slide20">20</a></td>
+        </tr>
+        
+        <tr id="toc-row-21" class="sub">
+          <th><a href="#slide21">Resolver Configuration</a></th>
+          <td><a href="#slide21">21</a></td>
+        </tr>
+        
+        <tr id="toc-row-22" class="sub">
+          <th><a href="#slide22">Controllers: Provide data to the view</a></th>
+          <td><a href="#slide22">22</a></td>
+        </tr>
+        
+        <tr id="toc-row-23" class="sub">
+          <th><a href="#slide23">Controllers: Provide data to the view</a></th>
+          <td><a href="#slide23">23</a></td>
+        </tr>
+        
+        <tr id="toc-row-24" class="sub">
+          <th><a href="#slide24">Controllers: Provide data to the view</a></th>
+          <td><a href="#slide24">24</a></td>
+        </tr>
+        
+        <tr id="toc-row-25" class="sub">
+          <th><a href="#slide25">Choose an alternate layout</a></th>
+          <td><a href="#slide25">25</a></td>
+        </tr>
+        
+        <tr id="toc-row-26" class="sub">
+          <th><a href="#slide26">Choose an alternate layout</a></th>
+          <td><a href="#slide26">26</a></td>
+        </tr>
+        
+        <tr id="toc-row-27" class="sub">
+          <th><a href="#slide27">Choose an alternate layout</a></th>
+          <td><a href="#slide27">27</a></td>
+        </tr>
+        
+        <tr id="toc-row-28" class="sub">
+          <th><a href="#slide28">Choose an alternate layout</a></th>
+          <td><a href="#slide28">28</a></td>
+        </tr>
+        
+        <tr id="toc-row-29" class="sub">
+          <th><a href="#slide29">Use multiple view models</a></th>
+          <td><a href="#slide29">29</a></td>
+        </tr>
+        
+        <tr id="toc-row-30" class="sub">
+          <th><a href="#slide30">Use multiple view models</a></th>
+          <td><a href="#slide30">30</a></td>
+        </tr>
+        
+        <tr id="toc-row-31" class="sub">
+          <th><a href="#slide31">Render without a layout</a></th>
+          <td><a href="#slide31">31</a></td>
+        </tr>
+        
+        <tr id="toc-row-32" class="sub">
+          <th><a href="#slide32">Don't render a view</a></th>
+          <td><a href="#slide32">32</a></td>
+        </tr>
+        
+      
+      
+      <tr id="toc-row-33">
+        <th><a href="#slide33">Handling Alternate Content Types</a></th>
+        <td><a href="#slide33">33</a></td>
+      </tr>
+      
+        
+        <tr id="toc-row-34" class="sub">
+          <th><a href="#slide34">An egg is not always an egg</a></th>
+          <td><a href="#slide34">34</a></td>
+        </tr>
+        
+        <tr id="toc-row-35" class="sub">
+          <th><a href="#slide35">Serving JSON</a></th>
+          <td><a href="#slide35">35</a></td>
+        </tr>
+        
+        <tr id="toc-row-36" class="sub">
+          <th><a href="#slide36">Serving JSON</a></th>
+          <td><a href="#slide36">36</a></td>
+        </tr>
+        
+        <tr id="toc-row-37" class="sub">
+          <th><a href="#slide37">Serving Feeds</a></th>
+          <td><a href="#slide37">37</a></td>
+        </tr>
+        
+        <tr id="toc-row-38" class="sub">
+          <th><a href="#slide38">Combined Strategies</a></th>
+          <td><a href="#slide38">38</a></td>
+        </tr>
+        
+        <tr id="toc-row-39" class="sub">
+          <th><a href="#slide39">Combined Strategies Example</a></th>
+          <td><a href="#slide39">39</a></td>
+        </tr>
+        
+      
+      
+      <tr id="toc-row-40">
+        <th><a href="#slide40">Things the View Layer Does Not Do (Yet)</a></th>
+        <td><a href="#slide40">40</a></td>
+      </tr>
+      
+        
+        <tr id="toc-row-41" class="sub">
+          <th><a href="#slide41">Helper injection</a></th>
+          <td><a href="#slide41">41</a></td>
+        </tr>
+        
+        <tr id="toc-row-42" class="sub">
+          <th><a href="#slide42">Layout variable hinting</a></th>
+          <td><a href="#slide42">42</a></td>
+        </tr>
+        
+      
+      
+      <tr id="toc-row-43">
+        <th><a href="#slide43">Wrapping Up</a></th>
+        <td><a href="#slide43">43</a></td>
+      </tr>
+      
+        
+        <tr id="toc-row-44" class="sub">
+          <th><a href="#slide44">What we covered</a></th>
+          <td><a href="#slide44">44</a></td>
+        </tr>
+        
+        <tr id="toc-row-45" class="sub">
+          <th><a href="#slide45">Resources</a></th>
+          <td><a href="#slide45">45</a></td>
+        </tr>
+        
+      
+      
+      <tr id="toc-row-46">
+        <th><a href="#slide46">Thank You!</a></th>
+        <td><a href="#slide46">46</a></td>
+      </tr>
+      
+      
+    </table>
+  </div>
+  
+  <div id="help" class="sidebar hidden">
+    <h2>Help</h2>
+    <table>
+      <caption>Help</caption>
+      <tr>
+        <th>Table of Contents</th>
+        <td>t</td>
+      </tr>
+      <tr>
+        <th>Exposé</th>
+        <td>ESC</td>
+      </tr>
+      <tr>
+        <th>Full screen slides</th>
+        <td>e</td>
+      </tr>
+      <tr>
+        <th>Presenter View</th>
+        <td>p</td>
+      </tr>
+      <tr>
+        <th>Source Files</th>
+        <td>s</td>
+      </tr>
+      <tr>
+        <th>Slide Numbers</th>
+        <td>n</td>
+      </tr>
+      <tr>
+        <th>Toggle screen blanking</th>
+        <td>b</td>
+      </tr>
+      <tr>
+        <th>Show/hide slide context</th>
+        <td>c</td>
+      </tr>
+      <tr>
+        <th>Notes</th>
+        <td>2</td>
+      </tr>
+      <tr>
+        <th>Help</th>
+        <td>h</td>
+      </tr>
+    </table>
+  </div>
+  <script>main()</script>
+</body>
+</html>
