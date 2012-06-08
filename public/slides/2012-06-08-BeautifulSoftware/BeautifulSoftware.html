@@ -1,0 +1,3341 @@
+<!DOCTYPE html>
+<!--
+  Copyright 2010 Google Inc.
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+
+  Original slides: Marcin Wichary (mwichary@google.com)
+  Modifications: Ernest Delgado (ernestd@google.com)
+                 Alex Russell (slightlyoff@chromium.org)
+
+  landslide modifications: Adam Zapletal (adamzap@gmail.com)
+                           Nicolas Perriault (nperriault@gmail.com)
+-->
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Designing Beautiful Software</title>
+    <!-- Styles -->
+    
+    <link rel="stylesheet" media="print" href="/usr/local/lib/python2.7/dist-packages/landslide-1.0.1-py2.7.egg/landslide/themes/default/css/print.css">
+    <link rel="stylesheet" media="screen, projection" href="theme/css/screen.css">
+    
+    
+    <!-- /Styles -->
+    <!-- Javascripts -->
+    
+    <script type="text/javascript" src="theme/js/slides.js"></script>
+    
+    
+      
+      <script type="text/javascript" src="./theme/js/dojo.js"></script>
+      
+    
+      
+      <script type="text/javascript" src="./theme/js/custom.js"></script>
+      
+    
+    <!-- /Javascripts -->
+</head>
+<body>
+  <div id="blank"></div>
+  <div class="presentation">
+    <div id="current_presenter_notes">
+      <div id="presenter_note"></div>
+    </div>
+    <div class="slides">
+      
+      <!-- slide source: BeautifulSoftware.md -->
+      <div class="slide-wrapper">
+        <div class="slide titleslide">
+          <div class="inner">
+            
+            <header><h1>Designing Beautiful Software</h1></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="BeautifulSoftware.md">BeautifulSoftware.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              1/78
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: BeautifulSoftware.md -->
+      <div class="slide-wrapper">
+        <div class="slide image-right">
+          <div class="inner">
+            
+            <header><h1>Who am I?</h1></header>
+            
+            
+            <section><p>Matthew Weier O'Phinney</p>
+<p><img alt="Matthew Weier O'Phinney" src="images/mwop.png" title="Matthew Weier O'Phinney" /></p>
+<ul>
+<li>Project Lead, Zend Framework</li>
+<li>PHP Developer</li>
+<li>http://mwop.net/</li>
+<li>@weierophinney</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="BeautifulSoftware.md">BeautifulSoftware.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              2/78
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: BeautifulSoftware.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Four Years Ago...</h1></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="BeautifulSoftware.md">BeautifulSoftware.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              3/78
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: BeautifulSoftware.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            
+            <section><p><img alt="Terry Chay" src="images/chay-small.jpg" title="Terry Chay" /></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="BeautifulSoftware.md">BeautifulSoftware.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              4/78
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: BeautifulSoftware.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>A ball of nails</h2></header>
+            
+            
+            <section><p><img alt="Ball of nails" src="images/spiky_ball.jpg" title="Ball of nails" /></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="BeautifulSoftware.md">BeautifulSoftware.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              5/78
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: BeautifulSoftware.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>What is Beauty</h1></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="BeautifulSoftware.md">BeautifulSoftware.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              6/78
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: BeautifulSoftware.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>What is beautiful software design?</h2></header>
+            
+            
+            <section><p><img alt="Plato" src="images/plato-small.png" /></p>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>Talk about Plato's ideas of the Good and Beauty</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="BeautifulSoftware.md">BeautifulSoftware.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              7/78
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: BeautifulSoftware.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>What is beautiful software design?</h2></header>
+            
+            
+            <section><p><img alt="Not Plato" src="images/plato-no.png" title="We're not talking about Plato today" /></p>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>We're not going to talk philosophy today, really</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="BeautifulSoftware.md">BeautifulSoftware.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              8/78
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: BeautifulSoftware.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>What is beautiful software design?</h2></header>
+            
+            
+            <section><p><img alt="Software" src="images/SoftwareImage.jpg" title="Software" /></p>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>We're talking about software, and how to make it beautiful</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="BeautifulSoftware.md">BeautifulSoftware.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              9/78
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: BeautifulSoftware.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Software Evolution</h2></header>
+            
+            
+            <section><p><img alt="How to go from code monkey to architect" src="images/evolution1.png" title="or, how to go from code monkey to architect" /></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="BeautifulSoftware.md">BeautifulSoftware.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              10/78
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: BeautifulSoftware.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Examining a real-world problem</h1></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>The Socratic method uses questions, and keeps questioning until truths are
+  ferreted out. That's what we're going to do here.</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="BeautifulSoftware.md">BeautifulSoftware.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              11/78
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: BeautifulSoftware.md -->
+      <div class="slide-wrapper">
+        <div class="slide image-right">
+          <div class="inner">
+            
+            <header><h2>Requirements</h2></header>
+            
+            
+            <section><p><img alt="Sending Email" src="images/Sending-Emails.jpg" title="Sending Email" /></p>
+<ul>
+<li>The application needs to send email</li>
+<li>I know the sender is always the same</li>
+<li>I want to BCC an address for verification</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="BeautifulSoftware.md">BeautifulSoftware.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              12/78
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: BeautifulSoftware.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code smaller-code">
+          <div class="inner">
+            
+            
+            <section><div class="highlight"><pre><span class="lineno">1</span> <span class="x">function shop_mail($to, $subject, $body)</span>
+<span class="lineno">2</span> <span class="x">{</span>
+<span class="lineno">3</span> <span class="x">    $headers = &quot;From: shop@example.com\r\n&quot;</span>
+<span class="lineno">4</span> <span class="x">            .= &quot;Bcc: shop-sent@example.com\r\n&quot;;</span>
+<span class="lineno">5</span> <span class="x">    mail($to, $subject, $body, $headers);</span>
+<span class="lineno">6</span> <span class="x">}</span>
+</pre></div>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="BeautifulSoftware.md">BeautifulSoftware.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              13/78
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: BeautifulSoftware.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Is it beautiful?</h2></header>
+            
+            
+            <section><ul>
+<li>It's succinct</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="BeautifulSoftware.md">BeautifulSoftware.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              14/78
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: BeautifulSoftware.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Is it beautiful?</h2></header>
+            
+            
+            <section><ul>
+<li>It's succinct</li>
+<li>It prevents us having to specify <code>$headers</code> manually each call</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="BeautifulSoftware.md">BeautifulSoftware.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              15/78
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: BeautifulSoftware.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Is it beautiful?</h2></header>
+            
+            
+            <section><ul>
+<li>It's succinct</li>
+<li>It prevents us having to specify <code>$headers</code> manually each call</li>
+<li>It's a little more than a wrapper on <code>mail()</code></li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="BeautifulSoftware.md">BeautifulSoftware.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              16/78
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: BeautifulSoftware.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>What if we introduce requirements?</h2></header>
+            
+            
+            <section><ul>
+<li>For instance, we add another shop on a different domain, using much (if not
+  all) the same code.</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="BeautifulSoftware.md">BeautifulSoftware.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              17/78
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: BeautifulSoftware.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>What if we introduce requirements?</h2></header>
+            
+            
+            <section><ul>
+<li>For instance, we add another shop on a different domain, using much (if not
+  all) the same code.</li>
+<li>Now the "From" and "Bcc" addresses need to be different.</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="BeautifulSoftware.md">BeautifulSoftware.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              18/78
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: BeautifulSoftware.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>New problems</h2></header>
+            
+            
+            <section><ul>
+<li>We don't want to change all the places in our code that call this function...</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="BeautifulSoftware.md">BeautifulSoftware.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              19/78
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: BeautifulSoftware.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>New problems</h2></header>
+            
+            
+            <section><ul>
+<li>We don't want to change all the places in our code that call this function...</li>
+<li>... at least, not after this change.</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="BeautifulSoftware.md">BeautifulSoftware.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              20/78
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: BeautifulSoftware.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>New problems</h2></header>
+            
+            
+            <section><ul>
+<li>We don't want to change all the places in our code that call this function...</li>
+<li>... at least, not after this change.</li>
+<li>So, let's introduce a "configuration" parameter.</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="BeautifulSoftware.md">BeautifulSoftware.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              21/78
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: BeautifulSoftware.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code smaller-code">
+          <div class="inner">
+            
+            
+            <section><div class="highlight"><pre><span class="lineno"> 1</span> <span class="cp">&lt;?php</span>
+<span class="lineno"> 2</span> <span class="k">function</span> <span class="nf">shop_mail</span><span class="p">(</span><span class="nv">$to</span><span class="p">,</span> <span class="nv">$subject</span><span class="p">,</span> <span class="nv">$body</span><span class="p">,</span> <span class="nv">$shop</span> <span class="o">=</span> <span class="s1">&#39;original&#39;</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno"> 3</span>     <span class="k">switch</span> <span class="p">(</span><span class="nv">$shop</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno"> 4</span>         <span class="k">case</span><span class="o">:</span> <span class="s1">&#39;subdomain&#39;</span><span class="o">:</span>
+<span class="lineno"> 5</span>             <span class="nv">$from</span> <span class="o">=</span> <span class="s1">&#39;shop@subdomain.example.com&#39;</span><span class="p">;</span>
+<span class="lineno"> 6</span>             <span class="nv">$bcc</span>  <span class="o">=</span> <span class="s1">&#39;shop-sent@subdomain.example.com&#39;</span><span class="p">;</span>
+<span class="lineno"> 7</span>             <span class="k">break</span><span class="p">;</span>
+<span class="lineno"> 8</span>         <span class="k">case</span><span class="o">:</span> <span class="s1">&#39;original&#39;</span><span class="o">:</span>
+<span class="lineno"> 9</span>         <span class="k">default</span><span class="o">:</span>
+<span class="lineno">10</span>             <span class="nv">$from</span> <span class="o">=</span> <span class="s1">&#39;shop@example.com&#39;</span><span class="p">;</span>
+<span class="lineno">11</span>             <span class="nv">$bcc</span>  <span class="o">=</span> <span class="s1">&#39;shop-sent@example.com&#39;</span><span class="p">;</span>
+<span class="lineno">12</span>             <span class="k">break</span><span class="p">;</span>
+<span class="lineno">13</span>     <span class="p">}</span>
+<span class="lineno">14</span> 
+<span class="lineno">15</span>     <span class="nv">$headers</span> <span class="o">=</span> <span class="s2">&quot;From: </span><span class="si">$from</span><span class="se">\r\n</span><span class="s2">&quot;</span>
+<span class="lineno">16</span>             <span class="o">.=</span> <span class="s2">&quot;Bcc: </span><span class="si">$bcc</span><span class="se">\r\n</span><span class="s2">&quot;</span><span class="p">;</span>
+<span class="lineno">17</span>     <span class="nb">mail</span><span class="p">(</span><span class="nv">$to</span><span class="p">,</span> <span class="nv">$subject</span><span class="p">,</span> <span class="nv">$body</span><span class="p">,</span> <span class="nv">$headers</span><span class="p">);</span>
+<span class="lineno">18</span> <span class="p">}</span>
+</pre></div>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="BeautifulSoftware.md">BeautifulSoftware.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              22/78
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: BeautifulSoftware.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Is it beautiful?</h2></header>
+            
+            
+            <section><ul>
+<li>Switch statements will grow, and need to be documented.</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="BeautifulSoftware.md">BeautifulSoftware.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              23/78
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: BeautifulSoftware.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Is it beautiful?</h2></header>
+            
+            
+            <section><ul>
+<li>Switch statements will grow, and need to be documented.</li>
+<li>We need to know what the value of that last argument will be.</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="BeautifulSoftware.md">BeautifulSoftware.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              24/78
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: BeautifulSoftware.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Is it beautiful?</h2></header>
+            
+            
+            <section><ul>
+<li>Switch statements will grow, and need to be documented.</li>
+<li>We need to know what the value of that last argument will be.</li>
+<li>The number of arguments may not justify wrapping <code>mail()</code></li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="BeautifulSoftware.md">BeautifulSoftware.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              25/78
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: BeautifulSoftware.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Evolution: use classes</h1></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="BeautifulSoftware.md">BeautifulSoftware.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              26/78
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: BeautifulSoftware.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code smaller-code">
+          <div class="inner">
+            
+            <header><h2>Base class</h2></header>
+            
+            
+            <section><div class="highlight"><pre><span class="lineno"> 1</span> <span class="cp">&lt;?php</span>
+<span class="lineno"> 2</span> <span class="k">class</span> <span class="nc">ShopMail</span>
+<span class="lineno"> 3</span> <span class="p">{</span>
+<span class="lineno"> 4</span>     <span class="k">protected</span> <span class="k">static</span> <span class="nv">$from</span> <span class="o">=</span> <span class="s1">&#39;shop@example.com&#39;</span><span class="p">;</span>
+<span class="lineno"> 5</span>     <span class="k">protected</span> <span class="k">static</span> <span class="nv">$bcc</span>  <span class="o">=</span> <span class="s1">&#39;shop-sent@example.com&#39;</span><span class="p">;</span>
+<span class="lineno"> 6</span> 
+<span class="lineno"> 7</span>     <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="nf">send</span><span class="p">(</span><span class="nv">$to</span><span class="p">,</span> <span class="nv">$subject</span><span class="p">,</span> <span class="nv">$body</span><span class="p">)</span> 
+<span class="lineno"> 8</span>     <span class="p">{</span>
+<span class="lineno"> 9</span>         <span class="nv">$headers</span> <span class="o">=</span> <span class="s2">&quot;From: &quot;</span> <span class="o">.</span> <span class="k">static</span><span class="o">::</span><span class="nv">$from</span> <span class="o">.</span> <span class="s2">&quot;</span><span class="se">\r\n</span><span class="s2">&quot;</span>
+<span class="lineno">10</span>                 <span class="o">.=</span> <span class="s2">&quot;Bcc: &quot;</span> <span class="o">.</span> <span class="k">static</span><span class="o">::</span><span class="nv">$bcc</span> <span class="o">.</span> <span class="s2">&quot;</span><span class="se">\r\n</span><span class="s2">&quot;</span><span class="p">;</span>
+<span class="lineno">11</span>         <span class="nb">mail</span><span class="p">(</span><span class="nv">$to</span><span class="p">,</span> <span class="nv">$subject</span><span class="p">,</span> <span class="nv">$body</span><span class="p">,</span> <span class="nv">$headers</span><span class="p">);</span>
+<span class="lineno">12</span>     <span class="p">}</span>
+<span class="lineno">13</span> <span class="p">}</span>
+</pre></div>
+
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>Statically done, allowing for Late Static Binding</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="BeautifulSoftware.md">BeautifulSoftware.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              27/78
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: BeautifulSoftware.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code smaller-code">
+          <div class="inner">
+            
+            <header><h2>Extending class</h2></header>
+            
+            
+            <section><div class="highlight"><pre><span class="lineno">1</span> <span class="cp">&lt;?php</span>
+<span class="lineno">2</span> <span class="k">class</span> <span class="nc">SubdomainMail</span> <span class="k">extends</span> <span class="nx">ShopMail</span>
+<span class="lineno">3</span> <span class="p">{</span>
+<span class="lineno">4</span>     <span class="k">protected</span> <span class="k">static</span> <span class="nv">$from</span> <span class="o">=</span> <span class="s1">&#39;shop@subdomain.example.com&#39;</span><span class="p">;</span>
+<span class="lineno">5</span>     <span class="k">protected</span> <span class="k">static</span> <span class="nv">$bcc</span>  <span class="o">=</span> <span class="s1">&#39;shop-sent@subdomain.example.com&#39;</span><span class="p">;</span>
+<span class="lineno">6</span> <span class="p">}</span>
+</pre></div>
+
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>We extend, and modify the static members</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="BeautifulSoftware.md">BeautifulSoftware.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              28/78
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: BeautifulSoftware.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code smaller-code">
+          <div class="inner">
+            
+            <header><h2>Usage</h2></header>
+            
+            
+            <section><div class="highlight"><pre><span class="lineno">1</span> <span class="cp">&lt;?php</span>
+<span class="lineno">2</span> <span class="nb">define</span><span class="p">(</span><span class="s1">&#39;MYENV&#39;</span><span class="p">,</span> <span class="s1">&#39;Subdomain&#39;</span><span class="p">);</span>
+<span class="lineno">3</span> 
+<span class="lineno">4</span> <span class="nv">$mailer</span> <span class="o">=</span> <span class="nx">MYENV</span> <span class="o">.</span> <span class="s1">&#39;Mail::send&#39;</span><span class="p">;</span>
+<span class="lineno">5</span> <span class="nb">call_user_func</span><span class="p">(</span><span class="nv">$mailer</span><span class="p">,</span> <span class="nv">$to</span><span class="p">,</span> <span class="nv">$subject</span><span class="p">,</span> <span class="nv">$body</span><span class="p">);</span>
+</pre></div>
+
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>Dirt-simple. In fact, in PHP 5.4, we can simply call <code>$mailer($to, $subect,
+  $body)</code></li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="BeautifulSoftware.md">BeautifulSoftware.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              29/78
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: BeautifulSoftware.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Is it beautiful?</h2></header>
+            
+            
+            <section><ul>
+<li>Requires extension</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="BeautifulSoftware.md">BeautifulSoftware.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              30/78
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: BeautifulSoftware.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Is it beautiful?</h2></header>
+            
+            
+            <section><ul>
+<li>Requires extension</li>
+<li>Strategy selection requires knowledge of environment</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="BeautifulSoftware.md">BeautifulSoftware.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              31/78
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: BeautifulSoftware.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Is it beautiful?</h2></header>
+            
+            
+            <section><ul>
+<li>Requires extension</li>
+<li>Strategy selection requires knowledge of environment</li>
+<li>Debugging requires knowledge of environment</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="BeautifulSoftware.md">BeautifulSoftware.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              32/78
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: BeautifulSoftware.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Evolution: use configuration</h1></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>Configuration makes it possible to program once, while still altering behavior</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="BeautifulSoftware.md">BeautifulSoftware.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              33/78
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: BeautifulSoftware.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code smaller-code">
+          <div class="inner">
+            
+            
+            <section><div class="highlight"><pre><span class="lineno">1</span> <span class="cp">&lt;?php</span>
+<span class="lineno">2</span> <span class="nv">$config</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ArrayObject</span><span class="p">(</span><span class="k">array</span><span class="p">(),</span> <span class="nx">ArrayObject</span><span class="o">::</span><span class="na">ARRAY_AS_PROPS</span><span class="p">);</span>
+<span class="lineno">3</span> <span class="nv">$config</span><span class="o">-&gt;</span><span class="na">env</span> <span class="o">=</span> <span class="s2">&quot;Subdomain&#39;;</span>
+<span class="lineno">4</span> 
+<span class="lineno">5</span> <span class="si">$mailer</span><span class="s2"> = </span><span class="si">$config-&gt;env</span><span class="s2"> . &#39;Mail::send&#39;;</span>
+<span class="lineno">6</span> <span class="s2">call_user_func(</span><span class="si">$mailer</span><span class="s2">, </span><span class="si">$to</span><span class="s2">, </span><span class="si">$subject</span><span class="s2">, </span><span class="si">$body</span><span class="s2">);</span>
+</pre></div>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="BeautifulSoftware.md">BeautifulSoftware.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              34/78
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: BeautifulSoftware.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Is it beautiful?</h2></header>
+            
+            
+            <section><ul>
+<li>Would be easier to just indicate the class to use, and have it be the same
+  throughout the application(s).</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="BeautifulSoftware.md">BeautifulSoftware.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              35/78
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: BeautifulSoftware.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Is it beautiful?</h2></header>
+            
+            
+            <section><ul>
+<li>Would be easier to just indicate the class to use, and have it be the same
+  throughout the application(s).</li>
+<li>What if I have a new requirement, such as sending HTML mails?</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="BeautifulSoftware.md">BeautifulSoftware.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              36/78
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: BeautifulSoftware.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Evolution: use objects</h1></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>Up until now, we've been looking at <em>class-oriented</em> programming</li>
+<li>Now we'll look at <em>object-oriented</em> programming. </li>
+<li>There's a difference</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="BeautifulSoftware.md">BeautifulSoftware.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              37/78
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: BeautifulSoftware.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code smaller-code">
+          <div class="inner">
+            
+            
+            <section><div class="highlight"><pre><span class="lineno"> 1</span> <span class="cp">&lt;?php</span>
+<span class="lineno"> 2</span> <span class="k">class</span> <span class="nc">Mailer</span>
+<span class="lineno"> 3</span> <span class="p">{</span>
+<span class="lineno"> 4</span>     <span class="k">protected</span> <span class="nv">$from</span> <span class="o">=</span> <span class="s1">&#39;shop@example.com&#39;</span><span class="p">;</span>
+<span class="lineno"> 5</span>     <span class="k">protected</span> <span class="nv">$bcc</span>  <span class="o">=</span> <span class="s1">&#39;shop-sent@example.com&#39;</span><span class="p">;</span>
+<span class="lineno"> 6</span>     <span class="k">protected</span> <span class="nv">$contentType</span> <span class="o">=</span> <span class="s1">&#39;text/plain&#39;</span><span class="p">;</span>
+<span class="lineno"> 7</span> 
+<span class="lineno"> 8</span>     <span class="k">public</span> <span class="k">function</span> <span class="nf">setFrom</span><span class="p">(</span><span class="nv">$from</span><span class="p">)</span> <span class="p">{</span> <span class="o">...</span> <span class="p">}</span>
+<span class="lineno"> 9</span>     <span class="k">public</span> <span class="k">function</span> <span class="nf">setBcc</span><span class="p">(</span><span class="nv">$bcc</span><span class="p">)</span> <span class="p">{</span> <span class="o">...</span> <span class="p">}</span>
+<span class="lineno">10</span>     <span class="k">public</span> <span class="k">function</span> <span class="nf">setContentType</span><span class="p">(</span><span class="nv">$type</span><span class="p">)</span> <span class="p">{</span> <span class="o">...</span> <span class="p">}</span>
+<span class="lineno">11</span>     <span class="k">public</span> <span class="k">function</span> <span class="nf">send</span><span class="p">(</span><span class="nv">$to</span><span class="p">,</span> <span class="nv">$subject</span><span class="p">,</span> <span class="nv">$body</span><span class="p">)</span>
+<span class="lineno">12</span>     <span class="p">{</span>
+<span class="lineno">13</span>         <span class="nv">$headers</span> <span class="o">=</span> <span class="s2">&quot;From: &quot;</span> <span class="o">.</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">from</span> <span class="o">.</span> <span class="s2">&quot;</span><span class="se">\r\n</span><span class="s2">&quot;</span>
+<span class="lineno">14</span>                 <span class="o">.=</span> <span class="s2">&quot;Bcc: &quot;</span> <span class="o">.</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">bcc</span> <span class="o">.</span> <span class="s2">&quot;</span><span class="se">\r\n</span><span class="s2">&quot;</span>
+<span class="lineno">15</span>                 <span class="o">.=</span> <span class="s2">&quot;Content-Type: &quot;</span> <span class="o">.</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">contentType</span> <span class="o">.</span> <span class="s2">&quot;</span><span class="se">\r\n</span><span class="s2">&quot;</span><span class="p">;</span>
+<span class="lineno">16</span>         <span class="nb">mail</span><span class="p">(</span><span class="nv">$to</span><span class="p">,</span> <span class="nv">$subject</span><span class="p">,</span> <span class="nv">$body</span><span class="p">,</span> <span class="nv">$headers</span><span class="p">);</span>
+<span class="lineno">17</span>     <span class="p">}</span>
+<span class="lineno">18</span> <span class="p">}</span>
+</pre></div>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="BeautifulSoftware.md">BeautifulSoftware.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              38/78
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: BeautifulSoftware.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code smaller-code">
+          <div class="inner">
+            
+            
+            <section><div class="highlight"><pre><span class="lineno">1</span> <span class="cp">&lt;?php</span>
+<span class="lineno">2</span> <span class="nv">$mailer</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Mailer</span><span class="p">();</span>
+<span class="lineno">3</span> <span class="nv">$mailer</span><span class="o">-&gt;</span><span class="na">setFrom</span><span class="p">(</span><span class="nv">$config</span><span class="o">-&gt;</span><span class="na">from</span><span class="p">)</span>
+<span class="lineno">4</span>        <span class="o">-&gt;</span><span class="na">setBcc</span><span class="p">(</span><span class="nv">$config</span><span class="o">-&gt;</span><span class="na">bcc</span><span class="p">)</span>
+<span class="lineno">5</span>        <span class="o">-&gt;</span><span class="na">setContentType</span><span class="p">(</span><span class="s1">&#39;text/html&#39;</span><span class="p">);</span>
+<span class="lineno">6</span> <span class="nv">$mailer</span><span class="o">-&gt;</span><span class="na">send</span><span class="p">(</span><span class="nv">$to</span><span class="p">,</span> <span class="nv">$subject</span><span class="p">,</span> <span class="nv">$body</span><span class="p">);</span>
+</pre></div>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="BeautifulSoftware.md">BeautifulSoftware.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              39/78
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: BeautifulSoftware.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Is it beautiful?</h2></header>
+            
+            
+            <section><ul>
+<li>Better, but not great</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="BeautifulSoftware.md">BeautifulSoftware.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              40/78
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: BeautifulSoftware.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Is it beautiful?</h2></header>
+            
+            
+            <section><ul>
+<li>Better, but not great</li>
+<li>Specific headers are hard-coded</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="BeautifulSoftware.md">BeautifulSoftware.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              41/78
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: BeautifulSoftware.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Is it beautiful?</h2></header>
+            
+            
+            <section><ul>
+<li>Better, but not great</li>
+<li>Specific headers are hard-coded</li>
+<li>What if we don't want to use <code>mail()</code>?</li>
+</ul>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>For instance, we may want to use SMTP</li>
+<li>Or, due to volume, push to a queue</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="BeautifulSoftware.md">BeautifulSoftware.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              42/78
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: BeautifulSoftware.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Take a shower</h1></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>When you need to think, or design, the best thing you can do is step away from
+  your computer.</li>
+<li>One agile practice is to take a shower. Idea is to do something <em>not</em>
+  programming, in order to spur the creative thinking processes.</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="BeautifulSoftware.md">BeautifulSoftware.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              43/78
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: BeautifulSoftware.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>We've identified several needs</h2></header>
+            
+            
+            <section><ul>
+<li>Configurable, arbitrary headers</li>
+<li>Configurable, arbitrary tranports</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="BeautifulSoftware.md">BeautifulSoftware.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              44/78
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: BeautifulSoftware.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Evolution: use composition and interfaces</h1></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>Hollywood principle</li>
+<li>Interfaces allow substitution</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="BeautifulSoftware.md">BeautifulSoftware.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              45/78
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: BeautifulSoftware.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code smaller-code">
+          <div class="inner">
+            
+            
+            <section><div class="highlight"><pre><span class="lineno"> 1</span> <span class="cp">&lt;?php</span>
+<span class="lineno"> 2</span> <span class="k">interface</span> <span class="nx">MailTransport</span>
+<span class="lineno"> 3</span> <span class="p">{</span>
+<span class="lineno"> 4</span>     <span class="k">public</span> <span class="k">function</span> <span class="nf">send</span><span class="p">(</span><span class="nv">$to</span><span class="p">,</span> <span class="nv">$subject</span><span class="p">,</span> <span class="nv">$body</span><span class="p">,</span> <span class="nv">$headers</span><span class="p">);</span>
+<span class="lineno"> 5</span> <span class="p">}</span>
+<span class="lineno"> 6</span> 
+<span class="lineno"> 7</span> <span class="k">class</span> <span class="nc">MailHeaders</span> <span class="k">extends</span> <span class="nx">ArrayObject</span>
+<span class="lineno"> 8</span> <span class="p">{</span>
+<span class="lineno"> 9</span>     <span class="k">public</span> <span class="k">function</span> <span class="nf">toString</span><span class="p">()</span>
+<span class="lineno">10</span>     <span class="p">{</span>
+<span class="lineno">11</span>         <span class="nv">$headers</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+<span class="lineno">12</span>         <span class="k">foreach</span> <span class="p">(</span><span class="nv">$this</span> <span class="k">as</span> <span class="nv">$header</span> <span class="o">=&gt;</span> <span class="nv">$value</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno">13</span>             <span class="nv">$headers</span> <span class="o">.=</span> <span class="nv">$header</span> <span class="o">.</span> <span class="s1">&#39;: &#39;</span> <span class="o">.</span> <span class="nv">$value</span> <span class="o">.</span> <span class="s2">&quot;</span><span class="se">\r\n</span><span class="s2">&quot;</span><span class="p">;</span>
+<span class="lineno">14</span>         <span class="p">}</span>
+<span class="lineno">15</span>         <span class="k">return</span> <span class="nv">$headers</span><span class="p">;</span>
+<span class="lineno">16</span>     <span class="p">}</span>
+<span class="lineno">17</span> <span class="p">}</span>
+</pre></div>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="BeautifulSoftware.md">BeautifulSoftware.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              46/78
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: BeautifulSoftware.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code smaller-code">
+          <div class="inner">
+            
+            
+            <section><div class="highlight"><pre><span class="lineno"> 1</span> <span class="cp">&lt;?php</span>
+<span class="lineno"> 2</span> <span class="k">class</span> <span class="nc">Mailer</span>
+<span class="lineno"> 3</span> <span class="p">{</span>
+<span class="lineno"> 4</span>     <span class="k">protected</span> <span class="nv">$headers</span><span class="p">,</span> <span class="nv">$transport</span><span class="p">;</span>
+<span class="lineno"> 5</span> 
+<span class="lineno"> 6</span>     <span class="k">public</span> <span class="k">function</span> <span class="nf">setHeaders</span><span class="p">(</span><span class="nx">MailHeaders</span> <span class="nv">$headers</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno"> 7</span>         <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">headers</span> <span class="o">=</span> <span class="nv">$headers</span><span class="p">;</span>
+<span class="lineno"> 8</span>         <span class="k">return</span> <span class="nv">$this</span><span class="p">;</span>
+<span class="lineno"> 9</span>     <span class="p">}</span>
+<span class="lineno">10</span> 
+<span class="lineno">11</span>     <span class="k">public</span> <span class="k">function</span> <span class="nf">getHeaders</span><span class="p">()</span> <span class="p">{</span>
+<span class="lineno">12</span>         <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">headers</span><span class="p">;</span>
+<span class="lineno">13</span>     <span class="p">}</span>
+<span class="lineno">14</span> 
+<span class="lineno">15</span>     <span class="k">public</span> <span class="k">function</span> <span class="nf">setTransport</span><span class="p">(</span><span class="nx">MailTransport</span> <span class="nv">$transport</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno">16</span>         <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">transport</span> <span class="o">=</span> <span class="nv">$transport</span><span class="p">;</span>
+<span class="lineno">17</span>         <span class="k">return</span> <span class="nv">$this</span><span class="p">;</span>
+<span class="lineno">18</span>     <span class="p">}</span>
+<span class="lineno">19</span> 
+<span class="lineno">20</span>     <span class="cm">/* ... */</span>
+<span class="lineno">21</span> <span class="p">}</span>
+</pre></div>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="BeautifulSoftware.md">BeautifulSoftware.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              47/78
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: BeautifulSoftware.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code smaller-code">
+          <div class="inner">
+            
+            
+            <section><div class="highlight"><pre><span class="lineno"> 1</span> <span class="cp">&lt;?php</span>
+<span class="lineno"> 2</span> <span class="k">class</span> <span class="nc">Mailer</span>
+<span class="lineno"> 3</span> <span class="p">{</span>
+<span class="lineno"> 4</span>     <span class="k">protected</span> <span class="nv">$headers</span><span class="p">,</span> <span class="nv">$transport</span><span class="p">;</span>
+<span class="lineno"> 5</span> 
+<span class="lineno"> 6</span>     <span class="k">public</span> <span class="k">function</span> <span class="err">\</span><span class="nf">__construct</span><span class="p">(</span><span class="nx">MailTransport</span> <span class="nv">$transport</span><span class="p">)</span>
+<span class="lineno"> 7</span>     <span class="p">{</span>
+<span class="lineno"> 8</span>         <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">setTransport</span><span class="p">(</span><span class="nv">$transport</span><span class="p">);</span>
+<span class="lineno"> 9</span>         <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">setHeaders</span><span class="p">(</span><span class="k">new</span> <span class="nx">MailHeaders</span><span class="p">());</span>
+<span class="lineno">10</span>     <span class="p">}</span>
+<span class="lineno">11</span>     <span class="k">public</span> <span class="k">function</span> <span class="nf">send</span><span class="p">(</span><span class="nv">$to</span><span class="p">,</span> <span class="nv">$subject</span><span class="p">,</span> <span class="nv">$body</span><span class="p">)</span>
+<span class="lineno">12</span>     <span class="p">{</span>
+<span class="lineno">13</span>         <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">transport</span><span class="o">-&gt;</span><span class="na">send</span><span class="p">(</span>
+<span class="lineno">14</span>             <span class="nv">$to</span><span class="p">,</span> <span class="nv">$subject</span><span class="p">,</span> <span class="nv">$body</span><span class="p">,</span> 
+<span class="lineno">15</span>             <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">headers</span><span class="o">-&gt;</span><span class="na">toString</span><span class="p">()</span>
+<span class="lineno">16</span>         <span class="p">);</span>
+<span class="lineno">17</span>     <span class="p">}</span>
+<span class="lineno">18</span> <span class="p">}</span>
+</pre></div>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="BeautifulSoftware.md">BeautifulSoftware.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              48/78
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: BeautifulSoftware.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code smaller-code">
+          <div class="inner">
+            
+            
+            <section><div class="highlight"><pre><span class="lineno"> 1</span> <span class="cp">&lt;?php</span>
+<span class="lineno"> 2</span> <span class="nv">$mailer</span>  <span class="o">=</span> <span class="k">new</span> <span class="nx">Mailer</span><span class="p">(</span><span class="k">new</span> <span class="nx">SmtpTransport</span><span class="p">);</span>
+<span class="lineno"> 3</span> <span class="nv">$headers</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MailHeaders</span><span class="p">();</span>
+<span class="lineno"> 4</span> <span class="c1">// or $headers = $mailer-&gt;getHeaders();</span>
+<span class="lineno"> 5</span> 
+<span class="lineno"> 6</span> <span class="nv">$headers</span><span class="p">[</span><span class="s1">&#39;From&#39;</span><span class="p">]</span>         <span class="o">=</span> <span class="nv">$config</span><span class="o">-&gt;</span><span class="na">from</span><span class="p">;</span>
+<span class="lineno"> 7</span> <span class="nv">$headers</span><span class="p">[</span><span class="s1">&#39;Bcc&#39;</span><span class="p">]</span>          <span class="o">=</span> <span class="nv">$config</span><span class="o">-&gt;</span><span class="na">bcc</span><span class="p">;</span>
+<span class="lineno"> 8</span> <span class="nv">$headers</span><span class="p">[</span><span class="s1">&#39;Content-Type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;text/html&#39;</span><span class="p">;</span>
+<span class="lineno"> 9</span> <span class="nv">$mailer</span><span class="o">-&gt;</span><span class="na">setHeaders</span><span class="p">(</span><span class="nv">$headers</span><span class="p">)</span> <span class="c1">// if instantiated separately</span>
+<span class="lineno">10</span>        <span class="o">-&gt;</span><span class="na">send</span><span class="p">(</span><span class="nv">$to</span><span class="p">,</span> <span class="nv">$subject</span><span class="p">,</span> <span class="nv">$body</span><span class="p">);</span>
+</pre></div>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="BeautifulSoftware.md">BeautifulSoftware.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              49/78
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: BeautifulSoftware.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Is it beautiful?</h2></header>
+            
+            
+            <section><ul>
+<li>Headers management and serialization is self-contained</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="BeautifulSoftware.md">BeautifulSoftware.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              50/78
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: BeautifulSoftware.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Is it beautiful?</h2></header>
+            
+            
+            <section><ul>
+<li>Headers management and serialization is self-contained</li>
+<li>Sending is separate from message composition </li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="BeautifulSoftware.md">BeautifulSoftware.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              51/78
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: BeautifulSoftware.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Problems</h2></header>
+            
+            
+            <section><ul>
+<li>No validation or normalization of header keys</li>
+<li>No validation of header values</li>
+<li>Should a message send itself? or should we pass a message to the transport?</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="BeautifulSoftware.md">BeautifulSoftware.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              52/78
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: BeautifulSoftware.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Evolution: object relations</h1></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="BeautifulSoftware.md">BeautifulSoftware.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              53/78
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: BeautifulSoftware.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            
+            <section><ul>
+<li>Objects should do one thing, and one thing well</li>
+<li>Use objects as messages between objects</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="BeautifulSoftware.md">BeautifulSoftware.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              54/78
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: BeautifulSoftware.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code smaller-code">
+          <div class="inner">
+            
+            <header><h2>Message</h2></header>
+            
+            
+            <section><div class="highlight"><pre><span class="lineno"> 1</span> <span class="cp">&lt;?php</span>
+<span class="lineno"> 2</span> <span class="k">interface</span> <span class="nx">MailMessage</span>
+<span class="lineno"> 3</span> <span class="p">{</span>
+<span class="lineno"> 4</span>     <span class="k">public</span> <span class="k">function</span> <span class="nf">setTo</span><span class="p">(</span><span class="nv">$to</span><span class="p">);</span>
+<span class="lineno"> 5</span>     <span class="k">public</span> <span class="k">function</span> <span class="nf">setSubject</span><span class="p">(</span><span class="nv">$subject</span><span class="p">);</span>
+<span class="lineno"> 6</span>     <span class="k">public</span> <span class="k">function</span> <span class="nf">setBody</span><span class="p">(</span><span class="nv">$body</span><span class="p">);</span>
+<span class="lineno"> 7</span>     <span class="k">public</span> <span class="k">function</span> <span class="nf">setHeaders</span><span class="p">(</span><span class="nx">MailHeaders</span> <span class="nv">$headers</span><span class="p">);</span>
+<span class="lineno"> 8</span> 
+<span class="lineno"> 9</span>     <span class="k">public</span> <span class="k">function</span> <span class="nf">getTo</span><span class="p">();</span>
+<span class="lineno">10</span>     <span class="k">public</span> <span class="k">function</span> <span class="nf">getSubject</span><span class="p">();</span>
+<span class="lineno">11</span>     <span class="k">public</span> <span class="k">function</span> <span class="nf">getBody</span><span class="p">();</span>
+<span class="lineno">12</span>     <span class="k">public</span> <span class="k">function</span> <span class="nf">getHeaders</span><span class="p">();</span>
+<span class="lineno">13</span> <span class="p">}</span>
+</pre></div>
+
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>The mail message is now simply a value object</li>
+<li>Note that it <em>composes</em> headers</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="BeautifulSoftware.md">BeautifulSoftware.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              55/78
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: BeautifulSoftware.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code smaller-code">
+          <div class="inner">
+            
+            <header><h2>Headers and Transport</h2></header>
+            
+            
+            <section><div class="highlight"><pre><span class="lineno"> 1</span> <span class="cp">&lt;?php</span>
+<span class="lineno"> 2</span> <span class="k">interface</span> <span class="nx">MailHeaders</span>
+<span class="lineno"> 3</span> <span class="p">{</span>
+<span class="lineno"> 4</span>     <span class="k">public</span> <span class="k">function</span> <span class="nf">addHeader</span><span class="p">(</span><span class="nv">$header</span><span class="p">,</span> <span class="nv">$value</span><span class="p">);</span>
+<span class="lineno"> 5</span>     <span class="k">public</span> <span class="k">function</span> <span class="nf">toString</span><span class="p">();</span>
+<span class="lineno"> 6</span> <span class="p">}</span>
+<span class="lineno"> 7</span> 
+<span class="lineno"> 8</span> <span class="k">interface</span> <span class="nx">MailTransport</span>
+<span class="lineno"> 9</span> <span class="p">{</span>
+<span class="lineno">10</span>     <span class="k">public</span> <span class="k">function</span> <span class="nf">send</span><span class="p">(</span><span class="nx">MailMessage</span> <span class="nv">$message</span><span class="p">);</span>
+<span class="lineno">11</span> <span class="p">}</span>
+</pre></div>
+
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>Instead of an ArrayObject, we have an object with a dedicated method for
+  adding headers, allowing us to validate them.</li>
+<li>toString() allows us to serialize the headers into a format that the transport
+  can use</li>
+<li>The mail transport sends a <em>message</em></li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="BeautifulSoftware.md">BeautifulSoftware.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              56/78
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: BeautifulSoftware.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code smaller-code">
+          <div class="inner">
+            
+            <header><h2>Usage</h2></header>
+            
+            
+            <section><div class="highlight"><pre><span class="lineno"> 1</span> <span class="cp">&lt;?php</span>
+<span class="lineno"> 2</span> <span class="nv">$message</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Message</span><span class="p">();</span>
+<span class="lineno"> 3</span> <span class="nv">$headers</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MessageHeaders</span><span class="p">();</span>
+<span class="lineno"> 4</span> <span class="nv">$headers</span><span class="o">-&gt;</span><span class="na">addHeader</span><span class="p">(</span><span class="s1">&#39;From&#39;</span><span class="p">,</span> <span class="nv">$from</span><span class="p">)</span>
+<span class="lineno"> 5</span>         <span class="o">-&gt;</span><span class="na">addHeader</span><span class="p">(</span><span class="s1">&#39;Content-Type&#39;</span><span class="p">,</span> <span class="s1">&#39;text/html&#39;</span><span class="p">);</span>
+<span class="lineno"> 6</span> <span class="nv">$message</span><span class="o">-&gt;</span><span class="na">setTo</span><span class="p">(</span><span class="nv">$to</span><span class="p">)</span>
+<span class="lineno"> 7</span>         <span class="o">-&gt;</span><span class="na">setSubject</span><span class="p">(</span><span class="nv">$subject</span><span class="p">)</span>
+<span class="lineno"> 8</span>         <span class="o">-&gt;</span><span class="na">setBody</span><span class="p">(</span><span class="nv">$body</span><span class="p">)</span>
+<span class="lineno"> 9</span>         <span class="o">-&gt;</span><span class="na">setHeaders</span><span class="p">(</span><span class="nv">$headers</span><span class="p">);</span>
+<span class="lineno">10</span> <span class="nv">$transport</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">SmtpTransport</span><span class="p">(</span><span class="nv">$config</span><span class="o">-&gt;</span><span class="na">transport</span><span class="p">);</span>
+<span class="lineno">11</span> <span class="nv">$transport</span><span class="o">-&gt;</span><span class="na">send</span><span class="p">(</span><span class="nv">$message</span><span class="p">);</span>
+</pre></div>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="BeautifulSoftware.md">BeautifulSoftware.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              57/78
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: BeautifulSoftware.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Is it beautiful?</h2></header>
+            
+            
+            <section><ul>
+<li>Headers can now potentially have validation and normalization...</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="BeautifulSoftware.md">BeautifulSoftware.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              58/78
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: BeautifulSoftware.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Is it beautiful?</h2></header>
+            
+            
+            <section><ul>
+<li>Headers can now potentially have validation and normalization...<ul>
+<li>... and implementation can be varied if necessary.</li>
+</ul>
+</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="BeautifulSoftware.md">BeautifulSoftware.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              59/78
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: BeautifulSoftware.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Is it beautiful?</h2></header>
+            
+            
+            <section><ul>
+<li>Headers can now potentially have validation and normalization...<ul>
+<li>... and implementation can be varied if necessary.</li>
+</ul>
+</li>
+<li>The message is self-contained, and contains all metadata related to it.</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="BeautifulSoftware.md">BeautifulSoftware.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              60/78
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: BeautifulSoftware.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Is it beautiful?</h2></header>
+            
+            
+            <section><ul>
+<li>Headers can now potentially have validation and normalization...<ul>
+<li>... and implementation can be varied if necessary.</li>
+</ul>
+</li>
+<li>The message is self-contained, and contains all metadata related to it.</li>
+<li>The mail transport accepts a message, and determines what to use from it, and
+  how.</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="BeautifulSoftware.md">BeautifulSoftware.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              61/78
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: BeautifulSoftware.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>What are we really asking?</h1></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>I've used the phrase "Is it beautiful?" throughout as a meme.</li>
+<li>It's now time to figure out what we're really asking.</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="BeautifulSoftware.md">BeautifulSoftware.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              62/78
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: BeautifulSoftware.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Is it beautiful...</h2></header>
+            
+            
+            <section><ul>
+<li>Can I maintain it?</li>
+</ul>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>The new solution allows for substitution. </li>
+<li>Which means we can mock things.</li>
+<li>Which means we can test things.</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="BeautifulSoftware.md">BeautifulSoftware.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              63/78
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: BeautifulSoftware.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Is it beautiful...</h2></header>
+            
+            
+            <section><ul>
+<li>Can I maintain it?</li>
+<li>Can I change behavior when needed?</li>
+</ul>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>The new solution allows for substitution.</li>
+<li>Which allows me to provide an alternate implementation of the interface.</li>
+<li>Which means I can change behavior.</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="BeautifulSoftware.md">BeautifulSoftware.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              64/78
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: BeautifulSoftware.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Other ideas to investigate</h2></header>
+            
+            
+            <section><ul>
+<li>SOLID principles</li>
+</ul>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>eek!</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="BeautifulSoftware.md">BeautifulSoftware.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              65/78
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: BeautifulSoftware.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Other ideas to investigate</h2></header>
+            
+            
+            <section><ul>
+<li>Aspect Oriented Programming and Event-Driven Programming</li>
+</ul>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>Allows providing inflection points within code</li>
+<li>Introduce cross-cutting concerns</li>
+<li>or allow replacing or short-circuiting implementation</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="BeautifulSoftware.md">BeautifulSoftware.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              66/78
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: BeautifulSoftware.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Other ideas to investigate</h2></header>
+            
+            
+            <section><ul>
+<li>Testing, testing, testing!<ul>
+<li>Define requirements as tests</li>
+<li>Exercise your API before you write it</li>
+<li>Gain confidence in your code</li>
+</ul>
+</li>
+</ul>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>If you can't test it, you can't maintain it, and you likely can't alter
+  behavior easily.</li>
+<li>Investigate continuous integration and deployment</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="BeautifulSoftware.md">BeautifulSoftware.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              67/78
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: BeautifulSoftware.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Other ideas to investigate</h2></header>
+            
+            
+            <section><ul>
+<li>Adopt a coding standard</li>
+</ul>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>Seems basic, but it's critical to making code easy to read, both for you and
+  your team</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="BeautifulSoftware.md">BeautifulSoftware.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              68/78
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: BeautifulSoftware.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Trade offs</h2></header>
+            
+            
+            <section><p>You can always write shorter code. The trade off is re-use.</p>
+<ul>
+<li>The original code sample was fine. But we couldn't:<ul>
+<li>configure it</li>
+<li>change its behavior</li>
+</ul>
+</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="BeautifulSoftware.md">BeautifulSoftware.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              69/78
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: BeautifulSoftware.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Trade offs</h2></header>
+            
+            
+            <section><p>You can always write shorter code. The trade off is re-use.</p>
+<ul>
+<li>The original code sample was fine. But we couldn't:<ul>
+<li>configure it</li>
+<li>change its behavior</li>
+</ul>
+</li>
+<li>You end up writing the same code over and over.</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="BeautifulSoftware.md">BeautifulSoftware.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              70/78
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: BeautifulSoftware.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Trade offs</h2></header>
+            
+            
+            <section><p>Writing robust code usually requires <em>some</em> verbosity.</p>
+<ul>
+<li>Separating concerns leads to a proliferation of objects and files.</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="BeautifulSoftware.md">BeautifulSoftware.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              71/78
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: BeautifulSoftware.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Trade offs</h2></header>
+            
+            
+            <section><p>Writing robust code usually requires <em>some</em> verbosity.</p>
+<ul>
+<li>Separating concerns leads to a proliferation of objects and files.</li>
+<li><em>Get over it.</em></li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="BeautifulSoftware.md">BeautifulSoftware.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              72/78
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: BeautifulSoftware.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Trade offs</h2></header>
+            
+            
+            <section><p>Writing robust code usually requires <em>some</em> verbosity.</p>
+<ul>
+<li>Separating concerns leads to a proliferation of objects and files.</li>
+<li><em>Get over it.</em></li>
+<li>It's easier to digest small bites than it is an entire roast.</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="BeautifulSoftware.md">BeautifulSoftware.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              73/78
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: BeautifulSoftware.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Trade offs</h2></header>
+            
+            
+            <section><p>Configuration can be either inline, or from a container.</p>
+<ul>
+<li>Inline is nice, but difficult to swap out.</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="BeautifulSoftware.md">BeautifulSoftware.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              74/78
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: BeautifulSoftware.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Trade offs</h2></header>
+            
+            
+            <section><p>Configuration can be either inline, or from a container.</p>
+<ul>
+<li>Inline is nice, but difficult to swap out.</li>
+<li>Containers are nice, but now you need to pass the container around.</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="BeautifulSoftware.md">BeautifulSoftware.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              75/78
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: BeautifulSoftware.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Closing thoughts</h2></header>
+            
+            
+            <section><ul>
+<li>Balls of nails get the job done.</li>
+<li>So do precision instruments.</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="BeautifulSoftware.md">BeautifulSoftware.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              76/78
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: BeautifulSoftware.md -->
+      <div class="slide-wrapper">
+        <div class="slide image-right">
+          <div class="inner">
+            
+            <header><h2>Closing thoughts</h2></header>
+            
+            
+            <section><p><img alt="Van Gogh Sunflowers" src="images/van-gogh-sunflowers.png" title="Van Gogn Sunflowers" /></p>
+<ul>
+<li>Think about long-term maintainability</li>
+<li>Consider re-usability</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="BeautifulSoftware.md">BeautifulSoftware.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              77/78
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: BeautifulSoftware.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Thank You!</h2></header>
+            
+            
+            <section><ul>
+<li>Feedback:<ul>
+<li>https://joind.in/6231</li>
+<li>https://twitter.com/weierophinney</li>
+<li>https://github.com/weierophinney</li>
+</ul>
+</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="BeautifulSoftware.md">BeautifulSoftware.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              78/78
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div id="toc" class="sidebar hidden">
+    <h2>Table of Contents</h2>
+    <table>
+      <caption>Table of Contents</caption>
+      
+      <tr id="toc-row-1">
+        <th><a href="#slide1">Designing Beautiful Software</a></th>
+        <td><a href="#slide1">1</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-2">
+        <th><a href="#slide2">Who am I?</a></th>
+        <td><a href="#slide2">2</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-3">
+        <th><a href="#slide3">Four Years Ago...</a></th>
+        <td><a href="#slide3">3</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-4">
+        <th><a href="#slide4">-</a></th>
+        <td><a href="#slide4">4</a></td>
+      </tr>
+      
+        
+        <tr id="toc-row-5" class="sub">
+          <th><a href="#slide5">A ball of nails</a></th>
+          <td><a href="#slide5">5</a></td>
+        </tr>
+        
+      
+      
+      <tr id="toc-row-6">
+        <th><a href="#slide6">What is Beauty</a></th>
+        <td><a href="#slide6">6</a></td>
+      </tr>
+      
+        
+        <tr id="toc-row-7" class="sub">
+          <th><a href="#slide7">What is beautiful software design?</a></th>
+          <td><a href="#slide7">7</a></td>
+        </tr>
+        
+        <tr id="toc-row-8" class="sub">
+          <th><a href="#slide8">What is beautiful software design?</a></th>
+          <td><a href="#slide8">8</a></td>
+        </tr>
+        
+        <tr id="toc-row-9" class="sub">
+          <th><a href="#slide9">What is beautiful software design?</a></th>
+          <td><a href="#slide9">9</a></td>
+        </tr>
+        
+        <tr id="toc-row-10" class="sub">
+          <th><a href="#slide10">Software Evolution</a></th>
+          <td><a href="#slide10">10</a></td>
+        </tr>
+        
+      
+      
+      <tr id="toc-row-11">
+        <th><a href="#slide11">Examining a real-world problem</a></th>
+        <td><a href="#slide11">11</a></td>
+      </tr>
+      
+        
+        <tr id="toc-row-12" class="sub">
+          <th><a href="#slide12">Requirements</a></th>
+          <td><a href="#slide12">12</a></td>
+        </tr>
+        
+      
+      
+      <tr id="toc-row-13">
+        <th><a href="#slide13">-</a></th>
+        <td><a href="#slide13">13</a></td>
+      </tr>
+      
+        
+        <tr id="toc-row-14" class="sub">
+          <th><a href="#slide14">Is it beautiful?</a></th>
+          <td><a href="#slide14">14</a></td>
+        </tr>
+        
+        <tr id="toc-row-15" class="sub">
+          <th><a href="#slide15">Is it beautiful?</a></th>
+          <td><a href="#slide15">15</a></td>
+        </tr>
+        
+        <tr id="toc-row-16" class="sub">
+          <th><a href="#slide16">Is it beautiful?</a></th>
+          <td><a href="#slide16">16</a></td>
+        </tr>
+        
+        <tr id="toc-row-17" class="sub">
+          <th><a href="#slide17">What if we introduce requirements?</a></th>
+          <td><a href="#slide17">17</a></td>
+        </tr>
+        
+        <tr id="toc-row-18" class="sub">
+          <th><a href="#slide18">What if we introduce requirements?</a></th>
+          <td><a href="#slide18">18</a></td>
+        </tr>
+        
+        <tr id="toc-row-19" class="sub">
+          <th><a href="#slide19">New problems</a></th>
+          <td><a href="#slide19">19</a></td>
+        </tr>
+        
+        <tr id="toc-row-20" class="sub">
+          <th><a href="#slide20">New problems</a></th>
+          <td><a href="#slide20">20</a></td>
+        </tr>
+        
+        <tr id="toc-row-21" class="sub">
+          <th><a href="#slide21">New problems</a></th>
+          <td><a href="#slide21">21</a></td>
+        </tr>
+        
+      
+      
+      <tr id="toc-row-22">
+        <th><a href="#slide22">-</a></th>
+        <td><a href="#slide22">22</a></td>
+      </tr>
+      
+        
+        <tr id="toc-row-23" class="sub">
+          <th><a href="#slide23">Is it beautiful?</a></th>
+          <td><a href="#slide23">23</a></td>
+        </tr>
+        
+        <tr id="toc-row-24" class="sub">
+          <th><a href="#slide24">Is it beautiful?</a></th>
+          <td><a href="#slide24">24</a></td>
+        </tr>
+        
+        <tr id="toc-row-25" class="sub">
+          <th><a href="#slide25">Is it beautiful?</a></th>
+          <td><a href="#slide25">25</a></td>
+        </tr>
+        
+      
+      
+      <tr id="toc-row-26">
+        <th><a href="#slide26">Evolution: use classes</a></th>
+        <td><a href="#slide26">26</a></td>
+      </tr>
+      
+        
+        <tr id="toc-row-27" class="sub">
+          <th><a href="#slide27">Base class</a></th>
+          <td><a href="#slide27">27</a></td>
+        </tr>
+        
+        <tr id="toc-row-28" class="sub">
+          <th><a href="#slide28">Extending class</a></th>
+          <td><a href="#slide28">28</a></td>
+        </tr>
+        
+        <tr id="toc-row-29" class="sub">
+          <th><a href="#slide29">Usage</a></th>
+          <td><a href="#slide29">29</a></td>
+        </tr>
+        
+        <tr id="toc-row-30" class="sub">
+          <th><a href="#slide30">Is it beautiful?</a></th>
+          <td><a href="#slide30">30</a></td>
+        </tr>
+        
+        <tr id="toc-row-31" class="sub">
+          <th><a href="#slide31">Is it beautiful?</a></th>
+          <td><a href="#slide31">31</a></td>
+        </tr>
+        
+        <tr id="toc-row-32" class="sub">
+          <th><a href="#slide32">Is it beautiful?</a></th>
+          <td><a href="#slide32">32</a></td>
+        </tr>
+        
+      
+      
+      <tr id="toc-row-33">
+        <th><a href="#slide33">Evolution: use configuration</a></th>
+        <td><a href="#slide33">33</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-34">
+        <th><a href="#slide34">-</a></th>
+        <td><a href="#slide34">34</a></td>
+      </tr>
+      
+        
+        <tr id="toc-row-35" class="sub">
+          <th><a href="#slide35">Is it beautiful?</a></th>
+          <td><a href="#slide35">35</a></td>
+        </tr>
+        
+        <tr id="toc-row-36" class="sub">
+          <th><a href="#slide36">Is it beautiful?</a></th>
+          <td><a href="#slide36">36</a></td>
+        </tr>
+        
+      
+      
+      <tr id="toc-row-37">
+        <th><a href="#slide37">Evolution: use objects</a></th>
+        <td><a href="#slide37">37</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-38">
+        <th><a href="#slide38">-</a></th>
+        <td><a href="#slide38">38</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-39">
+        <th><a href="#slide39">-</a></th>
+        <td><a href="#slide39">39</a></td>
+      </tr>
+      
+        
+        <tr id="toc-row-40" class="sub">
+          <th><a href="#slide40">Is it beautiful?</a></th>
+          <td><a href="#slide40">40</a></td>
+        </tr>
+        
+        <tr id="toc-row-41" class="sub">
+          <th><a href="#slide41">Is it beautiful?</a></th>
+          <td><a href="#slide41">41</a></td>
+        </tr>
+        
+        <tr id="toc-row-42" class="sub">
+          <th><a href="#slide42">Is it beautiful?</a></th>
+          <td><a href="#slide42">42</a></td>
+        </tr>
+        
+      
+      
+      <tr id="toc-row-43">
+        <th><a href="#slide43">Take a shower</a></th>
+        <td><a href="#slide43">43</a></td>
+      </tr>
+      
+        
+        <tr id="toc-row-44" class="sub">
+          <th><a href="#slide44">We've identified several needs</a></th>
+          <td><a href="#slide44">44</a></td>
+        </tr>
+        
+      
+      
+      <tr id="toc-row-45">
+        <th><a href="#slide45">Evolution: use composition and interfaces</a></th>
+        <td><a href="#slide45">45</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-46">
+        <th><a href="#slide46">-</a></th>
+        <td><a href="#slide46">46</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-47">
+        <th><a href="#slide47">-</a></th>
+        <td><a href="#slide47">47</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-48">
+        <th><a href="#slide48">-</a></th>
+        <td><a href="#slide48">48</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-49">
+        <th><a href="#slide49">-</a></th>
+        <td><a href="#slide49">49</a></td>
+      </tr>
+      
+        
+        <tr id="toc-row-50" class="sub">
+          <th><a href="#slide50">Is it beautiful?</a></th>
+          <td><a href="#slide50">50</a></td>
+        </tr>
+        
+        <tr id="toc-row-51" class="sub">
+          <th><a href="#slide51">Is it beautiful?</a></th>
+          <td><a href="#slide51">51</a></td>
+        </tr>
+        
+        <tr id="toc-row-52" class="sub">
+          <th><a href="#slide52">Problems</a></th>
+          <td><a href="#slide52">52</a></td>
+        </tr>
+        
+      
+      
+      <tr id="toc-row-53">
+        <th><a href="#slide53">Evolution: object relations</a></th>
+        <td><a href="#slide53">53</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-54">
+        <th><a href="#slide54">-</a></th>
+        <td><a href="#slide54">54</a></td>
+      </tr>
+      
+        
+        <tr id="toc-row-55" class="sub">
+          <th><a href="#slide55">Message</a></th>
+          <td><a href="#slide55">55</a></td>
+        </tr>
+        
+        <tr id="toc-row-56" class="sub">
+          <th><a href="#slide56">Headers and Transport</a></th>
+          <td><a href="#slide56">56</a></td>
+        </tr>
+        
+        <tr id="toc-row-57" class="sub">
+          <th><a href="#slide57">Usage</a></th>
+          <td><a href="#slide57">57</a></td>
+        </tr>
+        
+        <tr id="toc-row-58" class="sub">
+          <th><a href="#slide58">Is it beautiful?</a></th>
+          <td><a href="#slide58">58</a></td>
+        </tr>
+        
+        <tr id="toc-row-59" class="sub">
+          <th><a href="#slide59">Is it beautiful?</a></th>
+          <td><a href="#slide59">59</a></td>
+        </tr>
+        
+        <tr id="toc-row-60" class="sub">
+          <th><a href="#slide60">Is it beautiful?</a></th>
+          <td><a href="#slide60">60</a></td>
+        </tr>
+        
+        <tr id="toc-row-61" class="sub">
+          <th><a href="#slide61">Is it beautiful?</a></th>
+          <td><a href="#slide61">61</a></td>
+        </tr>
+        
+      
+      
+      <tr id="toc-row-62">
+        <th><a href="#slide62">What are we really asking?</a></th>
+        <td><a href="#slide62">62</a></td>
+      </tr>
+      
+        
+        <tr id="toc-row-63" class="sub">
+          <th><a href="#slide63">Is it beautiful...</a></th>
+          <td><a href="#slide63">63</a></td>
+        </tr>
+        
+        <tr id="toc-row-64" class="sub">
+          <th><a href="#slide64">Is it beautiful...</a></th>
+          <td><a href="#slide64">64</a></td>
+        </tr>
+        
+        <tr id="toc-row-65" class="sub">
+          <th><a href="#slide65">Other ideas to investigate</a></th>
+          <td><a href="#slide65">65</a></td>
+        </tr>
+        
+        <tr id="toc-row-66" class="sub">
+          <th><a href="#slide66">Other ideas to investigate</a></th>
+          <td><a href="#slide66">66</a></td>
+        </tr>
+        
+        <tr id="toc-row-67" class="sub">
+          <th><a href="#slide67">Other ideas to investigate</a></th>
+          <td><a href="#slide67">67</a></td>
+        </tr>
+        
+        <tr id="toc-row-68" class="sub">
+          <th><a href="#slide68">Other ideas to investigate</a></th>
+          <td><a href="#slide68">68</a></td>
+        </tr>
+        
+        <tr id="toc-row-69" class="sub">
+          <th><a href="#slide69">Trade offs</a></th>
+          <td><a href="#slide69">69</a></td>
+        </tr>
+        
+        <tr id="toc-row-70" class="sub">
+          <th><a href="#slide70">Trade offs</a></th>
+          <td><a href="#slide70">70</a></td>
+        </tr>
+        
+        <tr id="toc-row-71" class="sub">
+          <th><a href="#slide71">Trade offs</a></th>
+          <td><a href="#slide71">71</a></td>
+        </tr>
+        
+        <tr id="toc-row-72" class="sub">
+          <th><a href="#slide72">Trade offs</a></th>
+          <td><a href="#slide72">72</a></td>
+        </tr>
+        
+        <tr id="toc-row-73" class="sub">
+          <th><a href="#slide73">Trade offs</a></th>
+          <td><a href="#slide73">73</a></td>
+        </tr>
+        
+        <tr id="toc-row-74" class="sub">
+          <th><a href="#slide74">Trade offs</a></th>
+          <td><a href="#slide74">74</a></td>
+        </tr>
+        
+        <tr id="toc-row-75" class="sub">
+          <th><a href="#slide75">Trade offs</a></th>
+          <td><a href="#slide75">75</a></td>
+        </tr>
+        
+        <tr id="toc-row-76" class="sub">
+          <th><a href="#slide76">Closing thoughts</a></th>
+          <td><a href="#slide76">76</a></td>
+        </tr>
+        
+        <tr id="toc-row-77" class="sub">
+          <th><a href="#slide77">Closing thoughts</a></th>
+          <td><a href="#slide77">77</a></td>
+        </tr>
+        
+        <tr id="toc-row-78" class="sub">
+          <th><a href="#slide78">Thank You!</a></th>
+          <td><a href="#slide78">78</a></td>
+        </tr>
+        
+      
+      
+    </table>
+  </div>
+  
+  <div id="help" class="sidebar hidden">
+    <h2>Help</h2>
+    <table>
+      <caption>Help</caption>
+      <tr>
+        <th>Table of Contents</th>
+        <td>t</td>
+      </tr>
+      <tr>
+        <th>Exposé</th>
+        <td>ESC</td>
+      </tr>
+      <tr>
+        <th>Full screen slides</th>
+        <td>e</td>
+      </tr>
+      <tr>
+        <th>Presenter View</th>
+        <td>p</td>
+      </tr>
+      <tr>
+        <th>Source Files</th>
+        <td>s</td>
+      </tr>
+      <tr>
+        <th>Slide Numbers</th>
+        <td>n</td>
+      </tr>
+      <tr>
+        <th>Toggle screen blanking</th>
+        <td>b</td>
+      </tr>
+      <tr>
+        <th>Show/hide slide context</th>
+        <td>c</td>
+      </tr>
+      <tr>
+        <th>Notes</th>
+        <td>2</td>
+      </tr>
+      <tr>
+        <th>Help</th>
+        <td>h</td>
+      </tr>
+    </table>
+  </div>
+  <script>main()</script>
+</body>
+</html>

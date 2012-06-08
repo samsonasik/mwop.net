@@ -1,0 +1,4047 @@
+<!DOCTYPE html>
+<!--
+  Copyright 2010 Google Inc.
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+
+  Original slides: Marcin Wichary (mwichary@google.com)
+  Modifications: Ernest Delgado (ernestd@google.com)
+                 Alex Russell (slightlyoff@chromium.org)
+
+  landslide modifications: Adam Zapletal (adamzap@gmail.com)
+                           Nicolas Perriault (nperriault@gmail.com)
+-->
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Creating Re-usable Modules for Zend Framework 2</title>
+    <!-- Styles -->
+    
+    <link rel="stylesheet" media="print" href="/usr/local/lib/python2.7/dist-packages/landslide-1.0.1-py2.7.egg/landslide/themes/default/css/print.css">
+    <link rel="stylesheet" media="screen, projection" href="theme/css/screen.css">
+    
+    
+    <!-- /Styles -->
+    <!-- Javascripts -->
+    
+    <script type="text/javascript" src="theme/js/slides.js"></script>
+    
+    
+      
+      <script type="text/javascript" src="./theme/js/dojo.js"></script>
+      
+    
+      
+      <script type="text/javascript" src="./theme/js/custom.js"></script>
+      
+    
+    <!-- /Javascripts -->
+</head>
+<body>
+  <div id="blank"></div>
+  <div class="presentation">
+    <div id="current_presenter_notes">
+      <div id="presenter_note"></div>
+    </div>
+    <div class="slides">
+      
+      <!-- slide source: Zf2ModuleWorkshop.md -->
+      <div class="slide-wrapper">
+        <div class="slide titleslide">
+          <div class="inner">
+            
+            <header><h1>Creating Re-usable Modules for Zend Framework 2</h1></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2ModuleWorkshop.md">Zf2ModuleWorkshop.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              1/97
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2ModuleWorkshop.md -->
+      <div class="slide-wrapper">
+        <div class="slide image-right">
+          <div class="inner">
+            
+            <header><h1>Who am I?</h1></header>
+            
+            
+            <section><p>Matthew Weier O'Phinney</p>
+<p><img alt="Matthew Weier O'Phinney" src="images/mwop.png" title="Matthew Weier O'Phinney" /></p>
+<ul>
+<li>Project Lead, Zend Framework</li>
+<li>PHP Developer</li>
+<li>http://mwop.net/</li>
+<li>@weierophinney</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2ModuleWorkshop.md">Zf2ModuleWorkshop.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              2/97
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2ModuleWorkshop.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Goals</h1></header>
+            
+            
+            <section><ul>
+<li>Learn the basics of ZF2</li>
+<li>Learn what modules are, and how to use them</li>
+<li>Build a module</li>
+</ul>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>In the process, we'll learn about a bunch of ZF2 functionality</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2ModuleWorkshop.md">Zf2ModuleWorkshop.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              3/97
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2ModuleWorkshop.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>MVC Quick Start</h1></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2ModuleWorkshop.md">Zf2ModuleWorkshop.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              4/97
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2ModuleWorkshop.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Three core concepts</h2></header>
+            
+            
+            <section><ul>
+<li>Decoupled and DI-driven (<code>ServiceManager</code>, <code>Di</code>)</li>
+<li>Event-driven (<code>EventManager</code>)</li>
+<li>HTTP handlers (<code>DispatchableInterface</code>)</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2ModuleWorkshop.md">Zf2ModuleWorkshop.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              5/97
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2ModuleWorkshop.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Decoupling, DI, and Services</h1></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2ModuleWorkshop.md">Zf2ModuleWorkshop.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              6/97
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2ModuleWorkshop.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>The problem</h2></header>
+            
+            
+            <section><blockquote>
+<p>How do controllers get their dependencies?</p>
+</blockquote>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>Core problem in ZF1 is there is no clean way to do this</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2ModuleWorkshop.md">Zf2ModuleWorkshop.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              7/97
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2ModuleWorkshop.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Decoupling</h2></header>
+            
+            
+            <section><ul>
+<li><strong>Contract Oriented Design</strong></li>
+<li>Favor composition over inheritance<ul>
+<li>... and thus <em>dependency injection</em></li>
+</ul>
+</li>
+</ul>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>Zend\Di is robust and well-tested</li>
+<li>But we won't talk about it. We're focussing on the SM now</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2ModuleWorkshop.md">Zf2ModuleWorkshop.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              8/97
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2ModuleWorkshop.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Service Manager</h1></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2ModuleWorkshop.md">Zf2ModuleWorkshop.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              9/97
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2ModuleWorkshop.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Zend\ServiceManager</h2></header>
+            
+            
+            <section><ul>
+<li>Very fast -- no magic or discovery</li>
+<li>Code -- don't configure -- your injections</li>
+<li>Explicit wiring -- it's all code -- makes debugging easy</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2ModuleWorkshop.md">Zf2ModuleWorkshop.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              10/97
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2ModuleWorkshop.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Types of services</h2></header>
+            
+            
+            <section><ul>
+<li>Explicit (name =&gt; object pairs)</li>
+<li>Invokables (name =&gt; class to instantiate)</li>
+<li>Factories (name =&gt; callable returning object)</li>
+<li>Aliases (name =&gt; some other name)</li>
+<li>Abstract Factories (unknown services)</li>
+<li>Scoped Containers (limit what can be created)</li>
+<li>Shared (or not; you decide)</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2ModuleWorkshop.md">Zf2ModuleWorkshop.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              11/97
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2ModuleWorkshop.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code smaller-code">
+          <div class="inner">
+            
+            <header><h2>Example: service</h2></header>
+            
+            
+            <section><div class="highlight"><pre><span class="lineno">1</span> <span class="cp">&lt;?php</span>
+<span class="lineno">2</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;services&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+<span class="lineno">3</span>     <span class="s1">&#39;foo&#39;</span> <span class="o">=&gt;</span> <span class="k">new</span> <span class="nx">Some\Component\Foo</span><span class="p">(),</span>
+<span class="lineno">4</span> <span class="p">))</span>
+</pre></div>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2ModuleWorkshop.md">Zf2ModuleWorkshop.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              12/97
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2ModuleWorkshop.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code smaller-code">
+          <div class="inner">
+            
+            <header><h2>Example: invokable</h2></header>
+            
+            
+            <section><div class="highlight"><pre><span class="lineno">1</span> <span class="cp">&lt;?php</span>
+<span class="lineno">2</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;invokables&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+<span class="lineno">3</span>     <span class="s1">&#39;foo&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Some\Component\Foo&#39;</span><span class="p">,</span>
+<span class="lineno">4</span> <span class="p">))</span>
+</pre></div>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2ModuleWorkshop.md">Zf2ModuleWorkshop.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              13/97
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2ModuleWorkshop.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code smaller-code">
+          <div class="inner">
+            
+            <header><h2>Example: factories</h2></header>
+            
+            
+            <section><div class="highlight"><pre><span class="lineno">1</span> <span class="cp">&lt;?php</span>
+<span class="lineno">2</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;factories&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+<span class="lineno">3</span>     <span class="s1">&#39;foo&#39;</span> <span class="o">=&gt;</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$services</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno">4</span>         <span class="c1">// lazy-loading, essentially:</span>
+<span class="lineno">5</span>         <span class="k">return</span> <span class="k">new</span> <span class="nx">Some\Component\Foo</span><span class="p">();</span>
+<span class="lineno">6</span>     <span class="p">},</span>
+<span class="lineno">7</span>     <span class="s1">&#39;bar&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Some\Static::method&#39;</span><span class="p">,</span>
+<span class="lineno">8</span>     <span class="s1">&#39;baz&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Some\Class\Implementing\FactoryInterface&#39;</span><span class="p">,</span>
+<span class="lineno">9</span> <span class="p">))</span>
+</pre></div>
+
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>Basically, any PHP callable can be used</li>
+<li>Or implement the FactoryInterface, which makes things more explicit</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2ModuleWorkshop.md">Zf2ModuleWorkshop.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              14/97
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2ModuleWorkshop.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code smaller-code">
+          <div class="inner">
+            
+            <header><h2>Example: aliases</h2></header>
+            
+            
+            <section><div class="highlight"><pre><span class="lineno">1</span> <span class="cp">&lt;?php</span>
+<span class="lineno">2</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;aliases&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+<span class="lineno">3</span>     <span class="s1">&#39;my_foo&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;foo&#39;</span><span class="p">,</span>        <span class="c1">// alias services</span>
+<span class="lineno">4</span>     <span class="s1">&#39;foo_master&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;my_foo&#39;</span><span class="p">,</span> <span class="c1">// alias aliases</span>
+<span class="lineno">5</span> <span class="p">))</span>
+</pre></div>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2ModuleWorkshop.md">Zf2ModuleWorkshop.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              15/97
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2ModuleWorkshop.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code smaller-code">
+          <div class="inner">
+            
+            <header><h2>Example: abstract factories</h2></header>
+            
+            
+            <section><div class="highlight"><pre><span class="lineno"> 1</span> <span class="cp">&lt;?php</span>
+<span class="lineno"> 2</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;abstract_factories&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+<span class="lineno"> 3</span>     <span class="s1">&#39;Class\Implementing\AbstractFactoryInterface&#39;</span><span class="p">,</span>
+<span class="lineno"> 4</span> <span class="p">))</span>
+<span class="lineno"> 5</span> 
+<span class="lineno"> 6</span> <span class="k">class</span> <span class="nc">SampleAbstractFactory</span> <span class="k">implements</span> <span class="nx">AbstractFactoryInterface</span>
+<span class="lineno"> 7</span> <span class="p">{</span>
+<span class="lineno"> 8</span>     <span class="k">public</span> <span class="k">function</span> <span class="nf">canCreateServiceWithName</span><span class="p">(</span><span class="nv">$name</span><span class="p">)</span> <span class="p">{</span><span class="cm">/* */</span><span class="p">}</span>
+<span class="lineno"> 9</span>     <span class="k">public</span> <span class="k">function</span> <span class="nf">createServiceWithName</span><span class="p">(</span>
+<span class="lineno">10</span>         <span class="nx">ServiceLocatorInterface</span> <span class="nv">$locator</span><span class="p">,</span> <span class="nv">$name</span>
+<span class="lineno">11</span>     <span class="p">)</span> <span class="p">{</span> <span class="cm">/* */</span> <span class="p">}</span>
+<span class="lineno">12</span> <span class="p">}</span>
+</pre></div>
+
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>Makes it relatively easy to create a "catch-all" factory to provide instances</li>
+<li>Good as a factory for context-specific types</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2ModuleWorkshop.md">Zf2ModuleWorkshop.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              16/97
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2ModuleWorkshop.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code smaller-code">
+          <div class="inner">
+            
+            <header><h2>Example: (un)shared service</h2></header>
+            
+            
+            <section><div class="highlight"><pre><span class="lineno">1</span> <span class="cp">&lt;?php</span>
+<span class="lineno">2</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;shared&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+<span class="lineno">3</span>     <span class="s1">&#39;EventManager&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">,</span> <span class="c1">// default is true</span>
+<span class="lineno">4</span> <span class="p">))</span>
+</pre></div>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2ModuleWorkshop.md">Zf2ModuleWorkshop.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              17/97
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2ModuleWorkshop.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Configure services anywhere</h2></header>
+            
+            
+            <section><ul>
+<li>Application configuration</li>
+<li>Module classes</li>
+<li>Module configuration</li>
+<li>Local override configuration</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2ModuleWorkshop.md">Zf2ModuleWorkshop.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              18/97
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2ModuleWorkshop.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Why?</h2></header>
+            
+            
+            <section><ul>
+<li>MVC uses the <code>ServiceManager</code> to wire the default workflow and event listeners</li>
+<li>Developers provide additional services and service configuration</li>
+</ul>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li><strong>controllers</strong> are services!</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2ModuleWorkshop.md">Zf2ModuleWorkshop.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              19/97
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2ModuleWorkshop.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Event Manager</h1></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2ModuleWorkshop.md">Zf2ModuleWorkshop.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              20/97
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2ModuleWorkshop.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Zend\EventManager in a slide</h2></header>
+            
+            
+            <section><ul>
+<li><strong>Trigger</strong> <em>events</em></li>
+<li><strong>Listen</strong> and react to triggered <em>events</em></li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2ModuleWorkshop.md">Zf2ModuleWorkshop.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              21/97
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2ModuleWorkshop.md -->
+      <div class="slide-wrapper">
+        <div class="slide image-right">
+          <div class="inner">
+            
+            <header><h2>Terminology</h2></header>
+            
+            
+            <section><p><img alt="Event Listeners" src="images/dominoes-small.png" title="Event Listeners" /></p>
+<ul>
+<li>An <strong>Event Manager</strong> is an object that aggregates listeners for one or more
+  named events, and which triggers events.</li>
+<li>A <strong>Listener</strong> is a callback that can react to an event.</li>
+<li>An <strong>Event</strong> is an action.</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2ModuleWorkshop.md">Zf2ModuleWorkshop.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              22/97
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2ModuleWorkshop.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code smaller-code">
+          <div class="inner">
+            
+            <header><h2>Example</h2></header>
+            
+            
+            <section><div class="highlight"><pre><span class="lineno"> 1</span> <span class="cp">&lt;?php</span>
+<span class="lineno"> 2</span> <span class="k">use</span> <span class="nx">Zend\EventManager\EventManager</span><span class="p">;</span>
+<span class="lineno"> 3</span> <span class="nv">$events</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">EventManager</span><span class="p">();</span>
+<span class="lineno"> 4</span> <span class="nv">$events</span><span class="o">-&gt;</span><span class="na">attach</span><span class="p">(</span><span class="s1">&#39;do&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$e</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno"> 5</span>     <span class="nb">printf</span><span class="p">(</span>
+<span class="lineno"> 6</span>         <span class="s1">&#39;Handled event &quot;%s&quot; with parameters &quot;%s&quot;&#39;</span>
+<span class="lineno"> 7</span>         <span class="nv">$e</span><span class="o">-&gt;</span><span class="na">getName</span><span class="p">(),</span>
+<span class="lineno"> 8</span>         <span class="nx">json_encode</span><span class="p">(</span><span class="nv">$e</span><span class="o">-&gt;</span><span class="na">getParams</span><span class="p">())</span>
+<span class="lineno"> 9</span>     <span class="p">);</span>
+<span class="lineno">10</span> <span class="p">});</span>
+<span class="lineno">11</span> <span class="nv">$params</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;foo&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;bar&#39;</span><span class="p">,</span> <span class="s1">&#39;baz&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;bat&#39;</span><span class="p">);</span>
+<span class="lineno">12</span> <span class="nv">$events</span><span class="o">-&gt;</span><span class="na">trigger</span><span class="p">(</span><span class="s1">&#39;do&#39;</span><span class="p">,</span> <span class="k">null</span><span class="p">,</span> <span class="nv">$params</span><span class="p">);</span>
+</pre></div>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2ModuleWorkshop.md">Zf2ModuleWorkshop.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              23/97
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2ModuleWorkshop.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Everything is an event</h2></header>
+            
+            
+            <section><p><img alt="MVC Events" src="images/events-small.png" title="MVC Events" /></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2ModuleWorkshop.md">Zf2ModuleWorkshop.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              24/97
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2ModuleWorkshop.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>MVC Events</h2></header>
+            
+            
+            <section><ul>
+<li>Loading modules: <strong>loadModules.pre</strong>, <strong>loadModule</strong>, <strong>loadModules.post</strong></li>
+<li><strong>bootstrap</strong></li>
+<li><strong>route</strong></li>
+<li><strong>dispatch</strong> and <strong>dispatch.error</strong></li>
+<li><strong>render</strong></li>
+<li><strong>finish</strong></li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2ModuleWorkshop.md">Zf2ModuleWorkshop.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              25/97
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2ModuleWorkshop.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Dispatchables == Controllers</h1></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2ModuleWorkshop.md">Zf2ModuleWorkshop.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              26/97
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2ModuleWorkshop.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>What is a web application?</h1></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2ModuleWorkshop.md">Zf2ModuleWorkshop.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              27/97
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2ModuleWorkshop.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>HTTP negotiation.</h1></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2ModuleWorkshop.md">Zf2ModuleWorkshop.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              28/97
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2ModuleWorkshop.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code">
+          <div class="inner">
+            
+            <header><h2>DispatchableInterface</h2></header>
+            
+            
+            <section><div class="highlight"><pre><span class="lineno"> 1</span> <span class="cp">&lt;?php</span>
+<span class="lineno"> 2</span> <span class="k">namespace</span> <span class="nx">Zend\Stdlib</span><span class="p">;</span>
+<span class="lineno"> 3</span> 
+<span class="lineno"> 4</span> <span class="k">interface</span> <span class="nx">DispatchableInterface</span>
+<span class="lineno"> 5</span> <span class="p">{</span>
+<span class="lineno"> 6</span>     <span class="k">public</span> <span class="k">function</span> <span class="nf">dispatch</span><span class="p">(</span>
+<span class="lineno"> 7</span>         <span class="nx">RequestInterface</span> <span class="nv">$request</span><span class="p">,</span>
+<span class="lineno"> 8</span>         <span class="nx">ResponseInterface</span> <span class="nv">$response</span> <span class="o">=</span> <span class="k">null</span>
+<span class="lineno"> 9</span>     <span class="p">);</span>
+<span class="lineno">10</span> <span class="p">}</span>
+</pre></div>
+
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>Implication is that you return a response</li>
+<li>Because we pass one in, can return arbitrary results</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2ModuleWorkshop.md">Zf2ModuleWorkshop.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              29/97
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2ModuleWorkshop.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Shipped contollers</h2></header>
+            
+            
+            <section><ul>
+<li>Zend\MvcController\ActionController</li>
+<li>Zend\MvcController\RestfulController</li>
+</ul>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>Compose an EM; dispatch actually simply triggers an event</li>
+<li>Compose the SM; you <em>can</em> lazily retrieve dependencies, but it's mostly there
+  to assist with a variety of plugins</li>
+<li>Compose a PluginBroker, Event, and more</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2ModuleWorkshop.md">Zf2ModuleWorkshop.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              30/97
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2ModuleWorkshop.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Most importantly...</h2></header>
+            
+            
+            <section><blockquote>
+<p>Controllers are <em>services</em></p>
+</blockquote>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>This allows them to be injected by the SM or DIC</li>
+<li>It means we're mainly interested in configuring the SM and EM</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2ModuleWorkshop.md">Zf2ModuleWorkshop.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              31/97
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2ModuleWorkshop.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Configuring the MVC</h1></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>We've talked about the core concepts</li>
+<li>How do we wire it together?</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2ModuleWorkshop.md">Zf2ModuleWorkshop.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              32/97
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2ModuleWorkshop.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Things that must happen</h2></header>
+            
+            
+            <section><ul>
+<li>Configure services</li>
+<li>Wire event listeners</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2ModuleWorkshop.md">Zf2ModuleWorkshop.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              33/97
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2ModuleWorkshop.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Core services</h2></header>
+            
+            
+            <section><ul>
+<li>Router</li>
+<li>View</li>
+<li><em>Controllers</em></li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2ModuleWorkshop.md">Zf2ModuleWorkshop.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              34/97
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2ModuleWorkshop.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>How do we provide configuration?</h1></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2ModuleWorkshop.md">Zf2ModuleWorkshop.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              35/97
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2ModuleWorkshop.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Modules</h1></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2ModuleWorkshop.md">Zf2ModuleWorkshop.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              36/97
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2ModuleWorkshop.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>What?</h2></header>
+            
+            
+            <section><blockquote>
+<p>A <strong>module</strong> is all related code and assets that <em>solve a specific problem</em>. </p>
+</blockquote>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>Don't put unrelated code in the same module</li>
+<li>Assets related to the code <em>should</em> be in the module</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2ModuleWorkshop.md">Zf2ModuleWorkshop.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              37/97
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2ModuleWorkshop.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Modules in ZF2</h2></header>
+            
+            
+            <section><ul>
+<li>Modules provide the MVC with configuration:<ul>
+<li>Autoloading</li>
+<li>Routing</li>
+<li>Controllers</li>
+</ul>
+</li>
+<li>Modules provide and attach listeners</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2ModuleWorkshop.md">Zf2ModuleWorkshop.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              38/97
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2ModuleWorkshop.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>How?</h2></header>
+            
+            
+            <section><ul>
+<li><strong>Zend\ModuleManager</strong> loops through modules, and passes <code>Module</code> objects to
+  listeners.</li>
+<li>Listeners look for <em>features</em> modules provide.</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2ModuleWorkshop.md">Zf2ModuleWorkshop.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              39/97
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2ModuleWorkshop.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Common Module Features</h2></header>
+            
+            
+            <section><ul>
+<li>Autoloading configuration</li>
+<li>Service configuration</li>
+<li>General configuration</li>
+<li>Bootstrap listeners</li>
+</ul>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>Each "feature" has an accompanying interface</li>
+<li>Listeners look for either interface implementation OR duck-typing</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2ModuleWorkshop.md">Zf2ModuleWorkshop.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              40/97
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2ModuleWorkshop.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Module classes</h2></header>
+            
+            
+            <section><ul>
+<li>A namespace...</li>
+<li>...containing a single classfile, <strong>Module.php</strong>... </li>
+<li>...containing a single class, <code>Module</code>.</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2ModuleWorkshop.md">Zf2ModuleWorkshop.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              41/97
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2ModuleWorkshop.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            
+            <section><blockquote>
+<p>When you write ZF2 MVC applications, you will write Modules.</p>
+</blockquote></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2ModuleWorkshop.md">Zf2ModuleWorkshop.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              42/97
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2ModuleWorkshop.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Skeleton Application</h1></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>The ZF2 community built this to make the job of starting simpler</li>
+<li>Provide basic application structure and configuration</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2ModuleWorkshop.md">Zf2ModuleWorkshop.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              43/97
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2ModuleWorkshop.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code smaller-code">
+          <div class="inner">
+            
+            <header><h2>Getting it</h2></header>
+            
+            
+            <section><div class="highlight"><pre><span class="lineno">1</span> <span class="nb">cd </span>my/project/dir
+<span class="lineno">2</span> git clone <span class="se">\</span>
+<span class="lineno">3</span>     git://github.com/zendframework/ZendSkeletonApplication.git
+<span class="lineno">4</span> <span class="nb">cd </span>ZendSkeletonApplication
+<span class="lineno">5</span> php composer.phar install
+</pre></div>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2ModuleWorkshop.md">Zf2ModuleWorkshop.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              44/97
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2ModuleWorkshop.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Let's look through it</h2></header>
+            
+            
+            <section><p>(Live coding here...)</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2ModuleWorkshop.md">Zf2ModuleWorkshop.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              45/97
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2ModuleWorkshop.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Module Demonstration</h1></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2ModuleWorkshop.md">Zf2ModuleWorkshop.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              46/97
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2ModuleWorkshop.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>PhlyContact</h2></header>
+            
+            
+            <section><ul>
+<li>Simple, configurable contact form functionality<ul>
+<li>Configure a mail transport</li>
+<li>Configure the captcha used in the form</li>
+<li>Potentially configure and change the route</li>
+</ul>
+</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2ModuleWorkshop.md">Zf2ModuleWorkshop.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              47/97
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2ModuleWorkshop.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Install</h2></header>
+            
+            
+            <section><p>Via composer:</p>
+<ul>
+<li>Edit composer.json to add a new requirement</li>
+<li><code>php composer.phar install</code></li>
+</ul>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>Alternately, the attendees can drop the "PhlyContact" file into the vendor
+  subdir</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2ModuleWorkshop.md">Zf2ModuleWorkshop.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              48/97
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2ModuleWorkshop.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Configure</h2></header>
+            
+            
+            <section><ul>
+<li>Copy the module's "config/module.phly-contact.local.php" to the application's
+  "configautoload" directory, and edit</li>
+<li>Edit "config/application.config.ini" to add the module</li>
+</ul>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>Live coding time</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2ModuleWorkshop.md">Zf2ModuleWorkshop.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              49/97
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2ModuleWorkshop.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Try it out!</h2></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2ModuleWorkshop.md">Zf2ModuleWorkshop.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              50/97
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2ModuleWorkshop.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Other things we could do</h2></header>
+            
+            
+            <section><ul>
+<li>Alter the base route</li>
+<li>Alter the captcha</li>
+<li>Change what controller ultimately wasy called</li>
+<li>Change where view scripts resolve</li>
+</ul>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>Local configuration allows overriding in a variety of ways</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2ModuleWorkshop.md">Zf2ModuleWorkshop.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              51/97
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2ModuleWorkshop.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Break time!</h1></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2ModuleWorkshop.md">Zf2ModuleWorkshop.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              52/97
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2ModuleWorkshop.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Project Walkthrough</h1></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2ModuleWorkshop.md">Zf2ModuleWorkshop.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              53/97
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2ModuleWorkshop.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>PhlyPeep: Dead Simple Twitter Clone</h2></header>
+            
+            
+            <section><pre><code>"peep": Make a cheeping or beeping sound
+</code></pre>
+<ul>
+<li>Show a timeline of all "peeps"</li>
+<li>Show a timeline of individual user's "peeps"</li>
+<li>Show individual "peeps"</li>
+<li>Allow authenticated users to "peep"</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2ModuleWorkshop.md">Zf2ModuleWorkshop.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              54/97
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2ModuleWorkshop.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Demo time</h1></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2ModuleWorkshop.md">Zf2ModuleWorkshop.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              55/97
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2ModuleWorkshop.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Dependencies</h2></header>
+            
+            
+            <section><ul>
+<li>We don't want to write authentication ourselves<ul>
+<li>We'll install the "ZfcUser" module to save some work</li>
+</ul>
+</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2ModuleWorkshop.md">Zf2ModuleWorkshop.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              56/97
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2ModuleWorkshop.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Installing ZfcUser</h2></header>
+            
+            
+            <section><p>(live coding)</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2ModuleWorkshop.md">Zf2ModuleWorkshop.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              57/97
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2ModuleWorkshop.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Create the module</h1></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2ModuleWorkshop.md">Zf2ModuleWorkshop.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              58/97
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2ModuleWorkshop.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>simple steps:</h2></header>
+            
+            
+            <section><ul>
+<li>Create a directory, "vendor/PhlyPeep"</li>
+<li>Create a "Module" class in "vendor/PhlyPeep/Module.php"</li>
+<li>Create "config", "data", "src/PhlyPeep", and "view" subdirectories</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2ModuleWorkshop.md">Zf2ModuleWorkshop.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              59/97
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2ModuleWorkshop.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code smaller-code">
+          <div class="inner">
+            
+            <header><h2>Module.php</h2></header>
+            
+            
+            <section><div class="highlight"><pre><span class="lineno"> 1</span> <span class="cp">&lt;?php</span>
+<span class="lineno"> 2</span> <span class="k">namespace</span> <span class="nx">PhlyPeep</span><span class="p">;</span>
+<span class="lineno"> 3</span> 
+<span class="lineno"> 4</span> <span class="k">class</span> <span class="nc">Module</span> <span class="p">{</span>
+<span class="lineno"> 5</span>     <span class="k">public</span> <span class="k">function</span> <span class="nf">getAutoloaderConfig</span><span class="p">()</span> <span class="p">{</span>
+<span class="lineno"> 6</span>         <span class="k">return</span> <span class="k">array</span><span class="p">(</span>
+<span class="lineno"> 7</span>             <span class="s1">&#39;Zend\Loader\StandardAutoloader&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+<span class="lineno"> 8</span>                 <span class="s1">&#39;namespaces&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+<span class="lineno"> 9</span>                     <span class="s1">&#39;PhlyPeep&#39;</span> <span class="o">=&gt;</span> <span class="nx">__DIR__</span> <span class="o">.</span> <span class="s1">&#39;/src/PhlyPeep&#39;</span><span class="p">,</span>
+<span class="lineno">10</span>                 <span class="p">)</span>
+<span class="lineno">11</span>             <span class="p">)</span>
+<span class="lineno">12</span>         <span class="p">);</span>
+<span class="lineno">13</span>     <span class="p">}</span>
+<span class="lineno">14</span> 
+<span class="lineno">15</span>     <span class="k">public</span> <span class="k">function</span> <span class="nf">getConfig</span><span class="p">()</span> <span class="p">{</span>
+<span class="lineno">16</span>         <span class="k">return</span> <span class="k">include</span> <span class="nx">__DIR__</span> <span class="o">.</span> <span class="s1">&#39;/config/module.config.php&#39;</span><span class="p">;</span>
+<span class="lineno">17</span>     <span class="p">}</span>
+<span class="lineno">18</span> <span class="p">}</span>
+</pre></div>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2ModuleWorkshop.md">Zf2ModuleWorkshop.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              60/97
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2ModuleWorkshop.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>First things first: Modelling</h1></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2ModuleWorkshop.md">Zf2ModuleWorkshop.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              61/97
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2ModuleWorkshop.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Model the peep and create a schema</h2></header>
+            
+            
+            <section><ul>
+<li>identifier (hash of username + timestamp + tweet text)</li>
+<li>username</li>
+<li>user_email (for gravatar)</li>
+<li>user_fullname (?)</li>
+<li>timestamp</li>
+<li>peep_text</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2ModuleWorkshop.md">Zf2ModuleWorkshop.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              62/97
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2ModuleWorkshop.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code smaller-code">
+          <div class="inner">
+            
+            <header><h2>Entity</h2></header>
+            
+            
+            <section><div class="highlight"><pre><span class="lineno"> 1</span> <span class="cp">&lt;?php</span>
+<span class="lineno"> 2</span> <span class="k">namespace</span> <span class="nx">PhlyPeep\Model</span><span class="p">;</span>
+<span class="lineno"> 3</span> 
+<span class="lineno"> 4</span> <span class="k">use</span> <span class="nx">Zend\InputFilter\InputFilterAwareInterface</span><span class="p">;</span>
+<span class="lineno"> 5</span> <span class="k">use</span> <span class="nx">Zend\InputFilter\InputFilterInterface</span><span class="p">;</span>
+<span class="lineno"> 6</span> <span class="k">use</span> <span class="nx">Zend\Stdlib\ArraySerializableInterface</span><span class="p">;</span>
+<span class="lineno"> 7</span> 
+<span class="lineno"> 8</span> <span class="k">class</span> <span class="nc">PeepEntity</span> <span class="k">implements</span> 
+<span class="lineno"> 9</span>     <span class="nx">ArraySerializableInterface</span><span class="p">,</span>
+<span class="lineno">10</span>     <span class="nx">InputFilterAwareInterface</span>
+<span class="lineno">11</span> <span class="p">{</span>
+<span class="lineno">12</span>     <span class="k">protected</span> <span class="nv">$filter</span><span class="p">;</span>
+<span class="lineno">13</span> 
+<span class="lineno">14</span>     <span class="k">protected</span> <span class="nv">$identifier</span><span class="p">;</span>
+<span class="lineno">15</span>     <span class="k">protected</span> <span class="nv">$username</span><span class="p">;</span>
+<span class="lineno">16</span>     <span class="k">protected</span> <span class="nv">$email</span><span class="p">;</span>
+<span class="lineno">17</span>     <span class="k">protected</span> <span class="nv">$displayName</span><span class="p">;</span>
+<span class="lineno">18</span>     <span class="k">protected</span> <span class="nv">$timestamp</span><span class="p">;</span>
+<span class="lineno">19</span>     <span class="k">protected</span> <span class="nv">$peepText</span><span class="p">;</span>
+<span class="lineno">20</span> <span class="p">}</span>
+</pre></div>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2ModuleWorkshop.md">Zf2ModuleWorkshop.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              63/97
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2ModuleWorkshop.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code smaller-code">
+          <div class="inner">
+            
+            <header><h2>Schema</h2></header>
+            
+            
+            <section><div class="highlight"><pre><span class="lineno"> 1</span> <span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">peep</span>
+<span class="lineno"> 2</span> <span class="p">(</span>
+<span class="lineno"> 3</span>     <span class="n">identifier</span>    <span class="nb">CHARACTER</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span> <span class="k">PRIMARY</span> <span class="k">KEY</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+<span class="lineno"> 4</span>     <span class="n">username</span>      <span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+<span class="lineno"> 5</span>     <span class="n">email</span>         <span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+<span class="lineno"> 6</span>     <span class="n">display_name</span>  <span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span> <span class="k">DEFAULT</span> <span class="k">NULL</span><span class="p">,</span>
+<span class="lineno"> 7</span>     <span class="k">timestamp</span>     <span class="nb">INTEGER</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+<span class="lineno"> 8</span>     <span class="n">peep_text</span>     <span class="nb">TEXT</span> <span class="k">NOT</span> <span class="k">NULL</span>
+<span class="lineno"> 9</span> <span class="p">);</span>
+<span class="lineno">10</span> 
+<span class="lineno">11</span> <span class="k">CREATE</span> <span class="k">INDEX</span> <span class="n">peep_username</span> <span class="k">ON</span> <span class="n">peep</span><span class="p">(</span><span class="n">username</span><span class="p">);</span>
+</pre></div>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2ModuleWorkshop.md">Zf2ModuleWorkshop.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              64/97
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2ModuleWorkshop.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Validation</h1></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2ModuleWorkshop.md">Zf2ModuleWorkshop.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              65/97
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2ModuleWorkshop.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Validate and normalize</h2></header>
+            
+            
+            <section><ul>
+<li>Identifiers should be 8 characters</li>
+<li>Username should ...</li>
+<li>Email should be valid</li>
+<li>Timestamp should be an integer</li>
+<li>We need at least <em>some</em> text</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2ModuleWorkshop.md">Zf2ModuleWorkshop.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              66/97
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2ModuleWorkshop.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Zend\InputFilter</h2></header>
+            
+            
+            <section><ul>
+<li>Define "inputs", which know how to normalize and validate themselves, and
+  define "meta-behavior" (required, allow empty, etc.).</li>
+<li>Define "input filters", which aggregate inputs and other input filters, and
+  are capable of validating the entire or partial sets.</li>
+<li>Perfect fit for <em>models</em></li>
+<li>Perfect fit for <em>forms</em></li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2ModuleWorkshop.md">Zf2ModuleWorkshop.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              67/97
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2ModuleWorkshop.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Persistence</h1></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2ModuleWorkshop.md">Zf2ModuleWorkshop.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              68/97
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2ModuleWorkshop.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Zend\Db</h2></header>
+            
+            
+            <section><ul>
+<li>Robust and flexible database abstraction layer (DBAL)</li>
+<li>Offers query abstraction</li>
+<li>Offers Table and Row Data Gateway implementations</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2ModuleWorkshop.md">Zf2ModuleWorkshop.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              69/97
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2ModuleWorkshop.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Service Layer (and Pagination)</h1></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2ModuleWorkshop.md">Zf2ModuleWorkshop.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              70/97
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2ModuleWorkshop.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Service Layer?</h2></header>
+            
+            
+            <section><ul>
+<li>Abstract domain model operations from persistence operations</li>
+<li>We'll use it to return paginators instead of result sets</li>
+<li>We'll use it to provide the minimum useful interface to the domain</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2ModuleWorkshop.md">Zf2ModuleWorkshop.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              71/97
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2ModuleWorkshop.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Zend\Paginator</h2></header>
+            
+            
+            <section><ul>
+<li>Paginate arbitrary data sets</li>
+<li>Adapters need only implement <code>getItems($offset, $numPerPage)</code> and <code>count()</code></li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2ModuleWorkshop.md">Zf2ModuleWorkshop.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              72/97
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2ModuleWorkshop.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Form</h1></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2ModuleWorkshop.md">Zf2ModuleWorkshop.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              73/97
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2ModuleWorkshop.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Zend\Form</h2></header>
+            
+            
+            <section><ul>
+<li>Bridges the domain model and view</li>
+<li>Elements, fieldsets, and forms<ul>
+<li>Each defines a <em>name</em> and <em>attributes</em></li>
+<li>Fieldsets aggregate elements and fieldsets</li>
+<li>Forms aggregate input filters and can bind to objects</li>
+</ul>
+</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2ModuleWorkshop.md">Zf2ModuleWorkshop.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              74/97
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2ModuleWorkshop.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Routes and Controller</h1></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2ModuleWorkshop.md">Zf2ModuleWorkshop.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              75/97
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2ModuleWorkshop.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>config/module.config.php</h2></header>
+            
+            
+            <section><p>(live coding time)</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2ModuleWorkshop.md">Zf2ModuleWorkshop.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              76/97
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2ModuleWorkshop.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>PeepController.php</h2></header>
+            
+            
+            <section><p>(live coding time)</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2ModuleWorkshop.md">Zf2ModuleWorkshop.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              77/97
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2ModuleWorkshop.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>View scripts and helpers</h1></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2ModuleWorkshop.md">Zf2ModuleWorkshop.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              78/97
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2ModuleWorkshop.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>What we need</h2></header>
+            
+            
+            <section><p>View Scripts:</p>
+<ul>
+<li>"index" -- show the public timeline</li>
+<li>"form-error" -- display peep submission errors</li>
+<li>"username" -- display user timelines</li>
+<li>"401" -- unauthorized (peeping without authorization)</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2ModuleWorkshop.md">Zf2ModuleWorkshop.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              79/97
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2ModuleWorkshop.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>What we need</h2></header>
+            
+            
+            <section><p>View Helpers</p>
+<ul>
+<li>"PeepText" -- escape a peep, but also link any URLs</li>
+<li>"PeepForm" -- show a form if user authorized, link to login/register otherwise</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2ModuleWorkshop.md">Zf2ModuleWorkshop.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              80/97
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2ModuleWorkshop.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Service Factories</h1></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2ModuleWorkshop.md">Zf2ModuleWorkshop.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              81/97
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2ModuleWorkshop.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>What we need</h2></header>
+            
+            
+            <section><ul>
+<li>Controller factory<ul>
+<li>inject authentication service</li>
+<li>inject peep service</li>
+</ul>
+</li>
+<li>Peep service factory<ul>
+<li>inject peep table object</li>
+</ul>
+</li>
+<li>Peep table factory<ul>
+<li>inject database adapter</li>
+<li>inject configuration</li>
+</ul>
+</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2ModuleWorkshop.md">Zf2ModuleWorkshop.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              82/97
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2ModuleWorkshop.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Configuration</h1></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2ModuleWorkshop.md">Zf2ModuleWorkshop.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              83/97
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2ModuleWorkshop.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>What we need to configure</h2></header>
+            
+            
+            <section><ul>
+<li>services</li>
+<li>routes (already done)</li>
+<li>controllers</li>
+<li>view information</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2ModuleWorkshop.md">Zf2ModuleWorkshop.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              84/97
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2ModuleWorkshop.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Define Dependencies</h1></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2ModuleWorkshop.md">Zf2ModuleWorkshop.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              85/97
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2ModuleWorkshop.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code smaller-code">
+          <div class="inner">
+            
+            <header><h2>composer.json</h2></header>
+            
+            
+            <section><div class="highlight"><pre><span class="lineno"> 1</span> <span class="p">{</span>
+<span class="lineno"> 2</span>     <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;phly/phly-peep&quot;</span><span class="p">,</span>
+<span class="lineno"> 3</span>     <span class="s2">&quot;description&quot;</span><span class="o">:</span> <span class="s2">&quot;Rudimentary twitter clone&quot;</span><span class="p">,</span>
+<span class="lineno"> 4</span>     <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;library&quot;</span><span class="p">,</span>
+<span class="lineno"> 5</span>     <span class="s2">&quot;keywords&quot;</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;zf2&quot;</span><span class="p">,</span> <span class="s2">&quot;zend&quot;</span><span class="p">,</span> <span class="s2">&quot;module&quot;</span><span class="p">],</span>
+<span class="lineno"> 6</span>     <span class="s2">&quot;homepage&quot;</span><span class="o">:</span> <span class="s2">&quot;https://github.com/weierophinney/PhlyPeep&quot;</span><span class="p">,</span>
+<span class="lineno"> 7</span>     <span class="s2">&quot;authors&quot;</span><span class="o">:</span> <span class="p">[</span> <span class="cm">/* ... */</span> <span class="p">],</span>
+<span class="lineno"> 8</span>     <span class="s2">&quot;require&quot;</span><span class="o">:</span> <span class="p">{</span>
+<span class="lineno"> 9</span>         <span class="s2">&quot;php&quot;</span><span class="o">:</span> <span class="s2">&quot;&gt;=5.3.3&quot;</span><span class="p">,</span>
+<span class="lineno">10</span>         <span class="s2">&quot;zendframework/zendframework&quot;</span><span class="o">:</span> <span class="s2">&quot;dev-master&quot;</span><span class="p">,</span>
+<span class="lineno">11</span>         <span class="s2">&quot;zf-commons/zfc-user&quot;</span><span class="o">:</span> <span class="s2">&quot;dev-master&quot;</span>
+<span class="lineno">12</span>     <span class="p">},</span>
+<span class="lineno">13</span>     <span class="s2">&quot;autoload&quot;</span><span class="o">:</span> <span class="p">{</span>
+<span class="lineno">14</span>         <span class="s2">&quot;psr-0&quot;</span><span class="o">:</span> <span class="p">{</span>
+<span class="lineno">15</span>             <span class="s2">&quot;PhlyPeep&quot;</span><span class="o">:</span> <span class="s2">&quot;src/&quot;</span>
+<span class="lineno">16</span>         <span class="p">},</span>
+<span class="lineno">17</span>         <span class="s2">&quot;classmap&quot;</span><span class="o">:</span> <span class="p">[</span>
+<span class="lineno">18</span>             <span class="s2">&quot;./&quot;</span>
+<span class="lineno">19</span>         <span class="p">]</span>
+<span class="lineno">20</span>     <span class="p">}</span>
+<span class="lineno">21</span> <span class="p">}</span>
+</pre></div>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2ModuleWorkshop.md">Zf2ModuleWorkshop.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              86/97
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2ModuleWorkshop.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Add it to your Application</h1></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2ModuleWorkshop.md">Zf2ModuleWorkshop.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              87/97
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2ModuleWorkshop.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code smaller-code">
+          <div class="inner">
+            
+            <header><h2>config/application.config.php</h2></header>
+            
+            
+            <section><div class="highlight"><pre><span class="lineno"> 1</span> <span class="cp">&lt;?php</span>
+<span class="lineno"> 2</span> <span class="k">return</span> <span class="k">array</span><span class="p">(</span>
+<span class="lineno"> 3</span>     <span class="s1">&#39;modules&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+<span class="lineno"> 4</span>         <span class="s1">&#39;Application&#39;</span><span class="p">,</span>
+<span class="lineno"> 5</span>         <span class="s1">&#39;PhlyContact&#39;</span><span class="p">,</span>
+<span class="lineno"> 6</span>         <span class="s1">&#39;PhlyPeep&#39;</span><span class="p">,</span>    <span class="c1">// HERE IT IS!</span>
+<span class="lineno"> 7</span>         <span class="s1">&#39;ZfcBase&#39;</span><span class="p">,</span>
+<span class="lineno"> 8</span>         <span class="s1">&#39;ZfcUser&#39;</span><span class="p">,</span>
+<span class="lineno"> 9</span>     <span class="p">),</span>
+<span class="lineno">10</span>     <span class="cm">/* ... */</span>
+<span class="lineno">11</span> <span class="p">);</span>
+</pre></div>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2ModuleWorkshop.md">Zf2ModuleWorkshop.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              88/97
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2ModuleWorkshop.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Time to test!</h1></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2ModuleWorkshop.md">Zf2ModuleWorkshop.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              89/97
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2ModuleWorkshop.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Bonus tasks</h2></header>
+            
+            
+            <section><ul>
+<li>Add caching to the timelines</li>
+<li>Add search capabilities</li>
+<li>Allow using a queue/job service to insert peeps<ul>
+<li>Offload caching, search index updating</li>
+</ul>
+</li>
+<li>Add Atom/RSS feeds</li>
+<li>Allow peep retrieval via XMLHttpRequest</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2ModuleWorkshop.md">Zf2ModuleWorkshop.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              90/97
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2ModuleWorkshop.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Takeaways</h1></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2ModuleWorkshop.md">Zf2ModuleWorkshop.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              91/97
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2ModuleWorkshop.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Module naming</h2></header>
+            
+            
+            <section><p>Prefix modules with your vendor name</p>
+<ul>
+<li>PhlyBlog, ZfcUser, OcraComposer, etc.</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2ModuleWorkshop.md">Zf2ModuleWorkshop.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              92/97
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2ModuleWorkshop.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code smaller-code">
+          <div class="inner">
+            
+            <header><h2>Use service aliases</h2></header>
+            
+            
+            <section><p>Define <em>aliases</em>, <em>routes</em>, etc. using a normalized module prefix; point them to
+<em>class names</em> or <em>interfaces</em> by default. (<code>phly-peep-service</code>,
+<code>zfcuser_db_adapter</code>, etc.)</p>
+<div class="highlight"><pre><span class="lineno">1</span> <span class="cp">&lt;?php</span>
+<span class="lineno">2</span> <span class="k">return</span> <span class="k">array</span><span class="p">(</span>
+<span class="lineno">3</span>     <span class="s1">&#39;service_manager&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;aliases&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+<span class="lineno">4</span>         <span class="s1">&#39;phly-peep-db-adapter&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Zend\Db\Adapter\Adapter&#39;</span><span class="p">,</span>
+<span class="lineno">5</span>     <span class="p">))</span>
+<span class="lineno">6</span> <span class="p">);</span>
+</pre></div>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2ModuleWorkshop.md">Zf2ModuleWorkshop.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              93/97
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2ModuleWorkshop.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code smaller-code">
+          <div class="inner">
+            
+            <header><h2>Enable helpers via the service manager</h2></header>
+            
+            
+            <section><p>Helpers and plugins can be looked up via the service manager. Leverage that.</p>
+<div class="highlight"><pre><span class="lineno"> 1</span> <span class="cp">&lt;?php</span>
+<span class="lineno"> 2</span> <span class="k">return</span> <span class="k">array</span><span class="p">(</span>
+<span class="lineno"> 3</span>     <span class="s1">&#39;service_manager&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+<span class="lineno"> 4</span>         <span class="s1">&#39;invokables&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+<span class="lineno"> 5</span>             <span class="s1">&#39;peeptext&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;PhlyPeep\View\PeepText&#39;</span><span class="p">,</span>
+<span class="lineno"> 6</span>         <span class="p">),</span>
+<span class="lineno"> 7</span>         <span class="s1">&#39;factories&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+<span class="lineno"> 8</span>             <span class="s1">&#39;peepform&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;PhlyPeep\Service\PeepViewFormFactory&#39;</span><span class="p">,</span>
+<span class="lineno"> 9</span>         <span class="p">),</span>
+<span class="lineno">10</span>     <span class="p">)</span>
+<span class="lineno">11</span> <span class="p">);</span>
+</pre></div>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2ModuleWorkshop.md">Zf2ModuleWorkshop.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              94/97
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2ModuleWorkshop.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code smaller-code">
+          <div class="inner">
+            
+            <header><h2>Routing</h2></header>
+            
+            
+            <section><p>Define a single, top-level route for the module, with children beneath</p>
+<div class="highlight"><pre><span class="lineno"> 1</span> <span class="cp">&lt;?php</span>
+<span class="lineno"> 2</span> <span class="k">return</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;router&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;routes&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+<span class="lineno"> 3</span>     <span class="s1">&#39;phly-peep&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+<span class="lineno"> 4</span>         <span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Literal&#39;</span><span class="p">,</span>
+<span class="lineno"> 5</span>         <span class="cm">/* ... */</span>
+<span class="lineno"> 6</span>         <span class="s1">&#39;may_terminate&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span> <span class="c1">// or not</span>
+<span class="lineno"> 7</span>         <span class="s1">&#39;child_routes&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+<span class="lineno"> 8</span>             <span class="cm">/* all other routes for this module */</span>
+<span class="lineno"> 9</span>         <span class="p">),</span> 
+<span class="lineno">10</span>     <span class="p">)</span>
+<span class="lineno">11</span> <span class="p">)));</span>
+</pre></div>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2ModuleWorkshop.md">Zf2ModuleWorkshop.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              95/97
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2ModuleWorkshop.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Be explicit about dependencies</h2></header>
+            
+            
+            <section><p>Define and delineate dependencies, preferably via a form of package metadata.</p>
+<ul>
+<li>Make it easy to install your module; developers <em>like</em> easy</li>
+<li>Document installation and post-install steps</li>
+<li>Look for existing modules when possible, and extend from them or use their
+  functionality</li>
+<li>Composer and Pyrus are <em>awesome</em>!</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2ModuleWorkshop.md">Zf2ModuleWorkshop.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              96/97
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: Zf2ModuleWorkshop.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Thank You!</h1></header>
+            
+            
+            <section><ul>
+<li>Feedback?<ul>
+<li>https://joind.in/6221</li>
+<li>http://framework.zend.com/zf2</li>
+<li>http://twitter.com/weierophinney</li>
+</ul>
+</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="Zf2ModuleWorkshop.md">Zf2ModuleWorkshop.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              97/97
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div id="toc" class="sidebar hidden">
+    <h2>Table of Contents</h2>
+    <table>
+      <caption>Table of Contents</caption>
+      
+      <tr id="toc-row-1">
+        <th><a href="#slide1">Creating Re-usable Modules for Zend Framework 2</a></th>
+        <td><a href="#slide1">1</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-2">
+        <th><a href="#slide2">Who am I?</a></th>
+        <td><a href="#slide2">2</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-3">
+        <th><a href="#slide3">Goals</a></th>
+        <td><a href="#slide3">3</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-4">
+        <th><a href="#slide4">MVC Quick Start</a></th>
+        <td><a href="#slide4">4</a></td>
+      </tr>
+      
+        
+        <tr id="toc-row-5" class="sub">
+          <th><a href="#slide5">Three core concepts</a></th>
+          <td><a href="#slide5">5</a></td>
+        </tr>
+        
+      
+      
+      <tr id="toc-row-6">
+        <th><a href="#slide6">Decoupling, DI, and Services</a></th>
+        <td><a href="#slide6">6</a></td>
+      </tr>
+      
+        
+        <tr id="toc-row-7" class="sub">
+          <th><a href="#slide7">The problem</a></th>
+          <td><a href="#slide7">7</a></td>
+        </tr>
+        
+        <tr id="toc-row-8" class="sub">
+          <th><a href="#slide8">Decoupling</a></th>
+          <td><a href="#slide8">8</a></td>
+        </tr>
+        
+      
+      
+      <tr id="toc-row-9">
+        <th><a href="#slide9">Service Manager</a></th>
+        <td><a href="#slide9">9</a></td>
+      </tr>
+      
+        
+        <tr id="toc-row-10" class="sub">
+          <th><a href="#slide10">Zend\ServiceManager</a></th>
+          <td><a href="#slide10">10</a></td>
+        </tr>
+        
+        <tr id="toc-row-11" class="sub">
+          <th><a href="#slide11">Types of services</a></th>
+          <td><a href="#slide11">11</a></td>
+        </tr>
+        
+        <tr id="toc-row-12" class="sub">
+          <th><a href="#slide12">Example: service</a></th>
+          <td><a href="#slide12">12</a></td>
+        </tr>
+        
+        <tr id="toc-row-13" class="sub">
+          <th><a href="#slide13">Example: invokable</a></th>
+          <td><a href="#slide13">13</a></td>
+        </tr>
+        
+        <tr id="toc-row-14" class="sub">
+          <th><a href="#slide14">Example: factories</a></th>
+          <td><a href="#slide14">14</a></td>
+        </tr>
+        
+        <tr id="toc-row-15" class="sub">
+          <th><a href="#slide15">Example: aliases</a></th>
+          <td><a href="#slide15">15</a></td>
+        </tr>
+        
+        <tr id="toc-row-16" class="sub">
+          <th><a href="#slide16">Example: abstract factories</a></th>
+          <td><a href="#slide16">16</a></td>
+        </tr>
+        
+        <tr id="toc-row-17" class="sub">
+          <th><a href="#slide17">Example: (un)shared service</a></th>
+          <td><a href="#slide17">17</a></td>
+        </tr>
+        
+        <tr id="toc-row-18" class="sub">
+          <th><a href="#slide18">Configure services anywhere</a></th>
+          <td><a href="#slide18">18</a></td>
+        </tr>
+        
+        <tr id="toc-row-19" class="sub">
+          <th><a href="#slide19">Why?</a></th>
+          <td><a href="#slide19">19</a></td>
+        </tr>
+        
+      
+      
+      <tr id="toc-row-20">
+        <th><a href="#slide20">Event Manager</a></th>
+        <td><a href="#slide20">20</a></td>
+      </tr>
+      
+        
+        <tr id="toc-row-21" class="sub">
+          <th><a href="#slide21">Zend\EventManager in a slide</a></th>
+          <td><a href="#slide21">21</a></td>
+        </tr>
+        
+        <tr id="toc-row-22" class="sub">
+          <th><a href="#slide22">Terminology</a></th>
+          <td><a href="#slide22">22</a></td>
+        </tr>
+        
+        <tr id="toc-row-23" class="sub">
+          <th><a href="#slide23">Example</a></th>
+          <td><a href="#slide23">23</a></td>
+        </tr>
+        
+        <tr id="toc-row-24" class="sub">
+          <th><a href="#slide24">Everything is an event</a></th>
+          <td><a href="#slide24">24</a></td>
+        </tr>
+        
+        <tr id="toc-row-25" class="sub">
+          <th><a href="#slide25">MVC Events</a></th>
+          <td><a href="#slide25">25</a></td>
+        </tr>
+        
+      
+      
+      <tr id="toc-row-26">
+        <th><a href="#slide26">Dispatchables == Controllers</a></th>
+        <td><a href="#slide26">26</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-27">
+        <th><a href="#slide27">What is a web application?</a></th>
+        <td><a href="#slide27">27</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-28">
+        <th><a href="#slide28">HTTP negotiation.</a></th>
+        <td><a href="#slide28">28</a></td>
+      </tr>
+      
+        
+        <tr id="toc-row-29" class="sub">
+          <th><a href="#slide29">DispatchableInterface</a></th>
+          <td><a href="#slide29">29</a></td>
+        </tr>
+        
+        <tr id="toc-row-30" class="sub">
+          <th><a href="#slide30">Shipped contollers</a></th>
+          <td><a href="#slide30">30</a></td>
+        </tr>
+        
+        <tr id="toc-row-31" class="sub">
+          <th><a href="#slide31">Most importantly...</a></th>
+          <td><a href="#slide31">31</a></td>
+        </tr>
+        
+      
+      
+      <tr id="toc-row-32">
+        <th><a href="#slide32">Configuring the MVC</a></th>
+        <td><a href="#slide32">32</a></td>
+      </tr>
+      
+        
+        <tr id="toc-row-33" class="sub">
+          <th><a href="#slide33">Things that must happen</a></th>
+          <td><a href="#slide33">33</a></td>
+        </tr>
+        
+        <tr id="toc-row-34" class="sub">
+          <th><a href="#slide34">Core services</a></th>
+          <td><a href="#slide34">34</a></td>
+        </tr>
+        
+      
+      
+      <tr id="toc-row-35">
+        <th><a href="#slide35">How do we provide configuration?</a></th>
+        <td><a href="#slide35">35</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-36">
+        <th><a href="#slide36">Modules</a></th>
+        <td><a href="#slide36">36</a></td>
+      </tr>
+      
+        
+        <tr id="toc-row-37" class="sub">
+          <th><a href="#slide37">What?</a></th>
+          <td><a href="#slide37">37</a></td>
+        </tr>
+        
+        <tr id="toc-row-38" class="sub">
+          <th><a href="#slide38">Modules in ZF2</a></th>
+          <td><a href="#slide38">38</a></td>
+        </tr>
+        
+        <tr id="toc-row-39" class="sub">
+          <th><a href="#slide39">How?</a></th>
+          <td><a href="#slide39">39</a></td>
+        </tr>
+        
+        <tr id="toc-row-40" class="sub">
+          <th><a href="#slide40">Common Module Features</a></th>
+          <td><a href="#slide40">40</a></td>
+        </tr>
+        
+        <tr id="toc-row-41" class="sub">
+          <th><a href="#slide41">Module classes</a></th>
+          <td><a href="#slide41">41</a></td>
+        </tr>
+        
+      
+      
+      <tr id="toc-row-42">
+        <th><a href="#slide42">-</a></th>
+        <td><a href="#slide42">42</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-43">
+        <th><a href="#slide43">Skeleton Application</a></th>
+        <td><a href="#slide43">43</a></td>
+      </tr>
+      
+        
+        <tr id="toc-row-44" class="sub">
+          <th><a href="#slide44">Getting it</a></th>
+          <td><a href="#slide44">44</a></td>
+        </tr>
+        
+        <tr id="toc-row-45" class="sub">
+          <th><a href="#slide45">Let's look through it</a></th>
+          <td><a href="#slide45">45</a></td>
+        </tr>
+        
+      
+      
+      <tr id="toc-row-46">
+        <th><a href="#slide46">Module Demonstration</a></th>
+        <td><a href="#slide46">46</a></td>
+      </tr>
+      
+        
+        <tr id="toc-row-47" class="sub">
+          <th><a href="#slide47">PhlyContact</a></th>
+          <td><a href="#slide47">47</a></td>
+        </tr>
+        
+        <tr id="toc-row-48" class="sub">
+          <th><a href="#slide48">Install</a></th>
+          <td><a href="#slide48">48</a></td>
+        </tr>
+        
+        <tr id="toc-row-49" class="sub">
+          <th><a href="#slide49">Configure</a></th>
+          <td><a href="#slide49">49</a></td>
+        </tr>
+        
+        <tr id="toc-row-50" class="sub">
+          <th><a href="#slide50">Try it out!</a></th>
+          <td><a href="#slide50">50</a></td>
+        </tr>
+        
+        <tr id="toc-row-51" class="sub">
+          <th><a href="#slide51">Other things we could do</a></th>
+          <td><a href="#slide51">51</a></td>
+        </tr>
+        
+      
+      
+      <tr id="toc-row-52">
+        <th><a href="#slide52">Break time!</a></th>
+        <td><a href="#slide52">52</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-53">
+        <th><a href="#slide53">Project Walkthrough</a></th>
+        <td><a href="#slide53">53</a></td>
+      </tr>
+      
+        
+        <tr id="toc-row-54" class="sub">
+          <th><a href="#slide54">PhlyPeep: Dead Simple Twitter Clone</a></th>
+          <td><a href="#slide54">54</a></td>
+        </tr>
+        
+      
+      
+      <tr id="toc-row-55">
+        <th><a href="#slide55">Demo time</a></th>
+        <td><a href="#slide55">55</a></td>
+      </tr>
+      
+        
+        <tr id="toc-row-56" class="sub">
+          <th><a href="#slide56">Dependencies</a></th>
+          <td><a href="#slide56">56</a></td>
+        </tr>
+        
+        <tr id="toc-row-57" class="sub">
+          <th><a href="#slide57">Installing ZfcUser</a></th>
+          <td><a href="#slide57">57</a></td>
+        </tr>
+        
+      
+      
+      <tr id="toc-row-58">
+        <th><a href="#slide58">Create the module</a></th>
+        <td><a href="#slide58">58</a></td>
+      </tr>
+      
+        
+        <tr id="toc-row-59" class="sub">
+          <th><a href="#slide59">simple steps:</a></th>
+          <td><a href="#slide59">59</a></td>
+        </tr>
+        
+        <tr id="toc-row-60" class="sub">
+          <th><a href="#slide60">Module.php</a></th>
+          <td><a href="#slide60">60</a></td>
+        </tr>
+        
+      
+      
+      <tr id="toc-row-61">
+        <th><a href="#slide61">First things first: Modelling</a></th>
+        <td><a href="#slide61">61</a></td>
+      </tr>
+      
+        
+        <tr id="toc-row-62" class="sub">
+          <th><a href="#slide62">Model the peep and create a schema</a></th>
+          <td><a href="#slide62">62</a></td>
+        </tr>
+        
+        <tr id="toc-row-63" class="sub">
+          <th><a href="#slide63">Entity</a></th>
+          <td><a href="#slide63">63</a></td>
+        </tr>
+        
+        <tr id="toc-row-64" class="sub">
+          <th><a href="#slide64">Schema</a></th>
+          <td><a href="#slide64">64</a></td>
+        </tr>
+        
+      
+      
+      <tr id="toc-row-65">
+        <th><a href="#slide65">Validation</a></th>
+        <td><a href="#slide65">65</a></td>
+      </tr>
+      
+        
+        <tr id="toc-row-66" class="sub">
+          <th><a href="#slide66">Validate and normalize</a></th>
+          <td><a href="#slide66">66</a></td>
+        </tr>
+        
+        <tr id="toc-row-67" class="sub">
+          <th><a href="#slide67">Zend\InputFilter</a></th>
+          <td><a href="#slide67">67</a></td>
+        </tr>
+        
+      
+      
+      <tr id="toc-row-68">
+        <th><a href="#slide68">Persistence</a></th>
+        <td><a href="#slide68">68</a></td>
+      </tr>
+      
+        
+        <tr id="toc-row-69" class="sub">
+          <th><a href="#slide69">Zend\Db</a></th>
+          <td><a href="#slide69">69</a></td>
+        </tr>
+        
+      
+      
+      <tr id="toc-row-70">
+        <th><a href="#slide70">Service Layer (and Pagination)</a></th>
+        <td><a href="#slide70">70</a></td>
+      </tr>
+      
+        
+        <tr id="toc-row-71" class="sub">
+          <th><a href="#slide71">Service Layer?</a></th>
+          <td><a href="#slide71">71</a></td>
+        </tr>
+        
+        <tr id="toc-row-72" class="sub">
+          <th><a href="#slide72">Zend\Paginator</a></th>
+          <td><a href="#slide72">72</a></td>
+        </tr>
+        
+      
+      
+      <tr id="toc-row-73">
+        <th><a href="#slide73">Form</a></th>
+        <td><a href="#slide73">73</a></td>
+      </tr>
+      
+        
+        <tr id="toc-row-74" class="sub">
+          <th><a href="#slide74">Zend\Form</a></th>
+          <td><a href="#slide74">74</a></td>
+        </tr>
+        
+      
+      
+      <tr id="toc-row-75">
+        <th><a href="#slide75">Routes and Controller</a></th>
+        <td><a href="#slide75">75</a></td>
+      </tr>
+      
+        
+        <tr id="toc-row-76" class="sub">
+          <th><a href="#slide76">config/module.config.php</a></th>
+          <td><a href="#slide76">76</a></td>
+        </tr>
+        
+        <tr id="toc-row-77" class="sub">
+          <th><a href="#slide77">PeepController.php</a></th>
+          <td><a href="#slide77">77</a></td>
+        </tr>
+        
+      
+      
+      <tr id="toc-row-78">
+        <th><a href="#slide78">View scripts and helpers</a></th>
+        <td><a href="#slide78">78</a></td>
+      </tr>
+      
+        
+        <tr id="toc-row-79" class="sub">
+          <th><a href="#slide79">What we need</a></th>
+          <td><a href="#slide79">79</a></td>
+        </tr>
+        
+        <tr id="toc-row-80" class="sub">
+          <th><a href="#slide80">What we need</a></th>
+          <td><a href="#slide80">80</a></td>
+        </tr>
+        
+      
+      
+      <tr id="toc-row-81">
+        <th><a href="#slide81">Service Factories</a></th>
+        <td><a href="#slide81">81</a></td>
+      </tr>
+      
+        
+        <tr id="toc-row-82" class="sub">
+          <th><a href="#slide82">What we need</a></th>
+          <td><a href="#slide82">82</a></td>
+        </tr>
+        
+      
+      
+      <tr id="toc-row-83">
+        <th><a href="#slide83">Configuration</a></th>
+        <td><a href="#slide83">83</a></td>
+      </tr>
+      
+        
+        <tr id="toc-row-84" class="sub">
+          <th><a href="#slide84">What we need to configure</a></th>
+          <td><a href="#slide84">84</a></td>
+        </tr>
+        
+      
+      
+      <tr id="toc-row-85">
+        <th><a href="#slide85">Define Dependencies</a></th>
+        <td><a href="#slide85">85</a></td>
+      </tr>
+      
+        
+        <tr id="toc-row-86" class="sub">
+          <th><a href="#slide86">composer.json</a></th>
+          <td><a href="#slide86">86</a></td>
+        </tr>
+        
+      
+      
+      <tr id="toc-row-87">
+        <th><a href="#slide87">Add it to your Application</a></th>
+        <td><a href="#slide87">87</a></td>
+      </tr>
+      
+        
+        <tr id="toc-row-88" class="sub">
+          <th><a href="#slide88">config/application.config.php</a></th>
+          <td><a href="#slide88">88</a></td>
+        </tr>
+        
+      
+      
+      <tr id="toc-row-89">
+        <th><a href="#slide89">Time to test!</a></th>
+        <td><a href="#slide89">89</a></td>
+      </tr>
+      
+        
+        <tr id="toc-row-90" class="sub">
+          <th><a href="#slide90">Bonus tasks</a></th>
+          <td><a href="#slide90">90</a></td>
+        </tr>
+        
+      
+      
+      <tr id="toc-row-91">
+        <th><a href="#slide91">Takeaways</a></th>
+        <td><a href="#slide91">91</a></td>
+      </tr>
+      
+        
+        <tr id="toc-row-92" class="sub">
+          <th><a href="#slide92">Module naming</a></th>
+          <td><a href="#slide92">92</a></td>
+        </tr>
+        
+        <tr id="toc-row-93" class="sub">
+          <th><a href="#slide93">Use service aliases</a></th>
+          <td><a href="#slide93">93</a></td>
+        </tr>
+        
+        <tr id="toc-row-94" class="sub">
+          <th><a href="#slide94">Enable helpers via the service manager</a></th>
+          <td><a href="#slide94">94</a></td>
+        </tr>
+        
+        <tr id="toc-row-95" class="sub">
+          <th><a href="#slide95">Routing</a></th>
+          <td><a href="#slide95">95</a></td>
+        </tr>
+        
+        <tr id="toc-row-96" class="sub">
+          <th><a href="#slide96">Be explicit about dependencies</a></th>
+          <td><a href="#slide96">96</a></td>
+        </tr>
+        
+      
+      
+      <tr id="toc-row-97">
+        <th><a href="#slide97">Thank You!</a></th>
+        <td><a href="#slide97">97</a></td>
+      </tr>
+      
+      
+    </table>
+  </div>
+  
+  <div id="help" class="sidebar hidden">
+    <h2>Help</h2>
+    <table>
+      <caption>Help</caption>
+      <tr>
+        <th>Table of Contents</th>
+        <td>t</td>
+      </tr>
+      <tr>
+        <th>Exposé</th>
+        <td>ESC</td>
+      </tr>
+      <tr>
+        <th>Full screen slides</th>
+        <td>e</td>
+      </tr>
+      <tr>
+        <th>Presenter View</th>
+        <td>p</td>
+      </tr>
+      <tr>
+        <th>Source Files</th>
+        <td>s</td>
+      </tr>
+      <tr>
+        <th>Slide Numbers</th>
+        <td>n</td>
+      </tr>
+      <tr>
+        <th>Toggle screen blanking</th>
+        <td>b</td>
+      </tr>
+      <tr>
+        <th>Show/hide slide context</th>
+        <td>c</td>
+      </tr>
+      <tr>
+        <th>Notes</th>
+        <td>2</td>
+      </tr>
+      <tr>
+        <th>Help</th>
+        <td>h</td>
+      </tr>
+    </table>
+  </div>
+  <script>main()</script>
+</body>
+</html>

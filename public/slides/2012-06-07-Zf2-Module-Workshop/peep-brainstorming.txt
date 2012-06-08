@@ -1,0 +1,123 @@
+Twitter app "Peep" brainstorming
+
+Schema
+ * identifier (hash of username + timestamp + tweet text)
+ * username
+ * user_email (for gravatar)
+ * user_fullname (?)
+ * timestamp
+ * peep_text
+
+Relies on ZfcUser (and thus ZfcBase)
+ * composer.json
+ * share DB connection between them
+
+Peep
+ * user must be logged in (ACL for this?)
+ * form only accepts the peep text
+ * form redisplayed if invalid
+
+Fetch paginated peeps, newest first
+ * all peeps
+ * by user
+ * show all details of peep per "fetch peep by identifier"
+
+Fetch peep by identifier
+ * use user email for gravatar
+ * display username
+ * display user full name (?)
+ * display peep
+ * display formatted time
+
+Bonus tasks
+ * allow repeeping
+ * allow deleting own peeps (requires ACLs)
+ * @ mentions listings (requires search)
+ * # tag listings (requires search)
+ * URL shortening
+
+Peep entity
+ * input filter
+ * setters and getters for all properties
+    * getIdentifier() should create one based on other properties, if none
+      provided, and all other properties present
+    * getTimestamp() should create one from $_SERVER['REQUEST_TIME'], if none
+      present
+ * user details should be hydrated from current authentication identity before
+   validating
+
+Form
+ * peep
+    * max 140 chars, min 1 char
+    * trim string
+ * submit
+    * button, label "Peep!"
+
+ZfcUser
+ * Need to make captcha work
+
+Twitter Bootstrap for styling?
+    http://twitter.github.com/bootstrap/
+    we already have bootstrap in the skeleton app -- mainly a matter of setting
+    appropriate attributes on form and elements, setting grid up, and having a
+    pagination control that works with it.
+
+TODO
+X Form
+X Controller
+X Service factories
+- view scripts
+  - view helper for rendering the "peep!" form
+  - styling with twitter bootstrap?
+- captcha on ZfcUser (?)
+
+== Modules Workshop ==
+
+App ideas: news/announcements, photos, blog, comments. 
+
+News would be interesting, as it's kind of like a blog, but wouldn't need
+tagging -- just pagination. It would still demonstrate basic CRUD.
+
+ * MVC walkthrough (skeleton app, basic dispatch structure)
+ * Project walkthrough
+ * Build a model, with validation (input filter)
+    * Build on !TableGateway? or on Doctrine?
+ * Build a form (forms)
+ * Build a controller consuming the form (controller, form/model binding,
+   responses and redirects)
+ * Build views (view, helpers)
+ * Create configuration and service factories (service manager, config)
+ * Create an autoload classmap (classmap_generator, autoloaders)
+ * Create Module class demonstrating autoloading and configuration (modules)
+ * Create a composer file (?) for distribution
+ * Tie it in to the application
+ * Configure it at the application level
+    * Different view scripts
+    * If using a DB, different connections
+    * Different captcha
+
+Where/how might we demonstrate events?
+
+Best Practices
+
+ * Prefix module with your "vendor" name
+    * PhlyBlog
+    * ZfcUser
+    * OcraComposer
+ * Define dependencies
+    * Use composer!
+ * Use aliases for services
+    * Default them to point to class names
+    * Users can point them to alternate services or factories if they wish to
+      customize
+ * Define a top-level route
+    * All other routes should be children
+    * Allows for altering the initial route
+    * Allows setting a default controller
+    * Allows removing all routes easily
+        * Set a bootstrap listener at high priority that removes the route from
+          configuration... *before* we create the router
+ * Define all services using a normalized module prefix
+    * Ensures there are no collisions
+    * You can alias to well-known services, but
+    * still allow for customization.
