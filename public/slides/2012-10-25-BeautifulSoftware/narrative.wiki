@@ -1,0 +1,691 @@
+= Beautiful Software =
+
+I'll be talking about PHP and tools and techniques I use eventually, but I want
+to start with some analogies.
+
+For a few summers in my early adulthood, I did construction work.  
+
+Construction is relatively easy to pick up.  You have some basic tools, that are
+used in specific ways, and you create things with them.  You use a saw to cut
+wood to the desired length.  You use a hammer or nailgun and nails to create a
+frame out of the wood.  You drill holes in the wood to run wires, and you use
+screws to attach drywall or siding to the frame. 
+
+Most carpenters can put things together more or less well. But
+inexperienced ones, or those who don't really care that much about the work
+they do, build houses like this: boxy, generic, utilitarian. While they're
+generally functional, over time, if you buy a house like this, you'll find there
+are a lot of details that bug you: the bathroom is too small to get dressed in,
+the turn in the hallway is an annoyance each time, the kitchen layout is not
+conducive to efficient cooking.
+
+A good carpenter learns his craft, and aims to for both efficiency and quality.
+She'll acquire more
+specific tools: a framing hammer is great, but she'll want a finish hammer when
+doing trim work.  If you're doing drywall work, you'll get an impact driver for
+screwing in drywall screws, while other drills and massive bits can be used for
+mixing the joint compound. 
+
+I had the fortune to work with a craftsman at one point, and that was an amazing
+experience.  He put thought into what specific nails to use for specific tasks,
+whether to use nails or screws for the siding based on the primary wind
+direction, and more.  
+
+A craftsman builds something that will last.
+
+Enough about construction.
+
+I also worked for several years as a graphics technician.  Note that I'm not
+saying "designer."  That's deliberate.
+
+You can be a good graphic artist quite often without having a good design sense.
+I was typically given a good set of templates and stylesheets, and from there
+was able to do my job: create maps, do book layout, create a catalog.
+Basically, I had very few decisions I had to make -- I mostly needed to get the
+work done.
+
+The designer, however, considered all the details.  How do different elements on
+the page relate?  How can the typography help create semantic meaning for the
+reader?  If using color, what colors will produce a cohesive whole?  If printing
+in black and white, how dark will a shade of gray appear based on the paper
+weight?  How many shades can the reader differentiate easily and semantically?
+
+My point: a graphics technician can get work done, but a designer thinks about
+how things are semantically related.
+
+Let's consider a simpler example; I mean, really: my children can create
+anything they want out of duct tape, but does that mean it's necessary good, or
+will last? (Well, it's duct tape, after all. It might last!)
+
+So, what does this have to do with PHP?
+
+When I started programming again, I started with ASP, then Perl, and then PHP.
+All three languages excelled at something: empowering the user.
+
+I'd not programmed in more than half a decade, but picking these up was simple.
+As Terry Chay likes to say, PHP is a ball of nails; whatever you throw it at, it
+sticks.  I was quickly able to figure out how to do what I needed, whether it
+was connecting to a database, processing a form, examining text, whatever.
+
+Over time, I became more skilled.  I added tools to my belt like object oriented
+programming, DOM manipulation, and more.  But those just made me a more
+effective developer -- not necessarily good at software architecture.
+
+My point is: are you cranking out code like a carpenter, or are you crafting a
+solution?
+
+That's what I mean by "Beautiful Software": software craftmanship.  Software that
+has design behind it.
+
+Just like with building a house or designing print media, the software architect
+needs to consider the details in light of the whole: how do objects relate, how
+do the communicate to one another, how can I provide substitutions, and more.
+
+The questions and problems that come up time after time in software projects
+are:
+
+ * Maintainability.  How easy is it to add a new feature?  How easy is it to fix
+   bugs?  Can somebody else pick up where I left off?  Testing scaffolds only
+   partially answer this; they tell us when things break.  Design of the system
+   is what dictates how easy it is to fix or extend.
+ * Extensibility.  Can somebody extend existing functionality easily?  Can
+   extension only be accomplished via inheritance, or do other mechanisms allow
+   dropping in new functionality (for example, hooks, plugins, or events)?
+ * Substitution.  Can another developer substitute an alternate implementation
+   easily?
+
+To address these, we need a set of tools and principles.  The following are all
+things I use or consider:
+
+ * Don't Repeat Yourself (DRY), and avoid Not Invented Here (NIH) syndrome.  A
+   common mistake I see is developers choosing to write code that has been
+   written before, simply so they don't have "dependencies."  This is ridiculous.
+   There are excellent tools available to solve the issue of tracking and
+   installing dependencies.  Write your code once, and re-use it over and over
+   again -- or use the code others have written.
+ * You Ain't Gonna Need It (YAGNI) principle.  While you should always be
+   thinking about things like extensibility and substitution, also consider
+   whether these will be likely in the lifespan of your project.  I've seen
+   abstractions that existed "just in case" that were never leveraged.
+ * Favor composition over inheritance.  While a basic tenet of OOP is that you
+   can extend a class, most often this is exactly the wrong way to accomplish
+   your goals.  The traditional idea behind OOP is that objects communicate with
+   each other via messages. 
+    * Use value objects.  Value objects are the messages you pass between
+      different objects.  Creating these can simplify the consuming code, and
+      allows you to make assumptions that can't be made when slinging arrays
+      around.
+    * Move shared logic into traits or into helper classes.  This allows the
+      consumer to define their own inheritance tree, while keeping code DRY.
+    * This is essentially the "Open Closed Principle".
+ * Create contracts for your objects (also known as the Interface Segregation
+   Principle, and related to the Liskov Substitution Principle and the
+   Dependency Inversion Principle).  Define interfaces wherever you have an
+   object that could have alternate implementations, and program to that
+   interface.  If you need to add capabilities later, add new interfaces, and
+   test against them.
+ * Have objects do one thing, and one thing well (also called the Single
+   Responsibility Principle).  I also extend this to the methods of an object; if
+   you can't see the work of a method in a single screen, you likely should
+   create a Facade.
+
+Let's look at these in light of a simple example, a pastebin.
+
+Pastebins are meant for sharing code.  They're written, but never updated.  They
+can be listed, but if a user marks one as "private", it will not show up in the
+list, though the URL may be shared and viewed.  Each paste has a unique URL,
+typically identified with some sort of hash.
+
+The novice developer will, as their first step, develop a database schema,
+likely in !MySQL, and then start writing code using the relevant PHP database
+extension, and likely get the job done in about 15 minutes.  Yes, it'll work.
+But is it good?
+
+We'll look at decisions and details I'd consider when developing this
+functionality.
+
+First, and most important, test all the things.
+
+Tests let you think about your system before you've written it.  You can
+experiment with how objects interact, and how you want to interact with them as
+a developer.  If you find stuff you don't like -- you see argument lists growing,
+or that simple value object now contains too many properties -- change it.
+
+For our pastebin, we know the following:
+
+ - We need to be able to create new "pastes".
+ - We need to be able to view a given "paste".
+ - We need to be able to list non-private "pastes", in reverse order from when
+   they were created.
+
+First things first: we should probably have a value object that represents a
+"paste".  We could use associative arrays, but we set ourselves up for problems
+that way:
+
+ * We have to test for the existence of each key we need to access
+
+This may not seem like a big deal, but I'd argue that while an array often seems
+like the simpler solution from an implementation standpoint, from a consumption
+standpoint, it's more complex.
+
+This is something that may or may not stand out in unit tests, so lets consider
+it from the point of view of our view script:
+
+{{{
+    echo (array_key_exists('content', $this->paste) ? $this->paste['content'] : '');
+    echo (array_key_exists('language', $this->paste) ? $this->paste['language'] : '');
+}}}
+
+If we don't want to clog up our PHP error logs with a bunch of notices, we have
+to be defensive in our coding, and test for the existence of an array key before
+accessing it.  These are the sorts of details we need to consider.
+
+Contrast that to this:
+
+{{{
+    echo $this->paste->content;
+    echo $this->paste->language;
+}}}
+
+With an object, we know what's available based on its type.  That allows us to
+write simpler code.  So, let's create the object:
+
+{{{
+class Paste
+{
+    public $hash;
+    public $language = 'txt'; // programming language of content
+    public $content = '';
+    public $timestamp;
+    public $private = false;
+}
+}}}
+
+If I have a Paste object, I know that those properties now exist.
+
+Next, knowing that each paste will have its own hash, my inclination is that on
+creating a new "paste", we'd generate the hash, and return that somehow.  Since
+we're passing a Paste object, we can simply access it via the "hash" property.
+
+{{{
+    public function testCreateReturnsAHashIdentifierOnSuccess()
+    {
+        $paste = new Paste();
+        $this->service->create($paste);
+        $this->assertRegex('/^[a-f0-9]{8}$/', $paste->hash);
+    }
+}}}
+
+I've done something here: I've made a decision of the hash size, and started
+creating my API.  I'll have some sort of service that manipulates and fetches
+"pastes" for me; we'll look at this more in a few minutes.  I've also said that
+I want my hashes to look like, well, hashes, and that they should be 8
+characters in length.  This seems reasonable, as it gives me 16^8 possible
+pastes, or more than 4 billion.  I'm not anticipating needing that many.
+
+Now, let's consider fetching a paste.
+
+{{{
+    public function testCanFetchAPasteByHash()
+    {
+        $paste = new Paste();
+        $this->service->create($paste);
+        $test = $this->service->fetch($paste->hash);
+        $this->assertInstanceOf('Paste', $test);
+        $this->assertEquals($paste, $test);
+    }
+}}}
+
+What I'm doing here is creating a paste -- an operation we've tested already --
+and then fetching it from the service.  PHPUnit allows you to compare the
+equality of two objects, and so I test that the paste I created and the paste I
+fetched are equal.
+
+Now, for the last operation, I need to fetch a list of pastes.  They should be
+in reverse chronological order, and not contain any marked "private".
+
+{{{
+    public function testCanFetchCollectionOfPastes()
+    {
+        $count = $this->seedService($this->service); // seed the service first
+        $collection = $this->service->fetchAll();
+        $this->assertInstanceOf('Zend\Paginator\Paginator');
+        $this->assertEquals($count, count($collection));
+    }
+}}}
+
+One criticism about Test Driven Development I often hear is that because the
+emphasis is on writing the least amount of code necessary to satisfy the tests,
+design and architecture often go out the window.  I disagree.  Often, as I write
+tests, I have some idea of the implementation in mind, and am making design
+decisions.
+
+This displays one of them.  I've decided I want to return a paginator back as my
+collection.  I've done this as I'm thinking about other collaborators and
+consumers.  Most likely, I'll want to deliver the list in chunked for in order
+to protect my server from undue load; besides, if I get anywere near that 4 
+billion figure, who wants to wait for all of those to return?!?!
+
+Now let's make sure that as we iterate over them, they're in order.
+
+{{{
+    public function testCollectionOfPastesFetchedIsInReverseChronologicalOrder()
+    {
+        $this->seedService($this->service); // seed the service first
+        $collection = $this->service->fetchAll();
+        
+        $previous = false;
+        foreach ($collection as $paste) {
+            $this->assertInstanceOf('Paste', $paste);
+            if ($previous) {
+                $this->assertLessThan($previous, $paste->timestamp);
+            }
+            $previous = $paste->timestamp;
+        }
+    }
+}}}
+
+This actually tests two things: that as we iterate, we get Paste objects, and
+that each item is older than the previous.  Note that I'm using "assertLessThan"
+here: I've made another decision, and that is that the timestamp values are unix
+timestamps, which means that they will be sequential, and I can thus compare
+them.
+
+Now, let's write one last test, to see that all pastes returned are public:
+
+{{{
+    public function testCollectionOfPastesFetchedContainsNoPrivates()
+    {
+        $this->seedService($this->service); // seed the service first
+        $collection = $this->service->fetchAll();
+        foreach ($collection as $paste) {
+            $this->assertInstanceOf('Paste', $paste);
+            $this->assertFalse($paste->private);
+        }
+    }
+}}}
+
+That one's simple.  Again, we assert that we have a Paste object, which means we
+don't need to make any assertions about whether or not a key exists or anything;
+we can simply assert against known properties.
+
+At this point, the only code I've committed to is the Paste class itself.  But
+what about that service?
+
+One thing of note is that I've not committed to any specific storage mechanism
+yet.  There are reasons for that.
+
+As I noted earlier, you could just start by writing the schema, and writing a
+bunch of glue in PHP.  But what if you make the wrong decision somewhere?
+
+For instance, what if MySQL is not the right tool for this job?  Or what if you
+need to put a cache of some sort in front of it?
+
+So, we'll define an interface for our service object, based on the interactions
+we've already defined in our tests.
+
+{{{
+interface PasteServiceInterface
+{
+    /**
+     * @return Paste
+     */
+    public function create(Paste $paste);
+    
+    /**
+     * @return Paste|null
+     */
+    public function fetch($hash);
+    
+    /**
+     * @return \Zend\Paginator\Paginator
+     */
+    public function fetchAll();
+
+    /**
+     * @return bool
+     */
+    public function exists($hash);
+}
+}}}
+
+PHP doesn't allow us to define return types via interface, so we have to make
+suggestions in our docblocks.  This is straight-forward, and code we've really
+already seen before.  The only new detail is the "exists" method, which I'll
+discuss momentarily.
+
+Now, let's create an implementation of this.  Here's a simple one:
+
+{{{
+
+class MemoryPasteService implements PasteServiceInterface
+{
+    protected $pastes = array();
+    protected $public;
+    
+    public function create(Paste $paste)
+    {
+        $hash = $this->createHash($paste);
+        $paste->hash = $hash;
+        $this->pastes[$hash] = $paste;
+        if (!$this->pastes->private) {
+            $this->public->insert($paste);
+        }
+        return $paste;
+    }
+}
+}}}
+
+This is pretty easy -- we're creating an in-memory set of pastes, stored as a
+hash.  But what's that "createHash" method?
+
+Here's an implementation that I'm creating as a trait:
+
+{{{
+trait CreateHash
+{
+    public function createHash(Paste $paste)
+    {
+        $hashSeed = sprintf(
+            '%d:%s:%s', 
+            microtime(true), 
+            $paste->language,
+            hash('sha1', $paste->content)
+        );
+        do {
+            $hashSeed .= ':' . uniqid();
+            $hash      = hash('sha256', $hashSeed);
+            $hash      = substr($hash, 0, 8);
+        } while ($this->exists($hash));
+        return $hash;
+    }
+    
+    abstract public function exists($hash);
+}
+}}}
+
+This bit of code does some work to create a unique hash based on information
+from the paste, a microtime, and uniqid.  If at any point there is a collision,
+it modifies the hash seed.
+
+What you'll notice here is that I'm using the "exists" method; the whole
+purpose of adding that to the interface was so that specific implementations
+could provide their own way to test for an existing hash so that we could ensure
+no collisions occur.
+
+The trait defines the method as abstract to ensure the consuming class
+implements it; we've also required it via the interface.  We have double the
+reason now to create it.
+
+Some of you are shaking your heads and saying, "But we can't use PHP 5.4 in our
+company yet."  Not a problem: we could have also done the following, using a
+static method in an abstract class:
+
+{{{
+abstract class CreateHash
+{
+    public static function createHash(
+        Paste $paste, 
+        PasteServiceInterface $service
+    ) {
+        // all is the same except that the "while" condition becomes:
+        //     while ($service->exists($hash))
+    }
+}
+}}}
+
+The important part here is thinking about how you can define classes and
+interactions in such a way that you compose objects or send messages, and don't
+need to resort to inheritance.
+
+Let's implement the exists method now, and also tell the class to use the trait,
+because I want to live in a world where PHP 5.4 is available to me.
+
+{{{
+class MemoryPasteService implements PasteServiceInterface
+{
+    use CreateHash;
+
+    /* ... previous code ... */
+
+    public function exists($hash)
+    {
+        return array_key_exists($hash, $this->pastes);
+    }
+}
+}}}
+
+Now that we've seen how to check for the existence of a paste, we can also
+likely fetch one:
+
+{{{
+class MemoryPasteService implements PasteServiceInterface
+{
+    /* ... previous code ... */
+
+    public function fetch($hash)
+    {
+        if (!$this->exists($hash)) {
+            return null;
+        }
+    
+        return $this->pastes[$hash];
+    }
+}
+}}}
+
+How you handle errors is up to you.  Fetching a non-existent hash may be
+something you can recover from; if so, return a falsy value from the method.  If
+it's not, raise an exception.
+
+Now, let's fetch all pastes.  Recall that we indicated in our tests that we need
+a Paginator instance, and also that only public pastes are expected.
+
+{{{
+use Zend\Paginator\Adapter\Iterator as IteratorPaginator;
+use Zend\Paginator\Paginator;
+
+class MemoryPasteService implements PasteServiceInterface
+{
+    /* ... previous code ... */
+
+    public function fetchAll()
+    {
+        $adapter   = new IteratorPaginator($this->public);
+        $paginator = new Paginator($adapter);
+        return $paginator;
+    }
+}
+}}}
+
+Those of you who were paying attention earlier may have noted I skipped over
+something in the create method: the "public" property. Now you can see why it's
+there.  But what is it, exactly?
+
+Good developers know the tools available to them.  For PHP, it's essential that
+you know the SPL.  In the case of the "public" property, I'm going to use an
+!SplMaxHeap extension:
+
+{{{
+class SortedPastes extends SplMaxHeap
+{
+    public function insert($value)
+    {
+        if (!$value instanceof Paste) {
+            throw new \InvalidArgumentException();
+        }
+        parent::insert($value);
+    }
+    
+    public function compare($a, $b)
+    {
+        if ($a->timestamp === $b->timestamp) {
+            return 0;
+        }
+        if ($a->timestamp > $b->timestamp) {
+            return 1;
+        }
+        return -1;
+    }
+}
+}}}
+
+A max heap sorts those with larger values to the top.  By extending the class,
+we get to tell it to examine a specific property of the values.  This means we
+need to define a constructor for our service now, to initialize the "public"
+property to be an instance of !SortedPastes.
+
+{{{
+class MemoryPasteService implements PasteServiceInterface
+{
+    /* ... previous code ... */
+
+    public function __construct()
+    {
+        $this->public = new SortedPastes;
+    }
+}
+}}}
+
+If we run our tests against this class, we'll see they all now pass!
+
+Now, this may seem like a lot of work for something so simple, and, let's be
+honest, we don't *really* want to store our pastes in memory.  
+
+The beauty behind the design, though, is that we've made it possible to define
+alternate implementations.  By defining an interface, we've defined how we want
+to interact with each implementation.  By defining a Trait or a static helper,
+we've encapsulated the logic of creating unique hashes.
+
+Here's another quick implementation:
+
+{{{
+class MongoPasteService implements PasteServiceInterface
+{
+    use CreateHash;
+    protected $collection;
+
+    public function __construct(MongoCollection $collection)
+    {
+        $this->collection = $collection;
+    }
+
+    public function create(Paste $paste)
+    {
+        $hash = $this->createHash($paste);
+        $paste->hash = $hash;
+        $data = (array) $paste;
+        $this->collection->insert($data);
+        return $paste;
+    }
+
+    public function fetch($hash)
+    {
+        $result = $this->collection->findOne(array('hash' => $hash));
+        if ($result === null) {
+            return null;
+        }
+        $paste = new Paste();
+        foreach ($result as $key => $value) {
+            $paste->{$key} = $value;
+        }
+        return $paste;
+    }
+
+    /**
+     * @return Paginator
+     */
+    public function fetchAll()
+    {
+        $cursor = $this->collection->find(array('private' => 'false'));
+        $cursor->sort(array('timestamp' => -1));
+        $hydratingCursor  = new HydratingMongoCursor($cursor, new Paste);
+        $paginatorAdapter = new HydratingPaginatorAdapter($hydratingCursor);
+        return new Paginator($paginatorAdapter);
+    }
+}
+}}}
+
+I won't go through all the details.  I have to do a little work to ensure that I
+return Paste objects when traversing a Mongo cursor, but just like the in-memory
+example, I can do that through collaborators, hiding the details from the
+consumer of the service.
+
+The important thing to remember is that by using an interface, we allow
+substitution, which means that we *can* change how we persist the pastes.
+
+If I wanted to, I could add caching to any of these services via a decorator. 
+
+{{{
+class CachingService implements PasteServiceInterface
+{
+    protected $cache;
+    protected $service;
+
+    public function __construct(Cache $cache, PasteServiceInterface $service)
+    {
+        $this->cache = $cache;
+        $this->service = $service;
+    }
+    
+    public function create(Paste $paste)
+    {
+        $paste = $this->service->create($paste);
+        $this->cache->store($paste->hash, $paste);
+        $this->cache->invalidate('list');
+    }
+    
+    public function fetch($hash)
+    {
+        if ($this->cache->has($hash)) {
+            return $this->cache->get($hash);
+        }
+        if (!$this->service->exists($hash)) {
+            return null;
+        }
+        $paste = $this->service->fetch($hash);
+        $this->cache->store($hash, $paste);
+        return $paste;
+    }
+    
+    /* ... etc. ... */
+}
+}}}
+
+Notice that there's no inheritance going on.  Whenever possible, compose
+objects, or send messages -- but don't extend.  Implement interfaces, so that
+you can substitute.  Patterns such as Decorator are incredibly powerful, and let
+you do things like caching quite simply.
+
+Here's a diagram detailing what we've done so far.
+
+It's clean.  Interactions are clearly defined.  We can consume any paste service
+implementation in our code, and know that things will just work.  This means
+that if you need to change an implementation detail in a low level object, the
+consumer remains unaffected.
+
+Let's summarize.
+
+The goals of software architecture are:
+
+ * Maintainability.  
+ * Extensibility.
+ * Substitution.
+
+The tools and principles to achieve those goals include:
+
+ * Don't Repeat Yourself (DRY), and avoid Not Invented Here (NIH) syndrome.
+ * You Ain't Gonna Need It (YAGNI) principle.
+ * Favor composition over inheritance.
+ * Create contracts for your objects.
+ * Have objects (and methods!) do one thing, and one thing well.
+
+Making these goals and principals your focus can help you achieve beauty in
+software.
+
+{{{
+Not sure where the below fits...
+}}}
+One constant I've noticed between various disciplines is that simplicity tends
+to win.
+
