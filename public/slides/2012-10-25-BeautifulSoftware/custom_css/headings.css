@@ -1,0 +1,10 @@
+div.slides div.imageslideheadingbottom {margin: 0; width: 1024px; height: 768px;}
+div.imageslideheadingbottom img { 
+  position: absolute; 
+  top: 0; left: 0; 
+  width: 1024px; 
+  max-width: 1024px; max-height: 768px;
+  z-index: 0; 
+}
+div.imageslideheadingbottom h1 { position: absolute; z-index: 3; right: 40px; bottom: 0; }
+

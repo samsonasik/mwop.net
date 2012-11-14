@@ -1,0 +1,3178 @@
+<!DOCTYPE html>
+<!--
+  Copyright 2010 Google Inc.
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+
+  Original slides: Marcin Wichary (mwichary@google.com)
+  Modifications: Ernest Delgado (ernestd@google.com)
+                 Alex Russell (slightlyoff@chromium.org)
+
+  landslide modifications: Adam Zapletal (adamzap@gmail.com)
+                           Nicolas Perriault (nperriault@gmail.com)
+-->
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Beautiful Software</title>
+    <!-- Styles -->
+    
+    <link rel="stylesheet" media="print" href="./avalanche/css/print.css">
+    <link rel="stylesheet" media="screen, projection" href="./avalanche/css/screen.css">
+    
+    
+      
+      <link rel="stylesheet" href="./custom_css/pygments/default.css">
+      
+    
+      
+      <link rel="stylesheet" href="./custom_css/headings.css">
+      
+    
+    <!-- /Styles -->
+    <!-- Javascripts -->
+    
+    <script type="text/javascript" src="./avalanche/js/slides.js"></script>
+    
+    
+    <!-- /Javascripts -->
+</head>
+<body>
+  <div id="blank"></div>
+  <div class="presentation">
+    <div id="time">
+      <span id="hours">00</span>:<span id="minutes">00</span>:<span id="seconds">00</span>
+    </div>            
+    <div id="current_presenter_notes">
+      <div id="presenter_note"></div>
+    </div>
+    <div class="slides">
+      
+      <!-- slide source: slides.md -->
+      <div class="slide-wrapper">
+        <div class="slide titleslide">
+          <div class="inner">
+            
+            <header><h1>Beautiful Software</h1></header>
+            
+            
+            <section><p>Matthew Weier O'Phinney</p>
+<p>ZendCon 2012</p>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="slides.md">slides.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              1/67
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: slides.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Who is that guy?</h1></header>
+            
+            
+            <section><p><img class="float-right" src="images/mwop.png" /></p>
+<ul>
+<li>Matthew Weier O'Phinney</li>
+<li>Project Lead, Zend Framework</li>
+<li><a href="https://github.com/weierophinney">https://github.com/weierophinney</a></li>
+<li><a href="http://mwop.net/">http://mwop.net/</a></li>
+<li>@weierophinney</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="slides.md">slides.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              2/67
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: slides.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Analogies</h1></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>Haven't always been a developer; worked in construction and design both at
+  different times.</li>
+<li>Both provide lessons for us to learn from.</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="slides.md">slides.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              3/67
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: slides.md -->
+      <div class="slide-wrapper">
+        <div class="slide imageslideheadingbottom whiteheading">
+          <div class="inner">
+            
+            <header><h1>Construction</h1></header>
+            
+            
+            <section><p><img src="images/construction.jpg" height="1024" /></p>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>Construction has a few basic tools and methods.</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="slides.md">slides.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              4/67
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: slides.md -->
+      <div class="slide-wrapper">
+        <div class="slide imageslide">
+          <div class="inner">
+            
+            <header><h1><span></span></h1></header>
+            
+            
+            <section><p><img src="images/claw-hammer.jpg" /></p>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>Hammers are the raw materials for assembly.</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="slides.md">slides.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              5/67
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: slides.md -->
+      <div class="slide-wrapper">
+        <div class="slide imageslide">
+          <div class="inner">
+            
+            <header><h1><span></span></h1></header>
+            
+            
+            <section><p><img src="images/saw.jpg" /></p>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>Saws allow us to make materials fit.</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="slides.md">slides.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              6/67
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: slides.md -->
+      <div class="slide-wrapper">
+        <div class="slide imageslide">
+          <div class="inner">
+            
+            <header><h1><span></span></h1></header>
+            
+            
+            <section><p><img src="images/drill.jpg" /></p>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>Drills are used to make roads for pipes and wires, and to attach things to the
+  building's frame.</li>
+<li>Carpenters can do a lot with these tools, without investing much time in
+  mastering them. But then you end up with houses like this:</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="slides.md">slides.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              7/67
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: slides.md -->
+      <div class="slide-wrapper">
+        <div class="slide imageslide">
+          <div class="inner">
+            
+            <header><h1><span></span></h1></header>
+            
+            
+            <section><p><img src="images/boxy-houses.jpg" /></p>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>Dull, unimaginative, and likely full of flaws both big and small that will
+  drive you crazy over time.</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="slides.md">slides.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              8/67
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: slides.md -->
+      <div class="slide-wrapper">
+        <div class="slide imageslide">
+          <div class="inner">
+            
+            <header><h1><span></span></h1></header>
+            
+            
+            <section><p><img src="images/bathroom.jpg" /></p>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>Things like bathrooms that crowd you in so much, you can't move.</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="slides.md">slides.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              9/67
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: slides.md -->
+      <div class="slide-wrapper">
+        <div class="slide imageslide">
+          <div class="inner">
+            
+            <header><h1><span></span></h1></header>
+            
+            
+            <section><p><img src="images/bad-kitchen-layout.jpg" /></p>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>or kitchens so poorly laid out that you have nowhere to do the essential work
+  of cooking.</li>
+<li>A good carpenter takes the time to learn his trade.</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="slides.md">slides.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              10/67
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: slides.md -->
+      <div class="slide-wrapper">
+        <div class="slide imageslide">
+          <div class="inner">
+            
+            <header><h1><span></span></h1></header>
+            
+            
+            <section><p><img src="images/finishing-hammer.jpg" /></p>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>She uses a finishing hammer instead of a framing hammer in order to do fine
+  detail that doesn't leave marks.</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="slides.md">slides.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              11/67
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: slides.md -->
+      <div class="slide-wrapper">
+        <div class="slide imageslide">
+          <div class="inner">
+            
+            <header><h1><span></span></h1></header>
+            
+            
+            <section><p><img src="images/impact-driver.jpg" /></p>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>A drywall hanger, knowing he has to get the stone up quickly, uses an impact
+  driver so he can screw it into the frame quickly.</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="slides.md">slides.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              12/67
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: slides.md -->
+      <div class="slide-wrapper">
+        <div class="slide imageslide">
+          <div class="inner">
+            
+            <header><h1><span></span></h1></header>
+            
+            
+            <section><p><img src="images/mud-mixer.jpg" /></p>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>A finisher will have a mud mixer so he can get the joint compound to the right
+  consistency.</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="slides.md">slides.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              13/67
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: slides.md -->
+      <div class="slide-wrapper">
+        <div class="slide imageslide">
+          <div class="inner">
+            
+            <header><h1><span></span></h1></header>
+            
+            
+            <section><p><img src="images/cathedral.jpg" /></p>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>Manchester Cathedral</li>
+<li>Basically, a craftsman aims to build things that last.</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="slides.md">slides.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              14/67
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: slides.md -->
+      <div class="slide-wrapper">
+        <div class="slide imageslide">
+          <div class="inner">
+            
+            <header><h1><span></span></h1></header>
+            
+            
+            <section><p><img src="images/design.jpg" /></p>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>I also worked as a graphics technician</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="slides.md">slides.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              15/67
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: slides.md -->
+      <div class="slide-wrapper">
+        <div class="slide imageslide">
+          <div class="inner">
+            
+            <header><h1><span></span></h1></header>
+            
+            
+            <section><p><img src="images/map.jpg" /></p>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>I drew maps used in guidebooks</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="slides.md">slides.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              16/67
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: slides.md -->
+      <div class="slide-wrapper">
+        <div class="slide imageslide">
+          <div class="inner">
+            
+            <header><h1><span></span></h1></header>
+            
+            
+            <section><p><img src="images/catalog.jpg" /></p>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>and did catalog and book layout.</li>
+<li>I didn't design them, though. That was the job of the designer.</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="slides.md">slides.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              17/67
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: slides.md -->
+      <div class="slide-wrapper">
+        <div class="slide imageslide">
+          <div class="inner">
+            
+            <header><h1><span></span></h1></header>
+            
+            
+            <section><p><img src="images/typography.jpg" /></p>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>A designer considers things like typography -- what font communicates best for
+  the content, how the space between letters, words, and paragraphs will convey
+  a message.</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="slides.md">slides.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              18/67
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: slides.md -->
+      <div class="slide-wrapper">
+        <div class="slide imageslide">
+          <div class="inner">
+            
+            <header><h1><span></span></h1></header>
+            
+            
+            <section><p><img src="images/gradient.jpg" /></p>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>Color and gradients are chosen to help lead the eye around the page, guiding a
+  viewer to the message.</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="slides.md">slides.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              19/67
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: slides.md -->
+      <div class="slide-wrapper">
+        <div class="slide imageslide">
+          <div class="inner">
+            
+            <header><h1><span></span></h1></header>
+            
+            
+            <section><p><img src="images/semantic.png" /></p>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>Essentially, a good designer is thinking about how things relate semantically.</li>
+<li>"Kate Ray interviews leading lights in the semantic web: see video at vimeo.
+  Wordle made by Jim Stauffer."</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="slides.md">slides.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              20/67
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: slides.md -->
+      <div class="slide-wrapper">
+        <div class="slide imageslide">
+          <div class="inner">
+            
+            <header><h1><span></span></h1></header>
+            
+            
+            <section><p><img src="images/duct-tape.jpg" /></p>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>You <em>could</em> build something or design something out of duct tape -- but would
+  it have lasting value?</li>
+<li>Yes, it might last, it's duct tape, after all.</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="slides.md">slides.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              21/67
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: slides.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>PHP</h1></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>But what does this have to do with PHP?</li>
+<li>When I started programming again, I started with Perl, classic ASP, and Perl.
+  They all excelled at letting you get immediate results.</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="slides.md">slides.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              22/67
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: slides.md -->
+      <div class="slide-wrapper">
+        <div class="slide imageslide">
+          <div class="inner">
+            
+            <header><h1><span></span></h1></header>
+            
+            
+            <section><p><img src="images/ball-of-nails.jpg" /></p>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>Ball of nails analogy</li>
+<li>PHP gives you all the tools you need to get things done...</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="slides.md">slides.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              23/67
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: slides.md -->
+      <div class="slide-wrapper">
+        <div class="slide imageslide">
+          <div class="inner">
+            
+            <header><h1><span></span></h1></header>
+            
+            
+            <section><p><img src="images/phpmyadmin.jpg" /></p>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>If you need to connect to a database, you can. If you need to process a form,
+  PHP was built for that.</li>
+<li>Over time, I added more tools to my belt...</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="slides.md">slides.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              24/67
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: slides.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>&lt;?xml</h1></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>OOP, DOM manipulation, and more.</li>
+<li>These made me more efficient, but not necessarily <em>better</em>.</li>
+<li>My point: do you want to crank out code, or <em>craft code</em>?</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="slides.md">slides.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              25/67
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: slides.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Beautiful Software:<br />Software Craftmanship</h1></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>Just like a carpenter or a designer, you consider the small details, and how
+  they relate to the whole.</li>
+<li>How do objects relate, how do the communicate with each other, how do you
+  subsitute implementations, and more.</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="slides.md">slides.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              26/67
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: slides.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Responsibilities</h1></header>
+            
+            
+            <section><ul>
+<li>Maintainability</li>
+<li>Extensibility</li>
+<li>Substitution</li>
+</ul>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>How easy is it to fix an issue, or add a feature?</li>
+<li>Can the behavior be extended or modified?</li>
+<li>Can you create alternate implementations easily?</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="slides.md">slides.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              27/67
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: slides.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Principles</h1></header>
+            
+            
+            <section><p><strong>Don't Repeat Yourself</strong> (DRY),<br />and avoid<br /><strong>Not Invented Here</strong> (NIH) syndrome.</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="slides.md">slides.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              28/67
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: slides.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Principles</h1></header>
+            
+            
+            <section><p><strong>You Ain't Gonna Need It</strong> (YAGNI)</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="slides.md">slides.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              29/67
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: slides.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Principles</h1></header>
+            
+            
+            <section><p>Favor <strong>Composition</strong> over inheritance</p>
+<ul>
+<li>Use value objects</li>
+<li>Move shared logic into traits or helpers</li>
+</ul>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>Essentially, the "Open Closed Principle"</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="slides.md">slides.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              30/67
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: slides.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Principles</h1></header>
+            
+            
+            <section><p>Create <strong>Contracts</strong> for your objects</p>
+<ul>
+<li>Define interfaces</li>
+</ul>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>Interface Segregation Principle, and related to Liskov Substitution Principle
+  and the Dependency Inversion principle.</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="slides.md">slides.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              31/67
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: slides.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Principles</h1></header>
+            
+            
+            <section><p>Objects should <strong>do one thing</strong>, well.</p>
+<ul>
+<li>Methods should also be short</li>
+<li>Use Facades to simplify and organize</li>
+</ul>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>Single Responsibility Principle</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="slides.md">slides.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              32/67
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: slides.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Practical Example</h1></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="slides.md">slides.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              33/67
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: slides.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Pastebin</h1></header>
+            
+            
+            <section><p><img src="images/pastebin-display.png" /></p>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>Pastebins are for sharing code.</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="slides.md">slides.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              34/67
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: slides.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Pastebin</h1></header>
+            
+            
+            <section><p><img src="images/pastebin-list.png" /></p>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>They can be listed, unless private</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="slides.md">slides.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              35/67
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: slides.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Pastebin</h1></header>
+            
+            
+            <section><p><img src="images/pastebin-view.png" /></p>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>Each paste may be viewed via unique hash URL</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="slides.md">slides.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              36/67
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: slides.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code">
+          <div class="inner">
+            
+            <header><h1>Novice approach</h1></header>
+            
+            
+            <section><div class="highlight"><pre><span class="lineno">1</span> <span class="nv">$hash</span> <span class="o">=</span> <span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;hash&#39;</span><span class="p">];</span>
+<span class="lineno">2</span> <span class="nb">mysql_connect</span><span class="p">();</span>
+<span class="lineno">3</span> <span class="nv">$res</span> <span class="o">=</span> <span class="nb">mysql_query</span><span class="p">(</span>
+<span class="lineno">4</span>     <span class="s2">&quot;SELECT * FROM pastes WHERE hash = &#39;</span><span class="si">$hash</span><span class="s2">&#39;&quot;</span>
+<span class="lineno">5</span> <span class="p">);</span>
+<span class="lineno">6</span> <span class="nv">$row</span> <span class="o">=</span> <span class="nb">mysql_fetch_assoc</span><span class="p">(</span><span class="nv">$res</span><span class="p">);</span>
+</pre></div>
+
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>Is it good?</li>
+<li>security issues</li>
+<li>untestable</li>
+<li>cannot alter behavior without altering code</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="slides.md">slides.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              37/67
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: slides.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>A Manageable Approach</h1></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>We'll look at decisions and details I'd consider when developing this
+  functionality.</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="slides.md">slides.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              38/67
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: slides.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Test all the things</h1></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>Let's you play with the system before committing to it</li>
+<li>Experiment with object interactions</li>
+<li>Don't like something? fix it.</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="slides.md">slides.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              39/67
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: slides.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Pastebin Requirements</h1></header>
+            
+            
+            <section><ul>
+<li>We need to be able to create new "pastes".</li>
+<li>We need to be able to view a given "paste".</li>
+<li>We need to be able to list non-private "pastes", in reverse order from when
+  they were created.</li>
+</ul>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>Lead in to next slide: First things first, create a value object representing
+  a paste.</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="slides.md">slides.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              40/67
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: slides.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Value object / Entity</h1></header>
+            
+            
+            <section><p>Why?</p>
+<ul>
+<li>Arrays are not typed</li>
+<li>Arrays require testing key existence</li>
+<li>Arrays require manual reference handling</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="slides.md">slides.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              41/67
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: slides.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code">
+          <div class="inner">
+            
+            <header><h1>Why arrays suck</h1></header>
+            
+            
+            <section><div class="highlight"><pre><span class="lineno">1</span> <span class="k">echo</span> <span class="p">(</span><span class="nb">array_key_exists</span><span class="p">(</span><span class="s1">&#39;content&#39;</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">paste</span><span class="p">)</span> 
+<span class="lineno">2</span>     <span class="o">?</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">paste</span><span class="p">[</span><span class="s1">&#39;content&#39;</span><span class="p">]</span> 
+<span class="lineno">3</span>     <span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">);</span>
+<span class="lineno">4</span> <span class="k">echo</span> <span class="p">(</span><span class="nb">array_key_exists</span><span class="p">(</span><span class="s1">&#39;language&#39;</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">paste</span><span class="p">)</span> 
+<span class="lineno">5</span>     <span class="o">?</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">paste</span><span class="p">[</span><span class="s1">&#39;language&#39;</span><span class="p">]</span> 
+<span class="lineno">6</span>     <span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">);</span>
+</pre></div>
+
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>Consider it from a view script: messy.</li>
+<li>Unless you're willing to clog up your error logs.</li>
+<li>These are important details.</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="slides.md">slides.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              42/67
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: slides.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code">
+          <div class="inner">
+            
+            <header><h1>Why value objects work</h1></header>
+            
+            
+            <section><div class="highlight"><pre><span class="lineno">1</span> <span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">paste</span><span class="o">-&gt;</span><span class="na">content</span><span class="p">;</span>
+<span class="lineno">2</span> <span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">paste</span><span class="o">-&gt;</span><span class="na">language</span><span class="p">;</span>
+</pre></div>
+
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>We know what's available based on type</li>
+<li>Our code becomes simpler</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="slides.md">slides.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              43/67
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: slides.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code">
+          <div class="inner">
+            
+            <header><h1>Paste</h1></header>
+            
+            
+            <section><div class="highlight"><pre><span class="lineno">1</span> <span class="k">class</span> <span class="nc">Paste</span>
+<span class="lineno">2</span> <span class="p">{</span>
+<span class="lineno">3</span>     <span class="k">public</span> <span class="nv">$hash</span><span class="p">;</span>
+<span class="lineno">4</span>     <span class="k">public</span> <span class="nv">$language</span> <span class="o">=</span> <span class="s1">&#39;txt&#39;</span><span class="p">;</span> <span class="c1">// programming language of content</span>
+<span class="lineno">5</span>     <span class="k">public</span> <span class="nv">$content</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+<span class="lineno">6</span>     <span class="k">public</span> <span class="nv">$timestamp</span><span class="p">;</span>
+<span class="lineno">7</span>     <span class="k">public</span> <span class="nv">$private</span> <span class="o">=</span> <span class="k">false</span><span class="p">;</span>
+<span class="lineno">8</span> <span class="p">}</span>
+</pre></div>
+
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>Now we know what properties and/or methods are available</li>
+<li>Now that we have our object, let's start considering behavior. We need to
+  think about identity of each paste.</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="slides.md">slides.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              44/67
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: slides.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code">
+          <div class="inner">
+            
+            <header><h1>Identity</h1></header>
+            
+            
+            <section><div class="highlight"><pre><span class="lineno">1</span> <span class="k">public</span> <span class="k">function</span> <span class="nf">testCreateReturnsAHashIdentifier</span><span class="p">()</span>
+<span class="lineno">2</span> <span class="p">{</span>
+<span class="lineno">3</span>     <span class="nv">$paste</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Paste</span><span class="p">();</span>
+<span class="lineno">4</span>     <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">service</span><span class="o">-&gt;</span><span class="na">create</span><span class="p">(</span><span class="nv">$paste</span><span class="p">);</span>
+<span class="lineno">5</span>     <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertRegex</span><span class="p">(</span>
+<span class="lineno">6</span>         <span class="s1">&#39;/^[a-f0-9]{8}$/&#39;</span><span class="p">,</span> <span class="nv">$paste</span><span class="o">-&gt;</span><span class="na">hash</span>
+<span class="lineno">7</span>     <span class="p">);</span>
+<span class="lineno">8</span> <span class="p">}</span>
+</pre></div>
+
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>I've made decisions about architecture:</li>
+<li>A service layer will encapsulate business logic</li>
+<li>I've specified what a hash looks like (16^8, or &gt; 4 billion, possible
+    identities</li>
+<li>Now let's look at fetching pastes</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="slides.md">slides.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              45/67
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: slides.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code">
+          <div class="inner">
+            
+            <header><h1>Fetch a paste</h1></header>
+            
+            
+            <section><div class="highlight"><pre><span class="lineno">1</span> <span class="k">public</span> <span class="k">function</span> <span class="nf">testCanFetchAPasteByHash</span><span class="p">()</span>
+<span class="lineno">2</span> <span class="p">{</span>
+<span class="lineno">3</span>     <span class="nv">$paste</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Paste</span><span class="p">();</span>
+<span class="lineno">4</span>     <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">service</span><span class="o">-&gt;</span><span class="na">create</span><span class="p">(</span><span class="nv">$paste</span><span class="p">);</span>
+<span class="lineno">5</span>     <span class="nv">$test</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">service</span><span class="o">-&gt;</span><span class="na">fetch</span><span class="p">(</span><span class="nv">$paste</span><span class="o">-&gt;</span><span class="na">hash</span><span class="p">);</span>
+<span class="lineno">6</span>     <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertInstanceOf</span><span class="p">(</span><span class="s1">&#39;Paste&#39;</span><span class="p">,</span> <span class="nv">$test</span><span class="p">);</span>
+<span class="lineno">7</span>     <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertEquals</span><span class="p">(</span><span class="nv">$paste</span><span class="p">,</span> <span class="nv">$test</span><span class="p">);</span>
+<span class="lineno">8</span> <span class="p">}</span>
+</pre></div>
+
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>Compare that two objects are equal -- but not necessarily identical.</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="slides.md">slides.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              46/67
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: slides.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code">
+          <div class="inner">
+            
+            <header><h1>Fetch a list of pastes</h1></header>
+            
+            
+            <section><div class="highlight"><pre><span class="lineno">1</span> <span class="k">public</span> <span class="k">function</span> <span class="nf">testCanFetchCollectionOfPastes</span><span class="p">()</span>
+<span class="lineno">2</span> <span class="p">{</span>
+<span class="lineno">3</span>     <span class="c1">// seed the service first</span>
+<span class="lineno">4</span>     <span class="nv">$count</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">seedService</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">service</span><span class="p">);</span> 
+<span class="lineno">5</span>     <span class="nv">$collection</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">service</span><span class="o">-&gt;</span><span class="na">fetchAll</span><span class="p">();</span>
+<span class="lineno">6</span>     <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertInstanceOf</span><span class="p">(</span>
+<span class="lineno">7</span>         <span class="s1">&#39;Zend\Paginator\Paginator&#39;</span><span class="p">);</span>
+<span class="lineno">8</span>     <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertEquals</span><span class="p">(</span><span class="nv">$count</span><span class="p">,</span> <span class="nb">count</span><span class="p">(</span><span class="nv">$collection</span><span class="p">));</span>
+<span class="lineno">9</span> <span class="p">}</span>
+</pre></div>
+
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>List in reverse chronological order</li>
+<li>TDD often criticized for being rushed and not resulting in design or
+  architecture. Rubbish. We make design decisions.</li>
+<li>Choosing to return Paginator; who wants to pull 4 billion results?</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="slides.md">slides.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              47/67
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: slides.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code">
+          <div class="inner">
+            
+            <header><h1>Iterate</h1></header>
+            
+            
+            <section><div class="highlight"><pre><span class="lineno"> 1</span> <span class="k">public</span> <span class="k">function</span> <span class="nf">testPastesAreInReverseChronoOrder</span><span class="p">()</span>
+<span class="lineno"> 2</span> <span class="p">{</span>
+<span class="lineno"> 3</span>     <span class="c1">// seed the service first</span>
+<span class="lineno"> 4</span>     <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">seedService</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">service</span><span class="p">);</span> 
+<span class="lineno"> 5</span>     <span class="nv">$collection</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">service</span><span class="o">-&gt;</span><span class="na">fetchAll</span><span class="p">();</span>
+<span class="lineno"> 6</span>     <span class="nv">$previous</span>   <span class="o">=</span> <span class="k">false</span><span class="p">;</span>
+<span class="lineno"> 7</span>     <span class="k">foreach</span> <span class="p">(</span><span class="nv">$collection</span> <span class="k">as</span> <span class="nv">$paste</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno"> 8</span>         <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertInstanceOf</span><span class="p">(</span><span class="s1">&#39;Paste&#39;</span><span class="p">,</span> <span class="nv">$paste</span><span class="p">);</span>
+<span class="lineno"> 9</span>         <span class="k">if</span> <span class="p">(</span><span class="nv">$previous</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno">10</span>             <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertLessThan</span><span class="p">(</span><span class="nv">$previous</span><span class="p">,</span> 
+<span class="lineno">11</span>                 <span class="nv">$paste</span><span class="o">-&gt;</span><span class="na">timestamp</span><span class="p">);</span>
+<span class="lineno">12</span>         <span class="p">}</span>
+<span class="lineno">13</span>         <span class="nv">$previous</span> <span class="o">=</span> <span class="nv">$paste</span><span class="o">-&gt;</span><span class="na">timestamp</span><span class="p">;</span>
+<span class="lineno">14</span>     <span class="p">}</span>
+<span class="lineno">15</span> <span class="p">}</span>
+</pre></div>
+
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>Testing that as we iterate, we get Paste objects, and that each is older than
+  the previous</li>
+<li>Another design decision: using timestamps, which allows for comparison.</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="slides.md">slides.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              48/67
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: slides.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code">
+          <div class="inner">
+            
+            <header><h1>Public only</h1></header>
+            
+            
+            <section><div class="highlight"><pre><span class="lineno"> 1</span> <span class="k">public</span> <span class="k">function</span> <span class="nf">testCollectionContainsNoPrivates</span><span class="p">()</span>
+<span class="lineno"> 2</span> <span class="p">{</span>
+<span class="lineno"> 3</span>     <span class="c1">// seed the service first</span>
+<span class="lineno"> 4</span>     <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">seedService</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">service</span><span class="p">);</span> 
+<span class="lineno"> 5</span>     <span class="nv">$collection</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">service</span><span class="o">-&gt;</span><span class="na">fetchAll</span><span class="p">();</span>
+<span class="lineno"> 6</span>     <span class="k">foreach</span> <span class="p">(</span><span class="nv">$collection</span> <span class="k">as</span> <span class="nv">$paste</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno"> 7</span>         <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertInstanceOf</span><span class="p">(</span><span class="s1">&#39;Paste&#39;</span><span class="p">,</span> <span class="nv">$paste</span><span class="p">);</span>
+<span class="lineno"> 8</span>         <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertFalse</span><span class="p">(</span><span class="nv">$paste</span><span class="o">-&gt;</span><span class="na">private</span><span class="p">);</span>
+<span class="lineno"> 9</span>     <span class="p">}</span>
+<span class="lineno">10</span> <span class="p">}</span>
+</pre></div>
+
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>Assert both type, and value of property</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="slides.md">slides.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              49/67
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: slides.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>What about the code?</h1></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>I've showed tests, and the Paste object only. What about the service?</li>
+<li>Notice that I've not shown anything about how pastes are persisted.</li>
+<li>Jr. dev would start with schema. But what if RDBMS is the wrong tool for the
+  job? What if I want to cache?</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="slides.md">slides.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              50/67
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: slides.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code">
+          <div class="inner">
+            
+            <header><h1>Service interface</h1></header>
+            
+            
+            <section><div class="highlight"><pre><span class="lineno"> 1</span> <span class="k">interface</span> <span class="nx">PasteServiceInterface</span> <span class="p">{</span>
+<span class="lineno"> 2</span>     <span class="sd">/**</span>
+<span class="lineno"> 3</span> <span class="sd">     * @return Paste</span>
+<span class="lineno"> 4</span> <span class="sd">     */</span>
+<span class="lineno"> 5</span>     <span class="k">public</span> <span class="k">function</span> <span class="nf">create</span><span class="p">(</span><span class="nx">Paste</span> <span class="nv">$paste</span><span class="p">);</span>
+<span class="lineno"> 6</span>     <span class="sd">/**</span>
+<span class="lineno"> 7</span> <span class="sd">     * @return Paste|null</span>
+<span class="lineno"> 8</span> <span class="sd">     */</span>
+<span class="lineno"> 9</span>     <span class="k">public</span> <span class="k">function</span> <span class="nf">fetch</span><span class="p">(</span><span class="nv">$hash</span><span class="p">);</span>
+<span class="lineno">10</span>     <span class="sd">/**</span>
+<span class="lineno">11</span> <span class="sd">     * @return \Zend\Paginator\Paginator</span>
+<span class="lineno">12</span> <span class="sd">     */</span>
+<span class="lineno">13</span>     <span class="k">public</span> <span class="k">function</span> <span class="nf">fetchAll</span><span class="p">();</span>
+<span class="lineno">14</span>     <span class="sd">/**</span>
+<span class="lineno">15</span> <span class="sd">     * @return bool</span>
+<span class="lineno">16</span> <span class="sd">     */</span>
+<span class="lineno">17</span>     <span class="k">public</span> <span class="k">function</span> <span class="nf">exists</span><span class="p">(</span><span class="nv">$hash</span><span class="p">);</span>
+<span class="lineno">18</span> <span class="p">}</span>
+</pre></div>
+
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>PHP doesn't allow defining return values; thus annotations</li>
+<li>What is the "exists" method for? We'll cover that later.</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="slides.md">slides.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              51/67
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: slides.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code">
+          <div class="inner">
+            
+            <header><h1>Implementation</h1></header>
+            
+            
+            <section><div class="highlight"><pre><span class="lineno"> 1</span> <span class="k">class</span> <span class="nc">MemoryPasteService</span> <span class="k">implements</span> 
+<span class="lineno"> 2</span>     <span class="nx">PasteServiceInterface</span>
+<span class="lineno"> 3</span> <span class="p">{</span>
+<span class="lineno"> 4</span>     <span class="k">protected</span> <span class="nv">$pastes</span> <span class="o">=</span> <span class="k">array</span><span class="p">();</span>
+<span class="lineno"> 5</span>     <span class="k">protected</span> <span class="nv">$public</span><span class="p">;</span>
+<span class="lineno"> 6</span>     <span class="k">public</span> <span class="k">function</span> <span class="nf">create</span><span class="p">(</span><span class="nx">Paste</span> <span class="nv">$paste</span><span class="p">)</span>
+<span class="lineno"> 7</span>     <span class="p">{</span>
+<span class="lineno"> 8</span>         <span class="nv">$hash</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">createHash</span><span class="p">(</span><span class="nv">$paste</span><span class="p">);</span>
+<span class="lineno"> 9</span>         <span class="nv">$paste</span><span class="o">-&gt;</span><span class="na">hash</span> <span class="o">=</span> <span class="nv">$hash</span><span class="p">;</span>
+<span class="lineno">10</span>         <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">pastes</span><span class="p">[</span><span class="nv">$hash</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$paste</span><span class="p">;</span>
+<span class="lineno">11</span>         <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">pastes</span><span class="o">-&gt;</span><span class="na">private</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno">12</span>             <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">public</span><span class="o">-&gt;</span><span class="na">insert</span><span class="p">(</span><span class="nv">$paste</span><span class="p">);</span>
+<span class="lineno">13</span>         <span class="p">}</span>
+<span class="lineno">14</span>         <span class="k">return</span> <span class="nv">$paste</span><span class="p">;</span>
+<span class="lineno">15</span>     <span class="p">}</span>
+<span class="lineno">16</span> <span class="p">}</span>
+</pre></div>
+
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>Simple implementation, in-memory</li>
+<li>What is "createHash()"?</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="slides.md">slides.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              52/67
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: slides.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code">
+          <div class="inner">
+            
+            <header><h1>Create a hash</h1></header>
+            
+            
+            <section><div class="highlight"><pre><span class="lineno"> 1</span> <span class="nx">trait</span> <span class="nx">CreateHash</span> <span class="p">{</span>
+<span class="lineno"> 2</span>     <span class="k">public</span> <span class="k">function</span> <span class="nf">createHash</span><span class="p">(</span><span class="nx">Paste</span> <span class="nv">$paste</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno"> 3</span>         <span class="nv">$hashSeed</span> <span class="o">=</span> <span class="nb">sprintf</span><span class="p">(</span>
+<span class="lineno"> 4</span>             <span class="s1">&#39;%d:%s:%s&#39;</span><span class="p">,</span> 
+<span class="lineno"> 5</span>             <span class="nb">microtime</span><span class="p">(</span><span class="k">true</span><span class="p">),</span> 
+<span class="lineno"> 6</span>             <span class="nv">$paste</span><span class="o">-&gt;</span><span class="na">language</span><span class="p">,</span>
+<span class="lineno"> 7</span>             <span class="nb">hash</span><span class="p">(</span><span class="s1">&#39;sha1&#39;</span><span class="p">,</span> <span class="nv">$paste</span><span class="o">-&gt;</span><span class="na">content</span><span class="p">)</span>
+<span class="lineno"> 8</span>         <span class="p">);</span>
+<span class="lineno"> 9</span>         <span class="k">do</span> <span class="p">{</span>
+<span class="lineno">10</span>             <span class="nv">$hashSeed</span> <span class="o">.=</span> <span class="s1">&#39;:&#39;</span> <span class="o">.</span> <span class="nb">uniqid</span><span class="p">();</span>
+<span class="lineno">11</span>             <span class="nv">$hash</span>      <span class="o">=</span> <span class="nb">hash</span><span class="p">(</span><span class="s1">&#39;sha256&#39;</span><span class="p">,</span> <span class="nv">$hashSeed</span><span class="p">);</span>
+<span class="lineno">12</span>             <span class="nv">$hash</span>      <span class="o">=</span> <span class="nx">substr</span><span class="p">(</span><span class="nv">$hash</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">8</span><span class="p">);</span>
+<span class="lineno">13</span>         <span class="p">}</span> <span class="k">while</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">exists</span><span class="p">(</span><span class="nv">$hash</span><span class="p">));</span>
+<span class="lineno">14</span>         <span class="k">return</span> <span class="nv">$hash</span><span class="p">;</span>
+<span class="lineno">15</span>     <span class="p">}</span>
+<span class="lineno">16</span>     <span class="k">abstract</span> <span class="k">public</span> <span class="k">function</span> <span class="nf">exists</span><span class="p">(</span><span class="nv">$hash</span><span class="p">);</span>
+<span class="lineno">17</span> <span class="p">}</span>
+</pre></div>
+
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>We need to create a unique hash. Collisions force generation of a new one</li>
+<li>exists() method allows us implementations to define it themselves.</li>
+<li>Defined in both interface and trait == must implement!!!</li>
+<li>"But we don't have 5.4 on our servers yet!"</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="slides.md">slides.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              53/67
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: slides.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code">
+          <div class="inner">
+            
+            <header><h1>Create a hash, redux</h1></header>
+            
+            
+            <section><div class="highlight"><pre><span class="lineno"> 1</span> <span class="k">abstract</span> <span class="k">class</span> <span class="nc">CreateHash</span>
+<span class="lineno"> 2</span> <span class="p">{</span>
+<span class="lineno"> 3</span>     <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="nf">createHash</span><span class="p">(</span>
+<span class="lineno"> 4</span>         <span class="nx">Paste</span> <span class="nv">$paste</span><span class="p">,</span> 
+<span class="lineno"> 5</span>         <span class="nx">PasteServiceInterface</span> <span class="nv">$service</span>
+<span class="lineno"> 6</span>     <span class="p">)</span> <span class="p">{</span>
+<span class="lineno"> 7</span>         <span class="c1">// all is the same except that the &quot;while&quot; </span>
+<span class="lineno"> 8</span>         <span class="c1">// condition becomes:</span>
+<span class="lineno"> 9</span>         <span class="c1">//     while ($service-&gt;exists($hash))</span>
+<span class="lineno">10</span>     <span class="p">}</span>
+<span class="lineno">11</span> <span class="p">}</span>
+</pre></div>
+
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>This will work in any version.</li>
+<li>Abstract means we cannot instantiate.</li>
+<li>Important thing to consider is that this doesn't require inheritance, but
+  rather sending messages between objects.</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="slides.md">slides.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              54/67
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: slides.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code">
+          <div class="inner">
+            
+            <header><h1>Existence</h1></header>
+            
+            
+            <section><div class="highlight"><pre><span class="lineno"> 1</span> <span class="k">class</span> <span class="nc">MemoryPasteService</span> <span class="k">implements</span> 
+<span class="lineno"> 2</span>     <span class="nx">PasteServiceInterface</span>
+<span class="lineno"> 3</span> <span class="p">{</span>
+<span class="lineno"> 4</span>     <span class="k">use</span> <span class="nx">CreateHash</span><span class="p">;</span>
+<span class="lineno"> 5</span> 
+<span class="lineno"> 6</span>     <span class="cm">/* ... previous code ... */</span>
+<span class="lineno"> 7</span> 
+<span class="lineno"> 8</span>     <span class="k">public</span> <span class="k">function</span> <span class="nf">exists</span><span class="p">(</span><span class="nv">$hash</span><span class="p">)</span>
+<span class="lineno"> 9</span>     <span class="p">{</span>
+<span class="lineno">10</span>         <span class="k">return</span> <span class="nb">array_key_exists</span><span class="p">(</span><span class="nv">$hash</span><span class="p">,</span> 
+<span class="lineno">11</span>             <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">pastes</span><span class="p">);</span>
+<span class="lineno">12</span>     <span class="p">}</span>
+<span class="lineno">13</span> <span class="p">}</span>
+</pre></div>
+
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>Using traits, because I can</li>
+<li>Very simple test.</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="slides.md">slides.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              55/67
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: slides.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code">
+          <div class="inner">
+            
+            <header><h1>Fetch a paste</h1></header>
+            
+            
+            <section><div class="highlight"><pre><span class="lineno"> 1</span> <span class="k">class</span> <span class="nc">MemoryPasteService</span> <span class="k">implements</span> 
+<span class="lineno"> 2</span>     <span class="nx">PasteServiceInterface</span>
+<span class="lineno"> 3</span> <span class="p">{</span>
+<span class="lineno"> 4</span>     <span class="cm">/* ... previous code ... */</span>
+<span class="lineno"> 5</span>     <span class="k">public</span> <span class="k">function</span> <span class="nf">fetch</span><span class="p">(</span><span class="nv">$hash</span><span class="p">)</span>
+<span class="lineno"> 6</span>     <span class="p">{</span>
+<span class="lineno"> 7</span>         <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">exists</span><span class="p">(</span><span class="nv">$hash</span><span class="p">))</span> <span class="p">{</span>
+<span class="lineno"> 8</span>             <span class="k">return</span> <span class="k">null</span><span class="p">;</span>
+<span class="lineno"> 9</span>         <span class="p">}</span>
+<span class="lineno">10</span>         <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">pastes</span><span class="p">[</span><span class="nv">$hash</span><span class="p">];</span>
+<span class="lineno">11</span>     <span class="p">}</span>
+<span class="lineno">12</span> <span class="p">}</span>
+</pre></div>
+
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>How you handle errors is up to you</li>
+<li>Do you consider inability to fetch recoverable?</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="slides.md">slides.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              56/67
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: slides.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code">
+          <div class="inner">
+            
+            <header><h1>Fetch many</h1></header>
+            
+            
+            <section><div class="highlight"><pre><span class="lineno"> 1</span> <span class="k">class</span> <span class="nc">MemoryPasteService</span> <span class="k">implements</span> 
+<span class="lineno"> 2</span>     <span class="nx">PasteServiceInterface</span>
+<span class="lineno"> 3</span> <span class="p">{</span>
+<span class="lineno"> 4</span>     <span class="cm">/* ... previous code ... */</span>
+<span class="lineno"> 5</span> 
+<span class="lineno"> 6</span>     <span class="k">public</span> <span class="k">function</span> <span class="nf">fetchAll</span><span class="p">()</span>
+<span class="lineno"> 7</span>     <span class="p">{</span>
+<span class="lineno"> 8</span>         <span class="nv">$adapter</span>   <span class="o">=</span> <span class="k">new</span> <span class="nx">IteratorPaginator</span><span class="p">(</span>
+<span class="lineno"> 9</span>             <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">public</span><span class="p">);</span>
+<span class="lineno">10</span>         <span class="nv">$paginator</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Paginator</span><span class="p">(</span><span class="nv">$adapter</span><span class="p">);</span>
+<span class="lineno">11</span>         <span class="k">return</span> <span class="nv">$paginator</span><span class="p">;</span>
+<span class="lineno">12</span>     <span class="p">}</span>
+<span class="lineno">13</span> <span class="p">}</span>
+</pre></div>
+
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>Our tests said we needed to return a paginator</li>
+<li>Only fetch public pastes</li>
+<li>but what is the "public" property?</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="slides.md">slides.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              57/67
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: slides.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code">
+          <div class="inner">
+            
+            <header><h1>Filtering</h1></header>
+            
+            
+            <section><div class="highlight"><pre><span class="lineno"> 1</span> <span class="k">class</span> <span class="nc">SortedPastes</span> <span class="k">extends</span> <span class="nx">SplMaxHeap</span> <span class="p">{</span>
+<span class="lineno"> 2</span>     <span class="k">public</span> <span class="k">function</span> <span class="nf">insert</span><span class="p">(</span><span class="nv">$value</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno"> 3</span>         <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$value</span> <span class="nx">instanceof</span> <span class="nx">Paste</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno"> 4</span>             <span class="k">throw</span> <span class="k">new</span> <span class="nx">\InvalidArgumentException</span><span class="p">();</span>
+<span class="lineno"> 5</span>         <span class="p">}</span>
+<span class="lineno"> 6</span>         <span class="k">parent</span><span class="o">::</span><span class="na">insert</span><span class="p">(</span><span class="nv">$value</span><span class="p">);</span>
+<span class="lineno"> 7</span>     <span class="p">}</span>
+<span class="lineno"> 8</span>     <span class="k">public</span> <span class="k">function</span> <span class="nf">compare</span><span class="p">(</span><span class="nv">$a</span><span class="p">,</span> <span class="nv">$b</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno"> 9</span>         <span class="k">if</span> <span class="p">(</span><span class="nv">$a</span><span class="o">-&gt;</span><span class="na">timestamp</span> <span class="o">===</span> <span class="nv">$b</span><span class="o">-&gt;</span><span class="na">timestamp</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno">10</span>             <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="lineno">11</span>         <span class="p">}</span>
+<span class="lineno">12</span>         <span class="k">if</span> <span class="p">(</span><span class="nv">$a</span><span class="o">-&gt;</span><span class="na">timestamp</span> <span class="o">&gt;</span> <span class="nv">$b</span><span class="o">-&gt;</span><span class="na">timestamp</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno">13</span>             <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+<span class="lineno">14</span>         <span class="p">}</span>
+<span class="lineno">15</span>         <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+<span class="lineno">16</span>     <span class="p">}</span>
+<span class="lineno">17</span> <span class="p">}</span>
+</pre></div>
+
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>Know your tools, especially the SPL</li>
+<li>Max heap sorts larger values to the top. </li>
+<li>Our public property will be a heap</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="slides.md">slides.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              58/67
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: slides.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code">
+          <div class="inner">
+            
+            <header><h1>Internal implementations</h1></header>
+            
+            
+            <section><div class="highlight"><pre><span class="lineno"> 1</span> <span class="k">class</span> <span class="nc">MemoryPasteService</span> <span class="k">implements</span> 
+<span class="lineno"> 2</span>     <span class="nx">PasteServiceInterface</span>
+<span class="lineno"> 3</span> <span class="p">{</span>
+<span class="lineno"> 4</span>     <span class="cm">/* ... previous code ... */</span>
+<span class="lineno"> 5</span> 
+<span class="lineno"> 6</span>     <span class="k">public</span> <span class="k">function</span> <span class="nf">__construct</span><span class="p">()</span>
+<span class="lineno"> 7</span>     <span class="p">{</span>
+<span class="lineno"> 8</span>         <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">public</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">SortedPastes</span><span class="p">;</span>
+<span class="lineno"> 9</span>     <span class="p">}</span>
+<span class="lineno">10</span> <span class="p">}</span>
+</pre></div>
+
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>Internal implementation details may not need composition</li>
+<li>Tests now pass!</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="slides.md">slides.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              59/67
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: slides.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Isn't it overkill?</h1></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>Aren't we making a simple idea complex?</li>
+<li>Do we really want to store in memory?</li>
+<li>The point: we've made something replaceable</li>
+<li>The trait encapsulates shared logic</li>
+<li>The interface defines the expected operations</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="slides.md">slides.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              60/67
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: slides.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code">
+          <div class="inner">
+            
+            <header><h1>Alterate implementation</h1></header>
+            
+            
+            <section><div class="highlight"><pre><span class="lineno"> 1</span> <span class="k">class</span> <span class="nc">MongoPasteService</span> <span class="k">implements</span> 
+<span class="lineno"> 2</span>     <span class="nx">PasteServiceInterface</span> <span class="p">{</span>
+<span class="lineno"> 3</span>     <span class="k">use</span> <span class="nx">CreateHash</span><span class="p">;</span>
+<span class="lineno"> 4</span>     <span class="k">protected</span> <span class="nv">$collection</span><span class="p">;</span>
+<span class="lineno"> 5</span>     <span class="k">public</span> <span class="k">function</span> <span class="nf">__construct</span><span class="p">(</span>
+<span class="lineno"> 6</span>         <span class="nx">MongoCollection</span> <span class="nv">$collection</span>
+<span class="lineno"> 7</span>     <span class="p">)</span> <span class="p">{</span>
+<span class="lineno"> 8</span>         <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">collection</span> <span class="o">=</span> <span class="nv">$collection</span><span class="p">;</span>
+<span class="lineno"> 9</span>     <span class="p">}</span>
+<span class="lineno">10</span>     <span class="k">public</span> <span class="k">function</span> <span class="nf">create</span><span class="p">(</span><span class="nx">Paste</span> <span class="nv">$paste</span><span class="p">)</span>
+<span class="lineno">11</span>     <span class="p">{</span>
+<span class="lineno">12</span>         <span class="nv">$hash</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">createHash</span><span class="p">(</span><span class="nv">$paste</span><span class="p">);</span>
+<span class="lineno">13</span>         <span class="nv">$paste</span><span class="o">-&gt;</span><span class="na">hash</span> <span class="o">=</span> <span class="nv">$hash</span><span class="p">;</span>
+<span class="lineno">14</span>         <span class="nv">$data</span> <span class="o">=</span> <span class="p">(</span><span class="k">array</span><span class="p">)</span> <span class="nv">$paste</span><span class="p">;</span>
+<span class="lineno">15</span>         <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">collection</span><span class="o">-&gt;</span><span class="na">insert</span><span class="p">(</span><span class="nv">$data</span><span class="p">);</span>
+<span class="lineno">16</span>         <span class="k">return</span> <span class="nv">$paste</span><span class="p">;</span>
+<span class="lineno">17</span>     <span class="p">}</span>
+<span class="lineno">18</span> <span class="p">}</span>
+</pre></div>
+
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>Requires some work to get cursors to return Paste objects</li>
+<li>But the point is that I consume it exactly the same</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="slides.md">slides.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              61/67
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: slides.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code">
+          <div class="inner">
+            
+            <header><h1>Decorator</h1></header>
+            
+            
+            <section><div class="highlight"><pre><span class="lineno"> 1</span> <span class="k">class</span> <span class="nc">CachingService</span> <span class="k">implements</span> 
+<span class="lineno"> 2</span>     <span class="nx">PasteServiceInterface</span>
+<span class="lineno"> 3</span> <span class="p">{</span>
+<span class="lineno"> 4</span>     <span class="k">protected</span> <span class="nv">$cache</span><span class="p">;</span>
+<span class="lineno"> 5</span>     <span class="k">protected</span> <span class="nv">$service</span><span class="p">;</span>
+<span class="lineno"> 6</span>     <span class="k">public</span> <span class="k">function</span> <span class="nf">__construct</span><span class="p">(</span>
+<span class="lineno"> 7</span>         <span class="nx">Cache</span> <span class="nv">$cache</span><span class="p">,</span> <span class="nx">PasteServiceInterface</span> <span class="nv">$service</span>
+<span class="lineno"> 8</span>     <span class="p">)</span> <span class="p">{</span>
+<span class="lineno"> 9</span>         <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">cache</span> <span class="o">=</span> <span class="nv">$cache</span><span class="p">;</span>
+<span class="lineno">10</span>         <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">service</span> <span class="o">=</span> <span class="nv">$service</span><span class="p">;</span>
+<span class="lineno">11</span>     <span class="p">}</span>
+<span class="lineno">12</span>     <span class="k">public</span> <span class="k">function</span> <span class="nf">create</span><span class="p">(</span><span class="nx">Paste</span> <span class="nv">$paste</span><span class="p">)</span>
+<span class="lineno">13</span>     <span class="p">{</span>
+<span class="lineno">14</span>         <span class="nv">$paste</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">service</span><span class="o">-&gt;</span><span class="na">create</span><span class="p">(</span><span class="nv">$paste</span><span class="p">);</span>
+<span class="lineno">15</span>         <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">cache</span><span class="o">-&gt;</span><span class="na">store</span><span class="p">(</span><span class="nv">$paste</span><span class="o">-&gt;</span><span class="na">hash</span><span class="p">,</span> <span class="nv">$paste</span><span class="p">);</span>
+<span class="lineno">16</span>         <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">cache</span><span class="o">-&gt;</span><span class="na">invalidate</span><span class="p">(</span><span class="s1">&#39;list&#39;</span><span class="p">);</span>
+<span class="lineno">17</span>     <span class="p">}</span>
+<span class="lineno">18</span> <span class="p">}</span>
+</pre></div>
+
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>No inheritance -- compose, and implement the interface.</li>
+<li>Allows us to write code once, and consume any implementation</li>
+<li>Knowledge of <em>design patterns</em>, coupled with good composition, allows us to
+  accomplish non-trivial patterns simply.</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="slides.md">slides.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              62/67
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: slides.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1><span></span></h1></header>
+            
+            
+            <section><p><img src="images/paste-uml.png" /></p>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>Interactions are clearly defined</li>
+<li>Substitution is easily possible</li>
+<li>Changing <em>implementation</em> details does not affect the consumer</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="slides.md">slides.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              63/67
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: slides.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Summary</h1></header>
+            
+            
+            <section><p>The goals of software craftsmanship are:</p>
+<ul>
+<li>Maintainability.<br />
+</li>
+<li>Extensibility.</li>
+<li>Substitution.</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="slides.md">slides.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              64/67
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: slides.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Tools</h1></header>
+            
+            
+            <section><ul>
+<li><strong>Don't Repeat Yourself</strong> (DRY), and avoid <strong>Not Invented Here</strong> (NIH) syndrome.</li>
+<li><strong>You Ain't Gonna Need It</strong> (YAGNI) principle.</li>
+<li>Favor <strong>composition</strong> over inheritance.</li>
+<li>Create <strong>contracts</strong> for your objects.</li>
+<li>Have objects (and methods!) <strong>do one thing</strong>, and one thing well.</li>
+</ul>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>Making these goals and principles your focus allows you to achieve beauty in
+  software</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="slides.md">slides.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              65/67
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: slides.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Practice Software Craftsmanship</h1></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="slides.md">slides.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              66/67
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: slides.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Thank You</h1></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="slides.md">slides.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              67/67
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
+  
+  <div id="toc" class="sidebar hidden">
+    <h2>Table of Contents</h2>
+    <table>
+      <caption>Table of Contents</caption>
+      
+      <tr id="toc-row-1">
+        <th><a href="#slide1">Beautiful Software</a></th>
+        <td><a href="#slide1">1</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-2">
+        <th><a href="#slide2">Who is that guy?</a></th>
+        <td><a href="#slide2">2</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-3">
+        <th><a href="#slide3">Analogies</a></th>
+        <td><a href="#slide3">3</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-4">
+        <th><a href="#slide4">Construction</a></th>
+        <td><a href="#slide4">4</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-5">
+        <th><a href="#slide5"><span></span></a></th>
+        <td><a href="#slide5">5</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-6">
+        <th><a href="#slide6"><span></span></a></th>
+        <td><a href="#slide6">6</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-7">
+        <th><a href="#slide7"><span></span></a></th>
+        <td><a href="#slide7">7</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-8">
+        <th><a href="#slide8"><span></span></a></th>
+        <td><a href="#slide8">8</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-9">
+        <th><a href="#slide9"><span></span></a></th>
+        <td><a href="#slide9">9</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-10">
+        <th><a href="#slide10"><span></span></a></th>
+        <td><a href="#slide10">10</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-11">
+        <th><a href="#slide11"><span></span></a></th>
+        <td><a href="#slide11">11</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-12">
+        <th><a href="#slide12"><span></span></a></th>
+        <td><a href="#slide12">12</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-13">
+        <th><a href="#slide13"><span></span></a></th>
+        <td><a href="#slide13">13</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-14">
+        <th><a href="#slide14"><span></span></a></th>
+        <td><a href="#slide14">14</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-15">
+        <th><a href="#slide15"><span></span></a></th>
+        <td><a href="#slide15">15</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-16">
+        <th><a href="#slide16"><span></span></a></th>
+        <td><a href="#slide16">16</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-17">
+        <th><a href="#slide17"><span></span></a></th>
+        <td><a href="#slide17">17</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-18">
+        <th><a href="#slide18"><span></span></a></th>
+        <td><a href="#slide18">18</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-19">
+        <th><a href="#slide19"><span></span></a></th>
+        <td><a href="#slide19">19</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-20">
+        <th><a href="#slide20"><span></span></a></th>
+        <td><a href="#slide20">20</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-21">
+        <th><a href="#slide21"><span></span></a></th>
+        <td><a href="#slide21">21</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-22">
+        <th><a href="#slide22">PHP</a></th>
+        <td><a href="#slide22">22</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-23">
+        <th><a href="#slide23"><span></span></a></th>
+        <td><a href="#slide23">23</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-24">
+        <th><a href="#slide24"><span></span></a></th>
+        <td><a href="#slide24">24</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-25">
+        <th><a href="#slide25">&lt;?xml</a></th>
+        <td><a href="#slide25">25</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-26">
+        <th><a href="#slide26">Beautiful Software:<br />Software Craftmanship</a></th>
+        <td><a href="#slide26">26</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-27">
+        <th><a href="#slide27">Responsibilities</a></th>
+        <td><a href="#slide27">27</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-28">
+        <th><a href="#slide28">Principles</a></th>
+        <td><a href="#slide28">28</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-29">
+        <th><a href="#slide29">Principles</a></th>
+        <td><a href="#slide29">29</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-30">
+        <th><a href="#slide30">Principles</a></th>
+        <td><a href="#slide30">30</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-31">
+        <th><a href="#slide31">Principles</a></th>
+        <td><a href="#slide31">31</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-32">
+        <th><a href="#slide32">Principles</a></th>
+        <td><a href="#slide32">32</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-33">
+        <th><a href="#slide33">Practical Example</a></th>
+        <td><a href="#slide33">33</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-34">
+        <th><a href="#slide34">Pastebin</a></th>
+        <td><a href="#slide34">34</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-35">
+        <th><a href="#slide35">Pastebin</a></th>
+        <td><a href="#slide35">35</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-36">
+        <th><a href="#slide36">Pastebin</a></th>
+        <td><a href="#slide36">36</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-37">
+        <th><a href="#slide37">Novice approach</a></th>
+        <td><a href="#slide37">37</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-38">
+        <th><a href="#slide38">A Manageable Approach</a></th>
+        <td><a href="#slide38">38</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-39">
+        <th><a href="#slide39">Test all the things</a></th>
+        <td><a href="#slide39">39</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-40">
+        <th><a href="#slide40">Pastebin Requirements</a></th>
+        <td><a href="#slide40">40</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-41">
+        <th><a href="#slide41">Value object / Entity</a></th>
+        <td><a href="#slide41">41</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-42">
+        <th><a href="#slide42">Why arrays suck</a></th>
+        <td><a href="#slide42">42</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-43">
+        <th><a href="#slide43">Why value objects work</a></th>
+        <td><a href="#slide43">43</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-44">
+        <th><a href="#slide44">Paste</a></th>
+        <td><a href="#slide44">44</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-45">
+        <th><a href="#slide45">Identity</a></th>
+        <td><a href="#slide45">45</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-46">
+        <th><a href="#slide46">Fetch a paste</a></th>
+        <td><a href="#slide46">46</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-47">
+        <th><a href="#slide47">Fetch a list of pastes</a></th>
+        <td><a href="#slide47">47</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-48">
+        <th><a href="#slide48">Iterate</a></th>
+        <td><a href="#slide48">48</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-49">
+        <th><a href="#slide49">Public only</a></th>
+        <td><a href="#slide49">49</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-50">
+        <th><a href="#slide50">What about the code?</a></th>
+        <td><a href="#slide50">50</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-51">
+        <th><a href="#slide51">Service interface</a></th>
+        <td><a href="#slide51">51</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-52">
+        <th><a href="#slide52">Implementation</a></th>
+        <td><a href="#slide52">52</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-53">
+        <th><a href="#slide53">Create a hash</a></th>
+        <td><a href="#slide53">53</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-54">
+        <th><a href="#slide54">Create a hash, redux</a></th>
+        <td><a href="#slide54">54</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-55">
+        <th><a href="#slide55">Existence</a></th>
+        <td><a href="#slide55">55</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-56">
+        <th><a href="#slide56">Fetch a paste</a></th>
+        <td><a href="#slide56">56</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-57">
+        <th><a href="#slide57">Fetch many</a></th>
+        <td><a href="#slide57">57</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-58">
+        <th><a href="#slide58">Filtering</a></th>
+        <td><a href="#slide58">58</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-59">
+        <th><a href="#slide59">Internal implementations</a></th>
+        <td><a href="#slide59">59</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-60">
+        <th><a href="#slide60">Isn't it overkill?</a></th>
+        <td><a href="#slide60">60</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-61">
+        <th><a href="#slide61">Alterate implementation</a></th>
+        <td><a href="#slide61">61</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-62">
+        <th><a href="#slide62">Decorator</a></th>
+        <td><a href="#slide62">62</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-63">
+        <th><a href="#slide63"><span></span></a></th>
+        <td><a href="#slide63">63</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-64">
+        <th><a href="#slide64">Summary</a></th>
+        <td><a href="#slide64">64</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-65">
+        <th><a href="#slide65">Tools</a></th>
+        <td><a href="#slide65">65</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-66">
+        <th><a href="#slide66">Practice Software Craftsmanship</a></th>
+        <td><a href="#slide66">66</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-67">
+        <th><a href="#slide67">Thank You</a></th>
+        <td><a href="#slide67">67</a></td>
+      </tr>
+      
+      
+    </table>
+  </div>
+  
+  <div id="help" class="sidebar hidden">
+    <h2>Help</h2>
+    <table>
+      <caption>Help</caption>
+      <tr>
+        <th>Table of contents</th>
+        <td>t</td>
+      </tr>
+      <tr>
+        <th>Exposé</th>
+        <td>ESC</td>
+      </tr>
+      <tr>
+        <th>Autoscale</th>
+        <td>e</td>
+      </tr>
+      <tr>
+        <th>Full screen slides</th>
+        <td>f</td>
+      </tr>
+      <tr>
+        <th>Presenter view</th>
+        <td>p</td>
+      </tr>
+      <tr>
+        <th>Source files</th>
+        <td>s</td>
+      </tr>
+      <tr>
+        <th>Slide numbers</th>
+        <td>n</td>
+      </tr>
+      <tr>
+        <th>Blank screen</th>
+        <td>b</td>
+      </tr>
+      <tr>
+        <th>Notes</th>
+        <td>2</td>
+      </tr>
+      <tr>
+        <th>Help</th>
+        <td>h</td>
+      </tr>
+    </table>
+  </div>
+  <script>$().landslide();</script>
+</body>
+</html>
